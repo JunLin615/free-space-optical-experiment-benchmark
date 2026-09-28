@@ -1,49 +1,53 @@
 # Free-Space Optical Experiment Benchmark
 
-An open benchmark under development for evaluating autonomous agents on **free-space optical experimental reasoning**: quantitative prediction, beam-path design, diagnosis, calibration, and defensible engineering trade-offs. The scientific questions are independent of OpenSci, any agent framework, vendor, and optical-design software. Four [versioned protocols](docs/protocols.md) compare closed-book, case-assisted, tool-assisted, and combined access to the *same* scientific tasks.
+A public benchmark for autonomous reasoning about **free-space optical experiments**. It covers quantitative prediction, beam paths, diagnosis, calibration, and constrained design. Scientific cases and scoring are independent of OpenSci, agent frameworks, vendors, and optical-design products. Normal scoring requires no human grader.
 
-**Status:** all 64 seed cases are canonical English YAML. Eighteen cases have registered autonomous scorers, including all ten deterministic-ready cases. Five typed-answer cases form the first evidence-pinned `0.1.0-rc1` release candidate; the [manifest](benchmark/releases/0.1.0-rc1.json) and [qualification report](docs/qualification_report.md) state its exact scope and exclusions. The original Chinese HTML remains byte for byte unchanged. The [generated Markdown](benchmark/generated/questions.md) and [HTML](benchmark/generated/questions.html) show questions only; gold specifications remain in canonical case files. A separate [five-item example library](docs/case_library.md), [ten public development variants](docs/variants.md), and a [provider-neutral baseline runner](docs/baseline_runner.md) support reproducible evaluation without changing rc1. The [first measured baseline](docs/baseline_results.md) and [contamination audit](docs/contamination_audit.md) document their observed scope and limits.
+## What is released
 
-## Run the local checks
+The repository contains **64 canonical English cases** derived from the preserved Chinese seed. They form a public scientific case bank with explicit development status; inclusion in that bank does not mean a case has a qualified autonomous scorer. The initial stable **v0.2.0 release contains nine `release_verified` cases** in nine concept families, with an [immutable manifest](benchmark/releases/0.2.0.json) and executable qualification. Other cases remain specified, executable, challenged, or development material according to their evidence. The original Chinese HTML remains byte-identical provenance.
 
-Use Python 3.11 or later:
+Public question-only views are generated in [English](benchmark/generated/questions.md) and [Chinese](benchmark/generated/questions.zh-CN.md), with HTML counterparts. Both present the same 64 case identities and scientific quantities. Gold answers, scoring rules, and evaluator logic remain in shared canonical data and code; the Chinese layer supplies public-facing text.
+
+The frozen historical releases [`0.1.0-rc1`](benchmark/releases/0.1.0-rc1.json) and [`0.2.0-rc1`](benchmark/releases/0.2.0-rc1.json) remain independently reproducible. The [three-model `0.2.0-rc1` campaign](docs/results/2026-09-28-multimodel-020rc1.md) records **108 real public formal results** from nine cases under four matched protocols. It also retains separate public development-variant evidence and public-safe attestations for a family-disjoint hidden pilot. These are historical rc1 results; the stable `SEED-3-1` contract repair does not change their scores. Nine public verified cases support descriptive paired comparisons, not universal model rankings.
+
+## Evaluation components
+
+- [Four matched protocols](docs/protocols.md): `closed_book`, `case_assisted`, `tool_assisted`, and `case_and_tool_assisted`, with identical scientific question bytes.
+- [Versioned case/example library](docs/case_library.md) and deterministic retrieval, separate from case prompts and gold.
+- [Provider-neutral resumable runner](docs/baseline_runner.md) with raw responses, parsed answers, scoring results, usage, retrieval, tool events, logs, and source provenance.
+- [Public development variants](docs/variants.md) for robustness work and a [family-disjoint hidden-evaluation policy](docs/hidden_evaluation.md) with external private bundles and evidence-derived public attestations.
+- Unit-aware numerical and structured physics scorers, release fixtures, and independent tests. Open-design and diagnosis scorers remain conservative development work; unknown plausible designs can return `unresolved`.
+
+The benchmark supplies a bounded generic computation-tool profile. Formal campaign models were offered this profile, but made zero observed tool calls. Monetary cost was unavailable through that CLI interface and remains `null` in the evidence.
+
+## Verify the release locally
+
+Release qualification uses the pinned **CPython 3.11.16** environment in [`0.1.0-rc1-environment.json`](benchmark/releases/0.1.0-rc1-environment.json). Obtain its exact package requirements with `python tools/check_release_environment.py --requirements`, install them in a fresh 3.11.16 environment, then run:
 
 ```sh
-python -m pip install -r requirements.txt
+python tools/check_release_environment.py --check
 python tools/validate_cases.py
 python tools/check_corpus.py
 python -m unittest discover -s tests
 python tools/run_case_fixtures.py
 python tools/check_verification_status.py
 python tools/render_cases.py --check
+python tools/render_zh_cn.py --check
+python tools/check_localization.py
 python tools/generate_coverage.py --check
 python tools/qualify_release.py --check
-python -m tools.protocols
-python -m tools.case_library
-python tools/variants.py check-public
+python tools/qualify_vnext.py --check
+python tools/qualify_stable.py --check
+python -m tools.check_frozen_history
+python -m tools.analyze_campaign benchmark/results/campaigns/2026-09-28-multimodel-020rc1/campaign.json --check
 ```
 
-`tools/validate_cases.py` checks schema structure, IDs, taxonomy, cross-field references, tolerances, and registered physics references. `tools/check_corpus.py` verifies all 64 legacy IDs and the original seed hash. `tools/render_cases.py` regenerates public question views from canonical YAML. CI also runs unit tests, scoring fixtures, and verification-status gates without a paid model API. Most cases have a specification and proposed oracle only; a YAML record alone does not mean a case can be scored autonomously.
+The renderer also verifies the English/Chinese public-view parity. All release and campaign checks run offline; no model API call or human adjudication is needed. The [release notes](docs/release_v0.2.0.md) describe the stable lineage and validation gates.
 
-The rc1 qualification check requires the [locked release environment](benchmark/releases/0.1.0-rc1-environment.json): CPython 3.11.16 and its listed exact package versions. Run `python tools/check_release_environment.py --requirements` to obtain the pip requirements for that environment, and `python tools/check_release_environment.py --check` to verify it. Other development Python versions can run the case and fixture checks, but cannot certify rc1 qualification.
+## Repository map and limits
 
-Run `python tools/qualify_release.py` to inspect each selected case's evidence and exact blockers. The release candidate scores only the required typed claims. Optional explanation prose is retained for audit and does not change a deterministic score. Unfamiliar plausible structured answers may return `unresolved`; no expert grades normal runs. The manifest pins case, evaluator, fixture, derivation, generated-view, dependency, and gate files by SHA-256. It is a technical release candidate, with no model-baseline or empirical-difficulty claim.
+`benchmark/cases/` holds the 64 canonical English case identities. Versioned release case revisions, manifests, schemas, fixtures, and generated views live under `benchmark/`. `tools/` contains validation, qualification, scoring, rendering, and runner code; `tests/` contains regression and challenge tests. `runs/` holds public measured evidence. `docs/` explains the [design](docs/benchmark_design.md), [campaign findings](docs/results/2026-09-28-multimodel-020rc1-findings.md), and [current freeze status](docs/project_status.md).
 
-## Repository map
+The nine-case release is an initial, bounded benchmark. It does not establish performance across every optical laboratory task. Open-ended experimental design and diagnosis still lack qualified coverage of all credible architectures; [Issue #3](https://github.com/JunLin615/free-space-optical-experiment-benchmark/issues/3) tracks that research boundary. Additional cases or broader semantic scoring require a future version and independent challenge evidence. The original [roadmap](docs/project_roadmap.md) remains a historical planning document.
 
-- `benchmark/cases/`: canonical English seed cases, one YAML file per case.
-- `benchmark/coverage/`: complete-corpus classifications, concept families, and migration status.
-- `benchmark/schema/`: versioned case and future run-result JSON Schemas.
-- `benchmark/generated/`: generated question-only Markdown and HTML.
-- `benchmark/protocols/` and `benchmark/case_library/`: matched access rules and optional examples.
-- `benchmark/variants/`: public development lineage and gold-free generated questions.
-- `benchmark/run_schema/` and `tools/baseline/`: frozen run records, adapters, and bounded tools.
-- `runs/`: executed baseline manifests, result records, logs, and analysis.
-- `tools/` and `tests/`: schema validation, rendering, physics checks, and tests.
-- `docs/`: [Round 2 decisions](docs/round2_decisions.md), [benchmark design](docs/benchmark_design.md), [case schema proposal](docs/case_schema_proposal.md), [evaluation design](docs/evaluation_design.md), [automated validation design](docs/automated_validation_design.md), [seed audit](docs/research/seed_audit.md), [benchmark landscape](docs/research/benchmark_landscape.md), and [roadmap](docs/project_roadmap.md).
-
-The long-term scoring design combines unit-aware calculations, independent optical physics, constraints that admit multiple valid designs, and calibrated semantic judges for bounded residual claims. Normal evaluation must run **without human expert grading**. Open-ended pilot cases are not promoted to a scored release until their autonomous oracles have been challenged with valid alternatives and plausible wrong answers. The optical example library is versioned separately from benchmark prompts and gold specifications.
-
-Use [Issues](https://github.com/JunLin615/free-space-optical-experiment-benchmark/issues) to propose or correct a case or discuss infrastructure. Contributions use focused pull requests to `main`; see [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md).
-
-Source code, schemas, tests, and tooling are MIT licensed under [LICENSE](LICENSE). Benchmark content, the seed, generated question views, and research/design documents are CC BY 4.0 under [LICENSE-CONTENT](LICENSE-CONTENT). Cite the exact case and evaluator release used; [CITATION.cff](CITATION.cff) provides repository metadata.
+Source code, schemas, tests, and tooling are MIT licensed under [LICENSE](LICENSE). Benchmark content, seed, public question views, and research documents are CC BY 4.0 under [LICENSE-CONTENT](LICENSE-CONTENT). Cite the exact release and evaluator version used; [CITATION.cff](CITATION.cff) provides repository metadata. Contributions use focused pull requests and [Issues](https://github.com/JunLin615/free-space-optical-experiment-benchmark/issues); see [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md).

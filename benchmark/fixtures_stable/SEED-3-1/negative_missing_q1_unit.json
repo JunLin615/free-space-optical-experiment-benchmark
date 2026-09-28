@@ -1,0 +1,18 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "negative_missing_q1_unit",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {"image_distance_in_focal_lengths": {"value": 2}},
+      "q2": {"lateral_magnification": {"value": -1, "unit": "1"}},
+      "q3": {"image_type": "real", "orientation": "inverted"}
+    }
+  },
+  "expected": {
+    "n_image_distance": {"status": "fail", "failure_class": "malformed_claim"},
+    "n_magnification": {"status": "pass"},
+    "c_image_character": {"status": "pass"}
+  },
+  "failure_family": "missing_q1_quantity_unit"
+}
