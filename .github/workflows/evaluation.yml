@@ -28,5 +28,14 @@ jobs:
         run: python tools/variants.py check-public
       - name: Test evaluation infrastructure
         run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Check portable replay of Windows-origin evidence
+        run: |
+          python -m tools.baseline runs/2026-09-28-gpt-6-luna-verified-release/manifest.json \
+            --output-root "$RUNNER_TEMP/optics-replay" --replay-suffix ci-smoke --check
+      - name: Validate stored measured analyses
+        run: |
+          python tools/analyze_baseline.py runs/2026-09-28-gpt-6-luna-verified-release --check
+          python tools/analyze_baseline.py runs/2026-09-28-gpt-6-luna-development-release --check
+          python tools/analyze_baseline.py runs/2026-09-28-gpt-6-luna-variants-release --check
       - name: Verify rc1 pinned evidence
         run: python tools/qualify_release.py --check

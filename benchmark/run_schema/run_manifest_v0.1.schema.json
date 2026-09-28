@@ -257,6 +257,15 @@
         "object",
         "null"
       ]
+    },
+    "replay_of": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "manifest_canonical_sha256"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "manifest_canonical_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
     }
   }
 }

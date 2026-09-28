@@ -57,7 +57,7 @@ def main() -> int:
             "retry_policy": {"transport_max_retries": 0, "malformed_answer_max_retries": 0,
                              "self_correction_max_retries": 0},
             "timeout_seconds": 300, "concurrency": 1, "seed": 20260928,
-            "output_directory": str(output_root / run_id), "pricing_snapshot": None,
+            "output_directory": run_id, "pricing_snapshot": None,
         }
         validate_manifest(manifest)
         path = manifest_dir / (run_id + ".json")

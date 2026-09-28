@@ -93,6 +93,9 @@ real model in this round.
 Run `python tools/analyze_baseline.py runs/<run-id> --check` to validate each
 stored analysis against its result records. The initial manifests live in
 `runs/input_manifests/`; every run directory freezes its exact input bytes.
+Those executed manifests retain their original Windows paths. Use the
+[cross-machine replay command](baseline_runner.md#cross-machine-replay) to
+derive a separate portable run and choose a new local output root.
 Running the model again can produce different answers or usage. The runner
 does not hand-repair raw answers. The Codex CLI adapter disallows its built-in
 shell and web tools, rejects observed built-in tool events, and exposes only

@@ -74,8 +74,12 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
     if manifest["agent"]["adapter_type"] == "codex_cli" and manifest["agent"]["provider"] != "openai":
         raise ValueError("Codex CLI provider identity must be openai")
     output = Path(manifest["output_directory"])
-    if not output.is_absolute() or output.name != manifest["run_id"]:
-        raise ValueError("output_directory must be absolute and end in run_id")
+    if manifest["output_directory"] != manifest["run_id"] and not (
+        output.is_absolute() and output.name == manifest["run_id"]
+    ):
+        raise ValueError("output_directory must be a host-absolute path ending in run_id or the logical run_id; use --output-root and --replay-suffix for a foreign-host historical manifest")
+    if "replay_of" in manifest and manifest["replay_of"]["run_id"] == manifest["run_id"]:
+        raise ValueError("replay must use a new run_id")
     if manifest["system_prompt_version"] != SYSTEM_PROMPT_VERSION:
         raise ValueError("unknown system prompt version")
     if manifest["tool_config"]["profile_id"] != PROFILE_ID:
@@ -386,12 +390,26 @@ def _run_one(manifest: dict[str, Any], case: dict[str, Any], selection: dict[str
     return record
 
 
-def run_manifest(manifest_path: Path, *, retry_failed: bool = False) -> dict[str, int]:
+def output_path(manifest: dict[str, Any], output_root: Path | None = None) -> Path:
+    """Resolve an operational destination without changing frozen run configuration."""
+    output = Path(manifest["output_directory"])
+    if output.is_absolute():
+        if output_root is not None:
+            raise ValueError("absolute historical output requires --replay-suffix with --output-root")
+        return output
+    root = Path(output_root) if output_root is not None else ROOT / "runs"
+    if not root.is_absolute():
+        raise ValueError("output_root must be absolute on the current host")
+    return root / manifest["run_id"]
+
+
+def run_manifest(manifest_path: Path, *, retry_failed: bool = False,
+                 output_root: Path | None = None) -> dict[str, int]:
     """Execute/resume one frozen manifest. Prior attempts are never overwritten."""
     raw_manifest = manifest_path.read_bytes()
     manifest = json.loads(raw_manifest)
     validate_manifest(manifest)
-    run_dir = Path(manifest["output_directory"])
+    run_dir = output_path(manifest, output_root)
     run_dir.mkdir(parents=True, exist_ok=True)
     for child in ("results", "logs"):
         (run_dir / child).mkdir(exist_ok=True)

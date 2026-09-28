@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from tools.baseline.adapters import _codex_prompt, _safe_codex_event
-from tools.baseline.runner import _cost, run_manifest, validate_manifest
+from tools.baseline.replay import build_replay_manifest, write_replay_manifest
+from tools.baseline.runner import _cost, output_path, run_manifest, validate_manifest
 from tools.baseline.tools import ToolCallError, execute_tool, observed_call
 from tools.protocols import public_payload
 from tools.scoring_runtime import load_scored_case
@@ -60,6 +63,71 @@ def record(directory: Path, protocol: str = "closed_book") -> dict:
 
 
 class BaselineRunnerTests(unittest.TestCase):
+    def test_new_baseline_templates_use_logical_output_directories(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            result = subprocess.run(
+                [sys.executable, "-m", "tools.prepare_first_baseline",
+                 "--output-root", temp, "--suffix=-portable-test"],
+                cwd=ROOT, capture_output=True, text=True, encoding="utf-8", check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            paths = sorted((Path(temp) / "input_manifests").glob("*.json"))
+            self.assertEqual(len(paths), 3)
+            for path in paths:
+                config = json.loads(path.read_text(encoding="utf-8"))
+                self.assertEqual(config["output_directory"], config["run_id"])
+                validate_manifest(config)
+                self.assertEqual(output_path(config, Path(temp)), Path(temp) / config["run_id"])
+
+    def test_committed_windows_manifest_converts_without_model_or_source_rewrite(self) -> None:
+        source_path = (ROOT / "runs/2026-09-28-gpt-6-luna-verified-release/manifest.json")
+        historical_bytes = source_path.read_bytes()
+        historical = json.loads(historical_bytes)
+        self.assertIn("E:", historical["output_directory"])
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            replay = build_replay_manifest(source_path, "posix-ci")
+            self.assertEqual(replay["run_id"], historical["run_id"] + "-posix-ci")
+            self.assertEqual(replay["output_directory"], replay["run_id"])
+            self.assertEqual(output_path(replay, root), root / replay["run_id"])
+            for field in historical:
+                if field not in {"run_id", "output_directory", "replay_of"}:
+                    self.assertEqual(replay[field], historical[field])
+            self.assertEqual(replay["replay_of"]["run_id"], historical["run_id"])
+            result = subprocess.run(
+                [sys.executable, "-m", "tools.baseline", str(source_path),
+                 "--output-root", str(root), "--replay-suffix", "posix-ci", "--check"],
+                cwd=ROOT, capture_output=True, text=True, encoding="utf-8", check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn(replay["run_id"], result.stdout)
+            self.assertFalse((root / replay["run_id"]).exists())
+        self.assertEqual(source_path.read_bytes(), historical_bytes)
+
+    def test_mock_replay_is_new_portable_run_and_resumes_without_overwriting_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            config = manifest(directory)
+            config["output_directory"] = r"E:\old-host\offline-test-001"
+            source_path = directory / "historical.json"
+            source_path.write_text(json.dumps(config), encoding="utf-8")
+            original_bytes = source_path.read_bytes()
+            root = directory / "new-machine"
+            replay_path = write_replay_manifest(source_path, root, "second-host")
+            replay = json.loads(replay_path.read_text(encoding="utf-8"))
+            self.assertEqual(replay["output_directory"], "offline-test-001-second-host")
+            self.assertEqual(replay["agent"], config["agent"])
+            self.assertEqual(replay["selections"], config["selections"])
+            self.assertEqual(replay["protocol_ids"], config["protocol_ids"])
+            self.assertEqual(run_manifest(replay_path, output_root=root)["completed"], 1)
+            frozen = root / replay["run_id"] / "manifest.json"
+            self.assertEqual(frozen.read_bytes(), replay_path.read_bytes())
+            self.assertEqual(run_manifest(replay_path, output_root=root)["skipped"], 1)
+            self.assertEqual(source_path.read_bytes(), original_bytes)
+            self.assertFalse((directory / "offline-test-001").exists())
+            other = build_replay_manifest(source_path, "third-host")
+            self.assertNotEqual(other["run_id"], replay["run_id"])
+
     def test_mock_cannot_masquerade_as_real_baseline(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             config = manifest(Path(temp))
