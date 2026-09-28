@@ -1,0 +1,36 @@
+{
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "wavelength_532_nm": "reflected",
+        "wavelength_1064_nm": "transmitted"
+      },
+      "q2": {
+        "response_may_change": true,
+        "change_kind": "performance_change"
+      },
+      "q3": {
+        "unconditionally_preserved": false
+      }
+    }
+  },
+  "expected": {
+    "c_routing": {
+      "status": "pass"
+    },
+    "c_angle": {
+      "status": "pass"
+    },
+    "c_polarization": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    }
+  },
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_polarization"
+  },
+  "case_id": "SEED-1-6",
+  "name": "boundary"
+}

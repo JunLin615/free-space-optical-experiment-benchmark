@@ -1,0 +1,30 @@
+{
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": "linear",
+      "q2": "linear",
+      "q3": {
+        "depends_on": [
+          "input_axis_orientation",
+          "fast_slow_phase_sign",
+          "observation_convention"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_circular": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    },
+    "c_zero": {
+      "status": "pass"
+    },
+    "c_handed": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-4-1",
+  "name": "negative"
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": "circular",
+      "q2": "linear",
+      "q3": {
+        "depends_on": [
+          "input_axis_orientation",
+          "fast_slow_phase_sign"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_circular": {
+      "status": "pass"
+    },
+    "c_zero": {
+      "status": "pass"
+    },
+    "c_handed": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    }
+  },
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_handed"
+  },
+  "case_id": "SEED-4-1",
+  "name": "boundary"
+}

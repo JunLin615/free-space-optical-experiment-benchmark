@@ -1,0 +1,33 @@
+{
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "wavelength_532_nm": "transmitted",
+        "wavelength_1064_nm": "reflected"
+      },
+      "q2": {
+        "response_may_change": true,
+        "change_kind": "cutoff_shift"
+      },
+      "q3": {
+        "unconditionally_preserved": false,
+        "mechanism": "s_p_response_difference"
+      }
+    }
+  },
+  "expected": {
+    "c_routing": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    },
+    "c_angle": {
+      "status": "pass"
+    },
+    "c_polarization": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-1-6",
+  "name": "negative"
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "state": "circular"
+      },
+      "q2": {
+        "state": "linear"
+      },
+      "q3": {
+        "depends_on": [
+          "observation_convention",
+          "input_axis_orientation",
+          "fast_slow_phase_sign"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_circular": {
+      "status": "pass"
+    },
+    "c_zero": {
+      "status": "pass"
+    },
+    "c_handed": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-4-1",
+  "name": "alternative valid"
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "wavelength_532_nm": "reflection",
+        "wavelength_1064_nm": "transmission"
+      },
+      "q2": {
+        "response_may_change": true,
+        "change_kind": "reflectance_transmittance_change"
+      },
+      "q3": {
+        "unconditionally_preserved": false,
+        "mechanism": "s_p_amplitude_difference"
+      }
+    }
+  },
+  "expected": {
+    "c_routing": {
+      "status": "pass"
+    },
+    "c_angle": {
+      "status": "pass"
+    },
+    "c_polarization": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-1-6",
+  "name": "alternative valid"
+}

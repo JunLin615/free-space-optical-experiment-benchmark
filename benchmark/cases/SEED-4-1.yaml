@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-4-1
 legacy_id: '4.1'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Circular polarization from a quarter-wave plate
 language: en
@@ -39,6 +39,10 @@ answer_contract:
   - answers.q1
   - answers.q2
   - answers.q3
+  method_shape:
+    q1: 'State circular as a string or object with state: circular. No handedness label is required here.'
+    q2: 'State linear as a string or object with state: linear.'
+    q3: 'Object with depends_on listing input_axis_orientation, fast_slow_phase_sign, and observation_convention. Do not assign an unqualified right/left label.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -87,6 +91,5 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
-    required before status promotion.
+  implemented_checks: [typed_polarization_states, handedness_dependencies, positive_negative_boundary_alternative_adversarial_fixtures]
+  notes: Bounded typed oracle checks state classes and handedness dependencies but not arbitrary Jones-vector notation or observer conventions. Novel equivalent forms abstain. Executable status only.

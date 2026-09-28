@@ -1,0 +1,37 @@
+{
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "mirror_count": "two",
+        "output_forward_parallel": true,
+        "same_height": true,
+        "lateral_offset": {
+          "value": 30,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "angular_deflections_cancel": true,
+        "mirror_geometry": "parallel_planes"
+      },
+      "q3": {
+        "single_reflection_sufficient": false,
+        "reason": "changes_direction"
+      }
+    }
+  },
+  "expected": {
+    "c_dogleg": {
+      "status": "pass"
+    },
+    "c_orientation": {
+      "status": "pass"
+    },
+    "c_single_reflection": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-1-3",
+  "name": "positive"
+}
