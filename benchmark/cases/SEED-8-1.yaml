@@ -1,0 +1,120 @@
+schema_version: 0.1.0
+case_id: SEED-8-1
+legacy_id: '8.1'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Free-space measurement of weak absorption
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - experimental_design
+  - calibration
+  - verification
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.1.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Clarification: 10^-4 is a relative
+    transmission-change target, not a guarantee of attainable precision; require a noise, bandwidth, drift,
+    and linearity argument. Three alternatives must differ in measurement principle.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Design a free-space system to measure a sample-transmission change of about 10^-4 despite
+    appreciable slow laser-power drift. Fiber must not be the principal transport path.
+  questions:
+  - id: q1
+    request: Give a complete optical and detection architecture.
+  - id: q2
+    request: Explain how source drift is suppressed or measured.
+  - id: q3
+    request: Protect the detectors from saturation while preserving sensitivity.
+  - id: q4
+    request: Describe blank and calibration measurements.
+  - id: q5
+    request: Give at least three genuinely distinct workable implementations.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  - answers.q4
+  - answers.q5
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Provide illumination, sample and detector paths, a measurable transmission observable,
+      and an acquisition sequence.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Use a simultaneous or interleaved reference, modulation, normalization, or another defensible
+      drift-control mechanism with appropriate time scale.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Address optical attenuation and detector linear range before acquisition, and show that
+      attenuation does not erase the 10^-4 sensitivity target.
+    evidence_path: answers.q3
+  - id: c_q4
+    severity: scored
+    predicate: Include blank or no-sample baseline, dark/background correction, detector linearity, and
+      known attenuation or reference validation.
+    evidence_path: answers.q4
+  - id: c_q5
+    severity: scored
+    predicate: Offer at least three distinct physical measurement architectures, not three parameter changes
+      of one setup; compare their noise and drift assumptions.
+    evidence_path: answers.q5
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+  accepted_solution_families:
+  - id: reference_ratio
+    example: Sample and reference channels are measured together and their ratio removes source drift.
+  - id: modulated_difference
+    example: Sample state or beam is modulated and a phase-sensitive difference is measured against a
+      reference.
+  - id: interleaved_blank
+    example: Sample and blank are alternated faster than the relevant drift with linearized detector readout.
+  - id: balanced_detection
+    example: Matched detection channels measure a calibrated small differential transmission.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.2
+    check: c_q1
+  - id: c_q2
+    weight: 0.2
+    check: c_q2
+  - id: c_q3
+    weight: 0.2
+    check: c_q3
+  - id: c_q4
+    weight: 0.2
+    check: c_q4
+  - id: c_q5
+    weight: 0.2
+    check: c_q5
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks: []
+  notes: English canonical specification only. No autonomous scorer or release verification is claimed.

@@ -1,0 +1,96 @@
+schema_version: 0.1.0
+case_id: SEED-8-3
+legacy_id: '8.3'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Polarimetric imaging of a thin birefringent sample
+language: en
+taxonomy:
+  optical_domain: polarization
+  task_types:
+  - experimental_design
+  - quantitative_inference
+  - calibration
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.3.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Clarification: intensity-only axis/retardance
+    inversion is model dependent and has axis-periodicity and retardance-wrap ambiguities; no unique map
+    is promised without enough states and calibration.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Map the local linear-birefringence axis and phase retardance of a thin sample over a two-dimensional
+    field. State a sample model under which these quantities are identifiable.
+  questions:
+  - id: q1
+    request: Design illumination, polarization preparation, sample, analyzer, and imaging paths.
+  - id: q2
+    request: Identify enough independent polarization settings or measurements to support inversion.
+  - id: q3
+    request: Explain the inversion, calibration, and remaining ambiguities.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Use known incident polarization states, controlled analyzers, and spatially registered
+      images with appropriate intensity references.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Collect sufficient independent states for the chosen Jones, Stokes, or Mueller model; identify
+      how degeneracies are tested rather than assuming a single intensity image is enough.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Describe reconstruction of axis and retardance for a stated nondepolarizing-retarder or
+      more general model, calibrate instrument birefringence, and address axis periodicity, retardance
+      wrapping, diattenuation, and depolarization where relevant.
+    evidence_path: answers.q3
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+  accepted_solution_families:
+  - id: rotating_analyzer
+    example: Multiple input and analyzer angles constrain a thin linear-retarder model.
+  - id: stokes_mueller
+    example: State-resolved Stokes or Mueller imaging measures a richer sample response.
+  - id: compensator_imaging
+    example: A calibrated variable retarder and analyzer provide phase-sensitive polarization diversity.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.3333333333333333
+    check: c_q1
+  - id: c_q2
+    weight: 0.3333333333333333
+    check: c_q2
+  - id: c_q3
+    weight: 0.3333333333333333
+    check: c_q3
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks: []
+  notes: English canonical specification only. No autonomous scorer or release verification is claimed.
