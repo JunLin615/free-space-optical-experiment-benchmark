@@ -248,7 +248,7 @@
     "tests/test_independent_physics.py": "0e8b723865604a3eb7e822712707a45b1cc2b77589a9b3dacfca7882ed96f84a",
     "tests/test_numerical_scoring.py": "6954da376702b99d64f4fb8e66da51adf0b186a885d298538fe0db4511e5d3e1",
     "tests/test_variants_vnext.py": "c9dec59a13154f59ab2a30bed4fadfec4cca1a97de84b8786313d96ad848b8a1",
-    "tests/test_vnext_compatibility.py": "645894d4d7e86d83810b663b3b047f2d4f3e49d1dbec68a208b690be8b3873c0",
+    "tests/test_vnext_compatibility.py": "325a2a5661fd2faedc58a89e566f5720d2d75d4f81f5e55f601195e91e0295de",
     "tests/test_vnext_deterministic_evidence.py": "20edba431c104745514e3f2645393ce0fab053db7a3ed90562efb0c1bf5010b3",
     "tools/baseline/runner.py": "53b00e6d053f1afe4a6afcff186026e261143dfcbf543ee064308babd229afa5",
     "tools/fixture_evidence.py": "ee5a42dd70a7446811db4d14e4bd8f55d5b5c5b43362f512fa7b2f4653d32af0",

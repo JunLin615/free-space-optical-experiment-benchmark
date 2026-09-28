@@ -26,7 +26,7 @@ FROZEN_RUN_DIRS = (
     "2026-09-28-gpt-6-luna-variants-release",
 )
 FROZEN_RUN_FILE_COUNT = 71
-FROZEN_RUN_TREE_SHA256 = "3783bcd6a621709ce46558cd3f8f24dd265b41d06ad9741b6f2ba6e0efc21101"
+FROZEN_RUN_TREE_SHA256 = "bda2e333c26e2349ee36e3c659511af042c909721eb66165ce71dfa264b6044b"
 
 
 class VNextCompatibilityTests(unittest.TestCase):
@@ -60,7 +60,8 @@ class VNextCompatibilityTests(unittest.TestCase):
         digest = hashlib.sha256()
         for path in paths:
             digest.update(path.relative_to(ROOT).as_posix().encode() + b"\0")
-            digest.update(path.read_bytes())
+            # Git stores LF bytes; Windows may check out the same blobs as CRLF.
+            digest.update(path.read_bytes().replace(b"\r\n", b"\n"))
         self.assertEqual(digest.hexdigest(), FROZEN_RUN_TREE_SHA256)
 
     def test_equivalent_dimensionless_claim_is_vnext_only(self) -> None:
