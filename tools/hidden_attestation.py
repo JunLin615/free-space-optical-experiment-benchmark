@@ -9,11 +9,43 @@ from __future__ import annotations
 
 from collections import Counter
 import hashlib
+import math
 from pathlib import Path
 from typing import Any
 
 
 TREE_DOMAIN = b"hidden-run-evidence-tree-v1\0"
+PRICE_FIELDS = ("currency", "pricing_reference", "pricing_snapshot_utc")
+
+
+def _aggregate_cost(costs: list[Any], pricing_snapshot: Any) -> dict[str, Any] | None:
+    """Sum only runner cost objects from one documented price snapshot."""
+    if all(cost is None for cost in costs):
+        return None
+    if any(cost is None for cost in costs):
+        raise ValueError("known and unknown result costs cannot be aggregated")
+    if not isinstance(pricing_snapshot, dict):
+        raise ValueError("priced results lack a manifest pricing snapshot")
+    required = {"amount", *PRICE_FIELDS}
+    provenance = None
+    amounts = []
+    for cost in costs:
+        if not isinstance(cost, dict) or set(cost) != required:
+            raise ValueError("invalid runner cost object")
+        amount = cost["amount"]
+        if (isinstance(amount, bool) or not isinstance(amount, (int, float)) or
+                not math.isfinite(amount) or amount < 0):
+            raise ValueError("invalid result cost amount")
+        current = tuple(cost[field] for field in PRICE_FIELDS)
+        if any(not isinstance(value, str) or not value for value in current):
+            raise ValueError("result cost lacks pricing provenance")
+        if current != tuple(pricing_snapshot.get(field) for field in PRICE_FIELDS):
+            raise ValueError("result cost differs from manifest pricing snapshot")
+        if provenance is not None and current != provenance:
+            raise ValueError("incompatible result cost provenance")
+        provenance = current
+        amounts.append(float(amount))
+    return {"amount": math.fsum(amounts), **dict(zip(PRICE_FIELDS, provenance))}
 
 
 def evidence_commitment(run_dir: Path) -> dict[str, Any]:
@@ -102,11 +134,7 @@ def derive_real_attestation(bundle_dir: Path, run_dir: Path, *,
             if not isinstance(value, int) or isinstance(value, bool) or value < 0:
                 raise ValueError(f"result lacks valid {field} usage")
             usage[field] += value
-        cost = result.get("cost")
-        if cost is not None:
-            if not isinstance(cost, (int, float)) or isinstance(cost, bool) or cost < 0:
-                raise ValueError("invalid result cost")
-            costs.append(float(cost))
+        costs.append(result.get("cost"))
     if len(identities) != 1 or len(protocols_seen) != 1:
         raise ValueError("real smoke attestation requires one model and protocol")
     adapter, model_id, model_version = next(iter(identities))
@@ -125,7 +153,8 @@ def derive_real_attestation(bundle_dir: Path, run_dir: Path, *,
             "linked_result_records": linkage["linked_result_records"],
             "completed_instances": len(scores), "aggregate_score": sum(scores) / len(scores),
             "failure_categories": dict(sorted(failures.items())),
-            "tokens": dict(usage), "cost": sum(costs) if len(costs) == len(results) else None,
+            "tokens": dict(usage),
+            "cost": _aggregate_cost(costs, manifest.get("pricing_snapshot")),
             "raw_hidden_instances_published": False, "raw_model_responses_published": False}
 
 

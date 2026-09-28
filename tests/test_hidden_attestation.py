@@ -8,7 +8,8 @@ import secrets
 import tempfile
 import unittest
 
-from tools.hidden_attestation import audit_real_attestation, derive_real_attestation
+from tools.hidden_attestation import (_aggregate_cost, audit_real_attestation,
+                                      derive_real_attestation)
 from tools.hidden_eval import FAMILY_MAP, audit_bundle, generate_bundle
 
 
@@ -115,6 +116,36 @@ class HiddenAttestationTests(unittest.TestCase):
         self._save(self.attestation_path, altered)
         with self.assertRaisesRegex(ValueError, "public attestation differs"):
             self._audit()
+
+    def test_priced_runner_record_preserves_provenance(self) -> None:
+        snapshot = {"currency": "USD", "pricing_reference": "test-price-v1",
+                    "pricing_snapshot_utc": "2026-09-28T00:00:00Z"}
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        manifest["pricing_snapshot"] = snapshot
+        self._save(self.manifest_path, manifest)
+        result = json.loads(self.result_path.read_text(encoding="utf-8"))
+        result["cost"] = {"amount": 0.0011, **snapshot}
+        self._save(self.result_path, result)
+        derived = derive_real_attestation(self.bundle, self.run, **self.kwargs)
+        self.assertEqual(derived["cost"], result["cost"])
+        self._save(self.attestation_path, derived)
+        self.assertTrue(self._audit()["verified"])
+
+    def test_costs_must_have_compatible_complete_provenance(self) -> None:
+        snapshot = {"currency": "USD", "pricing_reference": "test-price-v1",
+                    "pricing_snapshot_utc": "2026-09-28T00:00:00Z"}
+        first = {"amount": 0.0011, **snapshot}
+        second = {"amount": 0.0022, **snapshot}
+        self.assertAlmostEqual(_aggregate_cost([first, second], snapshot)["amount"], 0.0033)
+        self.assertIsNone(_aggregate_cost([None, None], None))
+        with self.assertRaisesRegex(ValueError, "known and unknown"):
+            _aggregate_cost([first, None], snapshot)
+        with self.assertRaisesRegex(ValueError, "pricing snapshot"):
+            _aggregate_cost([first, {**second, "currency": "EUR"}], snapshot)
+        with self.assertRaisesRegex(ValueError, "pricing snapshot"):
+            _aggregate_cost([first], None)
+        with self.assertRaisesRegex(ValueError, "invalid runner cost object"):
+            _aggregate_cost([0.0011], snapshot)
 
 
 if __name__ == "__main__":

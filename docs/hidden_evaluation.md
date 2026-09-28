@@ -93,6 +93,11 @@ Do not publish a real run without reviewing its response disclosure risk.
 `attest-run` derives model/protocol identity, score, usage, cost, and failure
 counts from the linked private result records. It refuses dry-run evidence;
 write its public output outside the frozen private run directory.
+Known costs retain the runner's amount, currency, pricing reference, and
+pricing-snapshot timestamp. A multi-result total is emitted only when every
+result has a known cost from the same manifest pricing snapshot. Mixed known
+and unknown costs or incompatible pricing provenance fail closed; if every
+cost is unknown, the public `cost` remains `null`.
 
 The first private pilot used four families and two variants per family. The
 external bundle reproduced all eight instances. A prepared mock runner run
