@@ -1,0 +1,120 @@
+schema_version: 0.1.0
+case_id: SEED-4-2
+legacy_id: '4.2'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Michelson mirror motion and fringe cycles
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - quantitative_inference
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The wavelength is symbolic in
+    the seed, so path differences are expressed in units of λ.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: In a monochromatic-light Michelson interferometer, the mirror in one arm moves by λ/2 along
+    the optical axis.
+  questions:
+  - id: q1
+    request: How much does the optical path difference change?
+  - id: q2
+    request: How many complete fringe periods does the detector experience?
+  - id: q3
+    request: What changes if the mirror moves only λ/4?
+  givens:
+  - value: 0.5
+    unit: '1'
+    symbol: mirror_displacement_wavelengths
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.opd_change_in_wavelengths
+  - answers.q2.fringe_cycles
+  - answers.q3.opd_change_in_wavelengths
+  - answers.q3.fringe_cycles
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: OPD change = 2*mirror displacement; phase change = 2π*OPD/λ
+    valid_if: single moving Michelson arm with ordinary double-pass reflection
+  numerical_checks:
+  - id: n_opd_half
+    answer_path: answers.q1.opd_change_in_wavelengths
+    reference:
+      value: 1
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+  - id: n_fringe_half
+    answer_path: answers.q2.fringe_cycles
+    reference:
+      value: 1
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: michelson_fringe_count
+  - id: n_opd_quarter
+    answer_path: answers.q3.opd_change_in_wavelengths
+    reference:
+      value: 0.5
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+  - id: n_fringe_quarter
+    answer_path: answers.q3.fringe_cycles
+    reference:
+      value: 0.5
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+  known_failure_modes:
+  - For λ/4 motion, the phase changes by π, moving bright to dark or vice versa.
+scoring:
+  criteria:
+  - id: n_opd_half
+    weight: 0.3
+    check: n_opd_half
+  - id: n_fringe_half
+    weight: 0.25
+    check: n_fringe_half
+  - id: n_opd_quarter
+    weight: 0.2
+    check: n_opd_quarter
+  - id: n_fringe_quarter
+    weight: 0.25
+    check: n_fringe_quarter
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []

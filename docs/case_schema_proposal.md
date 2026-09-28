@@ -10,12 +10,12 @@ This is a recommendation, not a claim that YAML itself verifies optical physics.
 
 The proposed separation is:
 
-1. **Public task**: facts, assumptions, subquestions, requested result schema, and allowed resources. No reference values or hidden grading logic.
+1. **Public task**: facts, assumptions, subquestions, requested result schema, and any intrinsic apparatus constraints. Evaluation tool and retrieval access belongs to the protocol manifest. No reference values or hidden grading logic.
 2. **Gold specification**: equations, quantitative reference values, accepted constraints and alternatives, forbidden contradictions, and weighted criteria. This is a specification of physical validity, not an answer paragraph.
 3. **Validator package**: named, sandboxed, versioned implementations of the checks, with positive and negative fixtures. Neither the case nor the candidate submits executable code to the grader by default.
 4. **Run record**: a separate immutable record of candidate answer, tool use, validator results, evaluator versions, and resource use. Run-specific metadata does not belong in the case file.
 
-The reference evaluator should grade the **declared physical outcome**, not the vendor, program, or incidental optical component nomenclature. A candidate can choose any viable measurement method within the stated resources. The public prompt should avoid embedding a preferred topology. Validity checks must cover claimed measured quantities and calibration logic; a model judge may assess residual semantic claims, but cannot override a failed deterministic physical check without an explicit, versioned rule.
+The reference evaluator should grade the **declared physical outcome**, not the vendor, program, or incidental optical component nomenclature. A candidate can choose any viable measurement method within the intrinsic apparatus constraints and the separately declared protocol. The public prompt should avoid embedding a preferred topology. Validity checks must cover claimed measured quantities and calibration logic; a model judge may assess residual semantic claims, but cannot override a failed deterministic physical check without an explicit, versioned rule.
 
 ## Proposed top-level fields
 
@@ -29,7 +29,7 @@ The reference evaluator should grade the **declared physical outcome**, not the 
 | `split` | Assignment independent of evidence stage: `unassigned`, `public_dev`, `public_eval`, or `hidden_eval`. The release manifest determines actual publication. A `quarantined` case retains its split for traceability but cannot be released. |
 | `title`, `language`, `taxonomy` | Display title; language tag; controlled optical domain, task type, difficulty evidence, and modality labels. Difficulty labels are hypotheses until calibrated on baseline results. |
 | `provenance` | Origin, source references, derivation notes, authoring or generation method, creation date, source hash, and source/license status. Never present an invented scenario as a sourced real experiment. |
-| `task` | Public statement, subquestions, given quantities and assumptions, requested observable and convention, exclusions, and resource policy. Every criterion should trace to a public requirement. |
+| `task` | Public statement, subquestions, given quantities and assumptions, requested observable and convention, exclusions, and optional intrinsic apparatus constraints. Every criterion should trace to a public requirement. |
 | `answer_contract` | Required machine-readable fields plus human-readable explanation. A versioned JSON Schema validates the candidate block. Permit equivalent methods and extra explanatory claims without requiring a single component list. |
 | `gold` | Machine-readable numerical checks, physical constraints, alternative solution families, forbidden claims, optional model-judge rubric, and expected error cases. Private for held-out cases. |
 | `scoring` | Criterion weights, check IDs, gate/cap rules, aggregation, uncertainty handling, and unscorable behavior. Weights sum to one within each scored question. |
@@ -95,7 +95,6 @@ task:
   questions:
     - {id: "q1", request: "Report x at z = 0, signed angle, and x at z = 3.00 m."}
     - {id: "q2", request: "Give a two-degree-of-freedom correction and verification procedure."}
-  allowed_resources: "Any scientific or optical tool; no named product required."
 answer_contract:
   format: "human_explanation_plus_json_object"
   schema_id: "beam_state_answer_v0.1"

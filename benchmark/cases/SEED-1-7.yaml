@@ -1,0 +1,111 @@
+schema_version: 0.1.0
+case_id: SEED-1-7
+legacy_id: '1.7'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Half-wave plate and linear polarization
+language: en
+taxonomy:
+  optical_domain: polarization
+  task_types:
+  - quantitative_inference
+  - conceptual_reasoning
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.7 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. Because the seed omits a signed
+    viewing convention, the requested rotation values are magnitudes.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Linearly polarized light passes through an ideal half-wave plate. The incident polarization
+    axis makes an angle of 17° with the plate's fast axis.
+  questions:
+  - id: q1
+    request: By what magnitude does the output linear-polarization direction rotate relative to the input?
+  - id: q2
+    request: If the half-wave plate itself is rotated a further 5°, by what magnitude does the output
+      direction change?
+  - id: q3
+    request: State whether the same linear-polarization rule can be applied directly to circularly polarized
+      input.
+  givens:
+  - value: 17
+    unit: deg
+    symbol: input_to_fast_axis_angle
+  - value: 5
+    unit: deg
+    symbol: plate_rotation
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.rotation_magnitude
+  - answers.q2.output_change_magnitude
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: output linear-polarization axis is the reflection of the input axis about the wave-plate
+      fast axis
+    valid_if: ideal half-wave retardance and linear input
+  numerical_checks:
+  - id: n_rotation
+    answer_path: answers.q1.rotation_magnitude
+    reference:
+      value: 34
+      unit: deg
+    absolute_tolerance:
+      value: 0.5
+      unit: deg
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: half_wave_relative_rotation_magnitude
+  - id: n_plate_effect
+    answer_path: answers.q2.output_change_magnitude
+    reference:
+      value: 10
+      unit: deg
+    absolute_tolerance:
+      value: 0.5
+      unit: deg
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: half_wave_plate_rotation_effect
+  universal_constraints:
+  - id: c_circular
+    severity: scored
+    predicate: Circular input does not become a merely rotated linear state; ideal half-wave plate reverses
+      handedness
+    evidence_path: answers.q3
+  forbidden_claims:
+  - id: f_circular_linear
+    predicate: two-angle linear-rotation rule applies directly to circular input
+scoring:
+  criteria:
+  - id: n_rotation
+    weight: 0.35
+    check: n_rotation
+  - id: n_plate_effect
+    weight: 0.35
+    check: n_plate_effect
+  - id: c_circular
+    weight: 0.3
+    check: c_circular
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []

@@ -1,0 +1,111 @@
+schema_version: 0.1.0
+case_id: SEED-1-5
+legacy_id: '1.5'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Folded optical delay line
+language: en
+taxonomy:
+  optical_domain: ultrafast_optics
+  task_types:
+  - quantitative_inference
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.5 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: An ultrashort pulse enters a straight folded delay line with two reflections. The translation
+    stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis.
+  questions:
+  - id: q1
+    request: Find the change in optical path length.
+  - id: q2
+    request: Find the change in time delay.
+  - id: q3
+    request: Estimate the required one-way mechanical travel for a 100 ps delay scan.
+  givens:
+  - value: 1.0
+    unit: mm
+    symbol: stage_displacement
+  - value: 100
+    unit: ps
+    symbol: target_delay
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.path_change
+  - answers.q2.delay_change
+  - answers.q3.stage_travel
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: path change = 2*stage displacement; delay = path change/c
+    valid_if: the folded geometry is double pass and propagation is in air
+  numerical_checks:
+  - id: n_path
+    answer_path: answers.q1.path_change
+    reference:
+      value: 2.0
+      unit: mm
+    absolute_tolerance:
+      value: 0.03
+      unit: mm
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: folded_delay_path
+  - id: n_delay
+    answer_path: answers.q2.delay_change
+    reference:
+      value: 6.67
+      unit: ps
+    absolute_tolerance:
+      value: 0.12
+      unit: ps
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: folded_delay_time
+  - id: n_travel
+    answer_path: answers.q3.stage_travel
+    reference:
+      value: 14.99
+      unit: mm
+    absolute_tolerance:
+      value: 0.4
+      unit: mm
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: folded_delay_stage_for_target
+  forbidden_claims:
+  - id: f_single_pass
+    predicate: stage motion changes path by only one stage displacement
+scoring:
+  criteria:
+  - id: n_path
+    weight: 0.3
+    check: n_path
+  - id: n_delay
+    weight: 0.35
+    check: n_delay
+  - id: n_travel
+    weight: 0.35
+    check: n_travel
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []

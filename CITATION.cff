@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, cite the repository and the exact benchmark release and evaluator version used."
+title: "Free-Space Optical Experiment Benchmark"
+type: dataset
+authors:
+  - name: "JunLin615 and contributors"
+repository-code: "https://github.com/JunLin615/free-space-optical-experiment-benchmark"
+url: "https://github.com/JunLin615/free-space-optical-experiment-benchmark"
+license: CC-BY-4.0

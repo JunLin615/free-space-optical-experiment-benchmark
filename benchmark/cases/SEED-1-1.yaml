@@ -1,0 +1,109 @@
+schema_version: 0.1.0
+case_id: SEED-1-1
+legacy_id: '1.1'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Mirror rotation and far-field displacement
+language: en
+taxonomy:
+  optical_domain: free_space_beam_geometry
+  task_types:
+  - quantitative_inference
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.1 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The screen orientation is implicit
+    in the seed; the numerical oracle uses a transverse plane normal to the nominal reflected ray.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror
+    rotates 0.50° about a vertical axis. The reflected beam then travels 2.0 m to a viewing screen. Neglect
+    higher-order corrections associated with the initial angle of incidence.
+  questions:
+  - id: q1
+    request: Find the change in direction of the reflected beam.
+  - id: q2
+    request: Estimate the transverse displacement of the spot on the screen.
+  - id: q3
+    request: Identify the most direct geometric quantity to change if the displacement must fall to one
+      quarter of its original value.
+  givens:
+  - value: 0.5
+    unit: deg
+    symbol: mirror_rotation
+  - value: 2.0
+    unit: m
+    symbol: screen_distance
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.angle_change
+  - answers.q2.spot_displacement
+  - answers.q3.geometry_change
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: reflected-ray rotation = 2*mirror rotation; transverse shift = L*tan(reflected-ray rotation)
+    valid_if: screen distance is measured along the nominal reflected ray and screen is normal to it
+  numerical_checks:
+  - id: n_angle
+    answer_path: answers.q1.angle_change
+    reference:
+      value: 1.0
+      unit: deg
+    absolute_tolerance:
+      value: 0.02
+      unit: deg
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: mirror_angle
+  - id: n_shift
+    answer_path: answers.q2.spot_displacement
+    reference:
+      value: 34.91
+      unit: mm
+    absolute_tolerance:
+      value: 1.0
+      unit: mm
+    relative_tolerance: 0.0
+    comparator: max_abs_or_relative_inclusive
+    validator_id: mirror_spot_shift
+  universal_constraints:
+  - id: c_quarter
+    severity: scored
+    predicate: At fixed angle, reduce screen distance from mirror to one quarter; reducing mirror rotation
+      to approximately one quarter is also acceptable
+    evidence_path: answers.q3.geometry_change
+  forbidden_claims:
+  - id: f_one_to_one
+    predicate: reflected_ray_rotates_only_by_mirror_rotation
+scoring:
+  criteria:
+  - id: n_angle
+    weight: 0.3
+    check: n_angle
+  - id: n_shift
+    weight: 0.4
+    check: n_shift
+  - id: c_quarter
+    weight: 0.3
+    check: c_quarter
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []

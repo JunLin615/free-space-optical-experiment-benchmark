@@ -1,0 +1,10 @@
+# Preserve the original HTML seed byte for byte, including its line endings.
+自由空间光学实验推理试题集_初版.html -text
+
+# Generated and authored text remains stable across Windows and Linux checkouts.
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.cff text eol=lf

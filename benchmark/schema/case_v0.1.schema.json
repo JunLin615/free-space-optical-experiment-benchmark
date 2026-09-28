@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JunLin615/free-space-optical-experiment-benchmark/blob/main/benchmark/schema/case_v0.1.schema.json",
+  "title": "Optical testing case, schema 0.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "case_revision", "validation_status", "split", "title", "language", "taxonomy", "provenance", "task", "answer_contract", "gold", "scoring", "validation"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "case_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*$"},
+    "legacy_id": {"type": "string", "minLength": 1},
+    "supersedes": {"type": "string", "minLength": 1},
+    "case_revision": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "benchmark_release": {"type": ["string", "null"]},
+    "validation_status": {"enum": ["seed", "specified", "executable", "challenged", "release_verified", "quarantined"]},
+    "split": {"enum": ["unassigned", "public_dev", "public_eval", "hidden_eval"]},
+    "title": {"type": "string", "minLength": 1},
+    "language": {"const": "en"},
+    "taxonomy": {"$ref": "#/$defs/taxonomy"},
+    "provenance": {"$ref": "#/$defs/provenance"},
+    "task": {"$ref": "#/$defs/task"},
+    "answer_contract": {"$ref": "#/$defs/answer_contract"},
+    "gold": {"$ref": "#/$defs/gold"},
+    "scoring": {"$ref": "#/$defs/scoring"},
+    "validation": {"$ref": "#/$defs/validation"},
+    "extensions": {"type": "object"}
+  },
+  "$defs": {
+    "quantity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["value", "unit"],
+      "properties": {
+        "symbol": {"type": "string"}, "value": {"type": "number"}, "unit": {"type": "string", "minLength": 1},
+        "definition": {"type": "string"}, "uncertainty": {"type": "number", "minimum": 0},
+        "coordinate_frame": {"type": "string"}, "source": {"type": "string"}
+      }
+    },
+    "taxonomy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["optical_domain", "task_types", "difficulty_hypothesis", "modality"],
+      "properties": {
+        "optical_domain": {"enum": ["free_space_beam_geometry", "gaussian_beams", "ultrafast_optics", "wavelength_routing", "polarization", "fourier_optics", "interferometry", "weak_signal_detection", "beam_diagnostics", "phase_imaging", "optical_alignment", "metrology", "other"]},
+        "task_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["quantitative_inference", "experimental_design", "diagnosis", "calibration", "verification", "planning", "error_analysis", "conceptual_reasoning"]}},
+        "difficulty_hypothesis": {"enum": ["introductory", "intermediate", "advanced", "expert", "unrated"]},
+        "modality": {"enum": ["text", "text_image", "text_data", "multimodal"]},
+        "labels": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "difficulty_evidence": {"type": "string"}
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["origin", "created_utc", "source_references", "license_status"],
+      "properties": {
+        "origin": {"type": "string", "minLength": 1}, "seed_relationship": {"type": "string"},
+        "created_utc": {"type": "string", "format": "date"},
+        "source_references": {"type": "array", "items": {"oneOf": [{"type": "string"}, {"type": "object", "additionalProperties": false, "required": ["citation"], "properties": {"citation": {"type": "string"}, "url": {"type": "string", "format": "uri"}, "doi": {"type": "string"}, "license": {"type": "string"}}}]}},
+        "derivation": {"type": "string"}, "authoring_method": {"type": "string"},
+        "source_hash": {"type": "string"}, "license_status": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
+      }
+    },
+    "question": {
+      "type": "object", "additionalProperties": false, "required": ["id", "request"],
+      "properties": {"id": {"type": "string", "minLength": 1}, "request": {"type": "string", "minLength": 1}, "requested_observable": {"type": "string"}, "answer_paths": {"type": "array", "items": {"type": "string"}}}
+    },
+    "task": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "questions"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 1},
+        "givens": {"type": "array", "items": {"$ref": "#/$defs/quantity"}},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "questions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/question"}},
+        "apparatus_constraints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "exclusions": {"type": "array", "items": {"type": "string"}},
+        "coordinate_convention": {"type": "string"}, "requested_result": {"type": "string"},
+        "attachments": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "answer_contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["format", "schema_id", "required_result_paths"],
+      "properties": {
+        "format": {"enum": ["human_explanation_plus_json_object", "json_object"]},
+        "schema_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"},
+        "required_result_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*$"}},
+        "quantity_shape": {"type": "object"}, "method_shape": {"type": "object"},
+        "permit_additional_explanation": {"type": "boolean"},
+        "answer_schema_path": {"type": "string"}, "notes": {"type": "string"}
+      }
+    },
+    "numerical_check": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "answer_path", "reference", "comparator"],
+      "anyOf": [{"required": ["absolute_tolerance"]}, {"required": ["relative_tolerance"]}],
+      "properties": {
+        "id": {"type": "string", "minLength": 1}, "answer_path": {"type": "string", "minLength": 1},
+        "reference": {"$ref": "#/$defs/quantity"},
+        "absolute_tolerance": {"$ref": "#/$defs/quantity"},
+        "relative_tolerance": {"type": "number", "minimum": 0},
+        "comparator": {"enum": ["max_abs_or_relative_inclusive", "absolute_inclusive", "relative_inclusive", "periodic_inclusive", "interval_inclusive", "custom_validator"]},
+        "validator_id": {"type": "string"}, "formula": {"type": "string"},
+        "inputs": {"type": "array", "items": {"type": "string"}},
+        "tolerance_rationale": {"type": "string"}, "notes": {"type": "string"}
+      }
+    },
+    "constraint": {
+      "type": "object", "additionalProperties": false, "required": ["id", "severity", "predicate", "evidence_path"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1}, "severity": {"enum": ["hard", "scored", "forbidden"]},
+        "predicate": {"type": "string", "minLength": 1}, "evidence_path": {"type": "string", "minLength": 1},
+        "validator_id": {"type": "string"}, "judge_rubric_id": {"type": "string"}, "notes": {"type": "string"}
+      }
+    },
+    "family": {
+      "type": "object", "additionalProperties": false, "required": ["id", "example"],
+      "properties": {"id": {"type": "string", "minLength": 1}, "example": {"type": "string", "minLength": 1}, "family_checks": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "notes": {"type": "string"}}
+    },
+    "judge_rubric": {
+      "type": "object", "additionalProperties": false, "required": ["id", "criterion", "judge_version", "threshold", "pass_examples", "fail_examples"],
+      "properties": {
+        "id": {"type": "string"}, "criterion": {"type": "string"}, "judge_version": {"type": "string"},
+        "threshold": {"type": "number", "minimum": 0, "maximum": 1},
+        "pass_examples": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "fail_examples": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "calibrated_reliability": {"type": "number", "minimum": 0, "maximum": 1},
+        "notes": {"type": "string"}
+      }
+    },
+    "gold": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "visibility": {"enum": ["private", "public_dev"]},
+        "reference_model": {"type": "object"},
+        "numerical_checks": {"type": "array", "items": {"$ref": "#/$defs/numerical_check"}},
+        "universal_constraints": {"type": "array", "items": {"$ref": "#/$defs/constraint"}},
+        "accepted_solution_families": {"type": "array", "items": {"$ref": "#/$defs/family"}},
+        "accepted_correction_families": {"type": "array", "items": {"$ref": "#/$defs/family"}},
+        "other_valid_families_policy": {"type": "string"},
+        "forbidden_claims": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "predicate"], "properties": {"id": {"type": "string"}, "predicate": {"type": "string"}, "validator_id": {"type": "string"}}}},
+        "judge_rubrics": {"type": "array", "items": {"$ref": "#/$defs/judge_rubric"}},
+        "known_failure_modes": {"type": "array", "items": {"type": "string"}}
+      },
+      "anyOf": [{"required": ["numerical_checks"]}, {"required": ["universal_constraints"]}, {"required": ["forbidden_claims"]}, {"required": ["judge_rubrics"]}]
+    },
+    "scoring": {
+      "type": "object", "additionalProperties": false, "required": ["criteria", "aggregation"],
+      "properties": {
+        "criteria": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "weight", "check"], "properties": {"id": {"type": "string", "minLength": 1}, "weight": {"type": "number", "minimum": 0, "maximum": 1}, "check": {"type": "string", "minLength": 1}, "question_id": {"type": "string"}}}},
+        "hard_rule": {"type": "string"}, "malformed_answer_rule": {"type": "string"},
+        "aggregation": {"enum": ["weighted_sum", "weighted_sum_then_hard_cap"]},
+        "unscorable_rule": {"type": "string"}
+      }
+    },
+    "validation": {
+      "type": "object", "additionalProperties": false, "required": ["planned_checks", "implemented_checks"],
+      "properties": {
+        "planned_checks": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "implemented_checks": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "draft_positive_fixture": {"type": "object"},
+        "positive_fixtures": {"type": "array", "items": {"type": "string"}},
+        "negative_fixtures": {"type": "array", "items": {"type": "string"}},
+        "independent_derivation": {"type": "string"},
+        "adversarial_evidence": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

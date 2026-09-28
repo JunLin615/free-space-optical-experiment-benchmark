@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JunLin615/free-space-optical-experiment-benchmark/blob/main/benchmark/schema/result.schema.json",
+  "title": "Free-space optics benchmark run result",
+  "description": "Versioned per-case run record. Null means unavailable; zero means measured zero. Aggregate reports may be derived from these records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "result_schema_version",
+    "case_id",
+    "benchmark_version",
+    "system",
+    "protocol",
+    "case_library_access",
+    "tools_available",
+    "tools_used",
+    "tool_call_count",
+    "tokens",
+    "provider_usage",
+    "cost",
+    "wall_time_seconds",
+    "retry_count",
+    "raw_answer",
+    "structured_answer",
+    "validator_results",
+    "judge_results",
+    "criterion_scores",
+    "scores"
+  ],
+  "properties": {
+    "result_schema_version": { "const": "0.1.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "case_id": { "type": "string", "minLength": 1 },
+    "case_revision": { "type": ["string", "null"] },
+    "benchmark_version": { "type": "string", "minLength": 1 },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "model_id", "model_version", "scaffold_id"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "provider": { "type": ["string", "null"] },
+        "model_id": { "type": "string", "minLength": 1 },
+        "model_version": { "type": ["string", "null"] },
+        "scaffold_id": { "type": ["string", "null"] }
+      }
+    },
+    "protocol": {
+      "enum": ["closed_book", "case_assisted", "tool_assisted", "case_and_tool_assisted"]
+    },
+    "case_library_access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "snapshot_id", "retrieved_document_ids"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "snapshot_id": { "type": ["string", "null"] },
+        "retrieved_document_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "tools_available": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "tools_used": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "Distinct tool identifiers used; call frequency is recorded separately." },
+    "tool_call_count": { "$ref": "#/$defs/nullableCount", "description": "Actual number of tool invocations; null means the runner could not measure it." },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output", "total"],
+      "properties": {
+        "input": { "$ref": "#/$defs/nullableCount" },
+        "output": { "$ref": "#/$defs/nullableCount" },
+        "total": { "$ref": "#/$defs/nullableCount" },
+        "cached_input": { "$ref": "#/$defs/nullableCount" }
+      }
+    },
+    "provider_usage": {
+      "type": ["object", "null"],
+      "description": "Raw or losslessly normalized provider usage payload, including provider-specific cache and reasoning-token fields. Null means unavailable."
+    },
+    "cost": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["amount", "currency", "pricing_reference", "pricing_snapshot_utc"],
+          "properties": {
+            "amount": {"type": "number", "minimum": 0},
+            "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+            "pricing_reference": {"type": "string", "minLength": 1, "description": "Provider price-sheet URL or immutable price-schedule identifier."},
+            "pricing_snapshot_utc": {"type": "string", "format": "date-time"}
+          }
+        }
+      ],
+      "description": "Null means cost is unknown; measured zero is an amount of 0 with pricing provenance."
+    },
+    "wall_time_seconds": { "type": ["number", "null"], "minimum": 0 },
+    "retry_count": { "type": "integer", "minimum": 0 },
+    "raw_answer": { "type": ["string", "null"] },
+    "structured_answer": { "type": ["object", "null"] },
+    "validator_results": { "type": "array", "items": { "$ref": "#/$defs/checkResult" } },
+    "judge_results": { "type": "array", "items": { "$ref": "#/$defs/checkResult" } },
+    "criterion_scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion_id", "score", "weight"],
+        "properties": {
+          "criterion_id": { "type": "string", "minLength": 1 },
+          "score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+          "status": { "enum": ["scored", "unresolved", "not_applicable"] },
+          "evidence": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_total", "capped_total"],
+      "properties": {
+        "raw_total": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "capped_total": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "aggregate_metrics": { "type": "object", "additionalProperties": { "type": ["number", "null"] } }
+      }
+    },
+    "failure_mode": {
+      "enum": ["none", "agent_timeout", "agent_error", "no_answer", "invalid_contract", "physics_fail", "constraint_fail", "judge_unresolved", "validator_error", "invalid_instance"]
+    }
+  },
+  "$defs": {
+    "nullableCount": { "type": ["integer", "null"], "minimum": 0 },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "status"],
+      "properties": {
+        "check_id": { "type": "string", "minLength": 1 },
+        "version": { "type": ["string", "null"] },
+        "status": { "enum": ["pass", "fail", "unresolved", "error", "not_applicable"] },
+        "score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "evidence": { "type": ["string", "null"] },
+        "details": { "type": ["object", "null"] }
+      }
+    }
+  }
+}

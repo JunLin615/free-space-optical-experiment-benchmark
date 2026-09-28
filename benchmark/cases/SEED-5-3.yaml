@@ -1,0 +1,112 @@
+schema_version: 0.1.0
+case_id: SEED-5-3
+legacy_id: '5.3'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Weak absorption with a reference channel
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - experimental_design
+  - conceptual_reasoning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 5.3 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A sample produces a relative transmission change of about 10^-5. The laser also has noticeable
+    slow power drift and intensity noise.
+  questions:
+  - id: q1
+    request: Design a measurement chain that includes at least a sample channel and a reference channel.
+  - id: q2
+    request: Explain the physical purpose of normalization.
+  - id: q3
+    request: Identify errors that an intensity ratio alone does not automatically remove.
+  givens:
+  - value: 1.0e-05
+    unit: '1'
+    symbol: relative_transmission_change
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_channels
+    severity: hard
+    predicate: Split illumination into sample and reference channels with synchronized detection, enabling
+      a ratio or differential estimate
+    evidence_path: answers.q1
+  - id: c_normalize
+    severity: scored
+    predicate: Reference channel tracks common source-intensity variation to reduce its contribution to
+      inferred absorption
+    evidence_path: answers.q2
+  - id: c_residuals
+    severity: scored
+    predicate: Identify independent detector drift, path mismatch, sample scattering changes, detector
+      nonlinearity or channel-specific noise as residual errors
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: simultaneous_ratio
+    example: Simultaneous sample/reference photocurrents followed by calibrated transmission ratio.
+    family_checks:
+    - common_source_tracking
+    - detector_linearity
+  - id: balanced_difference
+    example: Balanced or differential readout with calibrated gain and baseline.
+    family_checks:
+    - gain_calibration
+    - common_source_tracking
+  other_valid_families_policy: Other free-space layouts pass if the sample and reference remain comparable
+    and the required common-mode and residual-error reasoning is present.
+  judge_rubrics:
+  - id: draft_semantic_review
+    criterion: Check the physical role of normalization and concrete residual errors; keyword matching
+      alone is insufficient.
+    judge_version: unimplemented-draft
+    threshold: 0.75
+    pass_examples:
+    - A synchronized sample/reference ratio suppresses common source fluctuations while detector mismatch
+      or nonlinear response remains a possible error.
+    fail_examples:
+    - A reference detector is named but its measurements are not compared with the sample channel, or
+      a ratio is claimed to cancel every error.
+    notes: Draft only; no judge calibration or scoring implementation yet.
+scoring:
+  criteria:
+  - id: c_channels
+    weight: 0.4
+    check: c_channels
+  - id: c_normalize
+    weight: 0.3
+    check: c_normalize
+  - id: c_residuals
+    weight: 0.3
+    check: c_residuals
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Semantic rubric is a draft; this case is not eligible for scored release.
