@@ -1,0 +1,94 @@
+{
+  "answer_contract": {
+    "format": "human_explanation_plus_json_object",
+    "method_shape": {
+      "q3": "Object with linear_rotation_rule_applies as a boolean; optional explanation may be included."
+    },
+    "permit_additional_explanation": true,
+    "quantity_shape": {
+      "answers.q1.rotation_magnitude": "Quantity {value, unit}; angle units deg or rad.",
+      "answers.q2.output_change_magnitude": "Quantity {value, unit}; angle units deg or rad."
+    },
+    "required_result_paths": [
+      "answers.q1.rotation_magnitude",
+      "answers.q2.output_change_magnitude",
+      "answers.q3.linear_rotation_rule_applies"
+    ],
+    "schema_id": "pilot_answer_v0.1"
+  },
+  "compatible_protocols": [
+    {
+      "id": "closed_book",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tool_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_and_tool_assisted",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "instance_content_sha256": "89f376f122e04d36d5c91a2c9f80203d2cb6e7e5689272822434ac9b9fc2b138",
+  "parameter_constraints": {
+    "input_axis_separation_rad": [
+      0,
+      0.7853981633974483
+    ],
+    "plate_rotation_rad": [
+      0,
+      0.2617993877991494
+    ]
+  },
+  "parent_case_content_sha256": "cf0f6a8b3db99ad00d9ecce099cc92d0dacac129305a0a33ea2758dfd374c3db",
+  "parent_case_id": "SEED-1-7",
+  "parent_case_revision": "0.2.1",
+  "parent_release": "0.1.0-rc1",
+  "public_seed": "public-waveplate-units-01",
+  "scientific_payload_sha256": "de8fe05c81b1c0e39682cd853e6cdb7516e728625cb13998e18ed3b2b47118a6",
+  "scorer": {
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "module": "numerical"
+  },
+  "seed_classification": "public_dev",
+  "seed_commitment_sha256": "4f5060f55f3803502f71ede9b0e9d1d3589e22501cacfe021722bcd94737344f",
+  "task": {
+    "givens": [
+      {
+        "symbol": "input_to_fast_axis_angle",
+        "unit": "rad",
+        "value": 0.3
+      },
+      {
+        "symbol": "plate_rotation",
+        "unit": "rad",
+        "value": 0.1
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "request": "By what magnitude does the output linear-polarization direction rotate relative to the input?"
+      },
+      {
+        "id": "q2",
+        "request": "If the half-wave plate itself is rotated a further 0.10 rad, by what magnitude does the output direction change?"
+      },
+      {
+        "id": "q3",
+        "request": "State whether the same linear-polarization rule can be applied directly to circularly polarized input."
+      }
+    ],
+    "statement": "Linearly polarized light passes through an ideal half-wave plate. The incident polarization axis makes an angle of 0.30 rad with the plate's fast axis."
+  },
+  "variant_id": "VAR-SEED-1-7-U-4f5060f55f38",
+  "variant_schema_version": "0.1.0",
+  "variant_type": "structural_unit"
+}

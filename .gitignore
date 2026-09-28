@@ -2,3 +2,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+/.private/
+/benchmark/variants/private/
+/benchmark/variants/hidden/
+*.private-seed.json

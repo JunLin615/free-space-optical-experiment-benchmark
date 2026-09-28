@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Versioned free-space optics evaluation protocol",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_id", "version", "scientific_prompt_source", "case_library_access", "tool_policy", "network_policy", "file_access_policy", "retrieval_policy", "context_injection_policy", "retry_policy", "timeout_policy", "answer_format_contract", "system_scaffold", "logging_requirements"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "protocol_id": {"enum": ["closed_book", "case_assisted", "tool_assisted", "case_and_tool_assisted"]},
+    "version": {"const": "1.0.0"},
+    "scientific_prompt_source": {"const": "tools.protocols.public_payload(case).task"},
+    "case_library_access": {"type": "object", "additionalProperties": false, "required": ["enabled", "snapshot_id"], "properties": {"enabled": {"type": "boolean"}, "snapshot_id": {"type": ["string", "null"]}}},
+    "tool_policy": {"type": "object", "additionalProperties": false, "required": ["profile_id", "allowed_tools"], "properties": {"profile_id": {"type": ["string", "null"]}, "allowed_tools": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}}},
+    "network_policy": {"type": "object", "additionalProperties": false, "required": ["external_access"], "properties": {"external_access": {"type": "boolean"}}},
+    "file_access_policy": {"type": "object", "additionalProperties": false, "required": ["mode", "allowed_roots"], "properties": {"mode": {"const": "runner_supplied_only"}, "allowed_roots": {"type": "array", "maxItems": 0}}},
+    "retrieval_policy": {"type": "object", "additionalProperties": false, "required": ["method", "version", "max_items", "max_context_tokens"], "properties": {"method": {"enum": ["none", "lexical_v1"]}, "version": {"type": "string"}, "max_items": {"type": "integer", "minimum": 0}, "max_context_tokens": {"type": "integer", "minimum": 0}}},
+    "context_injection_policy": {"type": "object", "additionalProperties": false, "required": ["mode", "max_items", "max_tokens", "order"], "properties": {"mode": {"enum": ["none", "retrieved_items_only"]}, "max_items": {"type": "integer", "minimum": 0}, "max_tokens": {"type": "integer", "minimum": 0}, "order": {"const": "retrieval_rank"}}},
+    "retry_policy": {"type": "object", "additionalProperties": false, "required": ["transport_retries", "malformed_answer_retries", "self_correction_retries"], "properties": {"transport_retries": {"const": 0}, "malformed_answer_retries": {"const": 0}, "self_correction_retries": {"const": 0}}},
+    "timeout_policy": {"type": "object", "additionalProperties": false, "required": ["agent_seconds", "tool_seconds"], "properties": {"agent_seconds": {"const": 300}, "tool_seconds": {"const": 10}}},
+    "answer_format_contract": {"const": "public_payload.answer_contract; evaluator accepts the declared JSON answer without hand repair"},
+    "system_scaffold": {"type": "object", "additionalProperties": false, "required": ["id", "version", "allowed_content"], "properties": {"id": {"const": "neutral_optics_v1"}, "version": {"const": "1.0.0"}, "allowed_content": {"const": "Role, protocol resource availability, and output format only; no case-specific hints."}}},
+    "logging_requirements": {"type": "array", "uniqueItems": true, "minItems": 5, "items": {"type": "string"}}
+  }
+}
