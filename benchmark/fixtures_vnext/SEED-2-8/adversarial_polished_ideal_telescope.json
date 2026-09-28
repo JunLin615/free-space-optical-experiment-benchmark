@@ -1,0 +1,58 @@
+{
+  "case_id": "SEED-2-8",
+  "name": "adversarial_polished_ideal_telescope",
+  "kind": "adversarial",
+  "challenge_reason": "Prestige language does not defeat the passive beam-product limit.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "achievable": true
+      },
+      "q2": {
+        "invariant": "beam_parameter_product",
+        "behavior": "cannot_decrease",
+        "same_beam": true
+      },
+      "q3": {
+        "reduce_size": "divergence_increases",
+        "reduce_divergence": "size_increases",
+        "same_beam_scenarios": [
+          {
+            "mode": "reduce_size",
+            "size_ratio": {
+              "value": 0.1,
+              "unit": "1"
+            },
+            "divergence_ratio": {
+              "value": 10.0,
+              "unit": "1"
+            }
+          },
+          {
+            "mode": "reduce_divergence",
+            "size_ratio": {
+              "value": 10.0,
+              "unit": "1"
+            },
+            "divergence_ratio": {
+              "value": 0.1,
+              "unit": "1"
+            }
+          }
+        ]
+      }
+    },
+    "explanation": "A premium ideal telescope preserves power and reduces both angles and size by tenfold."
+  },
+  "expected": {
+    "c_impossible": {
+      "status": "fail"
+    },
+    "c_invariant": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "pass"
+    }
+  }
+}
