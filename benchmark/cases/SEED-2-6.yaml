@@ -1,0 +1,77 @@
+schema_version: 0.1.0
+case_id: SEED-2-6
+legacy_id: '2.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Circularizing an elliptical free-space beam
+language: en
+taxonomy:
+  optical_domain: gaussian_beams
+  task_types: [experimental_design, verification]
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 2.6 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the seed's anisotropic magnification task; a single-plane near-circular spot need not imply equal two-axis propagation or beam quality.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: >-
+    A semiconductor laser output is approximately collimated but strongly
+    elliptical. Its horizontal-to-vertical 1/e² beam-diameter ratio is about
+    3:1. A downstream free-space system would benefit from a nearly circular beam.
+  questions:
+  - id: q1
+    request: Give at least two distinct classes of free-space optics that could adjust the two axes differently.
+  - id: q2
+    request: Explain why an ordinary rotationally symmetric two-spherical-lens telescope cannot independently set horizontal and vertical magnification.
+  - id: q3
+    request: Describe measurements that verify circularization and its propagation behavior.
+  givens:
+  - {symbol: horizontal_to_vertical_diameter_ratio, value: 3, unit: '1'}
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_solutions
+    severity: scored
+    predicate: Identify two distinct anisotropic free-space solution classes, such as a cylindrical-lens pair and an anamorphic prism pair.
+    evidence_path: answers.q1
+  - id: c_spherical_limit
+    severity: scored
+    predicate: A centered rotationally symmetric spherical telescope provides the same first-order transverse magnification on both orthogonal axes.
+    evidence_path: answers.q2
+  - id: c_verify
+    severity: scored
+    predicate: Measure both 1/e² diameters and axis divergences or propagation at multiple planes, using a beam profiler or orthogonal knife-edge scans.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: cylindrical_pair
+    example: Use a cylindrical lens telescope on one axis to alter the 3:1 ratio while preserving suitable collimation.
+  - id: anamorphic_prisms
+    example: Use an anamorphic prism pair oriented for the required axis-specific magnification.
+  - id: other_anisotropic_relay
+    example: Use another asymmetric free-space optical relay with independently designed horizontal and vertical magnifications.
+  other_valid_families_policy: Accept any two causally distinct free-space architectures that can alter relative axis magnifications and support two-axis verification.
+  known_failure_modes:
+  - A near-circular spot in one plane may conceal unequal divergence, astigmatism, or unequal beam quality.
+scoring:
+  criteria:
+  - {id: c_solutions, weight: 0.4, check: c_solutions, question_id: q1}
+  - {id: c_spherical_limit, weight: 0.3, check: c_spherical_limit, question_id: q2}
+  - {id: c_verify, weight: 0.3, check: c_verify, question_id: q3}
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, calibrated_semantic_judge]
+  implemented_checks: []
+  notes: The distinct-solution and two-axis verification oracle is not implemented.
