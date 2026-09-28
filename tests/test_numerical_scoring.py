@@ -28,7 +28,7 @@ def by_criterion(case: dict, answer: dict) -> dict[str, dict]:
 class NumericalScoringTests(unittest.TestCase):
     def test_machine_readable_fixture_matrix(self) -> None:
         fixture_paths = sorted(FIXTURES.glob("SEED-1-[15]/*.json"))
-        self.assertEqual(len(fixture_paths), 33)
+        self.assertEqual(len(fixture_paths), 34)
         kinds: set[str] = set()
         for path in fixture_paths:
             with self.subTest(fixture=path.name, case=path.parent.name):

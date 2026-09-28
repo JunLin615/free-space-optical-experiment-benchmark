@@ -59,6 +59,7 @@ def run(path: Path = DEFAULT_FIXTURES) -> tuple[dict[str, int], list[str]]:
             if "capped_total" in fixture and result["scores"]["capped_total"] != fixture["capped_total"]:
                 errors.append(f"{file}: capped score {result['scores']['capped_total']} != {fixture['capped_total']}")
             counts["unresolved_criteria"] += sum(v["status"] == "unresolved" for v in scored_values(result))
+            counts["unresolved_judge_checks"] += sum(v["status"] == "unresolved" for v in result["judge_results"])
         except (OSError, ValueError, KeyError, TypeError, RuntimeError) as exc:
             errors.append(f"{file}: {type(exc).__name__}: {exc}")
     counts["cases"] = len(cases)
@@ -76,7 +77,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("path", nargs="?", type=Path, default=DEFAULT_FIXTURES)
     args = parser.parse_args(argv)
     counts, errors = run(args.path)
-    for key in ("cases", "fixtures", "positive", "boundary", "alternative_valid", "negative", "adversarial", "unresolved_criteria", "unexpected"):
+    for key in ("cases", "fixtures", "positive", "boundary", "alternative_valid", "negative", "adversarial", "unresolved_criteria", "unresolved_judge_checks", "unexpected"):
         print(f"{key}: {counts.get(key, 0)}")
     for error in errors:
         print(error, file=sys.stderr)

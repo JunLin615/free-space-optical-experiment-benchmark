@@ -72,6 +72,15 @@ class ScoringRuntimeTests(unittest.TestCase):
         self.assertEqual(result["scores"]["capped_total"], 0.65)
         self.assertEqual(list(self.validator.iter_errors(result)), [])
 
+    def test_correct_numbers_do_not_silently_validate_optional_prose(self) -> None:
+        answer = copy.deepcopy(ANSWER)
+        answer["explanation"] = "The delay line is single pass despite these tabulated numbers."
+        result = evaluate_case(self.case, answer)
+        self.assertEqual(result["failure_mode"], "judge_unresolved")
+        self.assertIsNone(result["scores"]["capped_total"])
+        self.assertEqual(result["judge_results"][0]["check_id"], "explanation_consistency")
+        self.assertEqual(list(self.validator.iter_errors(result)), [])
+
     def test_bounded_judge_only_resolves_configured_residual(self) -> None:
         case = load_scored_case("SEED-2-8")
         answer = {"answers": {"q1": {"achievable": False},

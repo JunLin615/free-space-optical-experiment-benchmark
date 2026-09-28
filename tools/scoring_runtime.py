@@ -219,6 +219,20 @@ def evaluate_case(
                     "details": {"source": "semantic_judge"},
                 }
 
+    residual_judge = None
+    explanation = answer.get("explanation")
+    if isinstance(explanation, str) and explanation.strip() and all(v["status"] == "pass" for v in by_id.values()):
+        # Correct structured leaves cannot certify contradictory optional prose.
+        # Without a calibrated backend the complete answer is unresolved.
+        from tools.semantic_judge import judge_criterion
+        residual_judge = judge_criterion(
+            criterion_id="explanation_consistency",
+            criterion="Does the optional explanation avoid physically contradicting the scored structured claims?",
+            candidate_text=raw_answer if raw_answer is not None else json.dumps(answer, ensure_ascii=False),
+            backend=judge_backend,
+        )
+        result["judge_results"].append(residual_judge)
+
     has_unresolved = False
     has_error = False
     total = 0.0
@@ -276,4 +290,11 @@ def evaluate_case(
             result["failure_mode"] = "invalid_contract"
         if answer_errors:
             result["scores"]["capped_total"] = min(result["scores"]["capped_total"], 0.49)
+        if residual_judge is not None:
+            if residual_judge["status"] == "unresolved":
+                result["scores"] = {"raw_total": None, "capped_total": None}
+                result["failure_mode"] = "judge_unresolved"
+            elif residual_judge["status"] == "fail":
+                result["scores"]["capped_total"] = min(result["scores"]["capped_total"], 0.49)
+                result["failure_mode"] = "constraint_fail"
     return finish()

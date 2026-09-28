@@ -1,7 +1,8 @@
 """Measure bounded-judge reliability from repeated live verdicts.
 
-Responses JSON maps calibration item IDs to lists of judge verdicts. This tool
-does not call a paid API and never treats mocked outputs as live evidence.
+Input JSON pins judge_version, prompt_version, model_id, and a responses mapping
+of calibration item IDs to repeated judge verdicts. This tool does not call a
+paid API and never treats mocked outputs as live evidence.
 """
 
 from __future__ import annotations
@@ -15,7 +16,7 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from tools.semantic_judge import ROOT
+from tools.semantic_judge import ROOT, load_config
 
 
 SET = ROOT / "benchmark" / "judge" / "calibration_v0.1.json"
@@ -59,8 +60,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--responses", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        responses = json.loads(args.responses.read_text(encoding="utf-8"))
-        print(json.dumps(measure(responses), indent=2))
+        submission = json.loads(args.responses.read_text(encoding="utf-8"))
+        config = load_config()
+        if submission["judge_version"] != config["judge_version"] or submission["prompt_version"] != config["prompt_version"]:
+            raise ValueError("judge or prompt version differs from calibration set")
+        if not isinstance(submission["model_id"], str) or not submission["model_id"]:
+            raise ValueError("model_id is required")
+        metrics = measure(submission["responses"])
+        print(json.dumps({"judge_version": submission["judge_version"],
+                          "prompt_version": submission["prompt_version"],
+                          "model_id": submission["model_id"], "metrics": metrics}, indent=2))
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f"Calibration input error: {exc}", file=sys.stderr)
         return 2
