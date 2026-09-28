@@ -1,5 +1,7 @@
 # `0.2.0-rc1`: broader verified optics families
 
+**Historical release-candidate note.** This document describes the state when `0.2.0-rc1` was prepared. Its statements about baselines refer to that point in time. The later [three-model rc1 campaign](results/2026-09-28-multimodel-020rc1.md) and [stable v0.2.0 release](release_v0.2.0.md) have separate evidence; neither changes the rc1 release or this note's original scientific contract.
+
 `0.2.0-rc1` is a technical release candidate, not a leaderboard or a new
 measured model baseline. It contains nine release-verified cases in nine
 distinct concept families. Five inherit their unchanged rc1 case bytes;

@@ -1,6 +1,16 @@
 # Roadmap to a public autonomous-agent benchmark
 
-Status: planning proposal, 2026-09-28. The 64-case HTML is an intact seed, not a ready-to-score benchmark. New documentation is English first; Chinese can be added after the English design and content stabilize. This round does not translate or expand the question bank.
+**Historical planning document, written 2026-09-28.** The original plan below is retained as a record of how the project was scoped; its present-tense round descriptions are not the current project status. See [project status after the v0.2.0 freeze](project_status.md) and the [stable release notes](release_v0.2.0.md).
+
+| Planned milestone | Status at the v0.2.0 freeze |
+| --- | --- |
+| Preserve and audit the original seed | Completed; original HTML bytes remain fixed. |
+| Migrate 64 cases into canonical English data | Completed; public English and Chinese question views cover the same 64 identities. |
+| Build autonomous-scoring vertical slice and challenge fixtures | Completed for the bounded release slice; nine cases are release-verified. |
+| Add matched protocols, case library, variants, runner, and empirical pilot | Completed; the frozen `0.2.0-rc1` campaign has 108 formal public records. |
+| Expand autonomous scoring to arbitrary open designs and diagnoses | Ongoing research under Issue #3; outside the v0.2.0 release. |
+
+Original proposal follows. Its references to a “current round” and future publication were written before the repository and release evidence existed.
 
 ## Current round: research foundation
 
