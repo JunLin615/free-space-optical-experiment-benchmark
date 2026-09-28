@@ -1,0 +1,125 @@
+{
+  "case_id": "SEED-8-6",
+  "name": "adversarial_single_plane_collinearity",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "combiner": "dichroic_combiner",
+        "common_transport": "free_space_collinear",
+        "separator": "dichroic_separator",
+        "max_cross_channel_fraction": {
+          "value": 0.01,
+          "unit": "1"
+        },
+        "routing_matrix": {
+          "nm532": {
+            "detector_532": {
+              "value": 0.94,
+              "unit": "1"
+            },
+            "detector_1064": {
+              "value": 0.004,
+              "unit": "1"
+            }
+          },
+          "nm1064": {
+            "detector_532": {
+              "value": 0.006,
+              "unit": "1"
+            },
+            "detector_1064": {
+              "value": 0.91,
+              "unit": "1"
+            }
+          }
+        }
+      },
+      "q2": {
+        "sources_measured_separately": true,
+        "planes": [
+          {
+            "z_m": {
+              "value": 0.0,
+              "unit": "m"
+            },
+            "centroids_mm": {
+              "nm532": {
+                "x": {
+                  "value": 0.0,
+                  "unit": "mm"
+                },
+                "y": {
+                  "value": 0.0,
+                  "unit": "mm"
+                }
+              },
+              "nm1064": {
+                "x": {
+                  "value": 0.01,
+                  "unit": "mm"
+                },
+                "y": {
+                  "value": 0.0,
+                  "unit": "mm"
+                }
+              }
+            }
+          }
+        ],
+        "max_position_difference_mm": {
+          "value": 0.05,
+          "unit": "mm"
+        },
+        "max_angle_difference_mrad": {
+          "value": 0.05,
+          "unit": "mrad"
+        }
+      },
+      "q3": {
+        "properties": [
+          {
+            "property": "coating_spectrum",
+            "test": "spectral_transmission_scan"
+          },
+          {
+            "property": "incidence_angle",
+            "test": "angle_sweep"
+          },
+          {
+            "property": "polarization_dependence",
+            "test": "polarization_sweep"
+          },
+          {
+            "property": "detector_responsivity",
+            "test": "detector_calibration_both_wavelengths"
+          }
+        ],
+        "leakage_test": {
+          "method": "one_source_at_a_time_dark_corrected",
+          "measured_cross_channel_fractions": {
+            "nm532": {
+              "value": 0.005,
+              "unit": "1"
+            },
+            "nm1064": {
+              "value": 0.007,
+              "unit": "1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  }
+}

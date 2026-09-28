@@ -1,0 +1,172 @@
+{
+  "case_id": "SEED-7-1",
+  "name": "alternative_height_and_drift",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "causes": [
+          {
+            "id": "iteration_procedure",
+            "family": "iteration_procedure",
+            "mechanism": "coupled_position_angle_not_iterated",
+            "fault_class": "procedure",
+            "prediction": {
+              "test": "alternate_near_far",
+              "outcome": "converges_after_iteration"
+            }
+          },
+          {
+            "id": "reference_axis_mismatch",
+            "family": "reference_axis_mismatch",
+            "mechanism": "aperture_centers_off_intended_reference_line",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "survey_aperture_centers",
+              "outcome": "center_off_reference_line"
+            }
+          },
+          {
+            "id": "beam_height_mismatch",
+            "family": "beam_height_mismatch",
+            "mechanism": "source_ray_height_incompatible_with_reachable_path",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "measure_source_height",
+              "outcome": "height_outside_reachable_path"
+            }
+          },
+          {
+            "id": "mount_drift",
+            "family": "mount_drift",
+            "mechanism": "optical_axis_changes_during_adjustment",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "repeat_fixed_setting",
+              "outcome": "centroid_drifts"
+            }
+          }
+        ]
+      },
+      "q2": {
+        "classifications": [
+          {
+            "cause_id": "iteration_procedure",
+            "fault_class": "procedure",
+            "corrective_action": "iterate_near_far"
+          },
+          {
+            "cause_id": "reference_axis_mismatch",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          },
+          {
+            "cause_id": "beam_height_mismatch",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          },
+          {
+            "cause_id": "mount_drift",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          }
+        ]
+      },
+      "q3": {
+        "steps": [
+          {
+            "test": "survey_aperture_centers",
+            "target_cause_ids": [
+              "reference_axis_mismatch"
+            ],
+            "controls": [
+              "fixed_source",
+              "fixed_reference"
+            ],
+            "if_present": "center_off_reference_line",
+            "if_absent": "centers_on_reference_line",
+            "conclusions": {
+              "supports_if_present": [
+                "reference_axis_mismatch"
+              ],
+              "weakens_if_absent": [
+                "reference_axis_mismatch"
+              ]
+            }
+          },
+          {
+            "test": "measure_source_height",
+            "target_cause_ids": [
+              "beam_height_mismatch"
+            ],
+            "controls": [
+              "fixed_source",
+              "fixed_reference"
+            ],
+            "if_present": "height_outside_reachable_path",
+            "if_absent": "height_compatible",
+            "conclusions": {
+              "supports_if_present": [
+                "beam_height_mismatch"
+              ],
+              "weakens_if_absent": [
+                "beam_height_mismatch"
+              ]
+            }
+          },
+          {
+            "test": "repeat_fixed_setting",
+            "target_cause_ids": [
+              "mount_drift"
+            ],
+            "controls": [
+              "fixed_source",
+              "fixed_reference"
+            ],
+            "if_present": "centroid_drifts",
+            "if_absent": "centroid_stable",
+            "conclusions": {
+              "supports_if_present": [
+                "mount_drift"
+              ],
+              "weakens_if_absent": [
+                "mount_drift"
+              ]
+            }
+          },
+          {
+            "test": "alternate_near_far",
+            "target_cause_ids": [
+              "iteration_procedure"
+            ],
+            "controls": [
+              "one_change_at_a_time",
+              "before_after"
+            ],
+            "if_present": "converges_after_iteration",
+            "if_absent": "does_not_converge",
+            "conclusions": {
+              "supports_if_present": [
+                "iteration_procedure"
+              ],
+              "weakens_if_absent": [
+                "iteration_procedure"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  }
+}
