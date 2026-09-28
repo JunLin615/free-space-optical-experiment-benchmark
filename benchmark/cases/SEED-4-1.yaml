@@ -20,7 +20,7 @@ provenance:
   created_utc: '2026-09-28'
   source_references: []
   derivation: English translation of the original seed prompt and tasks. No fixed right- or left-handed
-    label is imposed because the seed does not define an observer convention.
+    label is imposed because the seed does not define an observer convention. Revision 0.2.0 adds typed state and handedness-dependency claims for bounded scoring.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Linearly polarized light enters an ideal quarter-wave plate. Its incident polarization direction

@@ -1,10 +1,10 @@
 schema_version: 0.1.0
 case_id: SEED-1-7
 legacy_id: '1.7'
-case_revision: 0.2.0
-benchmark_release: null
-validation_status: executable
-split: public_dev
+case_revision: 0.2.1
+benchmark_release: 0.1.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Half-wave plate and linear polarization
 language: en
 taxonomy:
@@ -23,6 +23,7 @@ provenance:
   derivation: English translation of the original seed prompt and tasks. Because the seed omits a signed
     viewing convention, the requested rotation values are magnitudes. Revision 0.2.0 specifies a typed
     yes-or-no claim for q3 without requiring the unasked handedness detail.
+    Revision 0.2.1 pins the qualified typed-answer oracle and challenge evidence for 0.1.0-rc1.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Linearly polarized light passes through an ideal half-wave plate. The incident polarization
@@ -119,11 +120,14 @@ validation:
   - unit_aware_numerical_oracle
   - typed_circular_input_oracle
   - positive_boundary_alternative_and_adversarial_fixtures
-  notes: Executable deterministic scorer for the two rotation magnitudes and the yes-or-no circular-input
-    question. Further independent challenge breadth is required before challenged status.
+  notes: Release-verified typed-answer scorer for 0.1.0-rc1. Independent executable physics checks,
+    alternative-valid and boundary fixtures, and distinct negative and adversarial failure families
+    pass the automated gate. Optional prose is outside the scored contract.
+
   independent_derivation: Reflection of a linear Jones vector about the half-wave plate axis gives an
     output axis displaced by twice the input-to-axis separation; turning the plate by an additional angle
     turns that output axis by twice the plate angle. Jones circular eigenstates reverse handedness.
+  adversarial_evidence: Quadruplicated wave-plate rotation and a polished claim that the circular input follows the linear-axis rule are rejected by independent regression fixtures.
   evidence_files:
   - tests/test_deterministic_qualification.py
   positive_fixtures:

@@ -1,10 +1,10 @@
 schema_version: 0.1.0
 case_id: SEED-4-2
 legacy_id: '4.2'
-case_revision: 0.2.1
-benchmark_release: null
-validation_status: executable
-split: public_dev
+case_revision: 0.2.2
+benchmark_release: 0.1.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Michelson mirror motion and fringe cycles
 language: en
 taxonomy:
@@ -24,6 +24,7 @@ provenance:
     motions as dimensionless givens and supplies independent validators for all four requested claims.
     Revision 0.2.1 clarifies that unspecified motion direction makes optical-path changes magnitudes;
     equivalent signed coordinate reports are accepted by absolute value.
+    Revision 0.2.2 pins the qualified typed-answer oracle and challenge evidence for 0.1.0-rc1.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   coordinate_convention: Mirror-motion direction is unspecified. Optical-path changes and fringe periods
@@ -137,12 +138,14 @@ validation:
   - independent_phase_accumulation_crosscheck
   - unit_aware_numerical_oracle_for_four_claims
   - positive_boundary_alternative_and_adversarial_fixtures
-  notes: Executable deterministic scorer for four dimensionless claims. Half a fringe period means a
-    bright-to-dark transition, not one complete period. Further challenge breadth is required before
-    challenged status.
+  notes: Release-verified typed-answer scorer for 0.1.0-rc1. Independent executable physics checks,
+    alternative-valid and boundary fixtures, and distinct negative and adversarial failure families
+    pass the automated gate. Optional prose is outside the scored contract.
+
   independent_derivation: For each moving Michelson arm, the round trip doubles mirror travel. Dividing
     optical-path change by one wavelength gives detector fringe cycles. Half-wavelength travel produces
     one cycle; quarter-wavelength travel produces half a cycle and a pi-radian phase change.
+  adversarial_evidence: Polished claims that half-cycle motion gives a full cycle or that full-cycle motion gives two cycles fail the independently checked phase and path-count fixtures.
   evidence_files:
   - tests/test_deterministic_qualification.py
   positive_fixtures:

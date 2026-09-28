@@ -22,7 +22,7 @@ provenance:
   source_references: []
   derivation: 'Translated the original seed prompt and answer outline. Clarification: the seed''s ideal-Gaussian
     Rayleigh-range relation is qualified by fixed M² and the 1/e² radius convention; it is not a universal
-    formula for arbitrary structured beams.'
+    formula for arbitrary structured beams. Revision 0.2.0 adds typed invariant and tradeoff claims and relaxes q3 gold to one valid usual cost.'
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: At fixed wavelength and fixed input beam quality, a passive free-space design is asked to

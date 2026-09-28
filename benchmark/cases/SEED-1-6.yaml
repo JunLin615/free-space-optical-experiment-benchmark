@@ -19,7 +19,7 @@ provenance:
   seed_relationship: Translation of case 1.6 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'English translation of the original seed prompt and tasks. '
+  derivation: 'English translation of the original seed prompt and tasks. Revision 0.2.0 adds typed routing, angle-response, and polarization claims for bounded scoring without changing the public task.'
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: At its design incidence angle, a dichroic mirror is highly reflective at 532 nm and highly

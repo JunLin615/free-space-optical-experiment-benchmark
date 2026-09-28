@@ -18,7 +18,7 @@ provenance:
   seed_relationship: Translation of case 1.3 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the seed's same-height 30 mm dogleg problem; parallel means the same forward propagation direction.
+  derivation: English translation of the seed's same-height 30 mm dogleg problem; parallel means the same forward propagation direction. Revision 0.2.0 adds a typed answer shape and bounded autonomous checks without changing the public task.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: >-
