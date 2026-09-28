@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "negative_half_frequency",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 40,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": {
+          "value": 2,
+          "unit": "1"
+        },
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "n_result": {
+      "status": "fail"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  },
+  "failure_family": "wrong_beat_frequency"
+}

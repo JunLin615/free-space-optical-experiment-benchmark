@@ -39,3 +39,7 @@ jobs:
           python tools/analyze_baseline.py runs/2026-09-28-gpt-6-luna-variants-release --check
       - name: Verify rc1 pinned evidence
         run: python tools/qualify_release.py --check
+      - name: Verify vNext release and synthetic hidden policy checks
+        run: |
+          python tools/qualify_vnext.py --check
+          python -m tools.hidden_eval check-map

@@ -1,0 +1,193 @@
+{
+  "release_candidate": "0.2.0-rc1",
+  "release_verified_ids": [
+    "SEED-1-1",
+    "SEED-1-5",
+    "SEED-1-7",
+    "SEED-2-2",
+    "SEED-4-2",
+    "SEED-2-1",
+    "SEED-3-1",
+    "SEED-3-7",
+    "SEED-5-5"
+  ],
+  "case_count": 9,
+  "concept_family_count": 9,
+  "fixture_count": 120,
+  "unresolved_release_fixture_count": 0,
+  "cases": [
+    {
+      "case_id": "SEED-1-1",
+      "source_release": "0.1.0-rc1",
+      "concept_family": "mirror_steering",
+      "scorer": "numerical",
+      "fixture_count": 16,
+      "fixture_kinds": {
+        "alternative_valid": 3,
+        "boundary": 2,
+        "negative": 7,
+        "adversarial": 2,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_independent_physics.py",
+        "tests/test_numerical_scoring.py"
+      ]
+    },
+    {
+      "case_id": "SEED-1-5",
+      "source_release": "0.1.0-rc1",
+      "concept_family": "optical_delay",
+      "scorer": "numerical",
+      "fixture_count": 18,
+      "fixture_kinds": {
+        "alternative_valid": 2,
+        "boundary": 3,
+        "negative": 8,
+        "adversarial": 2,
+        "positive": 3
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_independent_physics.py",
+        "tests/test_numerical_scoring.py"
+      ]
+    },
+    {
+      "case_id": "SEED-1-7",
+      "source_release": "0.1.0-rc1",
+      "concept_family": "polarization_transform",
+      "scorer": "numerical",
+      "fixture_count": 12,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_deterministic_qualification.py"
+      ]
+    },
+    {
+      "case_id": "SEED-2-2",
+      "source_release": "0.1.0-rc1",
+      "concept_family": "afocal_expansion",
+      "scorer": "numerical",
+      "fixture_count": 12,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_closed_physics.py"
+      ]
+    },
+    {
+      "case_id": "SEED-4-2",
+      "source_release": "0.1.0-rc1",
+      "concept_family": "interferometric_fringe",
+      "scorer": "numerical",
+      "fixture_count": 13,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 3,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_deterministic_qualification.py"
+      ]
+    },
+    {
+      "case_id": "SEED-2-1",
+      "source_release": "0.2.0-rc1",
+      "concept_family": "gaussian_focus",
+      "scorer": "numerical",
+      "fixture_count": 13,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 5,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_vnext_deterministic_evidence.py"
+      ]
+    },
+    {
+      "case_id": "SEED-3-1",
+      "source_release": "0.2.0-rc1",
+      "concept_family": "thin_lens_conjugates",
+      "scorer": "closed_vnext",
+      "fixture_count": 12,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_vnext_deterministic_evidence.py"
+      ]
+    },
+    {
+      "case_id": "SEED-3-7",
+      "source_release": "0.2.0-rc1",
+      "concept_family": "diffraction_resolution",
+      "scorer": "closed_vnext",
+      "fixture_count": 12,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_vnext_deterministic_evidence.py"
+      ]
+    },
+    {
+      "case_id": "SEED-5-5",
+      "source_release": "0.2.0-rc1",
+      "concept_family": "heterodyne_detection",
+      "scorer": "closed_vnext",
+      "fixture_count": 12,
+      "fixture_kinds": {
+        "adversarial": 2,
+        "alternative_valid": 2,
+        "boundary": 2,
+        "negative": 4,
+        "positive": 2
+      },
+      "unresolved_release_fixtures": 0,
+      "semantic_judge_dependency": false,
+      "independent_evidence": [
+        "tests/test_vnext_deterministic_evidence.py"
+      ]
+    }
+  ]
+}

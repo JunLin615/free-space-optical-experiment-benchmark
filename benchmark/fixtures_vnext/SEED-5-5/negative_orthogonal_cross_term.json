@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "negative_orthogonal_cross_term",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": {
+          "value": 2,
+          "unit": "1"
+        },
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": true
+      }
+    }
+  },
+  "expected": {
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "fail"
+    }
+  },
+  "failure_family": "ignored_polarization_orthogonality"
+}

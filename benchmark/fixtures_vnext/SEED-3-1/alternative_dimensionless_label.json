@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "alternative_dimensionless_label",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "dimensionless"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": -1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "real",
+        "orientation": "inverted"
+      }
+    }
+  },
+  "expected": {
+    "n_image_distance": {
+      "status": "pass"
+    },
+    "n_magnification": {
+      "status": "pass"
+    },
+    "c_image_character": {
+      "status": "pass"
+    }
+  }
+}

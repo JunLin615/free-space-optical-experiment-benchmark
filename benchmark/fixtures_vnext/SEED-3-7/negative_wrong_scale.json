@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "negative_wrong_scale",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.671,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 0.1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_trend": "decreases"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "fail"
+    },
+    "c_depth": {
+      "status": "pass"
+    }
+  },
+  "failure_family": "wrong_offered_scale"
+}

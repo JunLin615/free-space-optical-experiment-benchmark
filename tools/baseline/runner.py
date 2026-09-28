@@ -18,7 +18,6 @@ from tools.baseline import RUNNER_VERSION, SYSTEM_PROMPT_VERSION
 from tools.baseline.adapters import (AdapterFailure, CommandAdapter, CodexCliAdapter,
                                      MockAdapter)
 from tools.baseline.tools import ALLOWED_TOOLS, PROFILE_ID, observed_call
-from tools.scoring_runtime import SCORERS, _evaluator_fingerprint, evaluate_case, load_scored_case
 from tools.validate_cases import ROOT
 
 
@@ -26,6 +25,17 @@ MANIFEST_SCHEMA = ROOT / "benchmark" / "run_schema" / "run_manifest_v0.1.schema.
 RECORD_SCHEMA = ROOT / "benchmark" / "run_schema" / "run_record_v0.1.schema.json"
 RESULT_SCHEMA = ROOT / "benchmark" / "schema" / "result.schema.json"
 PROMPT_FILE = ROOT / "benchmark" / "system_prompts" / "neutral_optics_v1.txt"
+
+
+def _runtime(release_id: str):
+    """Select a pinned evaluator lineage without changing rc1 interpretation."""
+    if release_id == "0.1.0-rc1":
+        from tools import scoring_runtime
+        return scoring_runtime
+    if release_id == "0.2.0-rc1":
+        from tools.vnext import scoring_runtime
+        return scoring_runtime
+    raise ValueError(f"unsupported evaluator release: {release_id}")
 
 
 def _validator(path: Path) -> Draft202012Validator:
@@ -45,12 +55,18 @@ def _hash(value: Any) -> str:
                                      separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
-def _source_revision() -> str | None:
+def _source_revision(release_id: str = "0.1.0-rc1") -> str | None:
     digest = hashlib.sha256()
     paths = sorted((ROOT / "tools" / "baseline").glob("*.py"))
     paths += [ROOT / "tools" / name for name in
               ("protocols.py", "retrieval.py", "case_library.py", "variants.py", "scoring_runtime.py")]
     paths.append(PROMPT_FILE)
+    if release_id == "0.2.0-rc1":
+        paths += [ROOT / relative for relative in (
+            "tools/vnext/scoring_runtime.py", "tools/vnext/units.py",
+            "tools/vnext/protocols.py",
+            "tools/scorers/closed_vnext.py", "tools/variants_vnext.py",
+            "benchmark/releases/0.2.0-rc1.json")]
     for path in paths:
         if path.exists():
             digest.update(str(path.relative_to(ROOT)).replace("\\", "/").encode("utf-8") + b"\0")
@@ -139,19 +155,25 @@ def _variant_source_path(raw_path: str) -> Path:
 
 
 def _load_selection(selection: dict[str, Any], release_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    runtime = _runtime(release_id)
     variant_id = None
     variant_record = None
     if selection["variant_path"] is not None:
-        from tools.variants import load_variant
+        if release_id == "0.2.0-rc1":
+            from tools.variants_vnext import load_variant
+        else:
+            from tools.variants import load_variant
         variant_path = _variant_source_path(selection["variant_path"])
         variant_record = load_variant(variant_path)
         if variant_record["parent_case_id"] != selection["case_id"]:
             raise ValueError("variant parent ID differs from selection")
+        if variant_record["parent_release"] != release_id:
+            raise ValueError("variant belongs to another release")
         variant_id = variant_record["variant_id"]
         case = variant_record["case"]
     else:
-        case = load_scored_case(selection["case_id"])
-    if case["case_id"] not in SCORERS:
+        case = runtime.load_scored_case(selection["case_id"])
+    if case["case_id"] not in runtime.SCORERS:
         raise ValueError("selected case has no autonomous scorer")
     if selection["track"] == "verified":
         if variant_id is not None:
@@ -162,7 +184,7 @@ def _load_selection(selection: dict[str, Any], release_id: str) -> tuple[dict[st
             raise ValueError("case is not pinned in requested release")
         if pinned["case_content_sha256"] != _hash(case):
             raise ValueError("release case content hash mismatch")
-        if pinned["evaluator_fingerprint"] != _evaluator_fingerprint(case):
+        if pinned["evaluator_fingerprint"] != runtime._evaluator_fingerprint(case):
             raise ValueError("release scorer fingerprint mismatch")
     elif selection["track"] in {"public_variant", "private_variant"}:
         if variant_record is None:
@@ -247,7 +269,10 @@ def _write_record(path: Path, record: dict[str, Any]) -> None:
 
 def _run_one(manifest: dict[str, Any], case: dict[str, Any], selection: dict[str, Any],
              protocol: dict[str, Any], adapter: Any, key: str, run_dir: Path) -> dict[str, Any]:
-    from tools.protocols import public_payload, payload_sha256
+    if manifest["release_id"] == "0.2.0-rc1":
+        from tools.vnext.protocols import public_payload, payload_sha256
+    else:
+        from tools.protocols import public_payload, payload_sha256
     from tools.retrieval import retrieve
     protocol_id = protocol["protocol_id"]
     public = public_payload(case)
@@ -364,7 +389,8 @@ def _run_one(manifest: dict[str, Any], case: dict[str, Any], selection: dict[str
                    "wall_time_seconds": time.monotonic() - start,
                    "retry_count": retries}
         try:
-            score_result = evaluate_case(case, candidate, raw_answer=raw_response, context=context)
+            score_result = _runtime(manifest["release_id"]).evaluate_case(
+                case, candidate, raw_answer=raw_response, context=context)
         except Exception as exc:
             _append_event(log_path, {"kind": "scorer_exception", "error_type": type(exc).__name__})
             failure_class = "scorer_failure"
@@ -449,7 +475,7 @@ def run_manifest(manifest_path: Path, *, retry_failed: bool = False,
             with frozen_protocol.open("xb") as stream:
                 stream.write(content)
     environment_path = run_dir / "environment.json"
-    frozen_source_revision = _source_revision()
+    frozen_source_revision = _source_revision(manifest["release_id"])
     if not environment_path.exists():
         with environment_path.open("x", encoding="utf-8") as stream:
             stream.write(json.dumps({
@@ -458,7 +484,11 @@ def run_manifest(manifest_path: Path, *, retry_failed: bool = False,
             }, indent=2) + "\n")
     elif json.loads(environment_path.read_text(encoding="utf-8"))["runner_source_revision"] != frozen_source_revision:
         raise ValueError("runner source differs from frozen run environment; start a new run ID")
-    from tools.protocols import check_matched_runs, load_protocol, payload_sha256
+    from tools.protocols import check_matched_runs, load_protocol
+    if manifest["release_id"] == "0.2.0-rc1":
+        from tools.vnext.protocols import payload_sha256
+    else:
+        from tools.protocols import payload_sha256
     adapter = _adapter(manifest)
     counts = {"total": len(manifest["selections"]) * len(manifest["protocol_ids"]),
               "completed": 0, "failed": 0, "skipped": 0, "unresolved": 0}
@@ -481,8 +511,8 @@ def run_manifest(manifest_path: Path, *, retry_failed: bool = False,
         descriptors = [{"case_id": case["case_id"], "case_revision": str(case["case_revision"]),
                         "variant_id": selection["variant_id"],
                         "scientific_payload_sha256": payload_sha256(case),
-                        "scorer_id": SCORERS[case["case_id"]],
-                        "scorer_fingerprint": _evaluator_fingerprint(case),
+                        "scorer_id": _runtime(manifest["release_id"]).SCORERS[case["case_id"]],
+                        "scorer_fingerprint": _runtime(manifest["release_id"])._evaluator_fingerprint(case),
                         "result_schema_version": "0.1.0", "agent_identity": _identity(manifest),
                         "protocol_id": protocol_id, "protocol_version": load_protocol(protocol_id)["version"]}
                        for protocol_id in manifest["protocol_ids"]]
@@ -515,10 +545,10 @@ def run_manifest(manifest_path: Path, *, retry_failed: bool = False,
                 key += f".attempt{suffix}"
                 path = _record_path(run_dir, key)
             protocol = load_protocol(protocol_id)
-            if _source_revision() != frozen_source_revision:
+            if _source_revision(manifest["release_id"]) != frozen_source_revision:
                 raise ValueError("runner source changed during run; start a new run ID")
             record = _run_one(manifest, case, selection, protocol, adapter, key, run_dir)
-            if _source_revision() != frozen_source_revision:
+            if _source_revision(manifest["release_id"]) != frozen_source_revision:
                 raise ValueError("runner source changed during model execution; discard this partial attempt")
             _write_record(path, record)
             counts[record["status"]] += 1

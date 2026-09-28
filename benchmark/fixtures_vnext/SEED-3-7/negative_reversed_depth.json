@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "negative_reversed_depth",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.671,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_trend": "increases"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_depth": {
+      "status": "fail"
+    }
+  },
+  "failure_family": "reversed_na_depth_trend"
+}

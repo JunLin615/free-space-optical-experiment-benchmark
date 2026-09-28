@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "adversarial_unjustified_beam_quality",
+  "kind": "adversarial",
+  "failure_family": "unjustified_nonideal_beam_quality",
+  "answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "value": 33.86,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 10,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    },
+    "explanation": "Assuming M squared equals two gives a physically plausible physical waist, but the question asks for the ideal diffraction-limited estimate."
+  },
+  "expected": {
+    "n_waist": {
+      "status": "fail"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_double": {
+      "status": "pass"
+    }
+  }
+}

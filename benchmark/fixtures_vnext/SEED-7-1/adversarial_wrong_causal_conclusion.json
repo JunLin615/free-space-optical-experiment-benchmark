@@ -1,0 +1,152 @@
+{
+  "case_id": "SEED-7-1",
+  "name": "adversarial_wrong_causal_conclusion",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "causes": [
+          {
+            "id": "iteration_procedure",
+            "family": "iteration_procedure",
+            "mechanism": "coupled_position_angle_not_iterated",
+            "fault_class": "procedure",
+            "prediction": {
+              "test": "alternate_near_far",
+              "outcome": "converges_after_iteration"
+            }
+          },
+          {
+            "id": "reference_axis_mismatch",
+            "family": "reference_axis_mismatch",
+            "mechanism": "aperture_centers_off_intended_reference_line",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "survey_aperture_centers",
+              "outcome": "center_off_reference_line"
+            }
+          },
+          {
+            "id": "steering_reach_limit",
+            "family": "steering_reach_limit",
+            "mechanism": "required_ray_outside_mirror_adjustment_range",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "check_mirror_travel",
+              "outcome": "required_setting_outside_range"
+            }
+          },
+          {
+            "id": "path_obstruction",
+            "family": "path_obstruction",
+            "mechanism": "ray_intercepted_by_intermediate_clear_aperture",
+            "fault_class": "hardware",
+            "prediction": {
+              "test": "inspect_intermediate_pupils",
+              "outcome": "beam_truncated"
+            }
+          }
+        ]
+      },
+      "q2": {
+        "classifications": [
+          {
+            "cause_id": "iteration_procedure",
+            "fault_class": "procedure",
+            "corrective_action": "iterate_near_far"
+          },
+          {
+            "cause_id": "reference_axis_mismatch",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          },
+          {
+            "cause_id": "steering_reach_limit",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          },
+          {
+            "cause_id": "path_obstruction",
+            "fault_class": "hardware",
+            "corrective_action": "correct_physical_limit"
+          }
+        ]
+      },
+      "q3": {
+        "steps": [
+          {
+            "test": "survey_aperture_centers",
+            "target_cause_ids": [
+              "reference_axis_mismatch"
+            ],
+            "controls": [
+              "fixed_source",
+              "fixed_reference"
+            ],
+            "if_present": "center_off_reference_line",
+            "if_absent": "centers_on_reference_line",
+            "conclusions": {
+              "supports_if_present": [
+                "reference_axis_mismatch"
+              ],
+              "weakens_if_absent": [
+                "reference_axis_mismatch"
+              ]
+            }
+          },
+          {
+            "test": "check_mirror_travel",
+            "target_cause_ids": [
+              "steering_reach_limit"
+            ],
+            "controls": [
+              "fixed_source",
+              "fixed_reference"
+            ],
+            "if_present": "required_setting_outside_range",
+            "if_absent": "required_setting_within_range",
+            "conclusions": {
+              "supports_if_present": [
+                "steering_reach_limit"
+              ],
+              "weakens_if_absent": [
+                "steering_reach_limit"
+              ]
+            }
+          },
+          {
+            "test": "alternate_near_far",
+            "target_cause_ids": [
+              "iteration_procedure"
+            ],
+            "controls": [
+              "one_change_at_a_time",
+              "before_after"
+            ],
+            "if_present": "converges_after_iteration",
+            "if_absent": "does_not_converge",
+            "conclusions": {
+              "supports_if_present": [
+                "reference_axis_mismatch"
+              ],
+              "weakens_if_absent": [
+                "iteration_procedure"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "fail"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "positive_rounded_17um",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "value": 17,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 10,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_waist": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_double": {
+      "status": "pass"
+    }
+  }
+}

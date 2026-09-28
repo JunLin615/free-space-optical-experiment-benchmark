@@ -1,0 +1,112 @@
+schema_version: 0.1.0
+case_id: SEED-8-6
+legacy_id: '8.6'
+case_revision: 0.2.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Collinear transport and separation of two wavelengths
+language: en
+taxonomy:
+  optical_domain: wavelength_routing
+  task_types:
+  - experimental_design
+  - verification
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.6.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Material correction: the seed asks
+    for complete separation, which finite extinction cannot guarantee; replace that absolute with a stated
+    and measured leakage or isolation requirement. Revision 0.2.0 adds a typed routing matrix, two-plane
+    collinearity data, and bounded component/leakage tests without changing the scientific question.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Transport 532 nm and 1064 nm beams collinearly over most of a free-space platform, then route
+    them to separate detector channels. Specify a measurable cross-channel leakage or isolation requirement;
+    finite optical extinction prevents literal complete separation.
+  questions:
+  - id: q1
+    request: Design combination, common transport, and terminal wavelength separation.
+  - id: q2
+    request: Explain how collinearity is checked at more than one plane.
+  - id: q3
+    request: Name at least four wavelength-dependent component properties and explain how to test channel
+      leakage.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.routing_matrix
+  - answers.q2.planes
+  - answers.q3.properties
+  - answers.q3.leakage_test
+  permit_additional_explanation: true
+  method_shape:
+    answers.q1: '{combiner,common_transport,separator,max_cross_channel_fraction,routing_matrix}; two
+      rows keyed 532 and 1064, two detector fractions in each row. Fractions are of incident power at
+      the terminal separator, and may include physical loss. Known optical method codes are in tools/scorers/routing_vnext.py.'
+    answers.q2: '{sources_measured_separately,planes:[{z_m,centroids_mm:{nm532:{x,y},nm1064:{x,y}}},...],max_position_difference_mm,max_angle_difference_mrad}.
+      Distinct planes establish position and direction.'
+    answers.q3: '{properties:[{property,test},...],leakage_test:{method,measured_cross_channel_fractions:{nm532,nm1064}}}.
+      Leakage fractions are measured with one source on at a time, dark corrected.'
+  notes: Functional bounds use the routing matrix rather than names alone. Unknown plausible optical architectures
+    or component properties abstain. This development contract is not release calibrated.
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Use compatible wavelength-selective or dispersive components and specify where each wavelength
+      exits, without assuming ideal infinite extinction.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Verify both position and direction using separated source operation and at least two longitudinal
+      observation planes or an equivalent angular/position measurement.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Check at least four among coating spectra, angle of incidence, polarization dependence,
+      dispersion and chromatic focus, damage threshold, detector responsivity, and filters; measure cross-talk
+      against the stated isolation requirement.
+    evidence_path: answers.q3
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+  accepted_solution_families:
+  - id: dichroic_pair
+    example: Dichroic combination and a complementary terminal dichroic route the two wavelengths.
+  - id: dispersive_terminal
+    example: Common transport is followed by calibrated dispersive separation and filtering.
+  - id: sequential_source_validation
+    example: Separate source-on measurements verify channel assignment and residual leakage.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.3333333333333333
+    check: c_q1
+  - id: c_q2
+    weight: 0.3333333333333333
+    check: c_q2
+  - id: c_q3
+    weight: 0.3333333333333333
+    check: c_q3
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks:
+  - typed_wavelength_routing_scorer_v0.2
+  - alternative_architecture_and_adversarial_fixtures
+  notes: Development scorer only. Demonstrates finite leakage, two-plane collinearity and functional routing
+    checks; no release verification claimed.

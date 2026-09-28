@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "negative_self_term_origin",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": {
+          "value": 2,
+          "unit": "1"
+        },
+        "frequency_component_source": "self_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  },
+  "failure_family": "wrong_interference_origin"
+}
