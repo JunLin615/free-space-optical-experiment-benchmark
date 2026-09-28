@@ -1,6 +1,7 @@
 {
   "case_id": "SEED-7-2",
   "name": "adversarial_category_label_spam",
+  "kind": "adversarial",
   "answer": {
     "answers": {
       "q1": {

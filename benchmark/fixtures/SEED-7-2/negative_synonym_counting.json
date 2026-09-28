@@ -1,6 +1,7 @@
 {
   "case_id": "SEED-7-2",
   "name": "negative_synonym_counting",
+  "kind": "negative",
   "answer": {
     "answers": {
       "q1": {
