@@ -39,8 +39,16 @@ pins fail. Synthetic tests exercise all these policy boundaries without a
 private seed in the repository. See [hidden evaluation](hidden_evaluation.md)
 for the external bundle and commitment workflow.
 
+The first `0.2.0-rc1` hidden pilot selected four newly qualified families:
+Gaussian focus, thin-lens conjugates, diffraction resolution, and heterodyne
+detection. None shares a concept-family label, canonical parent, or generator
+template with the five families used for the ten committed public-development
+variants. The external eight-instance bundle passed the exact payload,
+normalized task-structure, and typed parameter-tuple screens. Its public
+commitment is recorded in the hidden-evaluation attestation; no private task
+or seed is committed.
+
 The screen is deliberately conservative. It does not prove that two differently
 worded tasks are semantically unrelated, nor can it exclude training exposure
-to the public canonical parents or general optics. Once new generator families
-are scientifically qualified, their proposed concept labels and structural
-sibling relationships need review before enabling hidden eligibility.
+to the public canonical parents or general optics. Broader domain relationships
+may remain even when the machine-checked concept families differ.

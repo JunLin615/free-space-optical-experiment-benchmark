@@ -15,6 +15,9 @@ an explicitly registered and tested variant generator, an approved variant
 type, and be marked hidden-eligible. Eligibility defaults to false. The
 generated instance remains a development-derived variant; its verified parent
 does not automatically make that instance release-verified.
+In `0.2.0-rc1`, SEED-2-1, SEED-3-1, SEED-3-7, and SEED-5-5 are the four
+approved hidden sources. They share no concept family with the five rc1
+public-variant sources.
 
 The hidden policy checker rejects a hidden source if **any** public-development
 variant in the committed plan has (1) the same canonical parent, (2) the same
@@ -69,8 +72,38 @@ and `commitment.json` under that destination. The evaluator reconstructs gold
 only in memory through the registered generator. The dry run sends the public
 payload to the same mock adapter envelope used by the baseline runner, parses
 its scripted response, and scores it. It is labeled `dry_run`, not a model
-result. The normal runner needs a version-dispatch integration for new
-generators before a real hidden run.
+result. The baseline runner now dispatches `0.2.0-rc1` to its versioned
+generator, neutral public answer hints, and scorer. To prepare a resumable
+private run, supply an external baseline agent JSON config and use a fresh
+run ID:
+
+```sh
+python -m tools.hidden_eval prepare-run --bundle-dir /external/hidden-bundle --output-root /external/runs --run-id hidden-run-001 --agent-json /external/agent.json
+python -m tools.baseline /external/runs/input_manifests/hidden-run-001.json --output-root /external/runs
+python -m tools.hidden_eval audit-results --bundle-dir /external/hidden-bundle --run-dir /external/runs/hidden-run-001
+```
+
+`prepare-run` validates the bundle, creates a new private input manifest, and
+rejects an existing run ID. A mock agent config makes a dry run; a configured
+command or Codex CLI adapter is recorded as a real run. The runner keeps raw
+responses, task instances, and per-attempt results outside the repository.
+Do not publish a real run without reviewing its response disclosure risk.
+
+The first private pilot used four families and two variants per family. The
+external bundle reproduced all eight instances. A prepared mock runner run
+completed eight of eight, and `audit-results` linked all eight records. No
+model API was called. Its public-safe commitment and dry-run counts are in
+[`first_private_dry_run.v1.json`](../benchmark/hidden_eval/attestations/first_private_dry_run.v1.json).
+
+One additional real smoke call used an already accessible `gpt-6-luna` Codex
+CLI adapter on a single private diffraction-resolution variant, under
+closed-book. The private runner completed one record; bundle/result linkage
+passed; its score was 1.0 with 12,784 reported input-plus-output tokens and
+no priced cost estimate. This is one infrastructure probe, not a model
+benchmark or a generalization estimate. The public
+[`first_real_smoke.v1.json`](../benchmark/hidden_eval/attestations/first_real_smoke.v1.json)
+contains only the bundle commitment, identity, aggregate score, usage, and
+failure summary. The private task and raw response remain outside the repo.
 
 ## Commitment and audit
 

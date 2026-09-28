@@ -32,5 +32,6 @@
     "c_q3": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "wrong_detector_response_order"
 }

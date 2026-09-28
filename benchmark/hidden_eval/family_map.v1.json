@@ -48,7 +48,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "structured_vnext",
       "variant_types": []
     },
     "SEED-1-5": {
@@ -108,14 +108,17 @@
     "SEED-2-1": {
       "case_id": "SEED-2-1",
       "concept_family": "gaussian_focus",
-      "generator_template": null,
-      "generator_version": null,
-      "hidden_variant_eligible": false,
+      "generator_template": "v0.2/SEED-2-1",
+      "generator_version": "0.2.0",
+      "hidden_variant_eligible": true,
       "public_variant_eligible": false,
-      "release_id": null,
-      "release_verification_status": "development",
+      "release_id": "0.2.0-rc1",
+      "release_verification_status": "release_verified",
       "scorer_family": "numerical",
-      "variant_types": []
+      "variant_types": [
+        "parameter",
+        "structural_unit"
+      ]
     },
     "SEED-2-2": {
       "case_id": "SEED-2-2",
@@ -207,14 +210,17 @@
     "SEED-3-1": {
       "case_id": "SEED-3-1",
       "concept_family": "thin_lens_conjugates",
-      "generator_template": null,
-      "generator_version": null,
-      "hidden_variant_eligible": false,
+      "generator_template": "v0.2/SEED-3-1",
+      "generator_version": "0.2.0",
+      "hidden_variant_eligible": true,
       "public_variant_eligible": false,
-      "release_id": null,
-      "release_verification_status": "development",
-      "scorer_family": "numerical",
-      "variant_types": []
+      "release_id": "0.2.0-rc1",
+      "release_verification_status": "release_verified",
+      "scorer_family": "closed_vnext",
+      "variant_types": [
+        "parameter",
+        "structural_unit"
+      ]
     },
     "SEED-3-2": {
       "case_id": "SEED-3-2",
@@ -225,7 +231,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "structured_vnext",
       "variant_types": []
     },
     "SEED-3-3": {
@@ -237,7 +243,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "structured_vnext",
       "variant_types": []
     },
     "SEED-3-4": {
@@ -279,14 +285,17 @@
     "SEED-3-7": {
       "case_id": "SEED-3-7",
       "concept_family": "diffraction_resolution",
-      "generator_template": null,
-      "generator_version": null,
-      "hidden_variant_eligible": false,
+      "generator_template": "v0.2/SEED-3-7",
+      "generator_version": "0.2.0",
+      "hidden_variant_eligible": true,
       "public_variant_eligible": false,
-      "release_id": null,
-      "release_verification_status": "development",
-      "scorer_family": "numerical",
-      "variant_types": []
+      "release_id": "0.2.0-rc1",
+      "release_verification_status": "release_verified",
+      "scorer_family": "closed_vnext",
+      "variant_types": [
+        "parameter",
+        "structural_unit"
+      ]
     },
     "SEED-3-8": {
       "case_id": "SEED-3-8",
@@ -450,14 +459,17 @@
     "SEED-5-5": {
       "case_id": "SEED-5-5",
       "concept_family": "heterodyne_detection",
-      "generator_template": null,
-      "generator_version": null,
-      "hidden_variant_eligible": false,
+      "generator_template": "v0.2/SEED-5-5",
+      "generator_version": "0.2.0",
+      "hidden_variant_eligible": true,
       "public_variant_eligible": false,
-      "release_id": null,
-      "release_verification_status": "development",
-      "scorer_family": "numerical",
-      "variant_types": []
+      "release_id": "0.2.0-rc1",
+      "release_verification_status": "release_verified",
+      "scorer_family": "closed_vnext",
+      "variant_types": [
+        "parameter",
+        "structural_unit"
+      ]
     },
     "SEED-5-6": {
       "case_id": "SEED-5-6",
@@ -600,7 +612,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "diagnostic_vnext",
       "variant_types": []
     },
     "SEED-7-2": {
@@ -648,7 +660,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "structured_vnext",
       "variant_types": []
     },
     "SEED-7-6": {
@@ -660,7 +672,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "structured_vnext",
       "variant_types": []
     },
     "SEED-7-7": {
@@ -756,7 +768,7 @@
       "public_variant_eligible": false,
       "release_id": null,
       "release_verification_status": "development",
-      "scorer_family": "none",
+      "scorer_family": "routing_vnext",
       "variant_types": []
     },
     "SEED-8-7": {

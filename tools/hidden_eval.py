@@ -108,7 +108,7 @@ def validate_family_map(path: Path = FAMILY_MAP) -> dict[str, Any]:
                 raise ValueError(f"family map missing {field}: {source}")
         if not isinstance(row["concept_family"], str) or not row["concept_family"]:
             raise ValueError(f"concept family missing: {source}")
-        scorer_registry = VNEXT_SCORERS if row.get("release_id") == "0.2.0-rc1" else RC1_SCORERS
+        scorer_registry = RC1_SCORERS if row.get("release_id") == "0.1.0-rc1" else VNEXT_SCORERS
         if row["scorer_family"] != scorer_registry.get(source, "none"):
             raise ValueError(f"scorer family mismatch: {source}")
         if row["release_verification_status"] not in {"release_verified", "development"}:
@@ -356,11 +356,12 @@ def dry_run_bundle(bundle_dir: Path, *, family_map: Path = FAMILY_MAP,
     policy = _read(Path(bundle_dir) / "private_policy.json")
     adapter_module = _adapter(policy["generator_version"], policy["release_id"])
     from tools.baseline.adapters import MockAdapter
-    from tools.protocols import public_payload, payload_sha256
     if policy["release_id"] == "0.2.0-rc1":
         from tools.vnext.scoring_runtime import evaluate_case
+        from tools.vnext.protocols import public_payload, payload_sha256
     else:
         from tools.scoring_runtime import evaluate_case
+        from tools.protocols import public_payload, payload_sha256
     counts = {"completed": 0, "failed": 0}
     for path in sorted((Path(bundle_dir) / "instances").glob("*.json")):
         loaded = adapter_module.load_variant(path)
@@ -433,6 +434,43 @@ def audit_result_linkage(bundle_dir: Path, run_dir: Path, *, family_map: Path = 
             "selected_instances": len(selected), "linked_result_records": linked}
 
 
+def prepare_run_manifest(bundle_dir: Path, output_root: Path, run_id: str,
+                         agent_path: Path) -> Path:
+    """Write a private, resumable runner input without publishing bundle data."""
+    from tools.baseline import RUNNER_VERSION, SYSTEM_PROMPT_VERSION
+    from tools.baseline.tools import PROFILE_ID
+    from tools.baseline.runner import validate_manifest
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{2,127}", run_id):
+        raise ValueError("run_id must be a 3-128 character safe slug")
+    commitment = audit_bundle(bundle_dir)
+    bundle = _external(bundle_dir)
+    root = _external(output_root)
+    agent = _read(_external(agent_path))
+    execution_class = "dry_run" if agent.get("adapter_type") == "mock" else "real"
+    selections = [{"case_id": item["parent_case_id"], "track": "private_variant",
+                   "variant_path": str(path.resolve())}
+                  for path in sorted((bundle / "instances").glob("*.json"))
+                  for item in [_read(path)]]
+    manifest = {"schema_version": "0.1.0", "run_id": run_id,
+                "created_utc": datetime.now(timezone.utc).isoformat(),
+                "execution_class": execution_class,
+                "release_id": commitment["benchmark_release_id"],
+                "selections": selections, "protocol_ids": ["closed_book"],
+                "agent": agent, "runner_version": RUNNER_VERSION,
+                "system_prompt_version": SYSTEM_PROMPT_VERSION,
+                "retrieval_config": {"max_items": 0},
+                "tool_config": {"profile_id": PROFILE_ID, "max_calls": 0},
+                "retry_policy": {"transport_max_retries": 0,
+                                 "malformed_answer_max_retries": 0,
+                                 "self_correction_max_retries": 0},
+                "timeout_seconds": 120, "concurrency": 1, "seed": None,
+                "output_directory": run_id, "pricing_snapshot": None}
+    validate_manifest(manifest)
+    destination = root / "input_manifests" / f"{run_id}.json"
+    _write_new(destination, manifest)
+    return destination
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="action", required=True)
@@ -446,6 +484,11 @@ def main() -> None:
     results = sub.add_parser("audit-results")
     results.add_argument("--bundle-dir", type=Path, required=True)
     results.add_argument("--run-dir", type=Path, required=True)
+    prepare = sub.add_parser("prepare-run")
+    prepare.add_argument("--bundle-dir", type=Path, required=True)
+    prepare.add_argument("--output-root", type=Path, required=True)
+    prepare.add_argument("--run-id", required=True)
+    prepare.add_argument("--agent-json", type=Path, required=True)
     args = parser.parse_args()
     if args.action == "check-map":
         print(f"family map valid: {len(validate_family_map()['cases'])} canonical cases")
@@ -455,6 +498,8 @@ def main() -> None:
         print(json.dumps(audit_bundle(args.bundle_dir), indent=2))
     elif args.action == "audit-results":
         print(json.dumps(audit_result_linkage(args.bundle_dir, args.run_dir), indent=2))
+    elif args.action == "prepare-run":
+        print(prepare_run_manifest(args.bundle_dir, args.output_root, args.run_id, args.agent_json))
     else:
         print(json.dumps(dry_run_bundle(args.bundle_dir), indent=2))
 

@@ -32,5 +32,6 @@
     "c_depth": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "polished_reversed_depth"
 }

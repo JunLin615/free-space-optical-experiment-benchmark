@@ -32,5 +32,6 @@
     "c_depth": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "wrong_diffraction_convention"
 }

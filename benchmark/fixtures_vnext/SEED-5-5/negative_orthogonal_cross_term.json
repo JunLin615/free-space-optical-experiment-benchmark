@@ -32,5 +32,6 @@
     "c_q3": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "ignored_polarization_orthogonality"
 }

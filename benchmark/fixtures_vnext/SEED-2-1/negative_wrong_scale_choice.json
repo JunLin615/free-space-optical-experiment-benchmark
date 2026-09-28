@@ -1,36 +1,39 @@
 {
-  "case_id": "SEED-3-7",
-  "name": "negative_wrong_scale",
+  "case_id": "SEED-2-1",
+  "name": "negative_wrong_scale_choice",
   "kind": "negative",
+  "failure_family": "wrong_offered_scale",
   "answer": {
     "answers": {
       "q1": {
-        "resolution_um": {
-          "value": 0.671,
+        "waist_radius": {
+          "value": 16.93,
           "unit": "um"
         }
       },
       "q2": {
         "closest_scale": {
-          "value": 0.1,
+          "value": 1,
           "unit": "um"
         }
       },
       "q3": {
-        "depth_of_focus_trend": "decreases"
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
       }
     }
   },
   "expected": {
-    "n_rayleigh": {
+    "n_waist": {
       "status": "pass"
     },
     "c_scale": {
       "status": "fail"
     },
-    "c_depth": {
+    "c_double": {
       "status": "pass"
     }
-  },
-  "failure_family": "wrong_offered_scale"
+  }
 }

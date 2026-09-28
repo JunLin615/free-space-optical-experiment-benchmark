@@ -1,36 +1,39 @@
 {
-  "case_id": "SEED-3-7",
-  "name": "negative_unchanged_depth",
+  "case_id": "SEED-2-1",
+  "name": "negative_waist_unchanged",
   "kind": "negative",
+  "failure_family": "ignored_incident_radius_change",
   "answer": {
     "answers": {
       "q1": {
-        "resolution_um": {
-          "value": 0.671,
+        "waist_radius": {
+          "value": 16.93,
           "unit": "um"
         }
       },
       "q2": {
         "closest_scale": {
-          "value": 1,
+          "value": 10,
           "unit": "um"
         }
       },
       "q3": {
-        "depth_of_focus_trend": "unchanged"
+        "waist_radius_factor": {
+          "value": 1,
+          "unit": "1"
+        }
       }
     }
   },
   "expected": {
-    "n_rayleigh": {
+    "n_waist": {
       "status": "pass"
     },
     "c_scale": {
       "status": "pass"
     },
-    "c_depth": {
+    "c_double": {
       "status": "fail"
     }
-  },
-  "failure_family": "ignored_na_depth_dependence"
+  }
 }

@@ -1,36 +1,39 @@
 {
-  "case_id": "SEED-3-7",
-  "name": "negative_decimal_error",
+  "case_id": "SEED-2-1",
+  "name": "negative_factor_two_waist",
   "kind": "negative",
+  "failure_family": "gaussian_waist_factor_two",
   "answer": {
     "answers": {
       "q1": {
-        "resolution_um": {
-          "value": 0.0671,
+        "waist_radius": {
+          "value": 33.86,
           "unit": "um"
         }
       },
       "q2": {
         "closest_scale": {
-          "value": 1,
+          "value": 10,
           "unit": "um"
         }
       },
       "q3": {
-        "depth_of_focus_trend": "decreases"
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
       }
     }
   },
   "expected": {
-    "n_rayleigh": {
+    "n_waist": {
       "status": "fail"
     },
     "c_scale": {
       "status": "pass"
     },
-    "c_depth": {
+    "c_double": {
       "status": "pass"
     }
-  },
-  "failure_family": "decimal_scale_error"
+  }
 }

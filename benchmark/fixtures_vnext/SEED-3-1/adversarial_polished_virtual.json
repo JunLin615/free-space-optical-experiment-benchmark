@@ -33,5 +33,6 @@
     "c_image_character": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "polished_wrong_image_reality"
 }

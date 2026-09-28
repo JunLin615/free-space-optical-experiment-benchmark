@@ -2,9 +2,9 @@ schema_version: 0.1.0
 case_id: SEED-3-7
 legacy_id: '3.7'
 case_revision: 0.3.0
-benchmark_release: null
-validation_status: executable
-split: public_dev
+benchmark_release: 0.2.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Diffraction-limited lateral resolution
 language: en
 taxonomy:
@@ -17,18 +17,19 @@ taxonomy:
 provenance:
   origin: user_supplied_chinese_html_seed
   source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
-  seed_relationship: Translation of case 3.7 in the original 64-case HTML seed. Revision 0.3.0 clarifies machine-readable
-    claims only in the new release lineage.
+  seed_relationship: Translation of case 3.7 in the original 64-case HTML seed. Revision 0.3.0 clarifies
+    machine-readable claims only in the new release lineage.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the original seed prompt and tasks. The Rayleigh criterion is named explicitly because
-    other resolution conventions give different coefficients. The ideal scalar estimate is 0.671 micrometers. Revision 0.2.0
-    defines typed fields for closed-physics autonomous scoring while preserving the public scientific questions. Revision
-    0.3.0 bounds the JSON answer vocabulary to physical state claims while retaining free explanatory prose.
+  derivation: English translation of the original seed prompt and tasks. The Rayleigh criterion is named
+    explicitly because other resolution conventions give different coefficients. The ideal scalar estimate
+    is 0.671 micrometers. Revision 0.2.0 defines typed fields for closed-physics autonomous scoring while
+    preserving the public scientific questions. Revision 0.3.0 bounds the JSON answer vocabulary to physical
+    state claims while retaining free explanatory prose.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
-  statement: A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect aberrations and use
-    the Rayleigh lateral-resolution estimate.
+  statement: A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect
+    aberrations and use the Rayleigh lateral-resolution estimate.
   questions:
   - id: q1
     request: Estimate the lateral diffraction-limited separation in micrometers.
@@ -55,8 +56,8 @@ answer_contract:
     answers.q1.resolution_um: Quantity {value, unit}; Rayleigh lateral separation.
     answers.q2.closest_scale: Quantity {value, unit}; one of the stated 0.1, 1, or 10 micrometer choices.
   method_shape:
-    q3: Object with depth_of_focus_trend enum decreases|unchanged|increases at fixed wavelength as numerical aperture increases.
-      Equivalent explanatory wording may be provided outside the scored JSON object.
+    q3: Object with depth_of_focus_trend enum decreases|unchanged|increases at fixed wavelength as numerical
+      aperture increases. Equivalent explanatory wording may be provided outside the scored JSON object.
 gold:
   reference_model:
     equation: delta = 0.61 lambda / NA
@@ -84,8 +85,8 @@ gold:
     evidence_path: answers.q2
   - id: c_depth
     severity: scored
-    predicate: At fixed wavelength and imaging conditions, larger numerical aperture generally narrows depth of focus and
-      increases focus sensitivity.
+    predicate: At fixed wavelength and imaging conditions, larger numerical aperture generally narrows
+      depth of focus and increases focus sensitivity.
     evidence_path: answers.q3.depth_of_focus_trend
   accepted_solution_families:
   - id: rayleigh
@@ -93,8 +94,8 @@ gold:
     family_checks:
     - consistent_units
     - rayleigh_factor
-  other_valid_families_policy: Accept the stated Rayleigh convention and numerically equivalent unit conversions; a different
-    well-defined diffraction criterion needs its own justified scale, not an arbitrary value.
+  other_valid_families_policy: Accept the stated Rayleigh convention and numerically equivalent unit conversions;
+    a different well-defined diffraction criterion needs its own justified scale, not an arbitrary value.
 scoring:
   criteria:
   - id: n_rayleigh
@@ -107,7 +108,8 @@ scoring:
     weight: 0.3
     check: c_depth
   hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
-  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
   aggregation: weighted_sum_then_hard_cap
 validation:
   planned_checks:
@@ -118,27 +120,25 @@ validation:
   implemented_checks:
   - independent_unit_aware_numeric_oracle
   - bounded_structured_physics_oracle
-  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial fixtures.
-    Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain unresolved. Further challenge
-    breadth is required before challenged or release_verified status. Revision 0.3.0 is a versioned contract clarification
-    for vNext; release qualification remains subject to independent challenge review.
+  notes: Coordinator-reviewed vNext contract; all scored tasks have deterministic verdicts and every release
+    fixture resolves. See docs/release_vnext.md for scope and residual risks.
   positive_fixtures:
-  - benchmark/fixtures_vnext/SEED-3-7/positive_reference.json
-  - benchmark/fixtures_vnext/SEED-3-7/positive_nm_units.json
   - benchmark/fixtures_vnext/SEED-3-7/alternative_m_units.json
   - benchmark/fixtures_vnext/SEED-3-7/alternative_rounded_resolution.json
-  - benchmark/fixtures_vnext/SEED-3-7/boundary_resolution_tolerance.json
   - benchmark/fixtures_vnext/SEED-3-7/boundary_explained_depth.json
+  - benchmark/fixtures_vnext/SEED-3-7/boundary_resolution_tolerance.json
+  - benchmark/fixtures_vnext/SEED-3-7/positive_nm_units.json
+  - benchmark/fixtures_vnext/SEED-3-7/positive_reference.json
   negative_fixtures:
-  - benchmark/fixtures_vnext/SEED-3-7/negative_decimal_error.json
-  - benchmark/fixtures_vnext/SEED-3-7/negative_wrong_scale.json
-  - benchmark/fixtures_vnext/SEED-3-7/negative_reversed_depth.json
-  - benchmark/fixtures_vnext/SEED-3-7/negative_unchanged_depth.json
   - benchmark/fixtures_vnext/SEED-3-7/adversarial_abbe_instead_rayleigh.json
   - benchmark/fixtures_vnext/SEED-3-7/adversarial_polished_wrong_depth.json
-  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference constructions
-    in tests/test_closed_physics.py, as applicable.
-  adversarial_evidence: benchmark/fixtures/SEED-3-7/adversarial_polished_false.json checks that incorrect structured physics
-    does not pass even with polished prose.
+  - benchmark/fixtures_vnext/SEED-3-7/negative_decimal_error.json
+  - benchmark/fixtures_vnext/SEED-3-7/negative_reversed_depth.json
+  - benchmark/fixtures_vnext/SEED-3-7/negative_unchanged_depth.json
+  - benchmark/fixtures_vnext/SEED-3-7/negative_wrong_scale.json
+  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference
+    constructions in tests/test_closed_physics.py, as applicable.
+  adversarial_evidence: benchmark/fixtures_vnext/SEED-3-7/adversarial_* and negative_* challenge distinct
+    physical errors under the versioned answer contract.
   evidence_files:
   - tests/test_vnext_deterministic_evidence.py

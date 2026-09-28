@@ -31,5 +31,6 @@
     "c_depth": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "reversed_na_depth_trend"
 }

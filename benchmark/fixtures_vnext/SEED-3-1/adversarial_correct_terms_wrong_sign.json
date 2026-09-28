@@ -33,5 +33,6 @@
     "c_image_character": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "polished_sign_contradiction"
 }
