@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-3-7
 legacy_id: '3.7'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Diffraction-limited lateral resolution
 language: en
@@ -20,13 +20,14 @@ provenance:
   seed_relationship: Translation of case 3.7 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the original seed prompt and tasks. The Rayleigh criterion is named
-    explicitly because other resolution conventions give different coefficients. The ideal scalar estimate
-    is 0.671 micrometers.
+  derivation: English translation of the original seed prompt and tasks. The Rayleigh criterion is named explicitly
+    because other resolution conventions give different coefficients. The ideal scalar estimate is 0.671 micrometers.
+    Revision 0.2.0 defines typed fields for closed-physics autonomous scoring while preserving the public scientific
+    questions.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
-  statement: A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect
-    aberrations and use the Rayleigh lateral-resolution estimate.
+  statement: A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect aberrations
+    and use the Rayleigh lateral-resolution estimate.
   questions:
   - id: q1
     request: Estimate the lateral diffraction-limited separation in micrometers.
@@ -46,9 +47,14 @@ answer_contract:
   schema_id: pilot_answer_v0.1
   required_result_paths:
   - answers.q1.resolution_um
-  - answers.q2
+  - answers.q2.closest_scale
   - answers.q3
   permit_additional_explanation: true
+  quantity_shape:
+    answers.q1.resolution_um: Quantity {value, unit}; Rayleigh lateral separation.
+    answers.q2.closest_scale: Quantity {value, unit}; one of the stated 0.1, 1, or 10 micrometer choices.
+  method_shape:
+    q3: Object with depth_of_focus_change at fixed wavelength as numerical aperture increases.
 gold:
   reference_model:
     equation: delta = 0.61 lambda / NA
@@ -65,6 +71,10 @@ gold:
     relative_tolerance: 0
     comparator: max_abs_or_relative_inclusive
     formula: 0.61 * 0.550 um / 0.50
+    validator_id: rayleigh_lateral_resolution
+    inputs:
+    - wavelength
+    - numerical_aperture
   universal_constraints:
   - id: c_scale
     severity: scored
@@ -72,8 +82,8 @@ gold:
     evidence_path: answers.q2
   - id: c_depth
     severity: scored
-    predicate: At fixed wavelength and imaging conditions, larger numerical aperture generally narrows
-      depth of focus and increases focus sensitivity.
+    predicate: At fixed wavelength and imaging conditions, larger numerical aperture generally narrows depth
+      of focus and increases focus sensitivity.
     evidence_path: answers.q3
   accepted_solution_families:
   - id: rayleigh
@@ -95,8 +105,8 @@ scoring:
     weight: 0.3
     check: c_depth
   hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
-  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
-    the parse error.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
   aggregation: weighted_sum_then_hard_cap
 validation:
   planned_checks:
@@ -104,6 +114,21 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
-    required before status promotion.
+  implemented_checks:
+  - independent_unit_aware_numeric_oracle
+  - bounded_structured_physics_oracle
+  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial
+    fixtures. Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain
+    unresolved. Further challenge breadth is required before challenged or release_verified status.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-3-7/positive_reference.json
+  - benchmark/fixtures/SEED-3-7/alternative_valid_units_or_form.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-3-7/negative_wrong_numeric.json
+  - benchmark/fixtures/SEED-3-7/adversarial_polished_false.json
+  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference
+    constructions in tests/test_closed_physics.py, as applicable.
+  adversarial_evidence: benchmark/fixtures/SEED-3-7/adversarial_polished_false.json checks that incorrect structured
+    physics does not pass even with polished prose.
+  evidence_files:
+  - tests/test_closed_physics.py

@@ -22,6 +22,11 @@ SCHEMAS = ROOT / "benchmark" / "schema"
 SCORERS = {
     "SEED-1-1": "numerical",
     "SEED-1-5": "numerical",
+    "SEED-2-2": "numerical",
+    "SEED-2-4": "numerical",
+    "SEED-3-1": "numerical",
+    "SEED-3-7": "numerical",
+    "SEED-5-5": "numerical",
     "SEED-2-8": "structured",
     "SEED-5-3": "structured",
     "SEED-7-2": "diagnostic",

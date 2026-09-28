@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-5-5
 legacy_id: '5.5'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Optical heterodyne beat
 language: en
@@ -21,7 +21,8 @@ provenance:
   created_utc: '2026-09-28'
   source_references: []
   derivation: The 80 MHz value is retained. The ideal orthogonal-polarization limit is stated separately from
-    practical leakage.
+    practical leakage. Revision 0.2.0 defines typed fields for closed-physics autonomous scoring while preserving
+    the public scientific questions.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Signal light has optical frequency f0. A local-oscillator beam has frequency f0 + 80 MHz. The
@@ -35,6 +36,10 @@ task:
   - id: q3
     request: Predict what happens if the beams instead have orthogonal polarizations and there is no polarization
       projector before the detector.
+  givens:
+  - symbol: lo_frequency_offset
+    value: 80
+    unit: MHz
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1
@@ -44,8 +49,10 @@ answer_contract:
   - answers.q3
   method_shape:
     q1: 'Object containing beat_frequency: quantity {value, unit}.'
-    q2: Object with detection_law and field_cross_term explanation.
-    q3: Object with orthogonal_polarization_effect and role_of_projection.
+    q2: 'Object with detection_law: square_law and field_cross_term: difference_frequency (equivalent typed
+      synonyms accepted).'
+    q3: 'Object with ideal_cross_term: false and projection_restores_beat: true; optional practical-leakage
+      qualification.'
   permit_additional_explanation: true
   quantity_shape:
     answers.q1.beat_frequency: Quantity {value, unit}; convertible frequency units accepted.
@@ -84,6 +91,9 @@ gold:
       unit: MHz
     comparator: absolute_inclusive
     tolerance_rationale: Allows normal rounding; this is a scoring tolerance, not an instrument uncertainty.
+    validator_id: heterodyne_beat
+    inputs:
+    - lo_frequency_offset
 scoring:
   criteria:
   - id: n_result
@@ -109,6 +119,21 @@ validation:
   - unit_aware_numerical_check
   - positive_and_adversarial_answer_fixtures_pass
   - calibrated_bounded_semantic_review_for_explanations
-  implemented_checks: []
-  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
-    positive and adversarial fixtures and semantic calibration are still required before promotion.
+  implemented_checks:
+  - independent_unit_aware_numeric_oracle
+  - bounded_structured_physics_oracle
+  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial
+    fixtures. Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain
+    unresolved. Further challenge breadth is required before challenged or release_verified status.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-5-5/positive_reference.json
+  - benchmark/fixtures/SEED-5-5/alternative_valid_units_or_form.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-5-5/negative_wrong_numeric.json
+  - benchmark/fixtures/SEED-5-5/adversarial_polished_false.json
+  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference
+    constructions in tests/test_closed_physics.py, as applicable.
+  adversarial_evidence: benchmark/fixtures/SEED-5-5/adversarial_polished_false.json checks that incorrect structured
+    physics does not pass even with polished prose.
+  evidence_files:
+  - tests/test_closed_physics.py

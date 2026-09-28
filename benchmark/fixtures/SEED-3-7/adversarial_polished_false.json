@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "adversarial_polished_false",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.671,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 10,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_change": "increases"
+      }
+    },
+    "explanation": "A polished-looking explanation claims the apparatus works as proposed, but the structured physical claims above determine grading."
+  },
+  "expected": {
+    "n_rayleigh": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "fail"
+    },
+    "c_depth": {
+      "status": "fail"
+    }
+  }
+}

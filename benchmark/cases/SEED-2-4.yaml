@@ -1,15 +1,17 @@
 schema_version: 0.1.0
 case_id: SEED-2-4
 legacy_id: '2.4'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Rayleigh range after doubling a Gaussian waist
 language: en
 taxonomy:
   optical_domain: gaussian_beams
-  task_types: [quantitative_inference, conceptual_reasoning]
+  task_types:
+  - quantitative_inference
+  - conceptual_reasoning
   difficulty_hypothesis: intermediate
   modality: text
 provenance:
@@ -18,16 +20,16 @@ provenance:
   seed_relationship: Translation of case 2.4 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: >-
-    Translates the seed's radius-scaling question. The fourfold Rayleigh-range
-    and half-divergence results require fixed wavelength and unchanged beam
-    quality; the latter is made explicit for a well-posed comparison.
+  derivation: Translates the seed's radius-scaling question. The fourfold Rayleigh-range and half-divergence
+    results require fixed wavelength and unchanged beam quality; the latter is made explicit for a well-posed
+    comparison. Revision 0.2.0 defines typed fields for closed-physics autonomous scoring while preserving
+    the public scientific questions. Peak-intensity comparisons assume fixed optical power, and the listed
+    benefits and costs are alternatives rather than jointly mandatory.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
-  statement: >-
-    A Gaussian beam waist has 1/e² intensity radius 50 μm. A redesigned
-    free-space optical path increases the waist radius to 100 μm at the same
-    wavelength and beam quality.
+  statement: A Gaussian beam waist has 1/e² intensity radius 50 μm. A redesigned free-space optical path increases
+    the waist radius to 100 μm at the same wavelength and beam quality. For any peak-intensity comparison,
+    hold the total beam power fixed.
   questions:
   - id: q1
     request: By what factor does the Rayleigh range change?
@@ -36,13 +38,28 @@ task:
   - id: q3
     request: Explain why a larger waist is not preferable for every application.
   givens:
-  - {symbol: initial_waist_radius, value: 50, unit: um, definition: 1/e^2 intensity radius}
-  - {symbol: final_waist_radius, value: 100, unit: um, definition: 1/e^2 intensity radius}
+  - symbol: initial_waist_radius
+    value: 50
+    unit: um
+    definition: 1/e^2 intensity radius
+  - symbol: final_waist_radius
+    value: 100
+    unit: um
+    definition: 1/e^2 intensity radius
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1
-  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  required_result_paths:
+  - answers.q1.rayleigh_range_factor
+  - answers.q2.divergence_factor
+  - answers.q3
   permit_additional_explanation: true
+  quantity_shape:
+    answers.q1.rayleigh_range_factor: Quantity {value, unit}; final/initial Rayleigh range.
+    answers.q2.divergence_factor: Quantity {value, unit}; final/initial far-field half-angle divergence.
+  method_shape:
+    q3: Object with a cost field naming one physically valid reason a larger waist is not always preferable;
+      benefit is optional. Unfamiliar alternatives abstain for review.
 gold:
   reference_model:
     equation: z_R = πw_0²/λ and θ = λ/(πw_0) for ideal Gaussian beams; fixed M² retains the same scaling.
@@ -58,20 +75,80 @@ gold:
     evidence_path: answers.q2
   - id: c_tradeoff
     severity: scored
-    predicate: A larger waist reduces peak intensity and extends depth of focus but worsens local spatial resolution and demands more clear aperture.
+    predicate: A larger waist can worsen local spatial resolution or require a larger clear aperture; one physically
+      valid application cost suffices. At fixed power it can also reduce peak intensity, and it extends depth
+      of focus.
     evidence_path: answers.q3
   forbidden_claims:
   - id: f_all_better
     predicate: Increasing waist size improves intensity, resolution, depth of focus, and aperture demand simultaneously.
+  numerical_checks:
+  - id: n_rayleigh_ratio
+    answer_path: answers.q1.rayleigh_range_factor
+    reference:
+      value: 4
+      unit: '1'
+    absolute_tolerance:
+      value: 0.05
+      unit: '1'
+    comparator: absolute_inclusive
+    validator_id: rayleigh_range_ratio
+    inputs:
+    - initial_waist_radius
+    - final_waist_radius
+  - id: n_divergence_ratio
+    answer_path: answers.q2.divergence_factor
+    reference:
+      value: 0.5
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    comparator: absolute_inclusive
+    validator_id: divergence_ratio
+    inputs:
+    - initial_waist_radius
+    - final_waist_radius
 scoring:
   criteria:
-  - {id: c_rayleigh, weight: 0.35, check: c_rayleigh, question_id: q1}
-  - {id: c_divergence, weight: 0.35, check: c_divergence, question_id: q2}
-  - {id: c_tradeoff, weight: 0.3, check: c_tradeoff, question_id: q3}
+  - id: n_rayleigh_ratio
+    weight: 0.35
+    check: n_rayleigh_ratio
+    question_id: q1
+  - id: n_divergence_ratio
+    weight: 0.35
+    check: n_divergence_ratio
+    question_id: q2
+  - id: c_tradeoff
+    weight: 0.3
+    check: c_tradeoff
+    question_id: q3
   hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
-  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
   aggregation: weighted_sum_then_hard_cap
 validation:
-  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, Gaussian_scaling_validator]
-  implemented_checks: []
-  notes: Fixed beam quality is required for the simple scaling; the numeric and tradeoff oracle is not implemented.
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - Gaussian_scaling_validator
+  implemented_checks:
+  - independent_unit_aware_numeric_oracle
+  - bounded_structured_physics_oracle
+  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial
+    fixtures. Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain
+    unresolved. Further challenge breadth is required before challenged or release_verified status.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-2-4/positive_reference.json
+  - benchmark/fixtures/SEED-2-4/alternative_valid_units_or_form.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-2-4/negative_wrong_numeric.json
+  - benchmark/fixtures/SEED-2-4/adversarial_polished_false.json
+  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference
+    constructions in tests/test_closed_physics.py, as applicable.
+  adversarial_evidence: benchmark/fixtures/SEED-2-4/adversarial_polished_false.json checks that incorrect structured
+    physics does not pass even with polished prose.
+  evidence_files:
+  - tests/test_closed_physics.py

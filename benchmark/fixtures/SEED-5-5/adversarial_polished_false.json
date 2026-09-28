@@ -1,0 +1,35 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "adversarial_polished_false",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detection_law": "linear_field",
+        "field_cross_term": "no_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": true,
+        "projection_restores_beat": false
+      }
+    },
+    "explanation": "A polished-looking explanation claims the apparatus works as proposed, but the structured physical claims above determine grading."
+  },
+  "expected": {
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail"
+    },
+    "c_q3": {
+      "status": "fail"
+    }
+  }
+}
