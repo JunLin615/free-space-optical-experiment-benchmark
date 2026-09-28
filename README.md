@@ -32,6 +32,8 @@ python -m unittest discover -s tests
 python tools/run_case_fixtures.py
 python tools/check_verification_status.py
 python tools/render_cases.py --check
+python tools/render_zh_cn.py --check
+python tools/check_localization.py
 python tools/generate_coverage.py --check
 python tools/qualify_release.py --check
 python tools/qualify_vnext.py --check

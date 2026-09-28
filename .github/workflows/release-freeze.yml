@@ -23,9 +23,11 @@ jobs:
           python tools/check_release_environment.py --check
           python tools/validate_cases.py
           python tools/check_corpus.py
+          python tools/check_verification_status.py
           python tools/render_cases.py --check
           python tools/render_zh_cn.py --check
           python tools/check_localization.py
+          python tools/generate_coverage.py --check
       - name: Verify autonomous scoring and conservative development fixtures
         run: |
           python -m unittest discover -s tests -p 'test_*.py'
