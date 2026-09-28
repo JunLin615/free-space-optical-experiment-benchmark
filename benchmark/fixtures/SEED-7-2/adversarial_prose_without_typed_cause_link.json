@@ -1,7 +1,7 @@
 {
   "case_id": "SEED-7-2",
-  "name": "negative_aperture_misclassification",
-  "kind": "negative",
+  "name": "adversarial_prose_without_typed_cause_link",
+  "kind": "adversarial",
   "answer": {
     "answers": {
       "q1": {
@@ -77,8 +77,13 @@
       "q2": {
         "aperture_causes": [
           {
-            "cause_id": "surface",
-            "aperture_type": "lens_surface",
+            "cause_id": "lens",
+            "aperture_type": "lens_clear_aperture",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          },
+          {
+            "cause_id": "pinhole",
+            "aperture_type": "filter_pinhole",
             "effect": "edge_diffraction_or_spatial_filter_truncation"
           }
         ]
@@ -96,15 +101,7 @@
             ],
             "if_present": "edge_truncation",
             "if_absent": "full_profile",
-            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it.",
-            "interpretation": {
-              "supports_if_present": [
-                "lens"
-              ],
-              "weakens_if_absent": [
-                "lens"
-              ]
-            }
+            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it."
           },
           {
             "operation": "remove_or_enlarge_pinhole",
@@ -177,11 +174,11 @@
       "status": "pass"
     },
     "c_apertures": {
-      "status": "fail",
-      "failure_class": "incorrect_aperture_classification"
+      "status": "pass"
     },
     "c_diagnosis": {
-      "status": "pass"
+      "status": "fail",
+      "failure_class": "non_discriminating_test"
     }
   }
 }

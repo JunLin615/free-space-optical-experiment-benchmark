@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-2-8
 legacy_id: '2.8'
-case_revision: 0.2.0
+case_revision: 0.2.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -19,7 +19,9 @@ provenance:
   seed_relationship: Translation of case 2.8 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'English translation of the original seed prompt and tasks. '
+  derivation: English translation of the original seed prompt and tasks. Revision 0.2.1
+    records the bounded structured scorer and explicitly rejects an unchanged conjugate
+    quantity after a same-beam reduction; public question wording is unchanged.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: A stable collimated free-space beam enters an ideal, entirely passive, lossless free-space
@@ -102,8 +104,10 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Semantic rubric is a draft; this case is not eligible for scored release.
-    Revision 0.2.0 makes the conceptual invariant and both reciprocal tradeoff directions
-    explicit in the answer contract without requiring the candidate to repeat the
-    supplied tenfold ratio. The scorer remains a bounded structural oracle.
+  implemented_checks:
+  - bounded_structured_bpp_invariant_scorer
+  - positive_boundary_negative_adversarial_fixtures
+  notes: A typed scorer covers the same-beam product constraint and reciprocal tradeoff,
+    including unchanged conjugate quantities as contradictions. Unknown credible formulations
+    remain unresolved; this case is not release-qualified. Revision 0.2.0 made the conceptual
+    invariant and both tradeoff directions explicit without requiring the supplied ratio.

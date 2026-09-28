@@ -1,0 +1,73 @@
+{
+  "case_id": "SEED-4-8",
+  "name": "negative_false_equal_power_label",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "operating_point": "equal_power",
+        "channels": [
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.4,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": -0.8,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.5,
+              "unit": "1"
+            }
+          },
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.6,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": 0.8,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.0,
+              "unit": "1"
+            }
+          }
+        ],
+        "analyzer_function": "complementary_polarization_components"
+      },
+      "q2": {
+        "rotation_response": "nonzero_linear",
+        "common_mode_at_bias": "first_order_cancelled"
+      },
+      "q3": {
+        "imbalance_sources": [
+          "unequal_path_loss",
+          "detector_responsivity_mismatch"
+        ],
+        "effect": "common_mode_leakage",
+        "balance_checks": [
+          "zero_rotation_offset"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_layout": {
+      "status": "fail",
+      "failure_class": "inconsistent_operating_point"
+    },
+    "c_response": {
+      "status": "pass"
+    },
+    "c_balance": {
+      "status": "pass"
+    }
+  }
+}

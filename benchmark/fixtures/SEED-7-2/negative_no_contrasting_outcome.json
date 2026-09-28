@@ -1,6 +1,6 @@
 {
   "case_id": "SEED-7-2",
-  "name": "negative_aperture_misclassification",
+  "name": "negative_no_contrasting_outcome",
   "kind": "negative",
   "answer": {
     "answers": {
@@ -77,8 +77,13 @@
       "q2": {
         "aperture_causes": [
           {
-            "cause_id": "surface",
-            "aperture_type": "lens_surface",
+            "cause_id": "lens",
+            "aperture_type": "lens_clear_aperture",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          },
+          {
+            "cause_id": "pinhole",
+            "aperture_type": "filter_pinhole",
             "effect": "edge_diffraction_or_spatial_filter_truncation"
           }
         ]
@@ -95,7 +100,7 @@
               "fixed_exposure"
             ],
             "if_present": "edge_truncation",
-            "if_absent": "full_profile",
+            "if_absent": "edge_truncation",
             "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it.",
             "interpretation": {
               "supports_if_present": [
@@ -177,11 +182,11 @@
       "status": "pass"
     },
     "c_apertures": {
-      "status": "fail",
-      "failure_class": "incorrect_aperture_classification"
+      "status": "pass"
     },
     "c_diagnosis": {
-      "status": "pass"
+      "status": "fail",
+      "failure_class": "non_discriminating_test"
     }
   }
 }

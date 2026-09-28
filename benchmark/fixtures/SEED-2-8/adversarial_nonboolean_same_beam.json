@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "adversarial",
+  "name": "adversarial_nonboolean_same_beam",
+  "answer": {
+    "answers": {
+      "q1": {
+        "achievable": false
+      },
+      "q2": {
+        "invariant": "beam_parameter_product",
+        "behavior": "conserved",
+        "same_beam": "no"
+      },
+      "q3": {
+        "reduce_size": "divergence_increases",
+        "reduce_divergence": "size_increases"
+      }
+    }
+  },
+  "expected": {
+    "c_impossible": {
+      "status": "pass"
+    },
+    "c_invariant": {
+      "status": "fail",
+      "failure_class": "malformed_claim"
+    },
+    "c_tradeoff": {
+      "status": "pass"
+    }
+  }
+}

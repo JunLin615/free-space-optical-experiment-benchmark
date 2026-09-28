@@ -1,7 +1,7 @@
 {
   "case_id": "SEED-7-2",
-  "name": "negative_aperture_misclassification",
-  "kind": "negative",
+  "name": "positive_typed_conclusions_without_prose",
+  "kind": "alternative_valid",
   "answer": {
     "answers": {
       "q1": {
@@ -77,8 +77,13 @@
       "q2": {
         "aperture_causes": [
           {
-            "cause_id": "surface",
-            "aperture_type": "lens_surface",
+            "cause_id": "lens",
+            "aperture_type": "lens_clear_aperture",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          },
+          {
+            "cause_id": "pinhole",
+            "aperture_type": "filter_pinhole",
             "effect": "edge_diffraction_or_spatial_filter_truncation"
           }
         ]
@@ -96,7 +101,6 @@
             ],
             "if_present": "edge_truncation",
             "if_absent": "full_profile",
-            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it.",
             "interpretation": {
               "supports_if_present": [
                 "lens"
@@ -117,7 +121,6 @@
             ],
             "if_present": "rings_weaken",
             "if_absent": "rings_unchanged",
-            "inference": "If rings weaken after enlarging the pinhole, spatial-filter truncation is implicated.",
             "interpretation": {
               "supports_if_present": [
                 "pinhole"
@@ -138,7 +141,6 @@
             ],
             "if_present": "rings_weaken",
             "if_absent": "rings_unchanged",
-            "inference": "A cleaner substitute reducing rings implicates the removed optic.",
             "interpretation": {
               "supports_if_present": [
                 "surface"
@@ -158,7 +160,6 @@
             ],
             "if_present": "rings_present_upstream",
             "if_absent": "rings_absent_upstream",
-            "inference": "Rings already upstream indicate input-mode structure rather than the expander.",
             "interpretation": {
               "supports_if_present": [
                 "source"
@@ -177,8 +178,7 @@
       "status": "pass"
     },
     "c_apertures": {
-      "status": "fail",
-      "failure_class": "incorrect_aperture_classification"
+      "status": "pass"
     },
     "c_diagnosis": {
       "status": "pass"

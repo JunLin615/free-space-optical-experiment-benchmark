@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-4-8
 legacy_id: '4.8'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -23,7 +23,8 @@ provenance:
   derivation: English translation of the original seed prompt and tasks. The seed omitted the operating
     point. A 45-degree bias relative to the analyzer axes and balanced gains are specified because without
     them the difference need not respond linearly to a small rotation or cancel common-mode power noise.
-    The signed slope depends on axis convention.
+    The signed slope depends on axis convention. Revision 0.2.0 adds a topology-neutral two-channel
+    transfer contract without changing public question wording.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: A small polarization rotation must be converted into a differential electrical signal while
@@ -46,12 +47,35 @@ answer_contract:
   - answers.q2
   - answers.q3
   permit_additional_explanation: true
+  method_shape:
+    answers.q1: 'Object with analyzer_function: orthogonal_linear_components or
+      complementary_polarization_components, channels: two detected, linear-unsaturated outputs, each giving
+      bias_power_fraction (ideal analyzer-output share of incident power before downstream loss, quantity in unit 1),
+      rotation_slope_per_rad (slope of that share, quantity in unit 1/rad or 1/deg),
+      and effective_gain (positive downstream path/detector/electronic gain in unit 1); and operating_point:
+      equal_power or balanced_difference. The transfer
+      model represents direct, single-pass polarization analysis followed by two detectors; name or explain the physical
+      analyzer in optional prose. Both outputs must be complementary and yield a zero difference at bias.'
+    answers.q2: 'Object with rotation_response: nonzero_linear and common_mode_at_bias:
+      first_order_cancelled, or declare an alternative/contradictory behavior for the scorer to evaluate.
+      These claims refer to the gain-weighted difference at the stated operating point.'
+    answers.q3: 'Object with imbalance_sources: array, effect: common_mode_leakage, and balance_checks:
+      array. A zero-rotation offset or measured leakage under common source-power modulation is an
+      acceptable balance check. An unfamiliar credible source or check is unresolved.'
+  notes: The typed transfer represents observable channel functions, not a required polarizing-beam-splitter
+    topology. Fractional slopes may reverse signs when channel labels are swapped. Balance uses a 1e-6
+    relative numerical rounding allowance; it is not a calibrated physical noise-rejection threshold.
+    Direct single-pass polarization analysis must also satisfy (2f-1)^2+(df/dtheta)^2 <= 1 for a channel's
+    ideal analyzer-output fraction f and rotation slope in radians; amplified or multipass designs need a
+    separate contract and remain unresolved here.
+    Free-form analyzer descriptions are not autonomously parsed by this bounded scorer.
 gold:
   universal_constraints:
   - id: c_layout
     severity: scored
-    predicate: Bias linear input near 45 degrees to the orthogonal axes of a polarizing analyzer or equivalent
-      so the two outputs have nearly equal power; detect both and form a gain-adjusted difference.
+    predicate: Use complementary analyzer outputs with nonzero opposite rotation slopes; detect both and
+      balance the gain-adjusted difference at the operating point. A linear-input 45-degree bias relative
+      to orthogonal analyzer axes is one realization.
     evidence_path: answers.q1
   - id: c_response
     severity: scored
@@ -106,6 +130,9 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
-    required before status promotion.
+  implemented_checks:
+  - typed_two_channel_transfer_and_balance_scorer
+  - positive_alternative_boundary_negative_adversarial_fixtures
+  notes: The scorer checks the submitted transfer model and imbalance reasoning, but does not independently
+    verify that an unstructured proposed optical layout realizes that model. Unfamiliar credible designs
+    abstain. Case remains specified pending broader challenge calibration.
