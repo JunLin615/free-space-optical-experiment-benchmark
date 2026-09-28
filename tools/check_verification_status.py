@@ -19,6 +19,7 @@ from tools.validate_cases import load_case
 from tools.fixture_evidence import fixture_kind_issues
 from tools.calibrate_judge import SET as CALIBRATION_SET, measure
 from tools.semantic_judge import CONFIG_PATH as JUDGE_CONFIG, load_config
+from tools.check_release_environment import SNAPSHOT as RELEASE_ENVIRONMENT, load_snapshot
 
 
 FIXTURES = ROOT / "benchmark" / "fixtures"
@@ -105,6 +106,9 @@ def required_release_files(case: dict, fixture_names: list[str]) -> set[str]:
         "tools/check_verification_status.py", "tools/qualify_release.py",
         "tools/check_corpus.py", "tools/generate_coverage.py", ".github/workflows/ci.yml",
         ".gitattributes", "requirements.txt",
+        RELEASE_ENVIRONMENT.relative_to(ROOT).as_posix(),
+        "tools/check_release_environment.py",
+        "tests/test_release_environment.py",
     }
     required.update(f"benchmark/fixtures/{case_id}/{name}" for name in fixture_names)
     required.update(case["validation"].get("evidence_files", []))
@@ -146,6 +150,17 @@ def _manifest_issues(case_id: str, release: str, fixture_names: list[str]) -> li
         issues.append(f"{case_id}: release manifest evaluator fingerprint differs from source")
     if pinned.get("case_content_sha256") != _content_hash(case):
         issues.append(f"{case_id}: release manifest case content hash differs from case")
+    try:
+        snapshot = load_snapshot()
+        expected_environment = {
+            "snapshot": RELEASE_ENVIRONMENT.relative_to(ROOT).as_posix(),
+            "python_implementation": snapshot["python_implementation"],
+            "python_version": snapshot["python_version"],
+        }
+        if manifest.get("environment") != expected_environment:
+            issues.append(f"{case_id}: release manifest environment differs from locked snapshot")
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        issues.append(f"{case_id}: release environment snapshot invalid: {exc}")
     required = required_release_files(case, fixture_names)
     judge_files, judge_issues = _judge_evidence_issues(case, manifest)
     issues.extend(judge_issues)

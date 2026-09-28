@@ -1,6 +1,11 @@
 {
   "release_candidate": "0.1.0-rc1",
   "case_count": 64,
+  "release_environment": {
+    "snapshot": "benchmark/releases/0.1.0-rc1-environment.json",
+    "python_implementation": "CPython",
+    "python_version": "3.11.16"
+  },
   "selected_count": 18,
   "release_verified_ids": [
     "SEED-1-1",

@@ -22,6 +22,8 @@ python tools/qualify_release.py --check
 
 `tools/validate_cases.py` checks schema structure, IDs, taxonomy, cross-field references, tolerances, and registered physics references. `tools/check_corpus.py` verifies all 64 legacy IDs and the original seed hash. `tools/render_cases.py` regenerates public question views from canonical YAML. CI also runs unit tests, scoring fixtures, and verification-status gates without a paid model API. Most cases have a specification and proposed oracle only; a YAML record alone does not mean a case can be scored autonomously.
 
+The rc1 qualification check requires the [locked release environment](benchmark/releases/0.1.0-rc1-environment.json): CPython 3.11.16 and its listed exact package versions. Run `python tools/check_release_environment.py --requirements` to obtain the pip requirements for that environment, and `python tools/check_release_environment.py --check` to verify it. Other development Python versions can run the case and fixture checks, but cannot certify rc1 qualification.
+
 Run `python tools/qualify_release.py` to inspect each selected case's evidence and exact blockers. The release candidate scores only the required typed claims. Optional explanation prose is retained for audit and does not change a deterministic score. Unfamiliar plausible structured answers may return `unresolved`; no expert grades normal runs. The manifest pins case, evaluator, fixture, derivation, generated-view, dependency, and gate files by SHA-256. It is a technical release candidate, with no model-baseline or empirical-difficulty claim.
 
 ## Repository map

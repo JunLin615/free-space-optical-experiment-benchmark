@@ -144,9 +144,14 @@
   "judge": {
     "mode": "disabled"
   },
+  "environment": {
+    "snapshot": "benchmark/releases/0.1.0-rc1-environment.json",
+    "python_implementation": "CPython",
+    "python_version": "3.11.16"
+  },
   "files": {
     ".gitattributes": "75ec940231f677f87e6b678538e88fd8cd4ab199c4bf3aa95709a658aad1b151",
-    ".github/workflows/ci.yml": "c464fbfc9e332145414ca027afe671cb6c4eaa9d57d18a42909ba916920e909a",
+    ".github/workflows/ci.yml": "c7d990cb00926adf125a08f13996f8b5cdd2f7a2488802c1fc45cbb4140d4e58",
     "benchmark/cases/SEED-1-1.yaml": "44664bc3efc4ee7c4dd0641ac76260c39a756ba86a466bde67625608bb868d4c",
     "benchmark/cases/SEED-1-5.yaml": "e3a3ddd74e653ba347a49e94a1ef58e79487f0686341de670895bed21cf2034a",
     "benchmark/cases/SEED-1-7.yaml": "cf97a0fda335d287f268ee9a60ed14bd4acaaac1170b98168497df4e8861e540",
@@ -227,6 +232,7 @@
     "benchmark/fixtures/SEED-4-2/positive_reference.json": "2ad673e1b79984651e3d5f7ce00bc9337780ad84a94e7da4ede50a8d6288fa8b",
     "benchmark/generated/questions.html": "4e46d57f574783d671f6a2e677766e70d03c8588b5f2c5078a2f20443cf12207",
     "benchmark/generated/questions.md": "66c08624e02354c099d65058e39b003436fbf408b937fdb6f1b7fede774c2968",
+    "benchmark/releases/0.1.0-rc1-environment.json": "3e1b2b0161c63383c6d1132f49eb08c35c1369dfe24ebd45a507d8c3620ffd45",
     "benchmark/schema/case_v0.1.schema.json": "e195fd7d98220d35716f03c4fab6c76c3a0e7c217dec0c3cf6999a703959dbdb",
     "benchmark/schema/pilot_answer_v0.1.schema.json": "03d57d5dc09312d0246f1ea86a3bef219505d2c7ee1ef0156bdcb1af6a034227",
     "benchmark/schema/result.schema.json": "f44be62f91ecea28580431a4072ec7f6dc4f20e242c04679f983c89ffc73f80a",
@@ -235,12 +241,14 @@
     "tests/test_deterministic_qualification.py": "2f32fd7368aaf067abef07a05e1087770875b3a48e203e0e4cba9af2cbf6e77f",
     "tests/test_independent_physics.py": "0e8b723865604a3eb7e822712707a45b1cc2b77589a9b3dacfca7882ed96f84a",
     "tests/test_numerical_scoring.py": "6954da376702b99d64f4fb8e66da51adf0b186a885d298538fe0db4511e5d3e1",
+    "tests/test_release_environment.py": "6f047ded81c4e7f08a5ba53d269a1fb27f9313c9992d046c67d5ee49a813152b",
     "tools/check_corpus.py": "30c583c89d007578debb4e934365a5a781ade0389d7c1ff33dd4c242541613d1",
-    "tools/check_verification_status.py": "8e04065ada0661e077afb8c1557bcb5438e4d0edb2f8ccd61f2c0debee6bc9c2",
+    "tools/check_release_environment.py": "ef83f1891c45237428b1f6172f485df87ac348c4079883339b2f098c9fd5520c",
+    "tools/check_verification_status.py": "46abac35c001dd13ef754d485beee82c4ab0ca9ab52428bcb49784ec542fff70",
     "tools/fixture_evidence.py": "ee5a42dd70a7446811db4d14e4bd8f55d5b5c5b43362f512fa7b2f4653d32af0",
     "tools/generate_coverage.py": "a897689e9587dd1b86bfab47cf98b3b59c89d8ada36803cc8bbb3bc272161fbb",
     "tools/physics_checks.py": "ef4fd0636cfda4324c1e278a6c5f0e2a5301cf30d4a76a34dc925106ca0141a9",
-    "tools/qualify_release.py": "c0055c5557e52b06297e946d36bd92ef35c784e54473918df8600245ab621add",
+    "tools/qualify_release.py": "ce405a3456775038c53391d901181aac38c88cb2191a4b666b2fd65c32420b78",
     "tools/render_cases.py": "7fe388aa833e2acee0be0f7f15f30a0800a87e7c31bacff9ac74d0e687c5729c",
     "tools/run_case_fixtures.py": "0d8cefb88bf3a9c3acd3822b35dab289311689c80031acc434e2f64e84ddfee4",
     "tools/scorers/geometry.py": "cbbdae8c9cf3151b9cb542226b6b19d96821f4d16d0afa88de637387c6e3fa47",

@@ -12,10 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.11.16"
           cache: pip
-      - name: Install validation dependencies
-        run: python -m pip install -r requirements.txt
+      - name: Install pinned release environment
+        run: |
+          python tools/check_release_environment.py --requirements > "$RUNNER_TEMP/rc1-requirements.txt"
+          python -m pip install --no-deps -r "$RUNNER_TEMP/rc1-requirements.txt"
+      - name: Verify pinned release environment
+        run: python tools/check_release_environment.py --check
       - name: Validate canonical cases
         run: python tools/validate_cases.py
       - name: Verify complete preserved seed migration
