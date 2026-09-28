@@ -23,6 +23,14 @@
     }
   },
   "expected": {
-    "full_credit": false
+    "n_image_distance": {
+      "status": "pass"
+    },
+    "n_magnification": {
+      "status": "pass"
+    },
+    "c_image_character": {
+      "status": "fail"
+    }
   }
 }

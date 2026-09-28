@@ -24,6 +24,14 @@
     }
   },
   "expected": {
-    "full_credit": false
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
   }
 }

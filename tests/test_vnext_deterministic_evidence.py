@@ -184,12 +184,13 @@ class RemainingDeterministicEvidence(unittest.TestCase):
                     verdicts = evaluate_closed_vnext(case, normalize_answer_units(fixture["answer"]))
                     self.assertEqual({v["criterion_id"] for v in verdicts}, {c["id"] for c in case["scoring"]["criteria"]})
                     self.assertTrue(all(v["status"] in ("pass", "fail") for v in verdicts), path.name)
-                    full_credit = all(v["status"] == "pass" for v in verdicts)
-                    self.assertEqual(full_credit, fixture["expected"]["full_credit"], path.name)
+                    wanted = {key: value["status"] for key, value in fixture["expected"].items()}
+                    self.assertEqual({v["criterion_id"]: v["status"] for v in verdicts}, wanted, path.name)
                     integrated = evaluate_vnext_case(case, fixture["answer"])
                     self.assertNotIn(integrated["failure_mode"], ("validator_error", "oracle_unresolved", "judge_unresolved"), path.name)
+                    self.assertEqual({v["check_id"]: v["status"] for v in integrated["validator_results"]}, wanted, path.name)
                     self.assertEqual(integrated["scores"]["capped_total"] == 1,
-                                     fixture["expected"]["full_credit"], path.name)
+                                     all(status == "pass" for status in wanted.values()), path.name)
                 self.assertEqual(counts, {"positive": 2, "alternative_valid": 2, "boundary": 2,
                                           "negative": 4, "adversarial": 2})
 

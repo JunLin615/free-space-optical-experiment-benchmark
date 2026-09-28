@@ -23,6 +23,14 @@
     }
   },
   "expected": {
-    "full_credit": false
+    "n_rayleigh": {
+      "status": "fail"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_depth": {
+      "status": "pass"
+    }
   }
 }

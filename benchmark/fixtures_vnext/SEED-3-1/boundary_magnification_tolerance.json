@@ -23,6 +23,18 @@
     }
   },
   "expected": {
-    "full_credit": true
+    "n_image_distance": {
+      "status": "pass"
+    },
+    "n_magnification": {
+      "status": "pass"
+    },
+    "c_image_character": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_magnification"
   }
 }
