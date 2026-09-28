@@ -80,6 +80,11 @@ class CaseSchemaTests(unittest.TestCase):
         self.write("b.yaml", case_record())
         self.assertTrue(any("duplicate case_id" in issue for issue in validate([self.directory])))
 
+    def test_malformed_question_id(self) -> None:
+        record = case_record()
+        record["task"]["questions"][0]["id"] = "question_one"
+        self.assertTrue(any("malformed task question ID" in issue for issue in validate([self.write("bad_question.yaml", record)])))
+
     def test_unresolved_score_reference_and_weights(self) -> None:
         record = case_record()
         record["scoring"]["criteria"][0].update(check="missing", weight=0.8)

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -92,6 +93,9 @@ def semantic_issues(case: dict[str, Any]) -> list[str]:
     contract = case["answer_contract"]
     questions = task["questions"]
     question_ids = [q["id"] for q in questions]
+    for question_id in question_ids:
+        if not re.fullmatch(r"q[1-9][0-9]*", question_id):
+            issues.append(f"malformed task question ID: {question_id}")
     for duplicate in sorted(_duplicates(question_ids)):
         issues.append(f"duplicate task question ID: {duplicate}")
 
