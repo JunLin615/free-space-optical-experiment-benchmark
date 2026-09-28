@@ -1,0 +1,103 @@
+schema_version: 0.1.0
+case_id: SEED-2-8
+legacy_id: '2.8'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Can beam size and divergence both shrink tenfold?
+language: en
+taxonomy:
+  optical_domain: gaussian_beams
+  task_types:
+  - conceptual_reasoning
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 2.8 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A stable collimated free-space beam enters an ideal, entirely passive, lossless free-space
+    optical system. A proposal claims that the system can reduce its transverse size tenfold and its far-field
+    divergence tenfold while preserving the same power and wavelength.
+  questions:
+  - id: q1
+    request: Judge whether this goal is generally achievable.
+  - id: q2
+    request: Identify the underlying physical constraint.
+  - id: q3
+    request: Explain what usually happens to one quantity if only the other is reduced.
+  givens:
+  - value: 10
+    unit: '1'
+    symbol: target_reduction_factor
+  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_impossible
+    severity: hard
+    predicate: Reject general simultaneous tenfold reduction of size and divergence in the stated passive
+      lossless system
+    evidence_path: answers.q1
+  - id: c_invariant
+    severity: scored
+    predicate: Explain diffraction, beam-parameter product or etendue/brightness constraint
+    evidence_path: answers.q2
+  - id: c_tradeoff
+    severity: scored
+    predicate: Reducing size tends to increase divergence; reducing divergence tends to require larger
+      size or an improved source mode
+    evidence_path: answers.q3
+  forbidden_claims:
+  - id: f_passive_bpp
+    predicate: passive lossless ideal optics can reduce the same beam's size-divergence product by a factor
+      of 100
+  judge_rubrics:
+  - id: draft_semantic_review
+    criterion: Accept equivalent beam-parameter-product and etendue reasoning; test explanations against
+      counterexamples before scoring.
+    judge_version: unimplemented-draft
+    threshold: 0.75
+    pass_examples:
+    - The proposal is rejected because a passive lossless relay cannot reduce the beam size-divergence
+      product by 100 at fixed wavelength and beam quality.
+    fail_examples:
+    - The answer says an ideal telescope can reduce both size and divergence tenfold without changing
+      source quality.
+    notes: Draft only; no judge calibration or scoring implementation yet.
+scoring:
+  criteria:
+  - id: c_impossible
+    weight: 0.35
+    check: c_impossible
+  - id: c_invariant
+    weight: 0.35
+    check: c_invariant
+  - id: c_tradeoff
+    weight: 0.3
+    check: c_tradeoff
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Semantic rubric is a draft; this case is not eligible for scored release.

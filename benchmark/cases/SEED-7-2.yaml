@@ -1,0 +1,107 @@
+schema_version: 0.1.0
+case_id: SEED-7-2
+legacy_id: '7.2'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Strong diffraction rings after beam expansion
+language: en
+taxonomy:
+  optical_domain: beam_diagnostics
+  task_types:
+  - diagnosis
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 7.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A two-lens beam expander has reached approximately the target output beam size, but the far
+    field shows strong ring-like structure.
+  questions:
+  - id: q1
+    request: List at least five plausible causes.
+  - id: q2
+    request: Identify which causes relate to an aperture.
+  - id: q3
+    request: Give a stepwise troubleshooting method.
+  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_causes
+    severity: scored
+    predicate: At least five distinct plausible causes, such as lens aperture clipping, dust or damage,
+      undersized internal pinhole, aberration, lens decenter or tilt, and poor input mode
+    evidence_path: answers.q1
+  - id: c_apertures
+    severity: scored
+    predicate: Recognize effective lens apertures, mechanical stops and a pinhole as possible clipping/diffraction
+      sources
+    evidence_path: answers.q2
+  - id: c_diagnosis
+    severity: scored
+    predicate: 'Stepwise isolation: inspect clipping/near field and removable stops, inspect optics, realign,
+      and compare far fields before and after inserting individual elements'
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: isolate_elements
+    example: Remove optional pinhole or stops and compare far-field patterns as elements are reintroduced.
+    family_checks:
+    - controlled_comparison
+  - id: near_and_far_field
+    example: Inspect near-field truncation and far-field changes while adjusting alignment.
+    family_checks:
+    - near_field_observation
+    - far_field_observation
+  other_valid_families_policy: Accept any staged fault-isolation sequence that distinguishes clipping
+    from contamination, aberration, misalignment and input-mode issues.
+  judge_rubrics:
+  - id: draft_semantic_review
+    criterion: Count distinct physically plausible causes and check causal, safe diagnostic sequencing.
+      Calibration against adversarial responses is pending.
+    judge_version: unimplemented-draft
+    threshold: 0.75
+    pass_examples:
+    - At least five distinct causes are listed and controlled removal or inspection of stops, pinhole,
+      optics and alignment is used to isolate the source.
+    fail_examples:
+    - The answer names five synonyms for clipping and suggests only cleaning the lens without checking
+      near- and far-field changes.
+    notes: Draft only; no judge calibration or scoring implementation yet.
+scoring:
+  criteria:
+  - id: c_causes
+    weight: 0.4
+    check: c_causes
+  - id: c_apertures
+    weight: 0.25
+    check: c_apertures
+  - id: c_diagnosis
+    weight: 0.35
+    check: c_diagnosis
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Semantic rubric is a draft; this case is not eligible for scored release.

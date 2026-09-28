@@ -1,0 +1,105 @@
+schema_version: 0.1.0
+case_id: SEED-1-6
+legacy_id: '1.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Dichroic wavelength routing
+language: en
+taxonomy:
+  optical_domain: wavelength_routing
+  task_types:
+  - conceptual_reasoning
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.6 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: At its design incidence angle, a dichroic mirror is highly reflective at 532 nm and highly
+    transmissive at 1064 nm. Collinear beams at these two wavelengths arrive simultaneously.
+  questions:
+  - id: q1
+    request: Draw or describe the output direction of each wavelength.
+  - id: q2
+    request: State the likely kind of change if the angle of incidence deviates substantially from its
+      design value.
+  - id: q3
+    request: Explain whether the dichroic mirror automatically guarantees unchanged output polarization
+      states.
+  givens:
+  - value: 532
+    unit: nm
+    symbol: reflected_wavelength
+  - value: 1064
+    unit: nm
+    symbol: transmitted_wavelength
+  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_routing
+    severity: hard
+    predicate: 532 nm exits mainly in the reflected direction and 1064 nm mainly in transmission
+    evidence_path: answers.q1
+  - id: c_angle
+    severity: scored
+    predicate: Changing incidence angle shifts coating spectral response or cutoff and may change performance
+    evidence_path: answers.q2
+  - id: c_polarization
+    severity: scored
+    predicate: No unconditional preservation of polarization; oblique-incidence s and p amplitude or phase
+      responses can differ
+    evidence_path: answers.q3
+  forbidden_claims:
+  - id: f_auto_polarization
+    predicate: dichroic routing unconditionally preserves every polarization state
+  judge_rubrics:
+  - id: draft_semantic_review
+    criterion: Evaluate physical meaning of the three public responses, allowing diagrams or text; automatic
+      judge calibration remains pending.
+    judge_version: unimplemented-draft
+    threshold: 0.75
+    pass_examples:
+    - 532 nm reflects and 1064 nm transmits; the response notes incidence-angle spectral shift and possible
+      s/p amplitude or phase differences.
+    fail_examples:
+    - Both wavelengths are said to transmit, or all polarization states are claimed to remain unchanged
+      at any angle.
+    notes: Draft only; no judge calibration or scoring implementation yet.
+scoring:
+  criteria:
+  - id: c_routing
+    weight: 0.4
+    check: c_routing
+  - id: c_angle
+    weight: 0.3
+    check: c_angle
+  - id: c_polarization
+    weight: 0.3
+    check: c_polarization
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Semantic rubric is a draft; this case is not eligible for scored release.

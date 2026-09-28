@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JunLin615/free-space-optical-experiment-benchmark/blob/main/benchmark/schema/pilot_answer_v0.1.schema.json",
+  "title": "Pilot answer block, schema 0.1",
+  "description": "A minimal structural contract. Case-specific required paths and physics checks are defined by each case, not by this shared schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answers"],
+  "properties": {
+    "answers": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^q[1-9][0-9]*$": {"$ref": "#/$defs/answer_node"}
+      },
+      "additionalProperties": false
+    },
+    "explanation": {"type": "string"},
+    "notes": {"type": "string"}
+  },
+  "$defs": {
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {"type": "number"},
+        "unit": {"type": "string", "minLength": 1},
+        "uncertainty": {"type": "number", "minimum": 0},
+        "definition": {"type": "string"}
+      }
+    },
+    "answer_node": {
+      "oneOf": [
+        {"$ref": "#/$defs/quantity"},
+        {"type": "string"},
+        {"type": "boolean"},
+        {"type": "null"},
+        {"type": "array", "items": {"$ref": "#/$defs/answer_node"}},
+        {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {"pattern": "^[A-Za-z_][A-Za-z0-9_]*$"},
+          "additionalProperties": {"$ref": "#/$defs/answer_node"},
+          "not": {
+            "anyOf": [
+              {"required": ["value"]},
+              {"required": ["unit"]}
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

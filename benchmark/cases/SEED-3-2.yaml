@@ -1,0 +1,89 @@
+schema_version: 0.1.0
+case_id: SEED-3-2
+legacy_id: '3.2'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Unity-magnification relay with an accessible Fourier plane
+language: en
+taxonomy:
+  optical_domain: fourier_optics
+  task_types:
+  - experimental_design
+  - conceptual_reasoning
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'English translation of the original seed prompt and tasks. '
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: An intensity pattern in one plane must be relayed without magnification to another, distant
+    plane, with room between them for a stop.
+  questions:
+  - id: q1
+    request: Give the basic layout of a two-lens relay.
+  - id: q2
+    request: Identify the plane suitable for a spatial-frequency stop.
+  - id: q3
+    request: Explain how that intermediate plane differs from an ordinary image plane.
+  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_4f
+    severity: hard
+    predicate: 'Equal-focal-length 4f relay: object at first front focal plane, lenses separated by 2f,
+      final image at second rear focal plane'
+    evidence_path: answers.q1
+  - id: c_fourier
+    severity: scored
+    predicate: Shared focal plane between the lenses is the Fourier plane and suitable for a spatial-frequency
+      stop
+    evidence_path: answers.q2
+  - id: c_not_image
+    severity: scored
+    predicate: Intermediate plane represents spatial-frequency content rather than direct geometric image
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: equal_lens_4f
+    example: Two equal positive focal lengths in a unity-magnification 4f relay.
+    family_checks:
+    - correct_conjugate_placement
+    - accessible_shared_focal_plane
+  other_valid_families_policy: Accept an optically equivalent unity-magnification two-lens relay if it
+    identifies a true Fourier plane and satisfies the task.
+scoring:
+  criteria:
+  - id: c_4f
+    weight: 0.45
+    check: c_4f
+  - id: c_fourier
+    weight: 0.3
+    check: c_fourier
+  - id: c_not_image
+    weight: 0.25
+    check: c_not_image
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []

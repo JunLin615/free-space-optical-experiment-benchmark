@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JunLin615/free-space-optical-experiment-benchmark/blob/main/benchmark/schema/result.schema.json",
+  "title": "Free-space optics benchmark run result",
+  "description": "Versioned per-case run record. Null means unavailable; zero means measured zero. Aggregate reports may be derived from these records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "result_schema_version",
+    "case_id",
+    "benchmark_version",
+    "system",
+    "protocol",
+    "case_library_access",
+    "tools_available",
+    "tools_used",
+    "tokens",
+    "wall_time_seconds",
+    "retry_count",
+    "raw_answer",
+    "structured_answer",
+    "validator_results",
+    "judge_results",
+    "criterion_scores",
+    "scores"
+  ],
+  "properties": {
+    "result_schema_version": { "const": "0.1.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "case_id": { "type": "string", "minLength": 1 },
+    "case_revision": { "type": ["string", "null"] },
+    "benchmark_version": { "type": "string", "minLength": 1 },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "model_id", "model_version", "scaffold_id"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "provider": { "type": ["string", "null"] },
+        "model_id": { "type": "string", "minLength": 1 },
+        "model_version": { "type": ["string", "null"] },
+        "scaffold_id": { "type": ["string", "null"] }
+      }
+    },
+    "protocol": {
+      "enum": ["closed_book", "case_assisted", "tool_assisted", "case_and_tool_assisted"]
+    },
+    "case_library_access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "snapshot_id", "retrieved_document_ids"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "snapshot_id": { "type": ["string", "null"] },
+        "retrieved_document_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "tools_available": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "tools_used": { "type": "array", "items": { "type": "string" } },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output", "total"],
+      "properties": {
+        "input": { "$ref": "#/$defs/nullableCount" },
+        "output": { "$ref": "#/$defs/nullableCount" },
+        "total": { "$ref": "#/$defs/nullableCount" },
+        "cached_input": { "$ref": "#/$defs/nullableCount" }
+      }
+    },
+    "wall_time_seconds": { "type": ["number", "null"], "minimum": 0 },
+    "retry_count": { "type": "integer", "minimum": 0 },
+    "raw_answer": { "type": ["string", "null"] },
+    "structured_answer": { "type": ["object", "null"] },
+    "validator_results": { "type": "array", "items": { "$ref": "#/$defs/checkResult" } },
+    "judge_results": { "type": "array", "items": { "$ref": "#/$defs/checkResult" } },
+    "criterion_scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion_id", "score", "weight"],
+        "properties": {
+          "criterion_id": { "type": "string", "minLength": 1 },
+          "score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+          "status": { "enum": ["scored", "unresolved", "not_applicable"] },
+          "evidence": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_total", "capped_total"],
+      "properties": {
+        "raw_total": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "capped_total": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "aggregate_metrics": { "type": "object", "additionalProperties": { "type": ["number", "null"] } }
+      }
+    },
+    "failure_mode": {
+      "enum": ["none", "agent_timeout", "agent_error", "no_answer", "invalid_contract", "physics_fail", "constraint_fail", "judge_unresolved", "validator_error", "invalid_instance"]
+    }
+  },
+  "$defs": {
+    "nullableCount": { "type": ["integer", "null"], "minimum": 0 },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "status"],
+      "properties": {
+        "check_id": { "type": "string", "minLength": 1 },
+        "version": { "type": ["string", "null"] },
+        "status": { "enum": ["pass", "fail", "unresolved", "error", "not_applicable"] },
+        "score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "evidence": { "type": ["string", "null"] },
+        "details": { "type": ["object", "null"] }
+      }
+    }
+  }
+}
