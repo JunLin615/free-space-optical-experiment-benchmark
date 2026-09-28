@@ -31,5 +31,6 @@
     "c_depth": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "decimal_place_resolution_error"
 }

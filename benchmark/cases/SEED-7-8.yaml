@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-7-8
 legacy_id: '7.8'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Can focus shrink while depth of focus grows?
 language: en
@@ -22,7 +22,7 @@ provenance:
   source_references: []
   derivation: 'Translated the original seed prompt and answer outline. Clarification: the seed''s ideal-Gaussian
     Rayleigh-range relation is qualified by fixed M² and the 1/e² radius convention; it is not a universal
-    formula for arbitrary structured beams.'
+    formula for arbitrary structured beams. Revision 0.2.0 adds typed invariant and tradeoff claims and relaxes q3 gold to one valid usual cost.'
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: At fixed wavelength and fixed input beam quality, a passive free-space design is asked to
@@ -43,6 +43,10 @@ answer_contract:
   - answers.q1
   - answers.q2
   - answers.q3
+  method_shape:
+    q1: 'Boolean false or object with simultaneous_trend_possible: false under the stated fixed conditions.'
+    q2: 'Object with relation: z_r_equals_pi_w0_squared_over_m2_lambda or z_r_proportional_to_w0_squared_at_fixed_lambda_m2; waist_definition: one_over_e_squared_intensity; and assumptions containing paraxial_gaussian, fixed_wavelength, fixed_beam_quality.'
+    q3: 'String, list, or object with costs list naming at least one: shorter_rayleigh_range, shorter_depth_of_focus, greater_divergence. Do not claim an opposite trend.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -58,8 +62,7 @@ gold:
     evidence_path: answers.q2
   - id: c_q3
     severity: scored
-    predicate: Explain increased divergence, shorter depth of focus, and typically greater sensitivity
-      to focusing and aberration when the spot shrinks.
+    predicate: State a usual cost of shrinking the waist at fixed wavelength and beam quality, such as increased divergence or shorter Rayleigh range and depth of focus. Greater sensitivity to focusing and aberration can also result but is not required.
     evidence_path: answers.q3
   other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
     equivalent approaches satisfying the stated observable and constraints.
@@ -85,5 +88,5 @@ validation:
   - scientific_assumptions_reviewed
   - valid_alternatives_and_adversarial_fixtures
   - autonomous_oracle_calibration
-  implemented_checks: []
-  notes: English canonical specification only. No autonomous scorer or release verification is claimed.
+  implemented_checks: [typed_gaussian_relation, fixed_quality_trend, criterion_local_missing_claims, positive_negative_boundary_alternative_adversarial_fixtures]
+  notes: Bounded typed oracle checks the stated fixed-quality paraxial Gaussian invariant. It does not certify arbitrary structured beams, free-form equations, or a particular focus design; novel forms abstain. Executable status only.

@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-2-4",
+  "name": "boundary_novel_valid_tradeoff",
+  "kind": "boundary",
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_tradeoff"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "rayleigh_range_factor": {
+          "value": 4,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "divergence_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "benefit": "longer_rayleigh_range",
+        "cost": "less nonlinear conversion"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh_ratio": {
+      "status": "pass"
+    },
+    "n_divergence_ratio": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "unresolved"
+    }
+  }
+}

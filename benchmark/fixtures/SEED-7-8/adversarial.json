@@ -1,0 +1,38 @@
+{
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": false,
+      "q2": {
+        "relation": "z_r_inversely_proportional_to_w0_squared",
+        "waist_definition": "one_over_e_squared_intensity",
+        "assumptions": [
+          "paraxial_gaussian",
+          "fixed_wavelength",
+          "fixed_beam_quality"
+        ]
+      },
+      "q3": {
+        "costs": [
+          "longer_rayleigh_range"
+        ]
+      }
+    },
+    "explanation": "All optical invariants were preserved."
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    },
+    "c_q3": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    }
+  },
+  "case_id": "SEED-7-8",
+  "name": "adversarial"
+}

@@ -106,6 +106,8 @@ def _beam_product(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[str
             results.append(_outcome("c_invariant", "unresolved", "The invariant or behavior uses an unrecognized but potentially valid formulation.", failure_class="unsupported_alternative", invariant=invariant, behavior=behavior))
         elif q2.get("same_beam") is False:
             results.append(_outcome("c_invariant", "fail", "The claimed constraint is applied to a different beam, outside the stated scenario.", failure_class="scope_mismatch"))
+        elif "same_beam" in q2 and q2["same_beam"] is not True:
+            results.append(_outcome("c_invariant", "fail", "same_beam must be a Boolean claim about the beam in the task.", failure_class="malformed_claim"))
         else:
             results.append(_outcome("c_invariant", "pass", "The named invariant prevents the implied 0.01 product ratio under the case assumptions.", invariant=invariant, behavior=behavior, claimed_product_ratio=claimed_product_ratio))
 
@@ -118,8 +120,8 @@ def _beam_product(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[str
         divergence = _name(q3.get("reduce_divergence"))
         if size is None or divergence is None:
             results.append(_missing("c_tradeoff", "answers.q3.reduce_size/reduce_divergence"))
-        elif size in {"divergence_decreases", "both_decrease"} or divergence in {"size_decreases", "both_decrease"}:
-            results.append(_outcome("c_tradeoff", "fail", "The proposed direction reduces both factors of the constrained product.", failure_class="physical_contradiction"))
+        elif size in {"divergence_decreases", "divergence_unchanged", "both_decrease"} or divergence in {"size_decreases", "size_unchanged", "both_decrease"}:
+            results.append(_outcome("c_tradeoff", "fail", "The proposed direction does not increase the conjugate size or divergence enough to preserve the same-beam product.", failure_class="physical_contradiction"))
         elif size in {"divergence_increases", "larger_divergence"} and divergence in {"size_increases", "larger_size"}:
             results.append(_outcome("c_tradeoff", "pass", "Reciprocal size and far-field divergence changes preserve the beam-parameter constraint."))
         else:
@@ -196,10 +198,14 @@ def _absorption(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[str, 
         mechanism = _name(q2.get("mechanism"))
         if tracks is None or mechanism is None or "sample_response_retained" not in q2:
             results.append(_missing("c_normalize", "answers.q2.tracks/mechanism/sample_response_retained"))
-        elif tracks not in {"common_source_power", "common_laser_intensity"}:
+        elif tracks in {"independent_source_power", "unrelated_reference_power", "sample_transmission", "sample_transmission_only"}:
             results.append(_outcome("c_normalize", "fail", "Reference normalization must track the same source-intensity variation.", failure_class="wrong_reference"))
+        elif tracks not in {"common_source_power", "common_laser_intensity"}:
+            results.append(_outcome("c_normalize", "unresolved", "The reference observable might track common source intensity but is outside the tested typed vocabulary.", failure_class="unsupported_alternative", tracks=tracks))
         elif mechanism in {"cancels_all_noise", "eliminates_every_error"} or q2["sample_response_retained"] is False:
             results.append(_outcome("c_normalize", "fail", "Normalization cannot remove all errors or the sample response itself.", failure_class="physical_contradiction"))
+        elif q2["sample_response_retained"] is not True:
+            results.append(_outcome("c_normalize", "fail", "sample_response_retained must be a Boolean claim.", failure_class="malformed_claim"))
         elif mechanism == "matched_gain_common_mode_rejection" and q2.get("reference_normalized") is not True:
             results.append(_outcome("c_normalize", "fail", "Matched subtraction alone does not define a fractional transmission estimate without reference scaling.", failure_class="missing_fractional_normalization"))
         elif mechanism in {"multiplicative_ratio_cancellation", "matched_gain_common_mode_rejection"}:

@@ -29,5 +29,6 @@
       "status": "fail",
       "failure_class": "missing_claim"
     }
-  }
+  },
+  "failure_family": "missing_required_claim"
 }

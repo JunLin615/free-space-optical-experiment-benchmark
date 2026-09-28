@@ -101,7 +101,15 @@
             ],
             "if_present": "edge_truncation",
             "if_absent": "full_profile",
-            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it."
+            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it.",
+            "interpretation": {
+              "supports_if_present": [
+                "lens"
+              ],
+              "weakens_if_absent": [
+                "lens"
+              ]
+            }
           },
           {
             "operation": "remove_or_enlarge_pinhole",
@@ -114,7 +122,15 @@
             ],
             "if_present": "rings_weaken",
             "if_absent": "rings_unchanged",
-            "inference": "If rings weaken after enlarging the pinhole, spatial-filter truncation is implicated."
+            "inference": "If rings weaken after enlarging the pinhole, spatial-filter truncation is implicated.",
+            "interpretation": {
+              "supports_if_present": [
+                "pinhole"
+              ],
+              "weakens_if_absent": [
+                "pinhole"
+              ]
+            }
           },
           {
             "operation": "substitute_optic",
@@ -127,7 +143,15 @@
             ],
             "if_present": "rings_weaken",
             "if_absent": "rings_unchanged",
-            "inference": "A cleaner substitute reducing rings implicates the removed optic."
+            "inference": "A cleaner substitute reducing rings implicates the removed optic.",
+            "interpretation": {
+              "supports_if_present": [
+                "surface"
+              ],
+              "weakens_if_absent": [
+                "surface"
+              ]
+            }
           },
           {
             "operation": "inspect_input_before_expander",
@@ -139,7 +163,15 @@
             ],
             "if_present": "rings_present_upstream",
             "if_absent": "rings_absent_upstream",
-            "inference": "Rings already upstream indicate input-mode structure rather than the expander."
+            "inference": "Rings already upstream indicate input-mode structure rather than the expander.",
+            "interpretation": {
+              "supports_if_present": [
+                "source"
+              ],
+              "weakens_if_absent": [
+                "source"
+              ]
+            }
           }
         ]
       }

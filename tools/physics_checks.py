@@ -110,6 +110,19 @@ def _michelson_fringe_count(case: dict[str, Any]) -> tuple[float, str]:
     return 2 * motion_in_wavelengths, "dimensionless"
 
 
+def _michelson_opd_change_half(case: dict[str, Any]) -> tuple[float, str]:
+    return 2 * _given(case, "mirror_displacement_wavelengths", "dimensionless"), "dimensionless"
+
+
+def _michelson_opd_change_quarter(case: dict[str, Any]) -> tuple[float, str]:
+    return 2 * _given(case, "quarter_mirror_displacement_wavelengths", "dimensionless"), "dimensionless"
+
+
+def _michelson_fringe_count_quarter(case: dict[str, Any]) -> tuple[float, str]:
+    opd, _ = _michelson_opd_change_quarter(case)
+    return opd, "dimensionless"
+
+
 def _half_wave_axis(case: dict[str, Any]) -> tuple[float, str]:
     incident = _given(case, "incident_axis", "angle")
     fast_axis = _given(case, "fast_axis", "angle")
@@ -187,6 +200,9 @@ REGISTRY: dict[str, Callable[[dict[str, Any]], tuple[float, str]]] = {
     "folded_delay_stage_for_target": _folded_delay_stage_for_target,
     "gaussian_focus_radius": _gaussian_focus_radius,
     "michelson_fringe_count": _michelson_fringe_count,
+    "michelson_opd_change_half": _michelson_opd_change_half,
+    "michelson_opd_change_quarter": _michelson_opd_change_quarter,
+    "michelson_fringe_count_quarter": _michelson_fringe_count_quarter,
     "half_wave_axis": _half_wave_axis,
     "half_wave_relative_rotation_magnitude": _half_wave_relative_rotation_magnitude,
     "half_wave_plate_rotation_effect": _half_wave_plate_rotation_effect,

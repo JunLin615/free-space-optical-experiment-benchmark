@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "negative",
+  "name": "negative_unchanged_divergence_after_smaller_beam",
+  "answer": {
+    "answers": {
+      "q1": {
+        "achievable": false
+      },
+      "q2": {
+        "invariant": "beam_parameter_product",
+        "behavior": "conserved",
+        "same_beam": true
+      },
+      "q3": {
+        "reduce_size": "divergence_unchanged",
+        "reduce_divergence": "size_increases"
+      }
+    }
+  },
+  "expected": {
+    "c_impossible": {
+      "status": "pass"
+    },
+    "c_invariant": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    }
+  }
+}

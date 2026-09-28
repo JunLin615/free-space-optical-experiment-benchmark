@@ -1,0 +1,42 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "boundary_inclusive_waist",
+  "kind": "boundary",
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_waist"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "value": 24.93,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 10,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_waist": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_double": {
+      "status": "pass"
+    }
+  }
+}

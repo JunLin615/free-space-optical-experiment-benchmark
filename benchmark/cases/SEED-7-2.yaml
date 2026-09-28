@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-7-2
 legacy_id: '7.2'
-case_revision: 0.2.0
+case_revision: 0.2.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -20,7 +20,8 @@ provenance:
   created_utc: '2026-09-28'
   source_references: []
   derivation: English translation of the original seed prompt and tasks. Revision 0.2.0 specifies a structured
-    diagnostic answer contract; scientific question wording is unchanged.
+    diagnostic answer contract; revision 0.2.1 requires typed cause conclusions for diagnostic tests.
+    Scientific question wording is unchanged.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: A two-lens beam expander has reached approximately the target output beam size, but the far
@@ -48,8 +49,9 @@ answer_contract:
     answers.q2.aperture_causes: Array of {cause_id, aperture_type, effect}; cause_id references q1. Aperture
       types include lens_clear_aperture, mechanical_stop, filter_pinhole. Effect for clipping is edge_diffraction_or_spatial_filter_truncation.
     answers.q3.steps: Ordered array of {operation, target_cause_ids, controls:[...], if_present, if_absent,
-      inference}. Target IDs reference q1. State a controlled comparison, distinct predicted outcomes,
-      and what each result implies.
+      interpretation:{supports_if_present:[cause_id,...], weakens_if_absent:[cause_id,...]}}. Target IDs
+      reference q1. State a controlled comparison, distinct predicted outcomes, and the cause IDs supported
+      or weakened by those outcomes. Optional prose is not scored.
   notes: Supported process, operation and outcome codes are documented in tools/scorers/diagnostic.py.
     Unknown physically credible alternatives yield unresolved rather than a categorical failure. This
     development case is not yet calibrated for release scoring.
@@ -118,6 +120,8 @@ validation:
   - positive_and_adversarial_answer_fixtures_pass
   implemented_checks:
   - structured_diagnostic_scorer_v0.1
-  - eight_positive_boundary_negative_adversarial_fixtures
-  notes: Structured diagnostic scorer and fixtures are a bounded proof of concept. Novel valid alternatives
-    and natural-language explanations need broader adversarial calibration; case remains specified.
+  - typed_cause_test_conclusion_links
+  - positive_boundary_negative_adversarial_fixtures
+  notes: Structured diagnostic scorer and fixtures are a bounded proof of concept. Typed conclusions
+    link each test to its stated cause; arbitrary prose is not interpreted. Novel valid alternatives
+    need broader adversarial calibration; case remains specified.

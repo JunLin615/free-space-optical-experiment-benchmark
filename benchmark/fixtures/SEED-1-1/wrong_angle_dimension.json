@@ -40,5 +40,6 @@
       "status": "pass",
       "score": 1
     }
-  }
+  },
+  "failure_family": "wrong_physical_dimension"
 }

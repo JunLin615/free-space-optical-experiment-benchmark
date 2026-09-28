@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "negative_quadruplicated_axis",
+  "kind": "negative",
+  "failure_family": "half_wave_rotation_applied_twice",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 68,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 10,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "fail"
+    },
+    "n_plate_effect": {
+      "status": "pass"
+    },
+    "c_circular": {
+      "status": "pass"
+    }
+  }
+}

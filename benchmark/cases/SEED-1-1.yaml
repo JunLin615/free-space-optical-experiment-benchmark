@@ -1,10 +1,10 @@
 schema_version: 0.1.0
 case_id: SEED-1-1
 legacy_id: '1.1'
-case_revision: 0.1.4
-benchmark_release: null
-validation_status: challenged
-split: public_dev
+case_revision: 0.1.5
+benchmark_release: 0.1.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Mirror rotation and far-field displacement
 language: en
 taxonomy:
@@ -24,6 +24,7 @@ provenance:
     Revision 0.1.2 discloses a typed geometry-change answer for executable scoring without changing the scientific task.
     Revision 0.1.3 states that requested changes are magnitudes because the seed gives no rotation sense.
     Revision 0.1.4 clarifies that optional explanation is retained for audit without adding a scoring criterion.
+    Revision 0.1.5 pins the qualified typed-answer oracle and challenge evidence for 0.1.0-rc1.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   coordinate_convention: The direction and displacement questions request magnitudes; no clockwise or transverse sign was specified, so equivalent signed reports are compared by absolute value.
@@ -128,4 +129,14 @@ validation:
   evidence_files:
   - tests/test_independent_physics.py
   - tests/test_numerical_scoring.py
-  notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-1-1/reference.json
+  - benchmark/fixtures/SEED-1-1/rounded_correct.json
+  - benchmark/fixtures/SEED-1-1/equivalent_units.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-1-1/one_to_one_reflection.json
+  - benchmark/fixtures/SEED-1-1/negative_wrong_geometry.json
+  - benchmark/fixtures/SEED-1-1/polished_but_false.json
+  notes: Release-verified typed-answer scorer for 0.1.0-rc1. Independent executable physics checks,
+    alternative-valid and boundary fixtures, and distinct negative and adversarial failure families
+    pass the automated gate. Optional prose is outside the scored contract.

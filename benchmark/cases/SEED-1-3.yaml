@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-1-3
 legacy_id: '1.3'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Parallel translation of a collimated beam
 language: en
@@ -18,7 +18,7 @@ provenance:
   seed_relationship: Translation of case 1.3 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the seed's same-height 30 mm dogleg problem; parallel means the same forward propagation direction.
+  derivation: English translation of the seed's same-height 30 mm dogleg problem; parallel means the same forward propagation direction. Revision 0.2.0 adds a typed answer shape and bounded autonomous checks without changing the public task.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: >-
@@ -37,6 +37,10 @@ answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1
   required_result_paths: [answers.q1, answers.q2, answers.q3]
+  method_shape:
+    q1: 'Object with mirror_count: two, output_forward_parallel: true, same_height: true, and lateral_offset: {value, unit}. Describe a two-reflection geometry in any optional explanation.'
+    q2: 'Object with angular_deflections_cancel: boolean and mirror_geometry: parallel_planes or equivalent_two_reflection_dogleg.'
+    q3: 'Object with single_reflection_sufficient: boolean and reason: changes_direction or one_reflection_changes_direction.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -71,5 +75,5 @@ scoring:
   aggregation: weighted_sum_then_hard_cap
 validation:
   planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, calibrated_semantic_judge]
-  implemented_checks: []
-  notes: Geometric equivalence is specified; no executable geometry checker is implemented.
+  implemented_checks: [typed_mirror_geometry, unit_aware_offset, criterion_local_missing_claims, positive_negative_boundary_alternative_adversarial_fixtures]
+  notes: Bounded typed geometry oracle verifies declared topology, output direction, height, and offset. It does not ray-trace arbitrary prose or certify an unmodeled mirror pose; novel geometries abstain. Executable status only.

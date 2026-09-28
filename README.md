@@ -2,7 +2,7 @@
 
 An open benchmark under development for evaluating autonomous agents on **free-space optical experimental reasoning**: quantitative prediction, beam-path design, diagnosis, calibration, and defensible engineering trade-offs. The scientific questions are independent of OpenSci, any agent framework, vendor, and optical-design software. Planned protocols compare closed-book, case-assisted, tool-assisted, and combined access to the *same* cases.
 
-**Status:** the original 64-case seed has been canonically migrated into English case YAML, but scoring support remains partial and no case is `release_verified`. The original Chinese HTML is preserved byte for byte as provenance. The [generated Markdown](benchmark/generated/questions.md) and [HTML](benchmark/generated/questions.html) show questions only; gold specifications stay in the canonical case files. The [migration report](docs/migration_report.md), [coverage report](docs/coverage_report.md), and [scoring-readiness plan](docs/scoring_readiness.md) document corpus scope and remaining oracle work.
+**Status:** all 64 seed cases are canonical English YAML. Eighteen cases have registered autonomous scorers, including all ten deterministic-ready cases. Five typed-answer cases form the first evidence-pinned `0.1.0-rc1` release candidate; the [manifest](benchmark/releases/0.1.0-rc1.json) and [qualification report](docs/qualification_report.md) state its exact scope and exclusions. The original Chinese HTML remains byte for byte unchanged. The [generated Markdown](benchmark/generated/questions.md) and [HTML](benchmark/generated/questions.html) show questions only; gold specifications remain in canonical case files.
 
 ## Run the local checks
 
@@ -17,9 +17,14 @@ python tools/run_case_fixtures.py
 python tools/check_verification_status.py
 python tools/render_cases.py --check
 python tools/generate_coverage.py --check
+python tools/qualify_release.py --check
 ```
 
 `tools/validate_cases.py` checks schema structure, IDs, taxonomy, cross-field references, tolerances, and registered physics references. `tools/check_corpus.py` verifies all 64 legacy IDs and the original seed hash. `tools/render_cases.py` regenerates public question views from canonical YAML. CI also runs unit tests, scoring fixtures, and verification-status gates without a paid model API. Most cases have a specification and proposed oracle only; a YAML record alone does not mean a case can be scored autonomously.
+
+The rc1 qualification check requires the [locked release environment](benchmark/releases/0.1.0-rc1-environment.json): CPython 3.11.16 and its listed exact package versions. Run `python tools/check_release_environment.py --requirements` to obtain the pip requirements for that environment, and `python tools/check_release_environment.py --check` to verify it. Other development Python versions can run the case and fixture checks, but cannot certify rc1 qualification.
+
+Run `python tools/qualify_release.py` to inspect each selected case's evidence and exact blockers. The release candidate scores only the required typed claims. Optional explanation prose is retained for audit and does not change a deterministic score. Unfamiliar plausible structured answers may return `unresolved`; no expert grades normal runs. The manifest pins case, evaluator, fixture, derivation, generated-view, dependency, and gate files by SHA-256. It is a technical release candidate, with no model-baseline or empirical-difficulty claim.
 
 ## Repository map
 

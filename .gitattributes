@@ -1,3 +1,8 @@
+# Keep pinned text assets identical in Windows and Linux checkouts.
+/.gitattributes text eol=lf
+*.html text eol=lf
+*.txt text eol=lf
+
 # Preserve the original HTML seed byte for byte, including its line endings.
 自由空间光学实验推理试题集_初版.html -text
 

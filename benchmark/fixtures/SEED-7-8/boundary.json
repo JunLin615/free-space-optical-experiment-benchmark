@@ -1,0 +1,35 @@
+{
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": false,
+      "q2": {
+        "relation": "z_r_equals_pi_w0_squared_over_m2_lambda",
+        "waist_definition": "one_over_e_squared_intensity",
+        "assumptions": [
+          "paraxial_gaussian",
+          "fixed_wavelength"
+        ]
+      },
+      "q3": "shorter_depth_of_focus"
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_q2"
+  },
+  "case_id": "SEED-7-8",
+  "name": "boundary"
+}

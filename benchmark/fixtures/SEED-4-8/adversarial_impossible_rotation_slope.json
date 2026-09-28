@@ -1,0 +1,74 @@
+{
+  "case_id": "SEED-4-8",
+  "name": "adversarial_impossible_rotation_slope",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "operating_point": "equal_power",
+        "channels": [
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.5,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": -100.0,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.0,
+              "unit": "1"
+            }
+          },
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.5,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": 100.0,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.0,
+              "unit": "1"
+            }
+          }
+        ],
+        "analyzer_function": "orthogonal_linear_components"
+      },
+      "q2": {
+        "rotation_response": "nonzero_linear",
+        "common_mode_at_bias": "first_order_cancelled"
+      },
+      "q3": {
+        "imbalance_sources": [
+          "unequal_path_loss",
+          "detector_responsivity_mismatch"
+        ],
+        "effect": "common_mode_leakage",
+        "balance_checks": [
+          "source_power_modulation_leakage"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_layout": {
+      "status": "fail",
+      "failure_class": "unphysical_transfer"
+    },
+    "c_response": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    },
+    "c_balance": {
+      "status": "pass"
+    }
+  }
+}

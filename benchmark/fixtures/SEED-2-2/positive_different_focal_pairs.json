@@ -1,0 +1,52 @@
+{
+  "case_id": "SEED-2-2",
+  "name": "positive_different_focal_pairs",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "expansion_factor": {
+          "value": 5,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "keplerian": {
+          "input_focal_length": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 50,
+            "unit": "mm"
+          }
+        },
+        "galilean": {
+          "input_focal_length": {
+            "value": -25,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 125,
+            "unit": "mm"
+          }
+        }
+      },
+      "q3": {
+        "keplerian_real_internal_focus": true,
+        "galilean_real_internal_focus": false
+      }
+    }
+  },
+  "expected": {
+    "n_expansion": {
+      "status": "pass"
+    },
+    "c_examples": {
+      "status": "pass"
+    },
+    "c_focus": {
+      "status": "pass"
+    }
+  }
+}

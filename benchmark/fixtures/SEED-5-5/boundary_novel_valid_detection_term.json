@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "boundary_novel_valid_detection_term",
+  "kind": "boundary",
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_q2"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detection_law": "square-law photodetection",
+        "field_cross_term": "difference-frequency interference"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "unresolved"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  }
+}

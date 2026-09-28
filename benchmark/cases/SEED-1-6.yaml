@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-1-6
 legacy_id: '1.6'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Dichroic wavelength routing
 language: en
@@ -19,7 +19,7 @@ provenance:
   seed_relationship: Translation of case 1.6 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'English translation of the original seed prompt and tasks. '
+  derivation: 'English translation of the original seed prompt and tasks. Revision 0.2.0 adds typed routing, angle-response, and polarization claims for bounded scoring without changing the public task.'
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: At its design incidence angle, a dichroic mirror is highly reflective at 532 nm and highly
@@ -47,6 +47,10 @@ answer_contract:
   - answers.q1
   - answers.q2
   - answers.q3
+  method_shape:
+    q1: 'Object with wavelength_532_nm: reflected and wavelength_1064_nm: transmitted.'
+    q2: 'Object with response_may_change: boolean and change_kind: band_shift, cutoff_shift, reflectance_transmittance_change, or performance_change. No shift direction is required.'
+    q3: 'Object with unconditionally_preserved: boolean and mechanism: s_p_amplitude_difference, s_p_phase_difference, or s_p_response_difference.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -100,5 +104,5 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Semantic rubric is a draft; this case is not eligible for scored release.
+  implemented_checks: [typed_wavelength_ports, angle_response_invariant, polarization_dependence, positive_negative_boundary_alternative_adversarial_fixtures]
+  notes: Bounded typed oracle checks the design-angle port mapping and non-guarantees. It does not predict coating-specific spectral shift direction or magnitude; unfamiliar formulations abstain. Executable status only.

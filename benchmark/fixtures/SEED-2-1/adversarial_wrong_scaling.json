@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "adversarial_wrong_scaling",
+  "kind": "adversarial",
+  "failure_family": "reversed_incident_radius_scaling",
+  "answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "value": 16.93,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "value": 2,
+          "unit": "1"
+        }
+      }
+    },
+    "explanation": "A larger incident beam focuses more sharply, so I select the smallest of the offered scales."
+  },
+  "expected": {
+    "n_waist": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "fail"
+    },
+    "c_double": {
+      "status": "fail"
+    }
+  }
+}

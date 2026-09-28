@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-5-3
 legacy_id: '5.3'
-case_revision: 0.2.0
+case_revision: 0.2.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -20,7 +20,9 @@ provenance:
   seed_relationship: Translation of case 5.3 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'English translation of the original seed prompt and tasks. '
+  derivation: English translation of the original seed prompt and tasks. Revision 0.2.1
+    distinguishes a demonstrably unrelated reference from an unfamiliar possible common-source
+    reference label; public question wording is unchanged.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: A sample produces a relative transmission change of about 10^-5. The laser also has noticeable
@@ -112,9 +114,11 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
-  notes: Semantic rubric is a draft; this case is not eligible for scored release.
-    Revision 0.2.0 specifies channel observables and a declared sensitivity plan
-    because a source/reference ratio alone cannot establish detection of a 1e-5
-    change. Planned noise floors are not measured evidence; scorer success does
-    not promote this case beyond specified status.
+  implemented_checks:
+  - bounded_structured_channel_and_normalization_scorer
+  - positive_boundary_negative_adversarial_fixtures
+  notes: The scorer checks shared-source tracking, a declared sensitivity plan, and
+    residual errors. Unfamiliar but possibly common references remain unresolved. Revision
+    0.2.0 specified channel observables and a declared sensitivity plan because a ratio alone
+    cannot establish detection of a 1e-5 change. Planned noise floors are not measured
+    evidence; this case remains specified and is not release-qualified.

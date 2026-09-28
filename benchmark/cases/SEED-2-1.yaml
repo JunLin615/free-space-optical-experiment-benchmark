@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-2-1
 legacy_id: '2.1'
-case_revision: 0.1.0
+case_revision: 0.2.1
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Diffraction-limited focus scale
 language: en
@@ -22,6 +22,8 @@ provenance:
   source_references: []
   derivation: English translation of the original seed prompt and tasks. The diffraction-limited numerical
     result assumes approximately M² = 1; the seed says approximately Gaussian but does not specify M².
+    Revision 0.2.0 supplies typed scale-choice and radius-ratio claims for autonomous scoring. Revision
+    0.2.1 accepts a 10 um order-scale response to q1 while preserving the independent numerical estimate.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: An approximately collimated Gaussian beam at 532 nm enters a thin lens of focal length 100
@@ -50,8 +52,14 @@ answer_contract:
   schema_id: pilot_answer_v0.1
   required_result_paths:
   - answers.q1.waist_radius
-  - answers.q2
-  - answers.q3
+  - answers.q2.closest_scale
+  - answers.q3.waist_radius_factor
+  quantity_shape:
+    answers.q1.waist_radius: Quantity {value, unit}; diffraction-limited 1/e² intensity radius.
+    answers.q2.closest_scale: Quantity {value, unit}; select one of 1 um, 10 um, or 1 mm.
+    answers.q3.waist_radius_factor: 'Dimensionless quantity {value, unit: 1}; new/old ideal waist-radius ratio.'
+  method_shape:
+    q3: State the ideal new/old waist-radius factor at fixed wavelength and focal length.
   permit_additional_explanation: true
 gold:
   reference_model:
@@ -64,20 +72,24 @@ gold:
       value: 16.93
       unit: um
     absolute_tolerance:
-      value: 2.0
+      value: 8.0
       unit: um
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
     validator_id: gaussian_focus_radius
+    tolerance_rationale: Approximate input radius and order-of-magnitude wording support both a 10 um scale
+      answer and a rounded 20 um estimate. The inclusive 8 um scoring band is not an instrument uncertainty;
+      it rejects the 1 um scale and a factor-two 34 um result. The separate closest-scale criterion remains
+      the explicit 10 um choice.
   universal_constraints:
   - id: c_scale
     severity: scored
     predicate: Among the three choices, 10 micrometers is closest
-    evidence_path: answers.q2
+    evidence_path: answers.q2.closest_scale
   - id: c_double
     severity: scored
     predicate: Doubling incident beam radius approximately halves ideal waist radius
-    evidence_path: answers.q3
+    evidence_path: answers.q3.waist_radius_factor
   known_failure_modes:
   - An M² qualification is physically valid; it should not be marked wrong when the ideal reference is
     stated.
@@ -102,4 +114,27 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
+  implemented_checks:
+  - independent_gaussian_q_parameter_crosscheck
+  - unit_aware_numerical_oracle
+  - typed_scale_and_ratio_oracles
+  - positive_boundary_alternative_and_adversarial_fixtures
+  notes: Executable deterministic scorer for the ideal Gaussian-limit estimate. Unknown beam quality
+    remains a legitimate qualification, but the public question explicitly asks for the diffraction-limited
+    estimate. The order-of-magnitude wording does not define a sharp acceptance interval; the current
+    inclusive band accepts 10 and 20 um but may not cover every defensible approximate response. Keep
+    below release_verified until this ambiguity is resolved and alternatives are challenged.
+  independent_derivation: The focused-waist approximation follows from the Fourier transform of a
+    collimated Gaussian field, yielding w0 = lambda f/(pi w_lens). At fixed wavelength and focal length,
+    doubling w_lens halves the ideal waist. For the stated inputs w0 is about 16.9 um.
+  evidence_files:
+  - tests/test_deterministic_qualification.py
+  positive_fixtures:
+  - benchmark/fixtures/SEED-2-1/positive_reference.json
+  - benchmark/fixtures/SEED-2-1/alternative_valid_units.json
+  - benchmark/fixtures/SEED-2-1/alternative_valid_rounded_estimate.json
+  - benchmark/fixtures/SEED-2-1/alternative_valid_order_scale.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-2-1/negative_factor_two_waist.json
+  - benchmark/fixtures/SEED-2-1/negative_wrong_dimension.json
+  - benchmark/fixtures/SEED-2-1/adversarial_wrong_scaling.json

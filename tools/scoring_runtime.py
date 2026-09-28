@@ -22,14 +22,22 @@ SCHEMAS = ROOT / "benchmark" / "schema"
 SCORERS = {
     "SEED-1-1": "numerical",
     "SEED-1-5": "numerical",
+    "SEED-1-7": "numerical",
+    "SEED-2-1": "numerical",
     "SEED-2-2": "numerical",
     "SEED-2-4": "numerical",
     "SEED-3-1": "numerical",
     "SEED-3-7": "numerical",
+    "SEED-4-2": "numerical",
     "SEED-5-5": "numerical",
+    "SEED-1-3": "structured_wave",
+    "SEED-1-6": "structured_wave",
+    "SEED-4-1": "structured_wave",
+    "SEED-7-8": "structured_wave",
     "SEED-2-8": "structured",
     "SEED-5-3": "structured",
     "SEED-7-2": "diagnostic",
+    "SEED-4-8": "diagnostic",
 }
 
 
@@ -103,6 +111,8 @@ def _dispatch(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[str, An
             return evaluate(case, answer) + [evaluate_quarter(case, answer)]
     elif module == "structured":
         from tools.scorers.structured import evaluate
+    elif module == "structured_wave":
+        from tools.scorers.structured_wave import evaluate
     else:
         from tools.scorers.diagnostic import evaluate
     return evaluate(case, answer)

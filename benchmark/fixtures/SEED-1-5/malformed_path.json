@@ -5,7 +5,7 @@
   "answer": {
     "answers": {
       "q1": {
-      "path_change": "2 mm"
+        "path_change": "2 mm"
       },
       "q2": {
         "delay_change": {
@@ -32,5 +32,6 @@
     "n_travel": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "malformed_quantity"
 }

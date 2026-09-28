@@ -33,5 +33,6 @@
     "c_tradeoff": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "reversed_divergence_and_tradeoff"
 }

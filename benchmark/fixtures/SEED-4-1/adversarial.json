@@ -1,0 +1,31 @@
+{
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": "circular",
+      "q2": "linear",
+      "q3": {
+        "depends_on": [
+          "independent_of_convention",
+          "input_axis_orientation",
+          "fast_slow_phase_sign"
+        ]
+      }
+    },
+    "explanation": "The universal right-handed output is convention independent."
+  },
+  "expected": {
+    "c_circular": {
+      "status": "pass"
+    },
+    "c_zero": {
+      "status": "pass"
+    },
+    "c_handed": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    }
+  },
+  "case_id": "SEED-4-1",
+  "name": "adversarial"
+}

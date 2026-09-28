@@ -1,0 +1,32 @@
+{
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "wavelength_532_nm": "reflected",
+        "wavelength_1064_nm": "transmitted"
+      },
+      "q2": {
+        "response_may_change": true,
+        "change_kind": "band_shift"
+      },
+      "q3": {
+        "unconditionally_preserved": false,
+        "mechanism": "s_p_phase_difference"
+      }
+    }
+  },
+  "expected": {
+    "c_routing": {
+      "status": "pass"
+    },
+    "c_angle": {
+      "status": "pass"
+    },
+    "c_polarization": {
+      "status": "pass"
+    }
+  },
+  "case_id": "SEED-1-6",
+  "name": "positive"
+}

@@ -36,5 +36,6 @@
     "n_travel": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "polished_false_physics"
 }

@@ -58,7 +58,7 @@ A horizontal collimated input beam at 50 mm height must leave at 100 mm height, 
 
 ## SEED-1-5 — Folded optical delay line
 
-An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. Report changes in optical path and time delay as magnitudes.
+An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. The beam traverses the moving-stage gap once on the outbound leg and once on the return leg; no other moving path segment changes. Report changes in optical path and time delay as magnitudes.
 
 **Given quantities**
 
@@ -333,11 +333,12 @@ Linearly polarized light enters an ideal quarter-wave plate. Its incident polari
 
 ## SEED-4-2 — Michelson mirror motion and fringe cycles
 
-In a monochromatic-light Michelson interferometer, the mirror in one arm moves by λ/2 along the optical axis.
+In a monochromatic-light Michelson interferometer, the mirror in one arm moves by λ/2 along the optical axis. Report optical-path changes as magnitudes because no direction is specified.
 
 **Given quantities**
 
 - mirror displacement wavelengths = 0.5
+- quarter mirror displacement wavelengths = 0.25
 
 **Questions**
 

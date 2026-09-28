@@ -1,0 +1,35 @@
+{
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "wavelength_532_nm": "reflected",
+        "wavelength_1064_nm": "transmitted"
+      },
+      "q2": {
+        "response_may_change": false,
+        "change_kind": "no_change"
+      },
+      "q3": {
+        "unconditionally_preserved": true,
+        "mechanism": "s_p_response_difference"
+      }
+    },
+    "explanation": "Dichroic coating guarantees perfect angle and polarization stability."
+  },
+  "expected": {
+    "c_routing": {
+      "status": "pass"
+    },
+    "c_angle": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    },
+    "c_polarization": {
+      "status": "fail",
+      "failure_class": "physical_contradiction"
+    }
+  },
+  "case_id": "SEED-1-6",
+  "name": "adversarial"
+}

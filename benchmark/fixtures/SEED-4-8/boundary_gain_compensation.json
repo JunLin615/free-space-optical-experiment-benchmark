@@ -1,0 +1,76 @@
+{
+  "case_id": "SEED-4-8",
+  "name": "boundary_gain_compensation",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "operating_point": "balanced_difference",
+        "channels": [
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.5,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": -1.0,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.000000999000998,
+              "unit": "1"
+            }
+          },
+          {
+            "detected": true,
+            "linear_unsaturated": true,
+            "bias_power_fraction": {
+              "value": 0.5,
+              "unit": "1"
+            },
+            "rotation_slope_per_rad": {
+              "value": 1.0,
+              "unit": "1/rad"
+            },
+            "effective_gain": {
+              "value": 1.0,
+              "unit": "1"
+            }
+          }
+        ],
+        "analyzer_function": "complementary_polarization_components"
+      },
+      "q2": {
+        "rotation_response": "nonzero_linear",
+        "common_mode_at_bias": "first_order_cancelled"
+      },
+      "q3": {
+        "imbalance_sources": [
+          "unequal_path_loss",
+          "detector_responsivity_mismatch"
+        ],
+        "effect": "common_mode_leakage",
+        "balance_checks": [
+          "source_power_modulation_leakage"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_layout": {
+      "status": "pass"
+    },
+    "c_response": {
+      "status": "pass"
+    },
+    "c_balance": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "c_layout"
+  }
+}

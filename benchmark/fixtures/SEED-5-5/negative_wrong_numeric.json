@@ -30,5 +30,6 @@
     "c_q3": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "half_heterodyne_frequency"
 }

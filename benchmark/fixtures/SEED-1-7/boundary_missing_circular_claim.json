@@ -1,0 +1,38 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "boundary_missing_circular_claim",
+  "kind": "boundary",
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_circular"
+  },
+  "failure_family": "missing_required_claim",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 34,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 10,
+          "unit": "deg"
+        }
+      },
+      "q3": {}
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "pass"
+    },
+    "n_plate_effect": {
+      "status": "pass"
+    },
+    "c_circular": {
+      "status": "fail"
+    }
+  }
+}

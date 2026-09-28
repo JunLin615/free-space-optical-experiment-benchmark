@@ -1,0 +1,49 @@
+{
+  "case_id": "SEED-4-2",
+  "name": "boundary_inclusive_quarter_fringe",
+  "kind": "boundary",
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_fringe_quarter"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "opd_change_in_wavelengths": {
+          "value": 0.5,
+          "unit": "1"
+        },
+        "fringe_cycles": {
+          "value": 0.51,
+          "unit": "1"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_opd_half": {
+      "status": "pass"
+    },
+    "n_fringe_half": {
+      "status": "pass"
+    },
+    "n_opd_quarter": {
+      "status": "pass"
+    },
+    "n_fringe_quarter": {
+      "status": "pass"
+    }
+  }
+}

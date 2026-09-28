@@ -1,0 +1,38 @@
+{
+  "case_id": "SEED-4-8",
+  "name": "adversarial_topology_name_only",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "topology": "polarizing_beam_splitter",
+        "operating_point": "equal_power"
+      },
+      "q2": {
+        "rotation_response": "nonzero_linear",
+        "common_mode_at_bias": "first_order_cancelled"
+      },
+      "q3": {
+        "imbalance_sources": [
+          "unequal_path_loss",
+          "detector_responsivity_mismatch"
+        ],
+        "effect": "common_mode_leakage",
+        "balance_checks": [
+          "source_power_modulation_leakage"
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_layout": {
+      "status": "fail"
+    },
+    "c_response": {
+      "status": "unresolved"
+    },
+    "c_balance": {
+      "status": "pass"
+    }
+  }
+}

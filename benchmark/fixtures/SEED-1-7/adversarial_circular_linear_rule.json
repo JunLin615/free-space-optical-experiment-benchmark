@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "adversarial_circular_linear_rule",
+  "kind": "adversarial",
+  "failure_family": "circular_state_misclassified",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 34,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 10,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": true
+      }
+    },
+    "explanation": "An ideal half-wave plate doubles the angular displacement for linear input."
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "pass"
+    },
+    "n_plate_effect": {
+      "status": "pass"
+    },
+    "c_circular": {
+      "status": "fail"
+    }
+  }
+}

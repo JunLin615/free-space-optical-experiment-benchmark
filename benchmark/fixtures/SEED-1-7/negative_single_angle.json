@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "negative_single_angle",
+  "kind": "negative",
+  "failure_family": "missing_half_wave_factor_two",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 17,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 5,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "fail"
+    },
+    "n_plate_effect": {
+      "status": "fail"
+    },
+    "c_circular": {
+      "status": "pass"
+    }
+  }
+}

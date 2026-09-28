@@ -40,5 +40,6 @@
       "score": 0,
       "failure_class": "wrong_value"
     }
-  }
+  },
+  "failure_family": "wrong_quarter_geometry"
 }

@@ -37,5 +37,6 @@
       "status": "pass",
       "score": 1
     }
-  }
+  },
+  "failure_family": "malformed_quantity"
 }

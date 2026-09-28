@@ -1,10 +1,10 @@
 schema_version: 0.1.0
 case_id: SEED-2-2
 legacy_id: '2.2'
-case_revision: 0.2.1
-benchmark_release: null
-validation_status: executable
-split: public_dev
+case_revision: 0.2.2
+benchmark_release: 0.1.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Designing a fivefold afocal beam expander
 language: en
 taxonomy:
@@ -24,6 +24,7 @@ provenance:
     illustrative rather than uniquely required. Revision 0.2.0 defines typed fields for closed-physics autonomous
     scoring. Revision 0.2.1 restores q1 to the seed's focal-length-ratio request; propagation direction is
     already specified and assessed in q2.
+    Revision 0.2.2 pins the qualified typed-answer oracle and challenge evidence for 0.1.0-rc1.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: An approximately collimated beam has a 1/e² intensity diameter near 1.5 mm. A two-lens afocal
@@ -139,9 +140,10 @@ validation:
   implemented_checks:
   - independent_unit_aware_numeric_oracle
   - bounded_structured_physics_oracle
-  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial
-    fixtures. Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain
-    unresolved. Further challenge breadth is required before challenged or release_verified status.
+  notes: Release-verified typed-answer scorer for 0.1.0-rc1. Independent executable physics checks,
+    alternative-valid and boundary fixtures, and distinct negative and adversarial failure families
+    pass the automated gate. Optional prose is outside the scored contract.
+
   positive_fixtures:
   - benchmark/fixtures/SEED-2-2/positive_reference.json
   - benchmark/fixtures/SEED-2-2/alternative_valid_units_or_form.json

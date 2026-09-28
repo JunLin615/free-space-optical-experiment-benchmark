@@ -1,10 +1,10 @@
 schema_version: 0.1.0
 case_id: SEED-1-5
 legacy_id: '1.5'
-case_revision: 0.1.3
-benchmark_release: null
-validation_status: challenged
-split: public_dev
+case_revision: 0.1.5
+benchmark_release: 0.1.0-rc1
+validation_status: release_verified
+split: public_eval
 title: Folded optical delay line
 language: en
 taxonomy:
@@ -19,12 +19,15 @@ provenance:
   seed_relationship: Translation of case 1.5 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the original seed prompt and tasks. Revision 0.1.1 documents scoring tolerances and independent path construction without changing the scientific question. Revision 0.1.2 states magnitude conventions because stage motion direction is unspecified. Revision 0.1.3 clarifies that optional explanation is retained for audit without adding a scoring criterion.
+  derivation: English translation of the original seed prompt and tasks. Revision 0.1.1 documents scoring tolerances and independent path construction without changing the scientific question. Revision 0.1.2 states magnitude conventions because stage motion direction is unspecified. Revision 0.1.3 clarifies that optional explanation is retained for audit without adding a scoring criterion. Revision 0.1.4 states the two moving-gap traversals that make the seed's double-pass calculation unambiguous.
+    Revision 0.1.5 pins the qualified typed-answer oracle and challenge evidence for 0.1.0-rc1.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   coordinate_convention: Path and time changes are magnitudes because the stage-motion sense was not given; required mechanical travel is nonnegative.
   statement: An ultrashort pulse enters a straight folded delay line with two reflections. The translation
-    stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. Report changes in optical path and time delay as magnitudes.
+    stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. The beam traverses
+    the moving-stage gap once on the outbound leg and once on the return leg; no other moving path segment
+    changes. Report changes in optical path and time delay as magnitudes.
   questions:
   - id: q1
     request: Find the change in optical path length.
@@ -125,4 +128,14 @@ validation:
   evidence_files:
   - tests/test_independent_physics.py
   - tests/test_numerical_scoring.py
-  notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-1-5/reference.json
+  - benchmark/fixtures/SEED-1-5/rounded_correct.json
+  - benchmark/fixtures/SEED-1-5/equivalent_units.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-1-5/single_pass_factor.json
+  - benchmark/fixtures/SEED-1-5/negative_required_travel.json
+  - benchmark/fixtures/SEED-1-5/polished_but_false.json
+  notes: Release-verified typed-answer scorer for 0.1.0-rc1. Independent executable physics checks,
+    alternative-valid and boundary fixtures, and distinct negative and adversarial failure families
+    pass the automated gate. Optional prose is outside the scored contract.
