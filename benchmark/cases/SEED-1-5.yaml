@@ -122,4 +122,9 @@ validation:
   - positive_boundary_alternative_and_adversarial_fixtures
   independent_derivation: Translate the retroreflector by d; the forward and return segments each gain d, so optical path gains 2d. Dividing by c gives delay, and inverting for a target delay gives c times delay over two.
   adversarial_evidence: Single-pass factor-of-two, wrong dimension, malformed and absent claims, and all three tolerance boundaries are regression fixtures in benchmark/fixtures/SEED-1-5.
+  evidence_files:
+  - tests/test_independent_physics.py
+  - tests/test_numerical_scoring.py
+  semantic_criteria:
+  - explanation_consistency
   notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.

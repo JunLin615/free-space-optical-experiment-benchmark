@@ -161,6 +161,8 @@
         "negative_fixtures": {"type": "array", "items": {"type": "string"}},
         "independent_derivation": {"type": "string"},
         "adversarial_evidence": {"type": "string"},
+        "evidence_files": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "semantic_criteria": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
         "notes": {"type": "string"}
       }
     }

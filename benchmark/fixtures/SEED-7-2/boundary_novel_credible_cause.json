@@ -133,5 +133,9 @@
     "c_diagnosis": {
       "status": "pass"
     }
+  },
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_causes"
   }
 }

@@ -26,6 +26,10 @@ cases' `answer_contract.schema_id`: it permits case-specific prose and structure
 design claims while requiring physical numerical leaves to have `value` and
 `unit`. Each case's `required_result_paths` and physics checks narrow that broad
 shape; passing this shared answer schema alone never earns a score.
+Cases at `challenged` or above inventory executable derivation files in
+`validation.evidence_files`. A release manifest hashes that inventory and,
+when semantic scoring is used, the actual judge configuration, challenge set,
+and live calibration results.
 
 The canonical authoring record contains both public `task` and private `gold`.
 Normal tool and case-library access is set by the evaluation protocol, not the

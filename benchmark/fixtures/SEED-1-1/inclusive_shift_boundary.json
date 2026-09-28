@@ -39,5 +39,9 @@
       "status": "pass",
       "score": 1
     }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_shift"
   }
 }

@@ -38,19 +38,27 @@ def measure(responses: dict[str, list[str]]) -> dict[str, dict[str, float | int 
         pairs = [(expected, verdict) for expected, runs in data for verdict in runs]
         positives = [(expected, actual) for expected, actual in pairs if expected == "pass"]
         negatives = [(expected, actual) for expected, actual in pairs if expected == "fail"]
+        borderline = [(expected, actual) for expected, actual in pairs if expected == "unresolved"]
         false_pass = sum(actual == "pass" for _, actual in negatives)
         false_fail = sum(actual == "fail" for _, actual in positives)
-        unresolved = sum(actual == "unresolved" for _, actual in pairs)
+        decisive = positives + negatives
+        unresolved = sum(actual == "unresolved" for _, actual in decisive)
+        borderline_overreach = sum(actual != "unresolved" for _, actual in borderline)
         unstable = sum(len(set(runs)) > 1 for _, runs in data)
+        positive_items = sum(expected == "pass" for expected, _ in data)
+        negative_items = sum(expected == "fail" for expected, _ in data)
         result[criterion] = {
+            "positive_items": positive_items, "negative_items": negative_items,
             "positive_runs": len(positives), "negative_runs": len(negatives),
             "false_pass_rate": false_pass / len(negatives) if negatives else 1.0,
             "false_fail_rate": false_fail / len(positives) if positives else 1.0,
-            "unresolved_rate": unresolved / len(pairs),
+            "unresolved_rate": unresolved / len(decisive) if decisive else 1.0,
+            "borderline_overreach_rate": borderline_overreach / len(borderline) if borderline else 0.0,
             "unstable_item_rate": unstable / len(data),
-            "release_ready": len(positives) >= 50 and len(negatives) >= 50 and false_pass == 0
-            and false_fail / len(positives) <= 0.05 and unresolved / len(pairs) <= 0.1
-            and unstable == 0,
+            "release_ready": positive_items >= 10 and negative_items >= 10
+            and len(positives) >= 50 and len(negatives) >= 50 and false_pass == 0
+            and false_fail / len(positives) <= 0.05 and unresolved / len(decisive) <= 0.1
+            and borderline_overreach == 0 and unstable == 0,
         }
     return result
 

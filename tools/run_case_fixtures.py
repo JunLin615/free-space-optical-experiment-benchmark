@@ -12,10 +12,10 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.scoring_runtime import ROOT, evaluate_case, load_scored_case
+from tools.fixture_evidence import KINDS, fixture_kind_issues
 
 
 DEFAULT_FIXTURES = ROOT / "benchmark" / "fixtures"
-KINDS = {"positive", "boundary", "alternative_valid", "negative", "adversarial"}
 
 
 def run(path: Path = DEFAULT_FIXTURES) -> tuple[dict[str, int], list[str]]:
@@ -35,6 +35,7 @@ def run(path: Path = DEFAULT_FIXTURES) -> tuple[dict[str, int], list[str]]:
             cases.add(case_id)
             counts[kind] += 1
             result = evaluate_case(load_scored_case(case_id), fixture["answer"])
+            errors.extend(f"{file}: {issue}" for issue in fixture_kind_issues(fixture, result))
             expected = fixture["expected"]
             actual = {v["criterion_id"]: v for v in result["criterion_scores"]}
             checks = {v["check_id"]: v for v in result["validator_results"]}

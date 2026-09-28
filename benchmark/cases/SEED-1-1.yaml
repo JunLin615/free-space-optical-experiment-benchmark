@@ -124,4 +124,9 @@ validation:
   - positive_boundary_alternative_and_adversarial_fixtures
   independent_derivation: Vector reflection about a rotated normal gives a 2-theta ray direction; intersection with the transverse screen gives L tan(2 theta). This independently matches the authored gold within the stated tolerance.
   adversarial_evidence: Factor-of-two reflection, wrong dimension, malformed and absent claims, and tolerance-boundary challenges are regression fixtures in benchmark/fixtures/SEED-1-1.
+  evidence_files:
+  - tests/test_independent_physics.py
+  - tests/test_numerical_scoring.py
+  semantic_criteria:
+  - explanation_consistency
   notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.

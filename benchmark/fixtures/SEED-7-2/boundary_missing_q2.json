@@ -142,5 +142,9 @@
     "c_diagnosis": {
       "status": "pass"
     }
+  },
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_apertures"
   }
 }

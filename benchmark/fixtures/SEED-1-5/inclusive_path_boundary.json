@@ -34,5 +34,9 @@
     "n_travel": {
       "status": "pass"
     }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_path"
   }
 }

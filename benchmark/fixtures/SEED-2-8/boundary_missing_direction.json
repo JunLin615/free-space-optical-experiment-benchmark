@@ -4,14 +4,32 @@
   "name": "One reciprocal direction supplied but the other omitted",
   "answer": {
     "answers": {
-      "q1": {"achievable": false},
-      "q2": {"invariant": "etendue", "behavior": "nondecreasing"},
-      "q3": {"reduce_size": "divergence_increases"}
+      "q1": {
+        "achievable": false
+      },
+      "q2": {
+        "invariant": "etendue",
+        "behavior": "nondecreasing"
+      },
+      "q3": {
+        "reduce_size": "divergence_increases"
+      }
     }
   },
   "expected": {
-    "c_impossible": {"status": "pass"},
-    "c_invariant": {"status": "pass"},
-    "c_tradeoff": {"status": "fail", "failure_class": "missing_claim"}
+    "c_impossible": {
+      "status": "pass"
+    },
+    "c_invariant": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    }
+  },
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_tradeoff"
   }
 }
