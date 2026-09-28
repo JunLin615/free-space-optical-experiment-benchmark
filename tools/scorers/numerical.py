@@ -17,6 +17,7 @@ from tools.physics_checks import PhysicsCheckError, UNITS, check_numeric_claim, 
 
 
 SUPPORTED_CASES = frozenset({"SEED-1-1", "SEED-1-5"})
+MAGNITUDE_CHECKS = {"SEED-1-1": {"n_angle", "n_shift"}, "SEED-1-5": {"n_path", "n_delay"}}
 
 
 def _verdict(
@@ -99,6 +100,13 @@ def _evaluate_check(
                         {"failure_class": _candidate_failure(candidate, dimension),
                          "answer_path": check["answer_path"]})
 
+    # The seed omits rotation/stage-motion sense. For changes explicitly
+    # requested as magnitudes, opposite signed coordinates are equivalent.
+    magnitude_claim = check_id in MAGNITUDE_CHECKS.get(case["case_id"], set())
+    if magnitude_claim:
+        candidate_si = abs(candidate_si)
+        canonical_unit = "rad" if dimension == "angle" else "m" if dimension == "length" else "s"
+        candidate = {"value": candidate_si, "unit": canonical_unit}
     try:
         raw = check_numeric_claim(case, check, candidate)
     except (PhysicsCheckError, KeyError, TypeError, ValueError) as exc:
@@ -123,6 +131,7 @@ def _evaluate_check(
         "difference_si": raw["difference_si"],
         "tolerance_si": tolerance,
         "comparator": check["comparator"],
+        "magnitude_convention": magnitude_claim,
     }
     if not passed:
         details["failure_class"] = "physics_fail"

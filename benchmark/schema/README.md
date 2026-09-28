@@ -17,6 +17,10 @@ The record distinguishes distinct `tools_used` identifiers from the measured
 `tool_call_count`, retains extensible raw `provider_usage`, and stores measured
 `cost` with currency and a dated pricing reference. Unknown counts, usage, and
 cost are `null`, never inferred as zero.
+The development scorer also records a canonical case-content SHA-256,
+evaluator version, and evaluator source fingerprint; these supplement the
+case revision when reproducing a verdict. `oracle_unresolved` is separate from
+candidate failures and from an unavailable semantic judge.
 `pilot_answer_v0.1.schema.json` is the shared JSON block shape named by the pilot
 cases' `answer_contract.schema_id`: it permits case-specific prose and structured
 design claims while requiring physical numerical leaves to have `value` and

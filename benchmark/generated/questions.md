@@ -4,7 +4,7 @@ Question bank generated from canonical case files.
 
 ## SEED-1-1 — Mirror rotation and far-field displacement
 
-A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror rotates 0.50° about a vertical axis. The reflected beam then travels 2.0 m to a viewing screen. Neglect higher-order corrections associated with the initial angle of incidence.
+A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror rotates 0.50° about a vertical axis. A viewing screen is normal to the nominal reflected ray, 2.0 m from the mirror along that ray. Neglect higher-order corrections associated with the initial angle of incidence. Report the angle change and spot displacement as magnitudes.
 
 **Given quantities**
 
@@ -19,7 +19,7 @@ A collimated laser beam is incident nearly normally on an adjustable plane mirro
 
 ## SEED-1-5 — Folded optical delay line
 
-An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis.
+An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. Report changes in optical path and time delay as magnitudes.
 
 **Given quantities**
 

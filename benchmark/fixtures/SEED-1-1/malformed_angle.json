@@ -5,7 +5,7 @@
   "answer": {
     "answers": {
       "q1": {
-      "angle_change": "1 deg"
+        "angle_change": "1 deg"
       },
       "q2": {
         "spot_displacement": {
@@ -14,7 +14,14 @@
         }
       },
       "q3": {
-        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+        "geometry_change": {
+          "variable": "screen_distance",
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "value": 0.25,
+            "unit": "1"
+          }
+        }
       }
     }
   },
@@ -25,6 +32,10 @@
     },
     "n_shift": {
       "status": "pass"
+    },
+    "c_quarter": {
+      "status": "pass",
+      "score": 1
     }
   }
 }

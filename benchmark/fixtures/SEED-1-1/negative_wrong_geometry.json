@@ -1,6 +1,6 @@
 {
   "case_id": "SEED-1-1",
-  "name": "missing_spot",
+  "name": "negative_wrong_geometry",
   "kind": "negative",
   "answer": {
     "answers": {
@@ -10,12 +10,18 @@
           "unit": "deg"
         }
       },
+      "q2": {
+        "spot_displacement": {
+          "value": 34.910129856,
+          "unit": "mm"
+        }
+      },
       "q3": {
         "geometry_change": {
           "variable": "screen_distance",
           "held_fixed": "mirror_rotation",
           "scale": {
-            "value": 0.25,
+            "value": 0.5,
             "unit": "1"
           }
         }
@@ -27,12 +33,12 @@
       "status": "pass"
     },
     "n_shift": {
-      "status": "fail",
-      "failure_class": "missing_claim"
+      "status": "pass"
     },
     "c_quarter": {
-      "status": "pass",
-      "score": 1
+      "status": "fail",
+      "score": 0,
+      "failure_class": "wrong_value"
     }
   }
 }

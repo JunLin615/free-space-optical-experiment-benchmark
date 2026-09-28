@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-1-1
 legacy_id: '1.1'
-case_revision: 0.1.1
+case_revision: 0.1.3
 benchmark_release: null
-validation_status: specified
+validation_status: challenged
 split: public_dev
 title: Mirror rotation and far-field displacement
 language: en
@@ -21,11 +21,15 @@ provenance:
   source_references: []
   derivation: English translation of the original seed prompt and tasks. Revision 0.1.1 states the
     screen orientation and distance convention that were implicit in the seed and required by the numerical oracle.
+    Revision 0.1.2 discloses a typed geometry-change answer for executable scoring without changing the scientific task.
+    Revision 0.1.3 states that requested changes are magnitudes because the seed gives no rotation sense.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
+  coordinate_convention: The direction and displacement questions request magnitudes; no clockwise or transverse sign was specified, so equivalent signed reports are compared by absolute value.
   statement: A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror
     rotates 0.50° about a vertical axis. A viewing screen is normal to the nominal reflected ray, 2.0 m
     from the mirror along that ray. Neglect higher-order corrections associated with the initial angle of incidence.
+    Report the angle change and spot displacement as magnitudes.
   questions:
   - id: q1
     request: Find the change in direction of the reflected beam.
@@ -48,6 +52,11 @@ answer_contract:
   - answers.q1.angle_change
   - answers.q2.spot_displacement
   - answers.q3.geometry_change
+  quantity_shape:
+    answers.q1.angle_change: 'Quantity {value, unit}; angle units deg or rad, magnitude scored.'
+    answers.q2.spot_displacement: 'Quantity {value, unit}; length units m, mm, um, or nm, magnitude scored.'
+  method_shape:
+    q3: 'Object geometry_change with variable: screen_distance or mirror_rotation; held_fixed: the other variable; scale: dimensionless quantity giving new/old value. The exact distance-quarter and approximate rotation-quarter alternatives are accepted.'
   permit_additional_explanation: true
 gold:
   reference_model:
@@ -65,6 +74,7 @@ gold:
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
     validator_id: mirror_angle
+    tolerance_rationale: Inclusive 0.02 deg allows two-significant-figure reporting from the 0.50 deg input; it is a scoring tolerance, not an instrument uncertainty.
   - id: n_shift
     answer_path: answers.q2.spot_displacement
     reference:
@@ -76,6 +86,7 @@ gold:
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
     validator_id: mirror_spot_shift
+    tolerance_rationale: Inclusive 1 mm allows rounded far-field shift reporting from a 2.0 m distance and nearly normal incidence; it is not a measured screen uncertainty.
   universal_constraints:
   - id: c_quarter
     severity: scored
@@ -106,4 +117,11 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
+  implemented_checks:
+  - independent_vector_reflection_and_screen_intersection
+  - numerical_oracle_with_si_unit_conversion
+  - typed_quarter_geometry_oracle
+  - positive_boundary_alternative_and_adversarial_fixtures
+  independent_derivation: Vector reflection about a rotated normal gives a 2-theta ray direction; intersection with the transverse screen gives L tan(2 theta). This independently matches the authored gold within the stated tolerance.
+  adversarial_evidence: Factor-of-two reflection, wrong dimension, malformed and absent claims, and tolerance-boundary challenges are regression fixtures in benchmark/fixtures/SEED-1-1.
+  notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.

@@ -80,6 +80,11 @@ class ResultSchemaTests(unittest.TestCase):
         self.record["cost"]["pricing_snapshot_utc"] = "not-a-timestamp"
         self.assertTrue(list(self.validator.iter_errors(self.record)))
 
+    def test_oracle_unresolved_is_a_distinct_failure_mode(self) -> None:
+        self.record["failure_mode"] = "oracle_unresolved"
+        self.record["scores"] = {"raw_total": None, "capped_total": None}
+        self.assertEqual(list(self.validator.iter_errors(self.record)), [])
+
 
 if __name__ == "__main__":
     unittest.main()

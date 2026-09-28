@@ -1,0 +1,38 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "rounded_correct",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 2,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 6.7,
+          "unit": "ps"
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "value": 15,
+          "unit": "mm"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_path": {
+      "status": "pass"
+    },
+    "n_delay": {
+      "status": "pass"
+    },
+    "n_travel": {
+      "status": "pass"
+    }
+  }
+}

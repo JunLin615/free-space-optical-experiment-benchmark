@@ -28,7 +28,7 @@ def by_criterion(case: dict, answer: dict) -> dict[str, dict]:
 class NumericalScoringTests(unittest.TestCase):
     def test_machine_readable_fixture_matrix(self) -> None:
         fixture_paths = sorted(FIXTURES.glob("SEED-1-[15]/*.json"))
-        self.assertEqual(len(fixture_paths), 26)
+        self.assertEqual(len(fixture_paths), 33)
         kinds: set[str] = set()
         for path in fixture_paths:
             with self.subTest(fixture=path.name, case=path.parent.name):
@@ -37,8 +37,10 @@ class NumericalScoringTests(unittest.TestCase):
                 self.assertEqual(fixture["name"], path.stem)
                 kinds.add(fixture["kind"])
                 verdicts = by_criterion(case_for(fixture["case_id"]), fixture["answer"])
-                self.assertEqual(set(verdicts), set(fixture["expected"]))
-                for criterion_id, expected in fixture["expected"].items():
+                numerical_expected = {key: value for key, value in fixture["expected"].items()
+                                      if key in verdicts}
+                self.assertEqual(set(verdicts), set(numerical_expected))
+                for criterion_id, expected in numerical_expected.items():
                     verdict = verdicts[criterion_id]
                     self.assertEqual(verdict["criterion_id"], criterion_id)
                     self.assertEqual(verdict["check_id"], criterion_id)
