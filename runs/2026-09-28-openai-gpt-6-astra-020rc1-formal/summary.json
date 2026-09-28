@@ -1,0 +1,1565 @@
+{
+  "run_id": "2026-09-28-openai-gpt-6-astra-020rc1-formal",
+  "execution_class": "real",
+  "record_count": 36,
+  "declared_run_count": 36,
+  "verified": {
+    "overall": {
+      "runs": 36,
+      "completed": 36,
+      "candidate_outcomes": 36,
+      "infrastructure_failures": 0,
+      "scored": 36,
+      "mean_score": 1.0,
+      "median_score": 1.0,
+      "score_distribution": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "successes": 36,
+      "task_success_rate": 1.0,
+      "first_attempt_success_rate": 1.0,
+      "unresolved_rate": 0.0,
+      "invalid_contract_rate": 0.0,
+      "physics_failure_rate": 0.0,
+      "failure_classes": {
+        "none": 36
+      },
+      "score_failure_modes": {
+        "none": 36
+      },
+      "usage": {
+        "input": {
+          "known_records": 36,
+          "total": 482974
+        },
+        "output": {
+          "known_records": 36,
+          "total": 7075
+        },
+        "total": {
+          "known_records": 36,
+          "total": 490049
+        },
+        "cached_input": {
+          "known_records": 36,
+          "total": 110592
+        },
+        "reasoning": {
+          "known_records": 36,
+          "total": 739
+        }
+      },
+      "tokens_per_success": 13612.472222222223,
+      "tool_calls": 0,
+      "tool_failures": 0,
+      "tool_calls_per_success": 0,
+      "wall_time_seconds": 602.4680000003427,
+      "wall_seconds_per_success": 16.73522222223174,
+      "cost": {
+        "amount": null,
+        "currency": null,
+        "known_records": 0,
+        "per_success": null
+      }
+    },
+    "by_protocol": {
+      "closed_book": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 118292
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1913
+          },
+          "total": {
+            "known_records": 9,
+            "total": 120205
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 24576
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 202
+          }
+        },
+        "tokens_per_success": 13356.111111111111,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 153.0460000000312,
+        "wall_seconds_per_success": 17.005111111114577,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "case_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 122792
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1677
+          },
+          "total": {
+            "known_records": 9,
+            "total": 124469
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 24576
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 34
+          }
+        },
+        "tokens_per_success": 13829.888888888889,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 149.78300000022864,
+        "wall_seconds_per_success": 16.64255555558096,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "tool_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 118693
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1812
+          },
+          "total": {
+            "known_records": 9,
+            "total": 120505
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 12288
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 373
+          }
+        },
+        "tokens_per_success": 13389.444444444445,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 159.13900000002468,
+        "wall_seconds_per_success": 17.682111111113855,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "case_and_tool_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 123197
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1673
+          },
+          "total": {
+            "known_records": 9,
+            "total": 124870
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 49152
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 130
+          }
+        },
+        "tokens_per_success": 13874.444444444445,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 140.5000000000582,
+        "wall_seconds_per_success": 15.611111111117578,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      }
+    }
+  },
+  "development": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variants": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variant_robustness": [],
+  "paired": {
+    "per_case": [
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 542,
+        "output_token_delta": -50,
+        "total_token_delta": 492,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -3.4529999999213032,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 41,
+        "output_token_delta": 8,
+        "total_token_delta": 49,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.2969999999622814,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 587,
+        "output_token_delta": -5,
+        "total_token_delta": 582,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.9839999999385327,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 546,
+        "output_token_delta": -13,
+        "total_token_delta": 533,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.6869999999762513,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 45,
+        "total_token_delta": 90,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.4689999999827705,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 542,
+        "output_token_delta": -4,
+        "total_token_delta": 538,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.2339999999385327,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 49,
+        "output_token_delta": -18,
+        "total_token_delta": 31,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.9989999999525025,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 587,
+        "output_token_delta": -32,
+        "total_token_delta": 555,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.7959999999729916,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 538,
+        "output_token_delta": -14,
+        "total_token_delta": 524,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.2029999999795109,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": -28,
+        "total_token_delta": 17,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.562000000034459,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 562,
+        "output_token_delta": -1,
+        "total_token_delta": 561,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.10899999999674037,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": -16,
+        "total_token_delta": 31,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.26500000001396984,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 607,
+        "output_token_delta": -38,
+        "total_token_delta": 569,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.48399999999674037,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 560,
+        "output_token_delta": -22,
+        "total_token_delta": 538,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.21899999998277053,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": -37,
+        "total_token_delta": 8,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.5929999999934807,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 538,
+        "output_token_delta": -18,
+        "total_token_delta": 520,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.4839999999967404,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 41,
+        "output_token_delta": -22,
+        "total_token_delta": 19,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.6869999999762513,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 581,
+        "output_token_delta": -34,
+        "total_token_delta": 547,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.01600000000325963,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": -12,
+        "total_token_delta": 528,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.6709999999729916,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": -16,
+        "total_token_delta": 27,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.5,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 533,
+        "output_token_delta": -33,
+        "total_token_delta": 500,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.06300000008195639,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 8,
+        "total_token_delta": 53,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.235000000044238,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 578,
+        "output_token_delta": -46,
+        "total_token_delta": 532,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -6.421999999962281,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 533,
+        "output_token_delta": -54,
+        "total_token_delta": 479,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -8.65700000000652,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": -13,
+        "total_token_delta": 32,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -6.485000000044238,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 365,
+        "output_token_delta": -76,
+        "total_token_delta": 289,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.5470000000204891,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": -48,
+        "total_token_delta": -3,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.1730000000679865,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 408,
+        "output_token_delta": -26,
+        "total_token_delta": 382,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.8750000000582077,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 363,
+        "output_token_delta": 22,
+        "total_token_delta": 385,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.2980000000097789,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 50,
+        "total_token_delta": 93,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.3280000000377186,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 338,
+        "output_token_delta": -28,
+        "total_token_delta": 310,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.687999999965541,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 49,
+        "output_token_delta": -45,
+        "total_token_delta": 4,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 5.453999999968801,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 385,
+        "output_token_delta": -52,
+        "total_token_delta": 333,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.1089999999967404,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 336,
+        "output_token_delta": -7,
+        "total_token_delta": 329,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -6.562999999965541,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": -24,
+        "total_token_delta": 23,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -3.7969999999622814,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": -16,
+        "total_token_delta": 524,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.35999999998603016,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 41,
+        "output_token_delta": -24,
+        "total_token_delta": 17,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.530999999959022,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 587,
+        "output_token_delta": -15,
+        "total_token_delta": 572,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.0940000000409782,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 546,
+        "output_token_delta": 9,
+        "total_token_delta": 555,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -3.625,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": 1,
+        "total_token_delta": 48,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.4540000000270084,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": -10,
+        "total_token_delta": 530,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.45300000003771856,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 56,
+        "total_token_delta": 99,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.3900000000139698,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 585,
+        "output_token_delta": 8,
+        "total_token_delta": 593,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.2339999999967404,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 542,
+        "output_token_delta": -48,
+        "total_token_delta": 494,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.8439999999827705,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-astra",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 18,
+        "total_token_delta": 63,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.7809999999590218,
+        "tool_call_delta": 0
+      }
+    ],
+    "aggregate": {
+      "case_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      },
+      "tool_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      },
+      "case_and_tool_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      },
+      "case_and_tool_assisted_minus_tool_assisted": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      },
+      "case_and_tool_assisted_minus_case_assisted": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      }
+    }
+  },
+  "retrieval": {
+    "closed_book": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    },
+    "case_assisted": {
+      "records_with_retrieval": 9,
+      "items": 25,
+      "tokens": 1852,
+      "latency_seconds": 0.03943919995799661
+    },
+    "tool_assisted": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    },
+    "case_and_tool_assisted": {
+      "records_with_retrieval": 9,
+      "items": 25,
+      "tokens": 1852,
+      "latency_seconds": 0.04086000012466684
+    }
+  },
+  "interpretation": "Observed results for this model and run only. Public variants are development probes, not hidden generalization evidence. Unknown cost or usage remains null."
+}

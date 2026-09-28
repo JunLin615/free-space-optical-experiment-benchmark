@@ -1,0 +1,232 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-astra",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "unit": "um",
+          "value": 2500
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "unit": "ps",
+          "value": 8.3391
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "unit": "mm",
+          "value": 22.4844
+        }
+      }
+    },
+    "explanation": "The changing gap is traversed twice, so path change = 2 × stage displacement, delay change = path change / c, and required travel = c × target delay / 2. Values assume propagation at c = 299792458 m/s; no medium refractive index was supplied."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "548a145fa86f3db624771e852ecb133b9eaf8b3befdd4ed18785e4e13081e97f",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\n  \"answers\": {\n    \"q1\": {\n      \"path_change\": {\"value\": 2500, \"unit\": \"um\"}\n    },\n    \"q2\": {\n      \"delay_change\": {\"value\": 8.3391, \"unit\": \"ps\"}\n    },\n    \"q3\": {\n      \"stage_travel\": {\"value\": 22.4844, \"unit\": \"mm\"}\n    }\n  },\n  \"explanation\": \"The changing gap is traversed twice, so path change = 2 × stage displacement, delay change = path change / c, and required travel = c × target delay / 2. Values assume propagation at c = 299792458 m/s; no medium refractive index was supplied.\"\n}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-astra-rc1-variant-probe",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "16f77f5eadd1befb71b2ca3abb8b8a52df18986df280c74ff30cbabfecfb19a1",
+    "case_id": "SEED-1-5",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.1.5",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_path",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-05.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_delay",
+        "evidence": "Absolute SI error 2.37995380269e-18 <= inclusive tolerance 1.2e-13.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "n_travel",
+        "evidence": "Absolute SI error 3.43499999972e-08 <= inclusive tolerance 0.0004.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 0,
+            "input": 13151,
+            "output": 202,
+            "reasoning": 39
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\n  \"answers\": {\n    \"q1\": {\n      \"path_change\": {\"value\": 2500, \"unit\": \"um\"}\n    },\n    \"q2\": {\n      \"delay_change\": {\"value\": 8.3391, \"unit\": \"ps\"}\n    },\n    \"q3\": {\n      \"stage_travel\": {\"value\": 22.4844, \"unit\": \"mm\"}\n    }\n  },\n  \"explanation\": \"The changing gap is traversed twice, so path change = 2 × stage displacement, delay change = path change / c, and required travel = c × target delay / 2. Values assume propagation at c = 299792458 m/s; no medium refractive index was supplied.\"\n}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-astra-rc1-variant-probe",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "path_change": {
+            "unit": "um",
+            "value": 2500
+          }
+        },
+        "q2": {
+          "delay_change": {
+            "unit": "ps",
+            "value": 8.3391
+          }
+        },
+        "q3": {
+          "stage_travel": {
+            "unit": "mm",
+            "value": 22.4844
+          }
+        }
+      },
+      "explanation": "The changing gap is traversed twice, so path change = 2 × stage displacement, delay change = path change / c, and required travel = c × target delay / 2. Values assume propagation at c = 299792458 m/s; no medium refractive index was supplied."
+    },
+    "system": {
+      "model_id": "gpt-6-astra",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 0,
+      "input": 13151,
+      "output": 202,
+      "total": 13353
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_path",
+        "details": {
+          "answer_path": "answers.q1.path_change",
+          "candidate_si": 0.0025,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "length",
+          "magnitude_convention": true,
+          "tolerance_si": 3e-05,
+          "validator_id": "folded_delay_path"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-05.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_delay",
+        "details": {
+          "answer_path": "answers.q2.delay_change",
+          "candidate_si": 8.3391e-12,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": -2.3799538026904453e-18,
+          "dimension": "time",
+          "magnitude_convention": true,
+          "tolerance_si": 1.2e-13,
+          "validator_id": "folded_delay_time"
+        },
+        "evidence": "Absolute SI error 2.37995380269e-18 <= inclusive tolerance 1.2e-13.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_travel",
+        "details": {
+          "answer_path": "answers.q3.stage_travel",
+          "candidate_si": 0.0224844,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": -3.434999999718524e-08,
+          "dimension": "length",
+          "magnitude_convention": false,
+          "tolerance_si": 0.0004,
+          "validator_id": "folded_delay_stage_for_target"
+        },
+        "evidence": "Absolute SI error 3.43499999972e-08 <= inclusive tolerance 0.0004.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 16.96899999998277
+  },
+  "selection": {
+    "case_content_sha256": "16f77f5eadd1befb71b2ca3abb8b8a52df18986df280c74ff30cbabfecfb19a1",
+    "case_id": "SEED-1-5",
+    "case_revision": "0.1.5",
+    "track": "public_variant",
+    "variant_id": "VAR-SEED-1-5-U-72b8d7fedf9d",
+    "variant_lineage": {
+      "generator_version": "0.1.0",
+      "instance_content_sha256": "16f77f5eadd1befb71b2ca3abb8b8a52df18986df280c74ff30cbabfecfb19a1",
+      "parent_case_id": "SEED-1-5",
+      "parent_case_revision": "0.1.5",
+      "seed_classification": "public_dev"
+    },
+    "variant_type": "structural_unit"
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 0,
+    "input": 13151,
+    "output": 202,
+    "reasoning": 39,
+    "total": 13353
+  },
+  "wall_time_seconds": 17.04700000002049
+}

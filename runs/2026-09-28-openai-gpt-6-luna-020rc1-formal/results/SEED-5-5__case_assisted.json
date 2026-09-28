@@ -1,0 +1,249 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "unit": "MHz",
+          "value": 80
+        }
+      },
+      "q2": {
+        "detector_field_response_order": {
+          "unit": "1",
+          "value": 2
+        },
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    },
+    "explanation": "The photodetector responds to the squared total electric field. With matching polarization and spatial overlap, the interference cross term oscillates at the difference frequency, 80 MHz. For orthogonal polarizations, the fields have zero polarization overlap, so the ideal cross term—and thus the beat component—vanishes without a polarization projector."
+  },
+  "protocol": {
+    "id": "case_assisted",
+    "scientific_payload_sha256": "8e022403e02a83460ec13ed4e548dfaeb743218dc281964326ae4cdb588aa01c",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"beat_frequency\":{\"value\":80,\"unit\":\"MHz\"}},\"q2\":{\"detector_field_response_order\":{\"value\":2,\"unit\":\"1\"},\"frequency_component_source\":\"interference_cross_term\"},\"q3\":{\"ideal_cross_term\":false}},\"explanation\":\"The photodetector responds to the squared total electric field. With matching polarization and spatial overlap, the interference cross term oscillates at the difference frequency, 80 MHz. For orthogonal polarizations, the fields have zero polarization overlap, so the ideal cross term—and thus the beat component—vanishes without a polarization projector.\"}",
+  "retrieval": {
+    "item_count": 3,
+    "items": [
+      {
+        "content_sha256": "35719a025fc1ec9a9da538d1bbf0f81aaa57d2e22f66bf18a2bc02f513d1a3e3",
+        "estimated_tokens": 76,
+        "item_id": "EX-DETECT-01",
+        "score": 5.97463856,
+        "text": "# Detector linearity calibration\n\nTo test whether a photodiode response is linear, attenuate a stable free-space\nbeam with calibrated neutral-density filters and record dark-subtracted output.\nFor an illustrative filter transmitting 12% of incident power, a linear response\nshould fall to about 12% of its previous dark-subtracted reading. If the ratio\nchanges with incident power, inspect amplifier saturation, offset, and detector\nbandwidth before interpreting the optical signal.\n\nRecord the filter transmission and dark offsets in the measurement log.\n"
+      },
+      {
+        "content_sha256": "7163af8d9aacdca5116e780a8b2cf9d272826ec5a7777ce450293ee904abbe6a",
+        "estimated_tokens": 69,
+        "item_id": "EX-PINHOLE-01",
+        "score": 2.21297293,
+        "text": "# Spatial-filter alignment failure\n\nWhen a focused free-space beam misses a spatial-filter pinhole, first reduce\npower, place a viewing card at the focus, and adjust transverse pinhole position\nwith small steps. Distinguish clipping from a focus displaced along the optical\naxis: transverse motion changes the bright spot overlap, whereas axial motion\nchanges the spot size at the aperture. Do not infer that every low-throughput\ncondition calls for a smaller aperture.\n"
+      },
+      {
+        "content_sha256": "5d92ff16059730f7c20a226cad6fe481b2fd1b7995daf942befb631ce0d74738",
+        "estimated_tokens": 83,
+        "item_id": "EX-ALIGN-01",
+        "score": 2.01819837,
+        "text": "# Two-iris alignment diagnosis\n\nAn alignment laser passes through two irises on an optical table. The first iris is\nclose to the steering mirror; the second is farther downstream. If the beam is\ncentered on the first iris but displaced at the second, change the steering angle\nand then recenter the first iris with a translation adjustment. Repeat because a\nsingle downstream observation cannot separate beam position from beam angle.\n\nThis procedure separates position error from angle error by using observations\nat two distances.\n"
+      }
+    ],
+    "latency_seconds": 0.004417799995280802,
+    "library_index_sha256": "99d374539ac143d3dd1fc44a532a34f5f0d6e0b20af2291c7692179cdb497003",
+    "library_snapshot_id": "optics-examples-v1",
+    "query": "Signal light has optical frequency f0. A local-oscillator beam has frequency f0 + 80 MHz. The beams have matching polarization and good spatial overlap on a photodetector fast enough to resolve their beat. What is the key new electrical frequency component? Explain the physical origin of this component. Predict what happens if the beams instead have orthogonal polarizations and there is no polarization projector before the detector.",
+    "query_sha256": "2a46f37baec8c0a3cc1682e2595c268597e872e3887d444f7ddb7d55c7566af1",
+    "retrieval_version": "lexical_v1.0.0",
+    "retrieved_ids": [
+      "EX-DETECT-01",
+      "EX-PINHOLE-01",
+      "EX-ALIGN-01"
+    ],
+    "scores": [
+      5.97463856,
+      2.21297293,
+      2.01819837
+    ],
+    "total_retrieved_tokens": 228
+  },
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-luna-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "0c7926946fa74bf179c69606c72e0a20290cbc689173ef0c6e8b2b68a71359e7",
+    "case_id": "SEED-5-5",
+    "case_library_access": {
+      "available": true,
+      "retrieved_document_ids": [
+        "EX-DETECT-01",
+        "EX-PINHOLE-01",
+        "EX-ALIGN-01"
+      ],
+      "snapshot_id": "optics-examples-v1"
+    },
+    "case_revision": "0.3.0",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_result",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 1000000.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333333
+      },
+      {
+        "criterion_id": "c_q2",
+        "evidence": "Second-order intensity detection of the interference cross term yields the difference-frequency photocurrent.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333333
+      },
+      {
+        "criterion_id": "c_q3",
+        "evidence": "Ideal orthogonality removes the beat in the stated no-projector condition.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333334
+      }
+    ],
+    "evaluator_fingerprint": "e9a66e11f05c50548fd9e335fa914224df631d01e427cae2f5dede057460b279",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "case_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 13029,
+            "output": 276,
+            "reasoning": 144
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"beat_frequency\":{\"value\":80,\"unit\":\"MHz\"}},\"q2\":{\"detector_field_response_order\":{\"value\":2,\"unit\":\"1\"},\"frequency_component_source\":\"interference_cross_term\"},\"q3\":{\"ideal_cross_term\":false}},\"explanation\":\"The photodetector responds to the squared total electric field. With matching polarization and spatial overlap, the interference cross term oscillates at the difference frequency, 80 MHz. For orthogonal polarizations, the fields have zero polarization overlap, so the ideal cross term—and thus the beat component—vanishes without a polarization projector.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-luna-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "beat_frequency": {
+            "unit": "MHz",
+            "value": 80
+          }
+        },
+        "q2": {
+          "detector_field_response_order": {
+            "unit": "1",
+            "value": 2
+          },
+          "frequency_component_source": "interference_cross_term"
+        },
+        "q3": {
+          "ideal_cross_term": false
+        }
+      },
+      "explanation": "The photodetector responds to the squared total electric field. With matching polarization and spatial overlap, the interference cross term oscillates at the difference frequency, 80 MHz. For orthogonal polarizations, the fields have zero polarization overlap, so the ideal cross term—and thus the beat component—vanishes without a polarization projector."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 13029,
+      "output": 276,
+      "total": 13305
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_result",
+        "details": {
+          "answer_path": "answers.q1.beat_frequency",
+          "candidate_si": 80000000.0,
+          "comparator": "absolute_inclusive",
+          "difference_si": 0.0,
+          "dimension": "frequency",
+          "magnitude_convention": false,
+          "tolerance_si": 1000000.0,
+          "validator_id": "heterodyne_beat"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 1000000.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_q2",
+        "details": {},
+        "evidence": "Second-order intensity detection of the interference cross term yields the difference-frequency photocurrent.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_q3",
+        "details": {},
+        "evidence": "Ideal orthogonality removes the beat in the stated no-projector condition.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      }
+    ],
+    "wall_time_seconds": 20.78200000000652
+  },
+  "selection": {
+    "case_content_sha256": "0c7926946fa74bf179c69606c72e0a20290cbc689173ef0c6e8b2b68a71359e7",
+    "case_id": "SEED-5-5",
+    "case_revision": "0.3.0",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 13029,
+    "output": 276,
+    "reasoning": 144,
+    "total": 13305
+  },
+  "wall_time_seconds": 20.844000000040978
+}

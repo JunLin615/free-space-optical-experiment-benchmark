@@ -1,0 +1,1569 @@
+{
+  "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+  "execution_class": "real",
+  "record_count": 36,
+  "declared_run_count": 36,
+  "verified": {
+    "overall": {
+      "runs": 36,
+      "completed": 36,
+      "candidate_outcomes": 36,
+      "infrastructure_failures": 0,
+      "scored": 36,
+      "mean_score": 0.9888888888888889,
+      "median_score": 1.0,
+      "score_distribution": [
+        0.6,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "successes": 35,
+      "task_success_rate": 0.9722222222222222,
+      "first_attempt_success_rate": 0.9722222222222222,
+      "unresolved_rate": 0.0,
+      "invalid_contract_rate": 0.027777777777777776,
+      "physics_failure_rate": 0.0,
+      "failure_classes": {
+        "invalid_contract": 1,
+        "none": 35
+      },
+      "score_failure_modes": {
+        "invalid_contract": 1,
+        "none": 35
+      },
+      "usage": {
+        "input": {
+          "known_records": 36,
+          "total": 466797
+        },
+        "output": {
+          "known_records": 36,
+          "total": 7138
+        },
+        "total": {
+          "known_records": 36,
+          "total": 473935
+        },
+        "cached_input": {
+          "known_records": 36,
+          "total": 280320
+        },
+        "reasoning": {
+          "known_records": 36,
+          "total": 2433
+        }
+      },
+      "tokens_per_success": 13177.114285714286,
+      "tool_calls": 0,
+      "tool_failures": 0,
+      "tool_calls_per_success": 0,
+      "wall_time_seconds": 528.894000000204,
+      "wall_seconds_per_success": 14.725085714291449,
+      "cost": {
+        "amount": null,
+        "currency": null,
+        "known_records": 0,
+        "per_success": null
+      }
+    },
+    "by_protocol": {
+      "closed_book": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 0.9555555555555556,
+        "median_score": 1.0,
+        "score_distribution": [
+          0.6,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 8,
+        "task_success_rate": 0.8888888888888888,
+        "first_attempt_success_rate": 0.8888888888888888,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.1111111111111111,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "invalid_contract": 1,
+          "none": 8
+        },
+        "score_failure_modes": {
+          "invalid_contract": 1,
+          "none": 8
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 114247
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1664
+          },
+          "total": {
+            "known_records": 9,
+            "total": 115911
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 58880
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 485
+          }
+        },
+        "tokens_per_success": 12896.875,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 130.34600000013597,
+        "wall_seconds_per_success": 14.60375000001659,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "case_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 118743
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1672
+          },
+          "total": {
+            "known_records": 9,
+            "total": 120415
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 58880
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 519
+          }
+        },
+        "tokens_per_success": 13379.444444444445,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 125.1260000000475,
+        "wall_seconds_per_success": 13.902888888894166,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "tool_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 114665
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1895
+          },
+          "total": {
+            "known_records": 9,
+            "total": 116560
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 80128
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 714
+          }
+        },
+        "tokens_per_success": 12951.111111111111,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 133.2050000000163,
+        "wall_seconds_per_success": 14.800555555557366,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      },
+      "case_and_tool_assisted": {
+        "runs": 9,
+        "completed": 9,
+        "candidate_outcomes": 9,
+        "infrastructure_failures": 0,
+        "scored": 9,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": 9,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 9
+        },
+        "score_failure_modes": {
+          "none": 9
+        },
+        "usage": {
+          "input": {
+            "known_records": 9,
+            "total": 119142
+          },
+          "output": {
+            "known_records": 9,
+            "total": 1907
+          },
+          "total": {
+            "known_records": 9,
+            "total": 121049
+          },
+          "cached_input": {
+            "known_records": 9,
+            "total": 82432
+          },
+          "reasoning": {
+            "known_records": 9,
+            "total": 715
+          }
+        },
+        "tokens_per_success": 13449.888888888889,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 140.2170000000042,
+        "wall_seconds_per_success": 15.579666666667132,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      }
+    }
+  },
+  "development": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variants": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variant_robustness": [],
+  "paired": {
+    "per_case": [
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": -8,
+        "total_token_delta": 532,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.1719999999622814,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": -19,
+        "total_token_delta": 24,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.4530000000377186,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 583,
+        "output_token_delta": 2,
+        "total_token_delta": 585,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 6.561999999976251,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": 21,
+        "total_token_delta": 561,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 8.01500000001397,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 10,
+        "total_token_delta": 53,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 4.39000000001397,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 544,
+        "output_token_delta": 13,
+        "total_token_delta": 557,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.4380000000237487,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 15,
+        "total_token_delta": 58,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.779999999969732,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 583,
+        "output_token_delta": 92,
+        "total_token_delta": 675,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.3889999999664724,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 540,
+        "output_token_delta": 77,
+        "total_token_delta": 617,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.6089999999967404,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 39,
+        "output_token_delta": 79,
+        "total_token_delta": 118,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.8269999999902211,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 556,
+        "output_token_delta": 13,
+        "total_token_delta": 569,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.1869999999762513,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 25,
+        "total_token_delta": 70,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.5929999999934807,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 601,
+        "output_token_delta": 35,
+        "total_token_delta": 636,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.4519999999902211,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 556,
+        "output_token_delta": 10,
+        "total_token_delta": 566,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.1410000000032596,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-1-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 22,
+        "total_token_delta": 67,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.7349999999860302,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 536,
+        "output_token_delta": -76,
+        "total_token_delta": 460,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.3119999999762513,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": 22,
+        "total_token_delta": 67,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 3.0790000000270084,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 581,
+        "output_token_delta": -78,
+        "total_token_delta": 503,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.5630000000237487,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 536,
+        "output_token_delta": -100,
+        "total_token_delta": 436,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -5.642000000050757,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 45,
+        "output_token_delta": -2,
+        "total_token_delta": 43,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.25100000004749745,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 533,
+        "output_token_delta": -33,
+        "total_token_delta": 500,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.5160000000032596,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": -10,
+        "total_token_delta": 37,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.07900000002700835,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 580,
+        "output_token_delta": -15,
+        "total_token_delta": 565,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.517000000050757,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 533,
+        "output_token_delta": -5,
+        "total_token_delta": 528,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.4380000000237487,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-2-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": 18,
+        "total_token_delta": 65,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.0010000000474975,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 0.6,
+        "score_delta": 0.4,
+        "input_token_delta": 359,
+        "output_token_delta": 62,
+        "total_token_delta": 421,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.1869999999762513,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 0.6,
+        "score_delta": 0.4,
+        "input_token_delta": 45,
+        "output_token_delta": 152,
+        "total_token_delta": 197,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 7.296999999962281,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 0.6,
+        "score_delta": 0.4,
+        "input_token_delta": 406,
+        "output_token_delta": 99,
+        "total_token_delta": 505,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 8.64000000001397,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 361,
+        "output_token_delta": -53,
+        "total_token_delta": 308,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 1.3430000000516884,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-1",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": 37,
+        "total_token_delta": 84,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 7.453000000037719,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 340,
+        "output_token_delta": -3,
+        "total_token_delta": 337,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -3.1880000000237487,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": -15,
+        "total_token_delta": 28,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -3.1880000000819564,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 383,
+        "output_token_delta": 11,
+        "total_token_delta": 394,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -2.219000000040978,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 340,
+        "output_token_delta": 26,
+        "total_token_delta": 366,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.9690000000409782,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-3-7",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 14,
+        "total_token_delta": 57,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.9689999999827705,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 546,
+        "output_token_delta": 36,
+        "total_token_delta": 582,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.030999999959022,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 51,
+        "output_token_delta": 41,
+        "total_token_delta": 92,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -0.43799999996554106,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 589,
+        "output_token_delta": 41,
+        "total_token_delta": 630,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.5160000000032596,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 538,
+        "output_token_delta": 0,
+        "total_token_delta": 538,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 2.9539999999688007,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-4-2",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 43,
+        "output_token_delta": 5,
+        "total_token_delta": 48,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.4850000000442378,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 542,
+        "output_token_delta": 4,
+        "total_token_delta": 546,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.9689999999827705,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 56,
+        "output_token_delta": 20,
+        "total_token_delta": 76,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.5459999999729916,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "closed_book",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 589,
+        "output_token_delta": 56,
+        "total_token_delta": 645,
+        "cost_delta": null,
+        "wall_time_delta_seconds": -1.4849999999860302,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "tool_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 533,
+        "output_token_delta": 36,
+        "total_token_delta": 569,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.060999999986961484,
+        "tool_call_delta": 0
+      },
+      {
+        "case_id": "SEED-5-5",
+        "agent_identity": {
+          "adapter_type": "codex_cli",
+          "framework": "codex-cli-0.158.0",
+          "model_id": "gpt-6-sol",
+          "model_version": null,
+          "provider": "openai",
+          "scaffold_id": "neutral_optics_v1",
+          "system_prompt_version": "neutral_optics_v1"
+        },
+        "assisted_protocol": "case_and_tool_assisted",
+        "baseline_protocol": "case_assisted",
+        "assisted_score": 1.0,
+        "baseline_score": 1.0,
+        "score_delta": 0.0,
+        "input_token_delta": 47,
+        "output_token_delta": 52,
+        "total_token_delta": 99,
+        "cost_delta": null,
+        "wall_time_delta_seconds": 0.48399999999674037,
+        "tool_call_delta": 0
+      }
+    ],
+    "aggregate": {
+      "case_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.044444444444444446
+      },
+      "tool_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.044444444444444446
+      },
+      "case_and_tool_assisted_minus_closed_book": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.044444444444444446
+      },
+      "case_and_tool_assisted_minus_tool_assisted": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      },
+      "case_and_tool_assisted_minus_case_assisted": {
+        "paired_cases": 9,
+        "scored_pairs": 9,
+        "mean_score_delta": 0.0
+      }
+    }
+  },
+  "retrieval": {
+    "closed_book": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    },
+    "case_assisted": {
+      "records_with_retrieval": 9,
+      "items": 25,
+      "tokens": 1852,
+      "latency_seconds": 0.041915199952200055
+    },
+    "tool_assisted": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    },
+    "case_and_tool_assisted": {
+      "records_with_retrieval": 9,
+      "items": 25,
+      "tokens": 1852,
+      "latency_seconds": 0.04317129997070879
+    }
+  },
+  "interpretation": "Observed results for this model and run only. Public variants are development probes, not hidden generalization evidence. Unknown cost or usage remains null."
+}

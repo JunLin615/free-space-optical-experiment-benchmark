@@ -1,0 +1,237 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-astra",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "unit": "um",
+          "value": 0.671
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "unit": "um",
+          "value": 1
+        }
+      },
+      "q3": {
+        "depth_of_focus_trend": "decreases"
+      }
+    },
+    "explanation": "The Rayleigh estimate is d = 0.61λ/NA = 0.61 × 0.550/0.50 = 0.671 micrometers, closest to 1 micrometer. Increasing numerical aperture typically decreases depth of focus, which scales approximately as 1/NA² with other conditions fixed."
+  },
+  "protocol": {
+    "id": "case_assisted",
+    "scientific_payload_sha256": "25c523576af46a9dae0d9670209c27944aca9c18e9464d75fdb4775fbef102ea",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\n  \"answers\": {\n    \"q1\": {\n      \"resolution_um\": {\"value\": 0.671, \"unit\": \"um\"}\n    },\n    \"q2\": {\n      \"closest_scale\": {\"value\": 1, \"unit\": \"um\"}\n    },\n    \"q3\": {\n      \"depth_of_focus_trend\": \"decreases\"\n    }\n  },\n  \"explanation\": \"The Rayleigh estimate is d = 0.61λ/NA = 0.61 × 0.550/0.50 = 0.671 micrometers, closest to 1 micrometer. Increasing numerical aperture typically decreases depth of focus, which scales approximately as 1/NA² with other conditions fixed.\"\n}",
+  "retrieval": {
+    "item_count": 2,
+    "items": [
+      {
+        "content_sha256": "7163af8d9aacdca5116e780a8b2cf9d272826ec5a7777ce450293ee904abbe6a",
+        "estimated_tokens": 69,
+        "item_id": "EX-PINHOLE-01",
+        "score": 4.69440078,
+        "text": "# Spatial-filter alignment failure\n\nWhen a focused free-space beam misses a spatial-filter pinhole, first reduce\npower, place a viewing card at the focus, and adjust transverse pinhole position\nwith small steps. Distinguish clipping from a focus displaced along the optical\naxis: transverse motion changes the bright spot overlap, whereas axial motion\nchanges the spot size at the aperture. Do not infer that every low-throughput\ncondition calls for a smaller aperture.\n"
+      },
+      {
+        "content_sha256": "a048a1e59600c3017a30cb35f95f110fca6074a86cddb29662c5327ed9305c91",
+        "estimated_tokens": 60,
+        "item_id": "EX-GRATING-01",
+        "score": 4.15888308,
+        "text": "# Check a grating order before moving a camera\n\nFor a transmission grating illuminated at normal incidence, use\n`m * wavelength = pitch * sin(theta)` to check whether a proposed diffraction\norder is physically possible. With a 1.5 micrometer pitch and 532 nm light,\nthe third order would require `sin(theta) = 1.064`, so it cannot propagate.\nThis check prevents a futile camera search.\n"
+      }
+    ],
+    "latency_seconds": 0.004131799971219152,
+    "library_index_sha256": "99d374539ac143d3dd1fc44a532a34f5f0d6e0b20af2291c7692179cdb497003",
+    "library_snapshot_id": "optics-examples-v1",
+    "query": "A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect aberrations and use the Rayleigh lateral-resolution estimate. Estimate the lateral diffraction-limited separation in micrometers. Is the scale closer to 0.1, 1 or 10 micrometers? What is the typical effect of increasing numerical aperture on depth of focus?",
+    "query_sha256": "ec794deba2fe316ace44a04541e2e3b5406b6ea03b6956addae9f3bd1bf3d58f",
+    "retrieval_version": "lexical_v1.0.0",
+    "retrieved_ids": [
+      "EX-PINHOLE-01",
+      "EX-GRATING-01"
+    ],
+    "scores": [
+      4.69440078,
+      4.15888308
+    ],
+    "total_retrieved_tokens": 129
+  },
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-astra-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "2fa4c46a094443bd2608e7e6d3edb6b2fbcee48fff2f33cddbd9d64ef283f5de",
+    "case_id": "SEED-3-7",
+    "case_library_access": {
+      "available": true,
+      "retrieved_document_ids": [
+        "EX-PINHOLE-01",
+        "EX-GRATING-01"
+      ],
+      "snapshot_id": "optics-examples-v1"
+    },
+    "case_revision": "0.3.0",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_rayleigh",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-08.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.5
+      },
+      {
+        "criterion_id": "c_scale",
+        "evidence": "Closest stated scale is 1e-06 m.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.2
+      },
+      {
+        "criterion_id": "c_depth",
+        "evidence": "At fixed wavelength, increasing NA narrows diffraction-limited depth of focus.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      }
+    ],
+    "evaluator_fingerprint": "e9a66e11f05c50548fd9e335fa914224df631d01e427cae2f5dede057460b279",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "case_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 0,
+            "input": 13432,
+            "output": 158,
+            "reasoning": 0
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\n  \"answers\": {\n    \"q1\": {\n      \"resolution_um\": {\"value\": 0.671, \"unit\": \"um\"}\n    },\n    \"q2\": {\n      \"closest_scale\": {\"value\": 1, \"unit\": \"um\"}\n    },\n    \"q3\": {\n      \"depth_of_focus_trend\": \"decreases\"\n    }\n  },\n  \"explanation\": \"The Rayleigh estimate is d = 0.61λ/NA = 0.61 × 0.550/0.50 = 0.671 micrometers, closest to 1 micrometer. Increasing numerical aperture typically decreases depth of focus, which scales approximately as 1/NA² with other conditions fixed.\"\n}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-astra-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "resolution_um": {
+            "unit": "um",
+            "value": 0.671
+          }
+        },
+        "q2": {
+          "closest_scale": {
+            "unit": "um",
+            "value": 1
+          }
+        },
+        "q3": {
+          "depth_of_focus_trend": "decreases"
+        }
+      },
+      "explanation": "The Rayleigh estimate is d = 0.61λ/NA = 0.61 × 0.550/0.50 = 0.671 micrometers, closest to 1 micrometer. Increasing numerical aperture typically decreases depth of focus, which scales approximately as 1/NA² with other conditions fixed."
+    },
+    "system": {
+      "model_id": "gpt-6-astra",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 0,
+      "input": 13432,
+      "output": 158,
+      "total": 13590
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_rayleigh",
+        "details": {
+          "answer_path": "answers.q1.resolution_um",
+          "candidate_si": 6.71e-07,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "length",
+          "magnitude_convention": false,
+          "tolerance_si": 3e-08,
+          "validator_id": "rayleigh_lateral_resolution"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-08.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_scale",
+        "details": {},
+        "evidence": "Closest stated scale is 1e-06 m.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_depth",
+        "details": {},
+        "evidence": "At fixed wavelength, increasing NA narrows diffraction-limited depth of focus.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      }
+    ],
+    "wall_time_seconds": 17.57900000002701
+  },
+  "selection": {
+    "case_content_sha256": "2fa4c46a094443bd2608e7e6d3edb6b2fbcee48fff2f33cddbd9d64ef283f5de",
+    "case_id": "SEED-3-7",
+    "case_revision": "0.3.0",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 0,
+    "input": 13432,
+    "output": 158,
+    "reasoning": 0,
+    "total": 13590
+  },
+  "wall_time_seconds": 17.64100000000326
+}

@@ -1,0 +1,5 @@
+{"event": {"type": "thread.started"}, "kind": "adapter_event"}
+{"event": {"type": "turn.started"}, "kind": "adapter_event"}
+{"event": {"item": {"id": "item_0", "type": "agent_message"}, "type": "item.completed"}, "kind": "adapter_event"}
+{"event": {"type": "turn.completed", "usage": {"cache_write_input_tokens": 0, "cached_input_tokens": 8960, "input_tokens": 12665, "output_tokens": 289, "reasoning_output_tokens": 153}}, "kind": "adapter_event"}
+{"kind": "adapter_turn", "response_type": "final", "turn": 1, "usage": {"cached_input": 8960, "input": 12665, "output": 289, "reasoning": 153}, "wall_time_seconds": 14.21899999998277}

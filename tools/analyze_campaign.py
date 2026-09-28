@@ -250,6 +250,12 @@ def _hidden(indexes: list[dict], root: Path) -> list[dict]:
         if _sha_bytes(path.read_bytes()) != index["sha256"]:
             raise ValueError("hidden attestation bytes differ from campaign index")
         value = json.loads(path.read_text(encoding="utf-8"))
+        if set(value) != {"adapter_type", "aggregate_score", "attestation_type", "commitment",
+                          "completed_instances", "cost", "execution_class", "failure_categories",
+                          "linked_result_records", "model_id", "model_version", "protocol",
+                          "raw_hidden_instances_published", "raw_model_responses_published",
+                          "run_evidence", "run_id", "selected_instances", "tokens"}:
+            raise ValueError("hidden attestation has missing fields or unsafe additional content")
         evidence = value.get("run_evidence") or {}
         commitment = value.get("commitment") or {}
         if (value.get("execution_class") != "real" or value.get("protocol") != "closed_book" or
@@ -259,7 +265,11 @@ def _hidden(indexes: list[dict], root: Path) -> list[dict]:
                 not HEX.fullmatch(evidence.get("manifest_sha256", "")) or
                 value.get("linked_result_records") != value.get("selected_instances") or
                 value.get("selected_instances") != commitment.get("instance_count") or
-                value.get("completed_instances", 0) > value.get("selected_instances", 0) or
+                value.get("completed_instances") != value.get("selected_instances") or
+                not isinstance(value.get("aggregate_score"), (int, float)) or
+                not 0 <= value["aggregate_score"] <= 1 or
+                not isinstance(value.get("failure_categories"), dict) or
+                sum(value["failure_categories"].values()) != value["selected_instances"] or
                 value.get("raw_hidden_instances_published") is not False or
                 value.get("raw_model_responses_published") is not False):
             raise ValueError("hidden attestation lacks required real closed-book evidence")
@@ -292,8 +302,8 @@ def analyze_campaign(index_path: Path, *, root: Path = ROOT) -> dict:
     for name in ("formal_runs", "variant_runs", "hidden_attestations"):
         if not isinstance(campaign.get(name), list):
             raise ValueError(f"campaign {name} must be a list")
-    if not campaign["formal_runs"]:
-        raise ValueError("campaign has no formal run evidence")
+    if not campaign["formal_runs"] or not campaign["variant_runs"] or not campaign["hidden_attestations"]:
+        raise ValueError("campaign requires formal, public-variant, and hidden-attestation evidence")
     paths = [item["run_dir"] for name in ("formal_runs", "variant_runs") for item in campaign[name]]
     if len(paths) != len(set(paths)):
         raise ValueError("run directory is indexed more than once")

@@ -1,0 +1,264 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-sol",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "unit": "1",
+          "value": 2
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "unit": "1",
+          "value": 2
+        }
+      },
+      "q3": {
+        "fringe_cycles": {
+          "unit": "1",
+          "value": 0.5
+        },
+        "opd_change_in_wavelengths": {
+          "unit": "1",
+          "value": 0.5
+        }
+      }
+    },
+    "explanation": "Light travels to the moving mirror and back, so the optical-path difference changes by twice the mirror displacement. Each wavelength of optical-path change produces one fringe period."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "561ce7715757e77a9376c47b81fc6a57bfaffa49d073a78dcfc94eff3e842958",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"opd_change_in_wavelengths\":{\"value\":2,\"unit\":\"1\"}},\"q2\":{\"fringe_cycles\":{\"value\":2,\"unit\":\"1\"}},\"q3\":{\"opd_change_in_wavelengths\":{\"value\":0.5,\"unit\":\"1\"},\"fringe_cycles\":{\"value\":0.5,\"unit\":\"1\"}}},\"explanation\":\"Light travels to the moving mirror and back, so the optical-path difference changes by twice the mirror displacement. Each wavelength of optical-path change produces one fringe period.\"}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-sol-rc1-variant-probe",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "e0ea6ab1a2c776c77cd0c39f8afd369af25573d0811d36b73ca9692845f987df",
+    "case_id": "SEED-4-2",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.2.2",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_opd_half",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_fringe_half",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      },
+      {
+        "criterion_id": "n_opd_quarter",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.2
+      },
+      {
+        "criterion_id": "n_fringe_quarter",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 0,
+            "input": 12745,
+            "output": 144,
+            "reasoning": 26
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"opd_change_in_wavelengths\":{\"value\":2,\"unit\":\"1\"}},\"q2\":{\"fringe_cycles\":{\"value\":2,\"unit\":\"1\"}},\"q3\":{\"opd_change_in_wavelengths\":{\"value\":0.5,\"unit\":\"1\"},\"fringe_cycles\":{\"value\":0.5,\"unit\":\"1\"}}},\"explanation\":\"Light travels to the moving mirror and back, so the optical-path difference changes by twice the mirror displacement. Each wavelength of optical-path change produces one fringe period.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-sol-rc1-variant-probe",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "opd_change_in_wavelengths": {
+            "unit": "1",
+            "value": 2
+          }
+        },
+        "q2": {
+          "fringe_cycles": {
+            "unit": "1",
+            "value": 2
+          }
+        },
+        "q3": {
+          "fringe_cycles": {
+            "unit": "1",
+            "value": 0.5
+          },
+          "opd_change_in_wavelengths": {
+            "unit": "1",
+            "value": 0.5
+          }
+        }
+      },
+      "explanation": "Light travels to the moving mirror and back, so the optical-path difference changes by twice the mirror displacement. Each wavelength of optical-path change produces one fringe period."
+    },
+    "system": {
+      "model_id": "gpt-6-sol",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 0,
+      "input": 12745,
+      "output": 144,
+      "total": 12889
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_opd_half",
+        "details": {
+          "answer_path": "answers.q1.opd_change_in_wavelengths",
+          "candidate_si": 2.0,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": true,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_opd_change_half"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_fringe_half",
+        "details": {
+          "answer_path": "answers.q2.fringe_cycles",
+          "candidate_si": 2.0,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": false,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_fringe_count"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_opd_quarter",
+        "details": {
+          "answer_path": "answers.q3.opd_change_in_wavelengths",
+          "candidate_si": 0.5,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": true,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_opd_change_quarter"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_fringe_quarter",
+        "details": {
+          "answer_path": "answers.q3.fringe_cycles",
+          "candidate_si": 0.5,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": false,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_fringe_count_quarter"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 12.46799999999348
+  },
+  "selection": {
+    "case_content_sha256": "e0ea6ab1a2c776c77cd0c39f8afd369af25573d0811d36b73ca9692845f987df",
+    "case_id": "SEED-4-2",
+    "case_revision": "0.2.2",
+    "track": "public_variant",
+    "variant_id": "VAR-SEED-4-2-P-cbd86d5fb68e",
+    "variant_lineage": {
+      "generator_version": "0.1.0",
+      "instance_content_sha256": "e0ea6ab1a2c776c77cd0c39f8afd369af25573d0811d36b73ca9692845f987df",
+      "parent_case_id": "SEED-4-2",
+      "parent_case_revision": "0.2.2",
+      "seed_classification": "public_dev"
+    },
+    "variant_type": "parameter"
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 0,
+    "input": 12745,
+    "output": 144,
+    "reasoning": 26,
+    "total": 12889
+  },
+  "wall_time_seconds": 12.547000000020489
+}
