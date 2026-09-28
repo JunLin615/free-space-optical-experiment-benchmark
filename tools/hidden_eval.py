@@ -113,6 +113,18 @@ def validate_family_map(path: Path = FAMILY_MAP) -> dict[str, Any]:
             raise ValueError(f"scorer family mismatch: {source}")
         if row["release_verification_status"] not in {"release_verified", "development"}:
             raise ValueError(f"invalid release status: {source}")
+        release = row.get("release_id")
+        if row["release_verification_status"] == "release_verified":
+            if not isinstance(release, str):
+                raise ValueError(f"verified source lacks release ID: {source}")
+            manifest_path = ROOT / "benchmark" / "releases" / f"{release}.json"
+            if not manifest_path.is_file():
+                raise ValueError(f"verified source release is unavailable: {source}")
+            pin = _read(manifest_path)["cases"].get(source)
+            if pin is None or pin.get("status") != "release_verified":
+                raise ValueError(f"source is not release-pinned: {source}")
+        elif release is not None:
+            raise ValueError(f"development source cannot claim release ID: {source}")
         for field in ("public_variant_eligible", "hidden_variant_eligible"):
             if not isinstance(row[field], bool):
                 raise ValueError(f"{field} must be boolean: {source}")
@@ -123,10 +135,8 @@ def validate_family_map(path: Path = FAMILY_MAP) -> dict[str, Any]:
                 raise ValueError(f"hidden source lacks generator metadata: {source}")
             if not isinstance(row.get("variant_types"), list) or not row["variant_types"]:
                 raise ValueError(f"hidden source lacks variant types: {source}")
-            release = row.get("release_id")
-            pin = _read(ROOT / "benchmark" / "releases" / f"{release}.json")["cases"].get(source)
-            if pin is None or pin.get("status") != "release_verified":
-                raise ValueError(f"hidden source is not pinned in release: {source}")
+            if (row["generator_version"], release) not in REGISTRY:
+                raise ValueError(f"hidden source has unregistered generator/release: {source}")
     return mapping
 
 
