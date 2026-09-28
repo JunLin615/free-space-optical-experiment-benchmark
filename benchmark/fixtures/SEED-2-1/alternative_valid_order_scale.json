@@ -1,0 +1,18 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "alternative_valid_order_scale",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {"waist_radius": {"value": 10, "unit": "um"}},
+      "q2": {"closest_scale": {"value": 10, "unit": "um"}},
+      "q3": {"waist_radius_factor": {"value": 0.5, "unit": "1"}}
+    },
+    "explanation": "The ideal calculation is about 17 micrometers, so its order is ten micrometers."
+  },
+  "expected": {
+    "n_waist": {"status": "pass"},
+    "c_scale": {"status": "pass"},
+    "c_double": {"status": "pass"}
+  }
+}

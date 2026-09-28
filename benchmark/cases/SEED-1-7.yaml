@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-1-7
 legacy_id: '1.7'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Half-wave plate and linear polarization
 language: en
@@ -21,7 +21,8 @@ provenance:
   created_utc: '2026-09-28'
   source_references: []
   derivation: English translation of the original seed prompt and tasks. Because the seed omits a signed
-    viewing convention, the requested rotation values are magnitudes.
+    viewing convention, the requested rotation values are magnitudes. Revision 0.2.0 specifies a typed
+    yes-or-no claim for q3 without requiring the unasked handedness detail.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Linearly polarized light passes through an ideal half-wave plate. The incident polarization
@@ -48,7 +49,12 @@ answer_contract:
   required_result_paths:
   - answers.q1.rotation_magnitude
   - answers.q2.output_change_magnitude
-  - answers.q3
+  - answers.q3.linear_rotation_rule_applies
+  quantity_shape:
+    answers.q1.rotation_magnitude: Quantity {value, unit}; angle units deg or rad.
+    answers.q2.output_change_magnitude: Quantity {value, unit}; angle units deg or rad.
+  method_shape:
+    q3: 'Object with linear_rotation_rule_applies: false. Optional explanation may note that ideal circular input remains circular with reversed handedness.'
   permit_additional_explanation: true
 gold:
   reference_model:
@@ -81,9 +87,9 @@ gold:
   universal_constraints:
   - id: c_circular
     severity: scored
-    predicate: Circular input does not become a merely rotated linear state; ideal half-wave plate reverses
-      handedness
-    evidence_path: answers.q3
+    predicate: The linear-axis rotation rule cannot be applied directly to circular input. An ideal half-wave
+      plate instead reverses circular handedness; that additional explanation is not required by q3.
+    evidence_path: answers.q3.linear_rotation_rule_applies
   forbidden_claims:
   - id: f_circular_linear
     predicate: two-angle linear-rotation rule applies directly to circular input
@@ -108,4 +114,21 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
+  implemented_checks:
+  - independent_jones_matrix_crosscheck
+  - unit_aware_numerical_oracle
+  - typed_circular_input_oracle
+  - positive_boundary_alternative_and_adversarial_fixtures
+  notes: Executable deterministic scorer for the two rotation magnitudes and the yes-or-no circular-input
+    question. Further independent challenge breadth is required before challenged status.
+  independent_derivation: Reflection of a linear Jones vector about the half-wave plate axis gives an
+    output axis displaced by twice the input-to-axis separation; turning the plate by an additional angle
+    turns that output axis by twice the plate angle. Jones circular eigenstates reverse handedness.
+  evidence_files:
+  - tests/test_deterministic_qualification.py
+  positive_fixtures:
+  - benchmark/fixtures/SEED-1-7/positive_reference.json
+  - benchmark/fixtures/SEED-1-7/alternative_valid_radians.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-1-7/negative_single_angle.json
+  - benchmark/fixtures/SEED-1-7/adversarial_circular_linear_rule.json

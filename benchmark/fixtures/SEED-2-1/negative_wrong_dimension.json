@@ -1,0 +1,39 @@
+{
+  "case_id": "SEED-2-1",
+  "name": "negative_wrong_dimension",
+  "kind": "negative",
+  "failure_family": "wrong_physical_dimension",
+  "answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "value": 16.93,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 10,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_waist": {
+      "status": "fail"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_double": {
+      "status": "pass"
+    }
+  }
+}

@@ -40,5 +40,6 @@
       "status": "pass",
       "score": 1
     }
-  }
+  },
+  "failure_family": "outside_numeric_tolerance"
 }

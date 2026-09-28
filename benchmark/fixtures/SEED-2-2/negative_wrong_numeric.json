@@ -48,5 +48,6 @@
     "c_focus": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "wrong_expansion_ratio"
 }

@@ -38,5 +38,6 @@
       "status": "fail",
       "failure_class": "physics_fail"
     }
-  }
+  },
+  "failure_family": "single_pass_factor_two_error"
 }

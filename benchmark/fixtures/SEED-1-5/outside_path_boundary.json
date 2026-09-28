@@ -35,5 +35,6 @@
     "n_travel": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "outside_numeric_tolerance"
 }

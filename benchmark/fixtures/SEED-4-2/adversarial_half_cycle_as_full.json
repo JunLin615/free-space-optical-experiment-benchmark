@@ -1,0 +1,47 @@
+{
+  "case_id": "SEED-4-2",
+  "name": "adversarial_half_cycle_as_full",
+  "kind": "adversarial",
+  "failure_family": "half_cycle_as_full_period",
+  "answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "opd_change_in_wavelengths": {
+          "value": 0.5,
+          "unit": "1"
+        },
+        "fringe_cycles": {
+          "value": 1,
+          "unit": "1"
+        }
+      }
+    },
+    "explanation": "The quarter-wavelength displacement completes a full fringe cycle because the beam returns through the arm."
+  },
+  "expected": {
+    "n_opd_half": {
+      "status": "pass"
+    },
+    "n_fringe_half": {
+      "status": "pass"
+    },
+    "n_opd_quarter": {
+      "status": "pass"
+    },
+    "n_fringe_quarter": {
+      "status": "fail"
+    }
+  }
+}

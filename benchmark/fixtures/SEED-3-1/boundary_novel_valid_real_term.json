@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "boundary_novel_valid_real_term",
+  "kind": "boundary",
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_image_character"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": -1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "projectable_real_image",
+        "orientation": "inverted"
+      }
+    }
+  },
+  "expected": {
+    "n_image_distance": {
+      "status": "pass"
+    },
+    "n_magnification": {
+      "status": "pass"
+    },
+    "c_image_character": {
+      "status": "unresolved"
+    }
+  }
+}

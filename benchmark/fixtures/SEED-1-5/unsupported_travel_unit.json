@@ -35,5 +35,6 @@
       "status": "fail",
       "failure_class": "wrong_unit"
     }
-  }
+  },
+  "failure_family": "unsupported_unit"
 }

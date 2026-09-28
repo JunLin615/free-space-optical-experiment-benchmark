@@ -1,0 +1,37 @@
+{
+  "case_id": "SEED-2-4",
+  "name": "negative_reversed_rayleigh_benefit",
+  "kind": "negative",
+  "failure_family": "false_rayleigh_tradeoff",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rayleigh_range_factor": {
+          "value": 4,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "divergence_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "benefit": "shorter_rayleigh_range",
+        "cost": "larger_clear_aperture"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh_ratio": {
+      "status": "pass"
+    },
+    "n_divergence_ratio": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "fail"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "SEED-4-2",
+  "name": "negative_wrong_full_period_count",
+  "kind": "negative",
+  "failure_family": "one_wavelength_opd_as_two_periods",
+  "answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "opd_change_in_wavelengths": {
+          "value": 0.5,
+          "unit": "1"
+        },
+        "fringe_cycles": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_opd_half": {
+      "status": "pass"
+    },
+    "n_fringe_half": {
+      "status": "fail"
+    },
+    "n_opd_quarter": {
+      "status": "pass"
+    },
+    "n_fringe_quarter": {
+      "status": "pass"
+    }
+  }
+}

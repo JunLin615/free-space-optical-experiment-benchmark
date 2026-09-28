@@ -1,0 +1,56 @@
+{
+  "case_id": "SEED-2-2",
+  "name": "boundary_missing_focus_claim",
+  "kind": "boundary",
+  "boundary": {
+    "type": "missing_claim",
+    "criterion_id": "c_focus"
+  },
+  "failure_family": "missing_required_claim",
+  "answer": {
+    "answers": {
+      "q1": {
+        "expansion_factor": {
+          "value": 5,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "keplerian": {
+          "input_focal_length": {
+            "value": 20,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 100,
+            "unit": "mm"
+          }
+        },
+        "galilean": {
+          "input_focal_length": {
+            "value": -20,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 100,
+            "unit": "mm"
+          }
+        }
+      },
+      "q3": {
+        "keplerian_real_internal_focus": true
+      }
+    }
+  },
+  "expected": {
+    "n_expansion": {
+      "status": "pass"
+    },
+    "c_examples": {
+      "status": "pass"
+    },
+    "c_focus": {
+      "status": "fail"
+    }
+  }
+}

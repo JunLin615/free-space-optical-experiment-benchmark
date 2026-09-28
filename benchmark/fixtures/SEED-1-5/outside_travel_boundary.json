@@ -35,5 +35,6 @@
       "status": "fail",
       "failure_class": "physics_fail"
     }
-  }
+  },
+  "failure_family": "outside_numeric_tolerance"
 }

@@ -32,5 +32,6 @@
     "c_image_character": {
       "status": "pass"
     }
-  }
+  },
+  "failure_family": "wrong_thin_lens_conjugate"
 }

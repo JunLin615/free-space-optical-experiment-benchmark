@@ -3,9 +3,9 @@
 The authored reference is checked against an independently computed equation
 before any candidate is graded. Quantities are converted to SI; the absolute
 or relative tolerance is inclusive. The four-ULP boundary allowance only
-compensates for binary conversion of an exact tolerance endpoint. These two
-cases use signed beam rotation/displacement and positive path/time/travel,
-without angular wrapping or an implicit absolute-value convention.
+compensates for binary conversion of an exact tolerance endpoint. Case-specific
+magnitude conventions are explicit in the public task and MAGNITUDE_CHECKS;
+other numerical claims retain their signed meaning.
 """
 
 from __future__ import annotations
@@ -16,8 +16,9 @@ from typing import Any
 from tools.physics_checks import PhysicsCheckError, UNITS, check_numeric_claim, to_si
 
 
-SUPPORTED_CASES = frozenset({"SEED-1-1", "SEED-1-5", "SEED-2-2", "SEED-2-4", "SEED-3-1", "SEED-3-7", "SEED-5-5"})
-MAGNITUDE_CHECKS = {"SEED-1-1": {"n_angle", "n_shift"}, "SEED-1-5": {"n_path", "n_delay"}}
+SUPPORTED_CASES = frozenset({"SEED-1-1", "SEED-1-5", "SEED-1-7", "SEED-2-1", "SEED-2-2", "SEED-2-4", "SEED-3-1", "SEED-3-7", "SEED-4-2", "SEED-5-5"})
+MAGNITUDE_CHECKS = {"SEED-1-1": {"n_angle", "n_shift"}, "SEED-1-5": {"n_path", "n_delay"},
+                    "SEED-4-2": {"n_opd_half", "n_opd_quarter"}}
 
 
 def _verdict(
@@ -105,7 +106,8 @@ def _evaluate_check(
     magnitude_claim = check_id in MAGNITUDE_CHECKS.get(case["case_id"], set())
     if magnitude_claim:
         candidate_si = abs(candidate_si)
-        canonical_unit = "rad" if dimension == "angle" else "m" if dimension == "length" else "s"
+        canonical_unit = {"angle": "rad", "length": "m", "time": "s",
+                          "dimensionless": "1", "frequency": "Hz"}[dimension]
         candidate = {"value": candidate_si, "unit": canonical_unit}
     try:
         raw = check_numeric_claim(case, check, candidate)
@@ -186,6 +188,44 @@ def _focal_pair(value: Any, expected_ratio: float, galilean: bool) -> tuple[str,
 
 def _closed_physics(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[str, Any]]:
     case_id = case["case_id"]
+    if case_id == "SEED-1-7":
+        applies = _field(answer, "answers.q3.linear_rotation_rule_applies")
+        if not isinstance(applies, bool):
+            return [_closed_verdict("c_circular", "fail", "Missing typed applicability boolean.", "missing_claim")]
+        correct = applies is False
+        return [_closed_verdict("c_circular", "pass" if correct else "fail",
+                                "The linear-axis rotation rule does not apply directly to circular input.",
+                                None if correct else "physics_fail")]
+
+    if case_id == "SEED-2-1":
+        try:
+            from tools.physics_checks import expected_si
+            waist, _ = expected_si(case, "gaussian_focus_radius")
+            options = (1e-6, 10e-6, 1e-3)
+            nearest = min(options, key=lambda x: abs(x - waist))
+        except (KeyError, TypeError, ValueError, PhysicsCheckError) as exc:
+            return [_closed_verdict(c, "error", f"Invalid case givens: {exc}", "invalid_instance")
+                    for c in ("c_scale", "c_double")]
+        try:
+            selected = to_si(_field(answer, "answers.q2.closest_scale"), "length")
+        except (TypeError, PhysicsCheckError) as exc:
+            scale = _closed_verdict("c_scale", "fail", f"Invalid scale-choice quantity: {exc}", "malformed_claim")
+        else:
+            matches = abs(selected - nearest) <= 1e-12
+            scale = _closed_verdict("c_scale", "pass" if matches else "fail",
+                                    "The selected scale must be the nearest of the three offered choices.",
+                                    None if matches else "physics_fail")
+        try:
+            ratio = to_si(_field(answer, "answers.q3.waist_radius_factor"), "dimensionless")
+        except (TypeError, PhysicsCheckError) as exc:
+            doubled = _closed_verdict("c_double", "fail", f"Invalid ideal waist-radius factor: {exc}", "malformed_claim")
+        else:
+            correct = _boundary_inclusive(abs(ratio - 0.5), 0.01, ratio, 0.5)
+            doubled = _closed_verdict("c_double", "pass" if correct else "fail",
+                                      "At fixed wavelength and focal length, doubled incident radius halves ideal waist.",
+                                      None if correct else "physics_fail")
+        return [scale, doubled]
+
     if case_id == "SEED-2-2":
         try:
             givens = {g["symbol"]: g for g in case["task"]["givens"]}

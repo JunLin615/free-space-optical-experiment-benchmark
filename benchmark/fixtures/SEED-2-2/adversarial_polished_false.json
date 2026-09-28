@@ -49,5 +49,6 @@
     "c_focus": {
       "status": "fail"
     }
-  }
+  },
+  "failure_family": "wrong_galilean_lens_sign"
 }

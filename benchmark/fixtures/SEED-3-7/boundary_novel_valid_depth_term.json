@@ -1,0 +1,39 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "boundary_novel_valid_depth_term",
+  "kind": "boundary",
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_depth"
+  },
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.671,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_change": "shrinks"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh": {
+      "status": "pass"
+    },
+    "c_scale": {
+      "status": "pass"
+    },
+    "c_depth": {
+      "status": "unresolved"
+    }
+  }
+}

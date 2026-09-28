@@ -1,0 +1,35 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "positive_reference",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 34,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 10,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "pass"
+    },
+    "n_plate_effect": {
+      "status": "pass"
+    },
+    "c_circular": {
+      "status": "pass"
+    }
+  }
+}

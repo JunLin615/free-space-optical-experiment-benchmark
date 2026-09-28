@@ -1,9 +1,9 @@
 schema_version: 0.1.0
 case_id: SEED-4-2
 legacy_id: '4.2'
-case_revision: 0.1.0
+case_revision: 0.2.1
 benchmark_release: null
-validation_status: specified
+validation_status: executable
 split: public_dev
 title: Michelson mirror motion and fringe cycles
 language: en
@@ -20,11 +20,16 @@ provenance:
   created_utc: '2026-09-28'
   source_references: []
   derivation: English translation of the original seed prompt and tasks. The wavelength is symbolic in
-    the seed, so path differences are expressed in units of λ.
+    the seed, so path differences are expressed in units of λ. Revision 0.2.0 encodes both stated mirror
+    motions as dimensionless givens and supplies independent validators for all four requested claims.
+    Revision 0.2.1 clarifies that unspecified motion direction makes optical-path changes magnitudes;
+    equivalent signed coordinate reports are accepted by absolute value.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
+  coordinate_convention: Mirror-motion direction is unspecified. Optical-path changes and fringe periods
+    are requested as magnitudes; equivalent signed optical-path reports are compared by absolute value.
   statement: In a monochromatic-light Michelson interferometer, the mirror in one arm moves by λ/2 along
-    the optical axis.
+    the optical axis. Report optical-path changes as magnitudes because no direction is specified.
   questions:
   - id: q1
     request: How much does the optical path difference change?
@@ -36,6 +41,9 @@ task:
   - value: 0.5
     unit: '1'
     symbol: mirror_displacement_wavelengths
+  - value: 0.25
+    unit: '1'
+    symbol: quarter_mirror_displacement_wavelengths
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1
@@ -44,6 +52,11 @@ answer_contract:
   - answers.q2.fringe_cycles
   - answers.q3.opd_change_in_wavelengths
   - answers.q3.fringe_cycles
+  quantity_shape:
+    answers.q1.opd_change_in_wavelengths: 'Dimensionless quantity {value, unit: 1}; optical-path difference in wavelengths, magnitude scored.'
+    answers.q2.fringe_cycles: 'Dimensionless quantity {value, unit: 1}; complete detector fringe periods.'
+    answers.q3.opd_change_in_wavelengths: 'Dimensionless quantity {value, unit: 1}; optical-path difference in wavelengths for quarter-wavelength mirror travel, magnitude scored.'
+    answers.q3.fringe_cycles: 'Dimensionless quantity {value, unit: 1}; detector fringe periods for quarter-wavelength mirror travel.'
   permit_additional_explanation: true
 gold:
   reference_model:
@@ -60,6 +73,7 @@ gold:
       unit: '1'
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
+    validator_id: michelson_opd_change_half
   - id: n_fringe_half
     answer_path: answers.q2.fringe_cycles
     reference:
@@ -81,6 +95,7 @@ gold:
       unit: '1'
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
+    validator_id: michelson_opd_change_quarter
   - id: n_fringe_quarter
     answer_path: answers.q3.fringe_cycles
     reference:
@@ -91,6 +106,7 @@ gold:
       unit: '1'
     relative_tolerance: 0.0
     comparator: max_abs_or_relative_inclusive
+    validator_id: michelson_fringe_count_quarter
   known_failure_modes:
   - For λ/4 motion, the phase changes by π, moving bright to dark or vice versa.
 scoring:
@@ -117,4 +133,22 @@ validation:
   - all_scoring_ids_resolve_and_weights_sum_to_one
   - independent_physics_review
   - positive_and_adversarial_answer_fixtures_pass
-  implemented_checks: []
+  implemented_checks:
+  - independent_phase_accumulation_crosscheck
+  - unit_aware_numerical_oracle_for_four_claims
+  - positive_boundary_alternative_and_adversarial_fixtures
+  notes: Executable deterministic scorer for four dimensionless claims. Half a fringe period means a
+    bright-to-dark transition, not one complete period. Further challenge breadth is required before
+    challenged status.
+  independent_derivation: For each moving Michelson arm, the round trip doubles mirror travel. Dividing
+    optical-path change by one wavelength gives detector fringe cycles. Half-wavelength travel produces
+    one cycle; quarter-wavelength travel produces half a cycle and a pi-radian phase change.
+  evidence_files:
+  - tests/test_deterministic_qualification.py
+  positive_fixtures:
+  - benchmark/fixtures/SEED-4-2/positive_reference.json
+  - benchmark/fixtures/SEED-4-2/alternative_valid_phase_derivation.json
+  - benchmark/fixtures/SEED-4-2/alternative_valid_signed_opd.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-4-2/negative_single_pass.json
+  - benchmark/fixtures/SEED-4-2/adversarial_half_cycle_as_full.json

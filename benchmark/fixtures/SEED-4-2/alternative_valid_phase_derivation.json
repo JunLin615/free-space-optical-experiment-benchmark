@@ -1,0 +1,46 @@
+{
+  "case_id": "SEED-4-2",
+  "name": "alternative_valid_phase_derivation",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "opd_change_in_wavelengths": {
+          "value": 0.5,
+          "unit": "1"
+        },
+        "fringe_cycles": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      }
+    },
+    "explanation": "A full 2π phase cycle follows λ/2 mirror translation; λ/4 gives a π shift and half a period."
+  },
+  "expected": {
+    "n_opd_half": {
+      "status": "pass"
+    },
+    "n_fringe_half": {
+      "status": "pass"
+    },
+    "n_opd_quarter": {
+      "status": "pass"
+    },
+    "n_fringe_quarter": {
+      "status": "pass"
+    }
+  }
+}

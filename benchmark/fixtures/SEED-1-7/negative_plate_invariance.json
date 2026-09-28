@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "negative_plate_invariance",
+  "kind": "negative",
+  "failure_family": "plate_rotation_ignored",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 34,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 0,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "pass"
+    },
+    "n_plate_effect": {
+      "status": "fail"
+    },
+    "c_circular": {
+      "status": "pass"
+    }
+  }
+}

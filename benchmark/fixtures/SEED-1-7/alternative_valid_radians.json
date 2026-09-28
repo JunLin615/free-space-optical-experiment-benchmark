@@ -1,0 +1,35 @@
+{
+  "case_id": "SEED-1-7",
+  "name": "alternative_valid_radians",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "value": 0.5934119456780721,
+          "unit": "rad"
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "value": 0.17453292519943295,
+          "unit": "rad"
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    }
+  },
+  "expected": {
+    "n_rotation": {
+      "status": "pass"
+    },
+    "n_plate_effect": {
+      "status": "pass"
+    },
+    "c_circular": {
+      "status": "pass"
+    }
+  }
+}

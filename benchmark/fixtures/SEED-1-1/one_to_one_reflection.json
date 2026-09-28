@@ -42,5 +42,6 @@
       "status": "pass",
       "score": 1
     }
-  }
+  },
+  "failure_family": "mirror_factor_two_error"
 }
