@@ -94,7 +94,9 @@ portable replay manifest. Its `created_utc` remains the source manifest's
 historical configuration timestamp. The original manifest and results are
 never rewritten or copied into the replay. Repeating the command with the
 same suffix resumes that new run; choose another suffix for another independent
-run. A real replay may yield different model answers and usage.
+run. Repository-relative public variant paths are interpreted with either
+Windows or POSIX separators, so historical variant selections work on both
+hosts. A real replay may yield different model answers and usage.
 
 For a new logical manifest, use `python -m tools.baseline path/to/input.json
 --output-root /absolute/local/root`. Omitting `--output-root` uses the

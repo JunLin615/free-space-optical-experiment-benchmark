@@ -34,7 +34,7 @@ def main() -> int:
         "verified": ([selection(case_id, "verified") for case_id in VERIFIED], PROTOCOLS),
         "development": ([selection(case_id, "development") for case_id in DEVELOPMENT], ["closed_book"]),
         "variants": ([selection("SEED-1-1", "verified")] + [
-            selection("SEED-1-1", "public_variant", str(Path("benchmark/variants/public_dev") / name))
+            selection("SEED-1-1", "public_variant", (Path("benchmark/variants/public_dev") / name).as_posix())
             for name in VARIANTS], ["closed_book"]),
     }
     manifest_dir = output_root / "input_manifests"

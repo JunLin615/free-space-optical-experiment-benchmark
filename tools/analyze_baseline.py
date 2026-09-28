@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from statistics import mean, median
 import sys
 from typing import Any
@@ -53,7 +53,7 @@ def load_run(directory: Path) -> tuple[dict, list[dict]]:
         if not any(item["case_id"] == selection["case_id"] and item["track"] == selection["track"]
                    and (item["variant_path"] is None and selection["variant_id"] is None
                         or isinstance(item["variant_path"], str)
-                        and Path(item["variant_path"]).stem == selection["variant_id"])
+                        and PureWindowsPath(item["variant_path"]).stem == selection["variant_id"])
                    for item in manifest["selections"]):
             raise ValueError("result selection is absent from immutable manifest")
         if record["score_result"] is not None:

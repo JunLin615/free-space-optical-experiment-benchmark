@@ -12,7 +12,9 @@ from pathlib import Path
 
 from tools.baseline.adapters import _codex_prompt, _safe_codex_event
 from tools.baseline.replay import build_replay_manifest, write_replay_manifest
-from tools.baseline.runner import _cost, output_path, run_manifest, validate_manifest
+from tools.baseline.runner import (_cost, _load_selection, _variant_source_path,
+                                   output_path, run_manifest, validate_manifest)
+from tools.analyze_baseline import load_run
 from tools.baseline.tools import ToolCallError, execute_tool, observed_call
 from tools.protocols import public_payload
 from tools.scoring_runtime import load_scored_case
@@ -63,6 +65,18 @@ def record(directory: Path, protocol: str = "closed_book") -> dict:
 
 
 class BaselineRunnerTests(unittest.TestCase):
+    def test_windows_relative_variant_path_replays_and_analyzes_on_posix(self) -> None:
+        directory = ROOT / "runs/2026-09-28-gpt-6-luna-variants-release"
+        historical = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
+        variant = next(item for item in historical["selections"] if item["variant_path"])
+        self.assertIn("\\", variant["variant_path"])
+        self.assertTrue(_variant_source_path(variant["variant_path"]).is_file())
+        case, metadata = _load_selection(variant, historical["release_id"])
+        self.assertEqual(case["case_id"], "SEED-1-1")
+        self.assertEqual(metadata["track"], "public_variant")
+        _, records = load_run(directory)
+        self.assertEqual(len(records), 3)
+
     def test_new_baseline_templates_use_logical_output_directories(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             result = subprocess.run(

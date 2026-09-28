@@ -130,12 +130,20 @@ def _selection_key(selection: dict[str, Any], variant_id: str | None = None) -> 
     return "".join(character if character.isalnum() or character in "-_" else "_" for character in label)
 
 
+def _variant_source_path(raw_path: str) -> Path:
+    """Interpret repository-relative variant paths from either host flavor."""
+    path = Path(raw_path)
+    if path.is_absolute():
+        return path.resolve()
+    return (ROOT / raw_path.replace("\\", "/")).resolve()
+
+
 def _load_selection(selection: dict[str, Any], release_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     variant_id = None
     variant_record = None
     if selection["variant_path"] is not None:
         from tools.variants import load_variant
-        variant_path = Path(selection["variant_path"]).resolve()
+        variant_path = _variant_source_path(selection["variant_path"])
         variant_record = load_variant(variant_path)
         if variant_record["parent_case_id"] != selection["case_id"]:
             raise ValueError("variant parent ID differs from selection")
