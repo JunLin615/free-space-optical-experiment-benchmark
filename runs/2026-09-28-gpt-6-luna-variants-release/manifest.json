@@ -1,0 +1,61 @@
+{
+  "agent": {
+    "adapter_type": "codex_cli",
+    "command": null,
+    "command_prefix": [
+      "npx",
+      "-y",
+      "@openai/codex@0.158.0"
+    ],
+    "framework": "codex-cli-0.158.0",
+    "mock_script": null,
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1"
+  },
+  "concurrency": 1,
+  "created_utc": "2026-09-28T14:21:03.304422+00:00",
+  "execution_class": "real",
+  "output_directory": "E:\\working\\codex\\Optical_Testing_Case_Study_Library\\runs\\2026-09-28-gpt-6-luna-variants-release",
+  "pricing_snapshot": null,
+  "protocol_ids": [
+    "closed_book"
+  ],
+  "release_id": "0.1.0-rc1",
+  "retrieval_config": {
+    "max_items": 3
+  },
+  "retry_policy": {
+    "malformed_answer_max_retries": 0,
+    "self_correction_max_retries": 0,
+    "transport_max_retries": 0
+  },
+  "run_id": "2026-09-28-gpt-6-luna-variants-release",
+  "runner_version": "0.1.0",
+  "schema_version": "0.1.0",
+  "seed": 20260928,
+  "selections": [
+    {
+      "case_id": "SEED-1-1",
+      "track": "verified",
+      "variant_path": null
+    },
+    {
+      "case_id": "SEED-1-1",
+      "track": "public_variant",
+      "variant_path": "benchmark\\variants\\public_dev\\VAR-SEED-1-1-P-c8828a9799d3.json"
+    },
+    {
+      "case_id": "SEED-1-1",
+      "track": "public_variant",
+      "variant_path": "benchmark\\variants\\public_dev\\VAR-SEED-1-1-U-613088edc5d1.json"
+    }
+  ],
+  "system_prompt_version": "neutral_optics_v1",
+  "timeout_seconds": 300,
+  "tool_config": {
+    "max_calls": 6,
+    "profile_id": "generic_computation_v0.1"
+  }
+}

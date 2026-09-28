@@ -1,0 +1,237 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": "physics_fail",
+  "first_attempt_success": false,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "expansion_factor": {
+          "unit": "1",
+          "value": 5
+        }
+      },
+      "q2": {
+        "galilean": {
+          "input_focal_length": {
+            "unit": "mm",
+            "value": 100
+          },
+          "output_focal_length": {
+            "unit": "mm",
+            "value": -500
+          }
+        },
+        "keplerian": {
+          "input_focal_length": {
+            "unit": "mm",
+            "value": 100
+          },
+          "output_focal_length": {
+            "unit": "mm",
+            "value": 500
+          }
+        }
+      },
+      "q3": {
+        "galilean_real_internal_focus": false,
+        "keplerian_real_internal_focus": true
+      }
+    },
+    "explanation": "The required diameter expansion is 7.5 mm / 1.5 mm = 5, so the magnitude of the focal-length ratio is 5. The listed pairs use a positive first lens; the Keplerian second lens is positive, while the Galilean second lens is negative. For the stated propagation direction, the Keplerian arrangement forms a real internal focus, while the Galilean arrangement does not."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "4155419e219660e702abf6470fa7b7ccb25c2265fd2f32b21d53e29a2444785b",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\n  \"answers\": {\n    \"q1\": {\n      \"expansion_factor\": {\n        \"value\": 5,\n        \"unit\": \"1\"\n      }\n    },\n    \"q2\": {\n      \"keplerian\": {\n        \"input_focal_length\": {\n          \"value\": 100,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 500,\n          \"unit\": \"mm\"\n        }\n      },\n      \"galilean\": {\n        \"input_focal_length\": {\n          \"value\": 100,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": -500,\n          \"unit\": \"mm\"\n        }\n      }\n    },\n    \"q3\": {\n      \"keplerian_real_internal_focus\": true,\n      \"galilean_real_internal_focus\": false\n    }\n  },\n  \"explanation\": \"The required diameter expansion is 7.5 mm / 1.5 mm = 5, so the magnitude of the focal-length ratio is 5. The listed pairs use a positive first lens; the Keplerian second lens is positive, while the Galilean second lens is negative. For the stated propagation direction, the Keplerian arrangement forms a real internal focus, while the Galilean arrangement does not.\"\n}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-gpt-6-luna-verified-release",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "5f6d97fe6aa57c72f690ad0fcfec8201c24d46fc+source-sha256:efbee45bc437678e9458989c7eb6402353fb03e603bcaa6bad4e37430dff7e1e",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "dfe041664ee0fc501e683ad4ecadfedb5ab7294d9f4b0bb137fd76b40494cbc6",
+    "case_id": "SEED-2-2",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.2.2",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_expansion",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.1.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "c_examples",
+        "evidence": "Keplerian: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion. Galilean: Lens signs, order, or focal-length magnitude ratio are inconsistent with the requested expander.",
+        "score": 0,
+        "status": "scored",
+        "weight": 0.4
+      },
+      {
+        "criterion_id": "c_focus",
+        "evidence": "Internal real-focus distinction for the stated lens order.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "physics_fail",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 12596,
+            "output": 485,
+            "reasoning": 199
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\n  \"answers\": {\n    \"q1\": {\n      \"expansion_factor\": {\n        \"value\": 5,\n        \"unit\": \"1\"\n      }\n    },\n    \"q2\": {\n      \"keplerian\": {\n        \"input_focal_length\": {\n          \"value\": 100,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 500,\n          \"unit\": \"mm\"\n        }\n      },\n      \"galilean\": {\n        \"input_focal_length\": {\n          \"value\": 100,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": -500,\n          \"unit\": \"mm\"\n        }\n      }\n    },\n    \"q3\": {\n      \"keplerian_real_internal_focus\": true,\n      \"galilean_real_internal_focus\": false\n    }\n  },\n  \"explanation\": \"The required diameter expansion is 7.5 mm / 1.5 mm = 5, so the magnitude of the focal-length ratio is 5. The listed pairs use a positive first lens; the Keplerian second lens is positive, while the Galilean second lens is negative. For the stated propagation direction, the Keplerian arrangement forms a real internal focus, while the Galilean arrangement does not.\"\n}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-gpt-6-luna-verified-release",
+    "scores": {
+      "capped_total": 0.6,
+      "raw_total": 0.6
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "expansion_factor": {
+            "unit": "1",
+            "value": 5
+          }
+        },
+        "q2": {
+          "galilean": {
+            "input_focal_length": {
+              "unit": "mm",
+              "value": 100
+            },
+            "output_focal_length": {
+              "unit": "mm",
+              "value": -500
+            }
+          },
+          "keplerian": {
+            "input_focal_length": {
+              "unit": "mm",
+              "value": 100
+            },
+            "output_focal_length": {
+              "unit": "mm",
+              "value": 500
+            }
+          }
+        },
+        "q3": {
+          "galilean_real_internal_focus": false,
+          "keplerian_real_internal_focus": true
+        }
+      },
+      "explanation": "The required diameter expansion is 7.5 mm / 1.5 mm = 5, so the magnitude of the focal-length ratio is 5. The listed pairs use a positive first lens; the Keplerian second lens is positive, while the Galilean second lens is negative. For the stated propagation direction, the Keplerian arrangement forms a real internal focus, while the Galilean arrangement does not."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 12596,
+      "output": 485,
+      "total": 13081
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_expansion",
+        "details": {
+          "answer_path": "answers.q1.expansion_factor",
+          "candidate_si": 5.0,
+          "comparator": "absolute_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": false,
+          "tolerance_si": 0.1,
+          "validator_id": "afocal_expansion"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.1.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_examples",
+        "details": {
+          "failure_class": "physics_fail"
+        },
+        "evidence": "Keplerian: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion. Galilean: Lens signs, order, or focal-length magnitude ratio are inconsistent with the requested expander.",
+        "score": 0,
+        "status": "fail",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_focus",
+        "details": {},
+        "evidence": "Internal real-focus distinction for the stated lens order.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 31.31200000003446
+  },
+  "selection": {
+    "case_content_sha256": "dfe041664ee0fc501e683ad4ecadfedb5ab7294d9f4b0bb137fd76b40494cbc6",
+    "case_id": "SEED-2-2",
+    "case_revision": "0.2.2",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 12596,
+    "output": 485,
+    "reasoning": 199,
+    "total": 13081
+  },
+  "wall_time_seconds": 31.39000000001397
+}

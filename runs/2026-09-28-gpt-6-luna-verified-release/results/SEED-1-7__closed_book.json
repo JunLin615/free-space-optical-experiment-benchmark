@@ -1,0 +1,210 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "rotation_magnitude": {
+          "unit": "deg",
+          "value": 34
+        }
+      },
+      "q2": {
+        "output_change_magnitude": {
+          "unit": "deg",
+          "value": 10
+        }
+      },
+      "q3": {
+        "linear_rotation_rule_applies": false
+      }
+    },
+    "explanation": "An ideal half-wave plate rotates the linear-polarization direction by twice the input angle relative to its fast axis. Rotating the plate by 5° changes the output direction by 10°. Circularly polarized input remains circular (with reversed handedness), so the linear-polarization rule does not apply directly."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "88a9528cb9e7531a1176c502ac5eddba2dd0c00bd9ebf91e1ffa50e998381af4",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"rotation_magnitude\":{\"value\":34,\"unit\":\"deg\"}},\"q2\":{\"output_change_magnitude\":{\"value\":10,\"unit\":\"deg\"}},\"q3\":{\"linear_rotation_rule_applies\":false}},\"explanation\":\"An ideal half-wave plate rotates the linear-polarization direction by twice the input angle relative to its fast axis. Rotating the plate by 5° changes the output direction by 10°. Circularly polarized input remains circular (with reversed handedness), so the linear-polarization rule does not apply directly.\"}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-gpt-6-luna-verified-release",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "5f6d97fe6aa57c72f690ad0fcfec8201c24d46fc+source-sha256:efbee45bc437678e9458989c7eb6402353fb03e603bcaa6bad4e37430dff7e1e",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "cf0f6a8b3db99ad00d9ecce099cc92d0dacac129305a0a33ea2758dfd374c3db",
+    "case_id": "SEED-1-7",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.2.1",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_rotation",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.00872664625997.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "n_plate_effect",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.00872664625997.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "c_circular",
+        "evidence": "The linear-axis rotation rule does not apply directly to circular input.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 0,
+            "input": 12458,
+            "output": 236,
+            "reasoning": 115
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"rotation_magnitude\":{\"value\":34,\"unit\":\"deg\"}},\"q2\":{\"output_change_magnitude\":{\"value\":10,\"unit\":\"deg\"}},\"q3\":{\"linear_rotation_rule_applies\":false}},\"explanation\":\"An ideal half-wave plate rotates the linear-polarization direction by twice the input angle relative to its fast axis. Rotating the plate by 5° changes the output direction by 10°. Circularly polarized input remains circular (with reversed handedness), so the linear-polarization rule does not apply directly.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-gpt-6-luna-verified-release",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "rotation_magnitude": {
+            "unit": "deg",
+            "value": 34
+          }
+        },
+        "q2": {
+          "output_change_magnitude": {
+            "unit": "deg",
+            "value": 10
+          }
+        },
+        "q3": {
+          "linear_rotation_rule_applies": false
+        }
+      },
+      "explanation": "An ideal half-wave plate rotates the linear-polarization direction by twice the input angle relative to its fast axis. Rotating the plate by 5° changes the output direction by 10°. Circularly polarized input remains circular (with reversed handedness), so the linear-polarization rule does not apply directly."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 0,
+      "input": 12458,
+      "output": 236,
+      "total": 12694
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_rotation",
+        "details": {
+          "answer_path": "answers.q1.rotation_magnitude",
+          "candidate_si": 0.5934119456780721,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "angle",
+          "magnitude_convention": false,
+          "tolerance_si": 0.008726646259971648,
+          "validator_id": "half_wave_relative_rotation_magnitude"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.00872664625997.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_plate_effect",
+        "details": {
+          "answer_path": "answers.q2.output_change_magnitude",
+          "candidate_si": 0.17453292519943295,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "angle",
+          "magnitude_convention": false,
+          "tolerance_si": 0.008726646259971648,
+          "validator_id": "half_wave_plate_rotation_effect"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.00872664625997.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_circular",
+        "details": {},
+        "evidence": "The linear-axis rotation rule does not apply directly to circular input.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 17.875
+  },
+  "selection": {
+    "case_content_sha256": "cf0f6a8b3db99ad00d9ecce099cc92d0dacac129305a0a33ea2758dfd374c3db",
+    "case_id": "SEED-1-7",
+    "case_revision": "0.2.1",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 0,
+    "input": 12458,
+    "output": 236,
+    "reasoning": 115,
+    "total": 12694
+  },
+  "wall_time_seconds": 17.95299999997951
+}
