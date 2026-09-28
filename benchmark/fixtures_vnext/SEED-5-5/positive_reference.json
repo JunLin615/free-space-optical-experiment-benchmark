@@ -11,7 +11,10 @@
         }
       },
       "q2": {
-        "detector_field_response_order": 2,
+        "detector_field_response_order": {
+          "value": 2,
+          "unit": "1"
+        },
         "frequency_component_source": "interference_cross_term"
       },
       "q3": {

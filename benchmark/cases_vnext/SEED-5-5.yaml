@@ -51,14 +51,16 @@ answer_contract:
   - answers.q3.ideal_cross_term
   method_shape:
     q1: 'Object containing beat_frequency: quantity {value, unit}.'
-    q2: 'Object with detector_field_response_order: integer (electric-field response order), and frequency_component_source
-      enum self_term|interference_cross_term|optical_carrier. Equivalent explanatory wording may be provided outside the scored
-      JSON object.'
+    q2: 'Object with detector_field_response_order: dimensionless Quantity {value, unit}, giving the electric-field response
+      order; and frequency_component_source enum self_term|interference_cross_term|optical_carrier. Equivalent explanatory
+      wording may be provided outside the scored JSON object.'
     q3: 'Object with ideal_cross_term: false for the stated no-projector condition; optional practical-leakage qualification.
       A possible beat-restoring projection is context, not required or scored.'
   permit_additional_explanation: true
   quantity_shape:
     answers.q1.beat_frequency: Quantity {value, unit}; convertible frequency units accepted.
+    answers.q2.detector_field_response_order: Dimensionless Quantity {value, unit}; electric-field response order of the photodetector
+      signal.
 gold:
   visibility: private
   universal_constraints:

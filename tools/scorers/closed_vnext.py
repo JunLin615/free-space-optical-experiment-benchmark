@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from tools.physics_checks import PhysicsCheckError, to_si
 from tools.scorers.numerical import evaluate as evaluate_numerical
 
 
@@ -55,9 +56,13 @@ def _depth_trend(answer: dict[str, Any]) -> dict[str, Any]:
 
 
 def _heterodyne_origin(answer: dict[str, Any]) -> dict[str, Any]:
-    order = _at(answer, "answers", "q2", "detector_field_response_order")
+    order_claim = _at(answer, "answers", "q2", "detector_field_response_order")
     source = _at(answer, "answers", "q2", "frequency_component_source")
-    if type(order) is not int or source not in ("self_term", "interference_cross_term", "optical_carrier"):
+    try:
+        order = to_si(order_claim, "dimensionless")
+    except (PhysicsCheckError, TypeError):
+        order = None
+    if order is None or source not in ("self_term", "interference_cross_term", "optical_carrier"):
         return _verdict("c_q2", "fail", "Response order and component source must use the specified typed fields.", "malformed_claim")
     if order == 2 and source == "interference_cross_term":
         return _verdict("c_q2", "pass", "Second-order intensity detection of the interference cross term yields the difference-frequency photocurrent.")

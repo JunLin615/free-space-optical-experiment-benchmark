@@ -18,6 +18,7 @@ from tools.physics_checks import check_numeric_claim
 from tools.scoring_runtime import evaluate_case, load_scored_case
 from tools.scorers.closed_vnext import evaluate as evaluate_closed_vnext
 from tools.vnext.units import normalize_answer_units
+from tools.vnext.scoring_runtime import evaluate_case as evaluate_vnext_case
 from tools.validate_cases import load_case, semantic_issues
 
 
@@ -59,6 +60,7 @@ class RemainingDeterministicEvidence(unittest.TestCase):
         }}
         result = evaluate_case(case, answer)
         self.assertEqual(result["scores"]["capped_total"], 1)
+        self.assertEqual(evaluate_vnext_case(case, answer)["scores"]["capped_total"], 1)
         decade_in_numeric_slot = copy.deepcopy(answer)
         decade_in_numeric_slot["answers"]["q1"]["waist_radius"]["value"] = 10
         results = evaluate_case(case, decade_in_numeric_slot)
@@ -88,6 +90,7 @@ class RemainingDeterministicEvidence(unittest.TestCase):
             self.assertEqual(evaluate_case(case, fixture["answer"])["scores"]["capped_total"], 1, name)
         old_decade = json.loads((ROOT / "benchmark/fixtures/SEED-2-1/alternative_valid_order_scale.json").read_text(encoding="utf-8"))
         self.assertLess(evaluate_case(case, old_decade["answer"])["scores"]["capped_total"], 1)
+        self.assertLess(evaluate_vnext_case(case, old_decade["answer"])["scores"]["capped_total"], 1)
 
     def test_gaussian_range_and_divergence_from_paraxial_envelope(self) -> None:
         case = copy.deepcopy(load_scored_case("SEED-2-4"))
@@ -183,6 +186,10 @@ class RemainingDeterministicEvidence(unittest.TestCase):
                     self.assertTrue(all(v["status"] in ("pass", "fail") for v in verdicts), path.name)
                     full_credit = all(v["status"] == "pass" for v in verdicts)
                     self.assertEqual(full_credit, fixture["expected"]["full_credit"], path.name)
+                    integrated = evaluate_vnext_case(case, fixture["answer"])
+                    self.assertNotIn(integrated["failure_mode"], ("validator_error", "oracle_unresolved", "judge_unresolved"), path.name)
+                    self.assertEqual(integrated["scores"]["capped_total"] == 1,
+                                     fixture["expected"]["full_credit"], path.name)
                 self.assertEqual(counts, {"positive": 2, "alternative_valid": 2, "boundary": 2,
                                           "negative": 4, "adversarial": 2})
 
