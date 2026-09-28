@@ -1,0 +1,27 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "negative_decimal_error",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.0671,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_trend": "decreases"
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

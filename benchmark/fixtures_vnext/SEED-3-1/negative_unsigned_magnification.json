@@ -1,0 +1,28 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "negative_unsigned_magnification",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "real",
+        "orientation": "inverted"
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

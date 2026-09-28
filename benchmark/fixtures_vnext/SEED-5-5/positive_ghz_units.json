@@ -1,0 +1,25 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "positive_ghz_units",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 0.08,
+          "unit": "GHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": 2,
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "full_credit": true
+  }
+}

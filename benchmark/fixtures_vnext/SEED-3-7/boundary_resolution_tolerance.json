@@ -1,0 +1,27 @@
+{
+  "case_id": "SEED-3-7",
+  "name": "boundary_resolution_tolerance",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "resolution_um": {
+          "value": 0.701,
+          "unit": "um"
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "value": 1,
+          "unit": "um"
+        }
+      },
+      "q3": {
+        "depth_of_focus_trend": "decreases"
+      }
+    }
+  },
+  "expected": {
+    "full_credit": true
+  }
+}

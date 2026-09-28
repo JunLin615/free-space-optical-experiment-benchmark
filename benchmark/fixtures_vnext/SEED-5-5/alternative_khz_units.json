@@ -1,0 +1,25 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "alternative_khz_units",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80000.0,
+          "unit": "kHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": 2,
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "full_credit": true
+  }
+}

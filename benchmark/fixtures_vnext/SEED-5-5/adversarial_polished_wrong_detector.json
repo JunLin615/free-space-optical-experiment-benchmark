@@ -1,0 +1,26 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "adversarial_polished_wrong_detector",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": 1,
+        "frequency_component_source": "interference_cross_term",
+        "explanation": "A sensitive linear photodiode follows the field directly and therefore beats."
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

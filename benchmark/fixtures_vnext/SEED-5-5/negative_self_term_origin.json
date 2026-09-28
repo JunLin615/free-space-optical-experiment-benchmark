@@ -1,0 +1,25 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "negative_self_term_origin",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": 2,
+        "frequency_component_source": "self_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

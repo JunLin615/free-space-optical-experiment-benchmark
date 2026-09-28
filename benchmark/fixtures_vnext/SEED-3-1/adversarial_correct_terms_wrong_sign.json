@@ -1,0 +1,29 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "adversarial_correct_terms_wrong_sign",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": 1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "real",
+        "orientation": "inverted",
+        "explanation": "This is a real, inverted image with unit magnification."
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

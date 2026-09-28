@@ -1,0 +1,29 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "positive_screen_projection",
+  "kind": "positive",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": -1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "real",
+        "orientation": "inverted",
+        "screen_projectable": true
+      }
+    }
+  },
+  "expected": {
+    "full_credit": true
+  }
+}

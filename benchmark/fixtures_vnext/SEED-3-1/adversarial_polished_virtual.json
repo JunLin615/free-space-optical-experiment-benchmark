@@ -1,0 +1,29 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "adversarial_polished_virtual",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": -1,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "virtual",
+        "orientation": "inverted",
+        "explanation": "The screen location is 2f, so this must be virtual."
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}

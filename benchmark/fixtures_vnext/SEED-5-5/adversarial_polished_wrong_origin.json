@@ -1,0 +1,26 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "adversarial_polished_wrong_origin",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80,
+          "unit": "MHz"
+        }
+      },
+      "q2": {
+        "detector_field_response_order": 2,
+        "frequency_component_source": "optical_carrier",
+        "explanation": "A large optical carrier naturally becomes the radiofrequency signal."
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    }
+  },
+  "expected": {
+    "full_credit": false
+  }
+}
