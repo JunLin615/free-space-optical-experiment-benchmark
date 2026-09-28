@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import unittest
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "benchmark" / "schema" / "result.schema.json"
@@ -15,7 +15,7 @@ SCHEMA_PATH = Path(__file__).resolve().parents[1] / "benchmark" / "schema" / "re
 class ResultSchemaTests(unittest.TestCase):
     def setUp(self) -> None:
         self.schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
-        self.validator = Draft202012Validator(self.schema)
+        self.validator = Draft202012Validator(self.schema, format_checker=FormatChecker())
         self.record = {
             "result_schema_version": "0.1.0",
             "case_id": "SEED-2.1",
@@ -25,7 +25,10 @@ class ResultSchemaTests(unittest.TestCase):
             "case_library_access": {"available": False, "snapshot_id": None, "retrieved_document_ids": []},
             "tools_available": [],
             "tools_used": [],
+            "tool_call_count": 0,
             "tokens": {"input": None, "output": None, "total": None},
+            "provider_usage": None,
+            "cost": None,
             "wall_time_seconds": 1.2,
             "retry_count": 0,
             "raw_answer": "example",
@@ -42,7 +45,39 @@ class ResultSchemaTests(unittest.TestCase):
 
     def test_unknown_usage_is_distinct_from_zero_and_bad_scores_fail(self) -> None:
         self.assertIsNone(self.record["tokens"]["input"])
+        self.assertIsNone(self.record["provider_usage"])
+        self.assertIsNone(self.record["cost"])
+        self.assertEqual(self.record["tool_call_count"], 0)
         self.record["criterion_scores"][0]["score"] = 1.2
+        self.assertTrue(list(self.validator.iter_errors(self.record)))
+
+    def test_tool_call_count_and_provider_usage_are_independent_of_tool_names(self) -> None:
+        self.record["tools_available"] = ["ray_trace"]
+        self.record["tools_used"] = ["ray_trace"]
+        self.record["tool_call_count"] = 3
+        self.record["provider_usage"] = {
+            "input_tokens": 120,
+            "cache_read_input_tokens": 40,
+            "reasoning_tokens": 12,
+        }
+        self.assertEqual(list(self.validator.iter_errors(self.record)), [])
+        self.record["tool_call_count"] = None
+        self.assertEqual(list(self.validator.iter_errors(self.record)), [])
+        self.record["tool_call_count"] = -1
+        self.assertTrue(list(self.validator.iter_errors(self.record)))
+
+    def test_measured_cost_requires_currency_and_pricing_snapshot(self) -> None:
+        self.record["cost"] = {
+            "amount": 0.0,
+            "currency": "USD",
+            "pricing_reference": "provider-price-sheet-2026-09-28",
+            "pricing_snapshot_utc": "2026-09-28T07:00:00Z",
+        }
+        self.assertEqual(list(self.validator.iter_errors(self.record)), [])
+        del self.record["cost"]["pricing_reference"]
+        self.assertTrue(list(self.validator.iter_errors(self.record)))
+        self.record["cost"]["pricing_reference"] = "provider-price-sheet-2026-09-28"
+        self.record["cost"]["pricing_snapshot_utc"] = "not-a-timestamp"
         self.assertTrue(list(self.validator.iter_errors(self.record)))
 
 

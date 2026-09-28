@@ -10,11 +10,13 @@ The stable `main` branch contains the Round 1 research baseline. Work proceeds o
 
 ## Language and provenance
 
-The user confirmed **English first** for the pilot cases and generated question bank. This resolves the conflicting language line in the pasted Round 2 brief. The original Chinese HTML remains untouched as seed provenance, with its hash recorded in each derived pilot case. A Chinese version can follow after English case content is finalized. Each English pilot preserves the seed's physical question and subquestions; ambiguities are documented rather than silently converted into new physics.
+The pasted Round 2 brief described the current benchmark language as Chinese. A subsequent user clarification established **English-first development** for the pilot cases and generated question bank. The original Chinese HTML remains untouched as seed provenance, with its hash recorded in each derived pilot case. A corresponding Chinese page should follow once the English content is close to stable, using the same case identities and scientific lineage rather than becoming a separate benchmark. Each English pilot preserves the seed's physical question and subquestions; ambiguities are documented rather than silently converted into new physics.
 
 ## Format and boundaries
 
 One YAML file per case is the canonical authoring format. JSON Schema 2020-12 checks its structure; the generated HTML/Markdown are question-only views. Development gold currently lives with each public pilot YAML, so these 11 cases are suitable for interface and scorer development rather than a hidden test. Future private instances must keep gold and seeds outside the public repository. The generic run-result schema is separate from the case schema. Tool adapters and an optional retrieval library are separate from scientific case content.
+
+Generic access to tools and the example library belongs to a protocol manifest, not `task`. The pilot cases no longer contain or render the former generic `allowed_resources` line. An optional `task.apparatus_constraints` field is reserved for restrictions intrinsic to the optical experiment, such as a fixed set of available components; it cannot grant evaluation tool access. The result contract records explicit tool-call count, provider usage, and measured cost with currency and pricing provenance, preserving unavailable values as `null`.
 
 The schema supports optional numerical checks, physical constraints, alternative solution families, forbidden claims, and semantic rubrics. These are available when relevant, not forced onto every case. The pilot statuses remain `specified` until positive and adversarial fixtures, independent checks, and any semantic judges meet the evidence gates in [automated validation design](automated_validation_design.md). The deterministic physics module verifies only selected numerical claims; the open design and diagnosis criteria are deliberately not awarded a benchmark score yet.
 

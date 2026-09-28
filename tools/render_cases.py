@@ -53,7 +53,7 @@ def load_cases(case_dir: Path) -> list[dict]:
     return sorted(cases, key=lambda case: _sort_key(Path(str(case["case_id"]))))
 
 
-def _public_parts(case: dict) -> tuple[str, list[str], list[str], list[str], str | None]:
+def _public_parts(case: dict) -> tuple[str, list[str], list[str], list[str], list[str]]:
     task = case["task"]
     if not isinstance(task, dict) or not task.get("statement"):
         raise ValueError(f"{case['case_id']}: missing task.statement")
@@ -73,7 +73,7 @@ def _public_parts(case: dict) -> tuple[str, list[str], list[str], list[str], str
         questions,
         givens,
         list(task.get("assumptions", [])),
-        task.get("allowed_resources"),
+        list(task.get("apparatus_constraints", [])),
     )
 
 
@@ -85,7 +85,7 @@ def _markdown_text(value: object) -> str:
 def render_markdown(cases: list[dict]) -> str:
     lines = [f"# {TITLE}", "", "Question bank generated from canonical case files.", ""]
     for case in cases:
-        statement, questions, givens, assumptions, resources = _public_parts(case)
+        statement, questions, givens, assumptions, apparatus_constraints = _public_parts(case)
         lines.extend(
             [f"## {_markdown_text(case['case_id'])} — {_markdown_text(case['title'])}", "", _markdown_text(statement), ""]
         )
@@ -101,8 +101,10 @@ def render_markdown(cases: list[dict]) -> str:
             lines.extend(["**Questions**", ""])
             lines.extend(f"{index}. {_markdown_text(question)}" for index, question in enumerate(questions, 1))
             lines.append("")
-        if resources:
-            lines.extend([f"**Allowed resources:** {_markdown_text(resources)}", ""])
+        if apparatus_constraints:
+            lines.extend(["**Experimental constraints**", ""])
+            lines.extend(f"- {_markdown_text(item)}" for item in apparatus_constraints)
+            lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -117,7 +119,7 @@ def _html_paragraphs(value: str) -> str:
 def render_html(cases: list[dict]) -> str:
     sections = []
     for case in cases:
-        statement, questions, givens, assumptions, resources = _public_parts(case)
+        statement, questions, givens, assumptions, apparatus_constraints = _public_parts(case)
         case_id = escape(str(case["case_id"]), quote=True)
         title = escape(str(case["title"]))
         block = [f'    <section class="case" id="{case_id}">', f"      <h2>{case_id} — {title}</h2>"]
@@ -134,8 +136,10 @@ def render_html(cases: list[dict]) -> str:
             block.extend(["      <h3>Questions</h3>", "      <ol>"])
             block.extend(f"        <li>{escape(str(question))}</li>" for question in questions)
             block.append("      </ol>")
-        if resources:
-            block.append(f"      <p><strong>Allowed resources:</strong> {escape(str(resources))}</p>")
+        if apparatus_constraints:
+            block.extend(["      <h3>Experimental constraints</h3>", "      <ul>"])
+            block.extend(f"        <li>{escape(str(item))}</li>" for item in apparatus_constraints)
+            block.append("      </ul>")
         block.append("    </section>")
         sections.append("\n".join(block))
     body = "\n".join(sections)

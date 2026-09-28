@@ -33,7 +33,6 @@ task:
     request: State the key reference or spatial-filtering conditions for each approach.
   - id: q3
     request: Compare their quantitative capability, stability and system complexity.
-  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1

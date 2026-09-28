@@ -24,7 +24,7 @@ class RenderCasesTests(unittest.TestCase):
                 "givens": [{"symbol": "z", "value": 2, "unit": "m"}],
                 "assumptions": ["Paraxial propagation."],
                 "questions": [{"id": "q1", "request": "Find the signed angle."}],
-                "allowed_resources": "Any scientific tool.",
+                "apparatus_constraints": ["Only two steering mirrors are available."],
             },
             "gold": {"reference": "SECRET_REFERENCE_SENTINEL"},
             "scoring": {"rubric": "SECRET_RUBRIC_SENTINEL"},
@@ -36,10 +36,22 @@ class RenderCasesTests(unittest.TestCase):
         for rendered in (markdown, html):
             self.assertIn("Find the signed angle.", rendered)
             self.assertIn("z = 2 m", rendered)
+            self.assertIn("Only two steering mirrors are available.", rendered)
             self.assertNotIn("SECRET_REFERENCE_SENTINEL", rendered)
             self.assertNotIn("SECRET_RUBRIC_SENTINEL", rendered)
         self.assertIn("&lt;alignment&gt;", html)
         self.assertIn("&lt;x&gt;", html)
+
+    def test_protocol_access_is_not_rendered_from_case_metadata(self) -> None:
+        baseline = (render_markdown([self.case]), render_html([self.case]))
+        self.case["task"]["allowed_resources"] = "Any scientific tool."
+        self.case["protocol"] = "closed_book"
+        for rendered in (render_markdown([self.case]), render_html([self.case])):
+            self.assertNotIn("Any scientific tool", rendered)
+            self.assertNotIn("closed_book", rendered)
+        self.assertEqual((render_markdown([self.case]), render_html([self.case])), baseline)
+        self.case["protocol"] = "tool_assisted"
+        self.assertEqual((render_markdown([self.case]), render_html([self.case])), baseline)
 
     def test_generation_check_detects_drift_and_case_order_is_numeric(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

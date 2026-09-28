@@ -13,6 +13,10 @@ implemented models; adversarial fixtures remain necessary before release.
 
 `result.schema.json` describes a separate per-case run record. Run records are
 outputs of the evaluator and are not embedded in canonical case YAML.
+The record distinguishes distinct `tools_used` identifiers from the measured
+`tool_call_count`, retains extensible raw `provider_usage`, and stores measured
+`cost` with currency and a dated pricing reference. Unknown counts, usage, and
+cost are `null`, never inferred as zero.
 `pilot_answer_v0.1.schema.json` is the shared JSON block shape named by the pilot
 cases' `answer_contract.schema_id`: it permits case-specific prose and structured
 design claims while requiring physical numerical leaves to have `value` and
@@ -20,6 +24,10 @@ design claims while requiring physical numerical leaves to have `value` and
 shape; passing this shared answer schema alone never earns a score.
 
 The canonical authoring record contains both public `task` and private `gold`.
+Normal tool and case-library access is set by the evaluation protocol, not the
+scientific task. `task.apparatus_constraints` is reserved for intrinsic limits
+of the optical experiment, such as available components, and may appear in the
+public question. It does not specify an agent's tool permissions.
 Any public renderer or release exporter must select public fields explicitly;
 it must never serialize the whole canonical record and then attempt to redact
 selected keys. For `hidden_eval`, `gold` and scoring details remain private even

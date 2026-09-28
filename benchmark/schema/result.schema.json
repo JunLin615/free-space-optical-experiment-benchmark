@@ -14,7 +14,10 @@
     "case_library_access",
     "tools_available",
     "tools_used",
+    "tool_call_count",
     "tokens",
+    "provider_usage",
+    "cost",
     "wall_time_seconds",
     "retry_count",
     "raw_answer",
@@ -56,7 +59,8 @@
       }
     },
     "tools_available": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "tools_used": { "type": "array", "items": { "type": "string" } },
+    "tools_used": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "Distinct tool identifiers used; call frequency is recorded separately." },
+    "tool_call_count": { "$ref": "#/$defs/nullableCount", "description": "Actual number of tool invocations; null means the runner could not measure it." },
     "tokens": {
       "type": "object",
       "additionalProperties": false,
@@ -67,6 +71,27 @@
         "total": { "$ref": "#/$defs/nullableCount" },
         "cached_input": { "$ref": "#/$defs/nullableCount" }
       }
+    },
+    "provider_usage": {
+      "type": ["object", "null"],
+      "description": "Raw or losslessly normalized provider usage payload, including provider-specific cache and reasoning-token fields. Null means unavailable."
+    },
+    "cost": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["amount", "currency", "pricing_reference", "pricing_snapshot_utc"],
+          "properties": {
+            "amount": {"type": "number", "minimum": 0},
+            "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+            "pricing_reference": {"type": "string", "minLength": 1, "description": "Provider price-sheet URL or immutable price-schedule identifier."},
+            "pricing_snapshot_utc": {"type": "string", "format": "date-time"}
+          }
+        }
+      ],
+      "description": "Null means cost is unknown; measured zero is an amount of 0 with pricing provenance."
     },
     "wall_time_seconds": { "type": ["number", "null"], "minimum": 0 },
     "retry_count": { "type": "integer", "minimum": 0 },

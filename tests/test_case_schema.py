@@ -105,6 +105,14 @@ class CaseSchemaTests(unittest.TestCase):
         self.assertTrue(any("certified" in issue for issue in issues))
         self.assertTrue(any("typo_gold" in issue for issue in issues))
 
+    def test_tool_access_is_not_a_scientific_case_field(self) -> None:
+        record = case_record()
+        record["task"]["allowed_resources"] = "Any scientific tool"
+        self.assertTrue(any("allowed_resources" in issue for issue in validate([self.write("tool_access.yaml", record)])))
+        del record["task"]["allowed_resources"]
+        record["task"]["apparatus_constraints"] = ["Only two steering mirrors are available."]
+        self.assertEqual(validate([self.write("apparatus.yaml", record)]), [])
+
     def test_references_and_release_metadata(self) -> None:
         record = case_record()
         record["gold"]["numerical_checks"][0]["answer_path"] = "results.missing"

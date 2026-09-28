@@ -38,7 +38,6 @@ task:
   - value: 100
     unit: ps
     symbol: target_delay
-  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1

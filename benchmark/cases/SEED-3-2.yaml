@@ -32,7 +32,6 @@ task:
     request: Identify the plane suitable for a spatial-frequency stop.
   - id: q3
     request: Explain how that intermediate plane differs from an ordinary image plane.
-  allowed_resources: Any scientific or optical tool; no product-specific implementation is required.
 answer_contract:
   format: human_explanation_plus_json_object
   schema_id: pilot_answer_v0.1
