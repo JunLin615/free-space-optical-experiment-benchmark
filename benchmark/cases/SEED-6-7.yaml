@@ -41,9 +41,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: Object with ordered_modules from source to interferometer entrance.
+    q2: Object with order_rationale and post-filter matching.
+    q3: 'Object with acceptance_metrics: array of at least three limits and measurement methods.'
   permit_additional_explanation: true
 gold:
   visibility: private

@@ -41,9 +41,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: Object with excitation_path, collection_direction, direct_beam_handling.
+    q2: Object with direct_transmission_rejection and residual_scatter explanation.
+    q3: 'Object with backgrounds: array of at least two distinct mechanisms and optional suppression methods.'
   permit_additional_explanation: true
 gold:
   visibility: private

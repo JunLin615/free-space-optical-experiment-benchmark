@@ -45,9 +45,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: Object with noise_sources and discriminating_controls or power_scaling.
+    q2: Object with absolute_rms_scaling and fractional_rms_scaling at fixed bandwidth.
+    q3: Object with high_power_limits and predicted measurement effects.
   permit_additional_explanation: true
 gold:
   visibility: private

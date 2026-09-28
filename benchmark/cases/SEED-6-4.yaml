@@ -48,9 +48,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: Object with input_controls, focusing, nonlinear_crystal, phase_matching, and output optics.
+    q2: Object with focusing_tradeoff and finite-interaction or damage limits.
+    q3: Object with separation_method, finite_isolation, and output verification.
   permit_additional_explanation: true
 gold:
   visibility: private

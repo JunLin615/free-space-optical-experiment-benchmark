@@ -41,9 +41,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: Object with excitation_focus, collection, spectral_separation, pinhole_imaging, and detector.
+    q2: Object with scan_method and maintained focal-volume-to-pinhole conjugacy.
+    q3: Object with pinhole_size, throughput, axial_selectivity, and alignment tradeoff.
   permit_additional_explanation: true
 gold:
   visibility: private

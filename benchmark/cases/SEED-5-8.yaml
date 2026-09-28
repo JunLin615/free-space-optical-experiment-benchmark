@@ -48,9 +48,10 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: 'Object with ordered_stages: array of at least three optical or spectral suppression stages and target
+      throughput.'
+    q2: Object with spectrometer_only_failure mechanisms.
+    q3: Object with passband_risks and verification.
   permit_additional_explanation: true
 gold:
   visibility: private

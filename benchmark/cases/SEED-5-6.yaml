@@ -41,9 +41,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: 'Object with first_action_appropriate: boolean and physical reason.'
+    q2: 'Object with prioritized_checks: array of at least four distinct checks and predicted findings.'
+    q3: Object with optical_background, detector_range, and measurable_consequence.
   permit_additional_explanation: true
 gold:
   visibility: private

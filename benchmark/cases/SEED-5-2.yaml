@@ -40,9 +40,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: Object with ordered optical_chain and sample_to_detector path.
+    q2: Object with rayleigh_filter_role and pinhole_role.
+    q3: Object with throughput_cost and sensitivity_to_alignment_or_aberration.
   permit_additional_explanation: true
 gold:
   visibility: private

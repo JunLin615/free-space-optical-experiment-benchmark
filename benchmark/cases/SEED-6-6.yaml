@@ -42,9 +42,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: 'Object with architectures: array of at least two distinct phase readouts.'
+    q2: Object with environmental_noise_controls and the disturbances each suppresses.
+    q3: Object with phase_displacement_relation, wavelength, pass_count, and geometry assumptions.
   permit_additional_explanation: true
 gold:
   visibility: private

@@ -43,9 +43,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: 'Object containing beat_frequency: quantity {value, unit}.'
+    q2: Object with detection_law and field_cross_term explanation.
+    q3: Object with orthogonal_polarization_effect and role_of_projection.
   permit_additional_explanation: true
   quantity_shape:
     answers.q1.beat_frequency: Quantity {value, unit}; convertible frequency units accepted.

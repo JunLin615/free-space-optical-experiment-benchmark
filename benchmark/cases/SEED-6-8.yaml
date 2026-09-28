@@ -41,9 +41,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: Object with sample_field, reference_field, phase_diversity method, and detector readout.
+    q2: Object with amplitude_observable, phase_observable, and reference calibration.
+    q3: 'Object with cross_talk_sources: array of at least two distinct mechanisms.'
   permit_additional_explanation: true
 gold:
   visibility: private

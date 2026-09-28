@@ -40,9 +40,9 @@ answer_contract:
   - answers.q2
   - answers.q3
   method_shape:
-    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q1: Object with modulation_location, reference_signal, demodulation, and measured_output.
+    q2: 'Object with frequency_constraints: array of at least four distinct mechanisms.'
+    q3: Object with high_frequency_limits and their effects on signal or phase.
   permit_additional_explanation: true
 gold:
   visibility: private

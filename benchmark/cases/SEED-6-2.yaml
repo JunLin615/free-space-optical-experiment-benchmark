@@ -66,10 +66,10 @@ answer_contract:
   - answers.q3
   - answers.q4
   method_shape:
-    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
-    q4: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q1: Object with pump_path, probe_path, delay, overlap, pump_rejection, and probe_readout.
+    q2: 'Object containing minimum_travel: quantity {value, unit}, for the whole delay interval.'
+    q3: Object with independent_time_zero_method and observable.
+    q4: 'Object with resolution_limits: array of at least three distinct physical factors.'
   permit_additional_explanation: true
   quantity_shape:
     answers.q2.minimum_travel: Quantity {value, unit}; convertible length units accepted; minimum span before
@@ -90,10 +90,10 @@ gold:
     evidence_path: answers.q3
   - id: c_q4
     severity: scored
-    predicate: Identify at least three distinct limits, such as pump-probe cross-correlation, dispersion
-      and chirp, crossing-angle or spatial-temporal coupling, and delay-stage jitter. Electronic detection
-      bandwidth affects demodulation and noise rather than the femtosecond resolution of a scanned delay
-      measurement by itself.
+    predicate: Identify at least three distinct limits, such as pump-probe cross-correlation, dispersion and
+      chirp, crossing-angle or spatial-temporal coupling, and delay-stage jitter. Electronic detection bandwidth
+      affects demodulation and noise rather than the femtosecond resolution of a scanned delay measurement
+      by itself.
     evidence_path: answers.q4
   accepted_solution_families:
   - id: probe_delay
