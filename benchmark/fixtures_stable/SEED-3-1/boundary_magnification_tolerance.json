@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-3-1",
+  "name": "boundary_magnification_tolerance",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "image_distance_in_focal_lengths": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "lateral_magnification": {
+          "value": -1.01,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "image_type": "real",
+        "orientation": "inverted"
+      }
+    }
+  },
+  "expected": {
+    "n_image_distance": {
+      "status": "pass"
+    },
+    "n_magnification": {
+      "status": "pass"
+    },
+    "c_image_character": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_magnification"
+  }
+}
