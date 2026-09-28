@@ -5,10 +5,7 @@
   "answer": {
     "answers": {
       "q1": {
-        "angle_change": {
-          "value": "1",
-          "unit": "deg"
-        }
+      "angle_change": "1 deg"
       },
       "q2": {
         "spot_displacement": {

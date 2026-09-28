@@ -1,0 +1,158 @@
+{
+  "case_id": "SEED-7-2",
+  "name": "negative_uncontrolled_intervention",
+  "answer": {
+    "answers": {
+      "q1": {
+        "causes": [
+          {
+            "id": "lens",
+            "category": "aperture_clipping",
+            "physical_process": "hard_edge_truncation",
+            "component": "lens_clear_aperture",
+            "explanation": "The expanded beam overfills the clear lens pupil, making a hard transverse edge.",
+            "prediction": {
+              "test": "inspect_near_field",
+              "outcome": "edge_truncation"
+            }
+          },
+          {
+            "id": "pinhole",
+            "category": "pinhole_clipping",
+            "physical_process": "spatial_filter_truncation",
+            "component": "filter_pinhole",
+            "explanation": "An undersized pinhole rejects part of the focused spatial spectrum.",
+            "prediction": {
+              "test": "remove_or_enlarge_pinhole",
+              "outcome": "rings_weaken"
+            }
+          },
+          {
+            "id": "surface",
+            "category": "surface_defect",
+            "physical_process": "scatter_from_defect",
+            "component": "lens_surface",
+            "explanation": "Dust or local damage on a lens scatters coherent light into a ringed pattern.",
+            "prediction": {
+              "test": "inspect_surface",
+              "outcome": "defect_visible"
+            }
+          },
+          {
+            "id": "aberration",
+            "category": "aberration",
+            "physical_process": "wavefront_phase_error",
+            "component": "lens",
+            "explanation": "Lens aberration distorts the outgoing wavefront even when the beam diameter is correct.",
+            "prediction": {
+              "test": "measure_wavefront",
+              "outcome": "wavefront_error"
+            }
+          },
+          {
+            "id": "alignment",
+            "category": "misalignment",
+            "physical_process": "beam_optic_axis_mismatch",
+            "component": "lens_mount",
+            "explanation": "A decentered or tilted expander lens makes the beam sample the pupil asymmetrically.",
+            "prediction": {
+              "test": "realign_lenses",
+              "outcome": "rings_weaken"
+            }
+          },
+          {
+            "id": "source",
+            "category": "input_mode",
+            "physical_process": "upstream_spatial_structure",
+            "component": "input_beam",
+            "explanation": "A poor input spatial mode carries structure through the expander.",
+            "prediction": {
+              "test": "inspect_input_before_expander",
+              "outcome": "rings_present_upstream"
+            }
+          }
+        ]
+      },
+      "q2": {
+        "aperture_causes": [
+          {
+            "cause_id": "lens",
+            "aperture_type": "lens_clear_aperture",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          },
+          {
+            "cause_id": "pinhole",
+            "aperture_type": "filter_pinhole",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          }
+        ]
+      },
+      "q3": {
+        "steps": [
+          {
+            "operation": "inspect_near_field",
+            "target_cause_ids": [
+              "lens"
+            ],
+            "controls": [
+              "fixed_input",
+              "fixed_exposure"
+            ],
+            "if_present": "edge_truncation",
+            "if_absent": "full_profile",
+            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it."
+          },
+          {
+            "operation": "remove_or_enlarge_pinhole",
+            "target_cause_ids": [
+              "pinhole"
+            ],
+            "controls": [
+              "fixed_input"
+            ],
+            "if_present": "rings_weaken",
+            "if_absent": "rings_unchanged",
+            "inference": "If rings weaken after enlarging the pinhole, spatial-filter truncation is implicated."
+          },
+          {
+            "operation": "substitute_optic",
+            "target_cause_ids": [
+              "surface"
+            ],
+            "controls": [
+              "fixed_input",
+              "one_change_at_a_time"
+            ],
+            "if_present": "rings_weaken",
+            "if_absent": "rings_unchanged",
+            "inference": "A cleaner substitute reducing rings implicates the removed optic."
+          },
+          {
+            "operation": "inspect_input_before_expander",
+            "target_cause_ids": [
+              "source"
+            ],
+            "controls": [
+              "fixed_exposure"
+            ],
+            "if_present": "rings_present_upstream",
+            "if_absent": "rings_absent_upstream",
+            "inference": "Rings already upstream indicate input-mode structure rather than the expander."
+          }
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_causes": {
+      "status": "pass"
+    },
+    "c_apertures": {
+      "status": "pass"
+    },
+    "c_diagnosis": {
+      "status": "fail",
+      "failure_class": "non_discriminating_test"
+    }
+  }
+}

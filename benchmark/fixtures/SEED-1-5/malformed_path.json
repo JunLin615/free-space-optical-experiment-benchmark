@@ -5,10 +5,7 @@
   "answer": {
     "answers": {
       "q1": {
-        "path_change": {
-          "value": true,
-          "unit": "mm"
-        }
+      "path_change": "2 mm"
       },
       "q2": {
         "delay_change": {
