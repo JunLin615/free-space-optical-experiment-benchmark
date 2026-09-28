@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-5-3
 legacy_id: '5.3'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -43,6 +43,10 @@ answer_contract:
   - answers.q1
   - answers.q2
   - answers.q3
+  method_shape:
+    q1: 'Object with sample and reference channel objects (contains_sample: boolean, observes: string), shared_source: boolean, timing: string, comparison: string, gain_calibrated: boolean, baseline_calibrated: boolean, sample_response_retained: boolean, optional reference_normalized: boolean, and resolution (noise_floor_fraction and systematic_floor_fraction as quantity objects in unit 1, linear_unsaturated: boolean, verification: string).'
+    q2: 'Object with tracks: string, mechanism: string, sample_response_retained: boolean, and optional reference_normalized: boolean. Explain which fluctuations are common to both channels and how the fractional sample signal survives.'
+    q3: 'Object with residuals: array of distinct named non-common error mechanisms.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -110,3 +114,7 @@ validation:
   - positive_and_adversarial_answer_fixtures_pass
   implemented_checks: []
   notes: Semantic rubric is a draft; this case is not eligible for scored release.
+    Revision 0.2.0 specifies channel observables and a declared sensitivity plan
+    because a source/reference ratio alone cannot establish detection of a 1e-5
+    change. Planned noise floors are not measured evidence; scorer success does
+    not promote this case beyond specified status.

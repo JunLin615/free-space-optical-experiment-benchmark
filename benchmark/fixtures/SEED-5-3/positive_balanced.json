@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-5-3",
+  "kind": "alternative_valid",
+  "name": "Balanced readout with gain matching and reference normalization",
+  "answer": {
+    "answers": {
+      "q1": {
+        "sample": {"contains_sample": true, "observes": "transmitted_intensity"},
+        "reference": {"contains_sample": false, "observes": "incident_intensity"},
+        "shared_source": true,
+        "timing": "synchronized",
+        "comparison": "calibrated_balanced_difference",
+        "gain_calibrated": true,
+        "baseline_calibrated": true,
+        "reference_normalized": true,
+        "sample_response_retained": true,
+        "resolution": {
+          "noise_floor_fraction": {"value": 1e-6, "unit": "1"},
+          "systematic_floor_fraction": {"value": 4e-6, "unit": "1"},
+          "linear_unsaturated": true,
+          "verification": "calibrated_attenuation"
+        }
+      },
+      "q2": {"tracks": "common_laser_intensity", "mechanism": "matched_gain_common_mode_rejection", "reference_normalized": true, "sample_response_retained": true},
+      "q3": {"residuals": ["gain_mismatch", "path_mismatch", "shot_noise"]}
+    }
+  },
+  "expected": {
+    "c_channels": {"status": "pass"},
+    "c_normalize": {"status": "pass"},
+    "c_residuals": {"status": "pass"}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "adversarial",
+  "name": "Persuasive prose without typed physical claims must not pass",
+  "answer": {
+    "answers": {
+      "q1": "Certainly impossible due to quantum optics and superb engineering considerations.",
+      "q2": "It follows from conservation of radiance, although no operational relationship is given.",
+      "q3": "One generally trades against the other."
+    }
+  },
+  "expected": {
+    "c_impossible": {"status": "unresolved", "failure_class": "unsupported_answer_shape"},
+    "c_invariant": {"status": "unresolved", "failure_class": "unsupported_answer_shape"},
+    "c_tradeoff": {"status": "unresolved", "failure_class": "unsupported_answer_shape"}
+  }
+}

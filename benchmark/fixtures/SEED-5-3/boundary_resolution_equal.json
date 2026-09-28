@@ -1,0 +1,32 @@
+{
+  "case_id": "SEED-5-3",
+  "kind": "boundary",
+  "name": "Declared error floor equal to the target cannot resolve it",
+  "answer": {
+    "answers": {
+      "q1": {
+        "sample": {"contains_sample": true, "observes": "transmitted_power"},
+        "reference": {"contains_sample": false, "observes": "source_power"},
+        "shared_source": true,
+        "timing": "simultaneous",
+        "comparison": "calibrated_ratio",
+        "gain_calibrated": true,
+        "baseline_calibrated": true,
+        "sample_response_retained": true,
+        "resolution": {
+          "noise_floor_fraction": {"value": 6e-6, "unit": "1"},
+          "systematic_floor_fraction": {"value": 4e-6, "unit": "1"},
+          "linear_unsaturated": true,
+          "verification": "blank_and_known_step"
+        }
+      },
+      "q2": {"tracks": "common_source_power", "mechanism": "multiplicative_ratio_cancellation", "sample_response_retained": true},
+      "q3": {"residuals": ["detector_drift", "detector_nonlinearity"]}
+    }
+  },
+  "expected": {
+    "c_channels": {"status": "fail", "failure_class": "dynamic_range"},
+    "c_normalize": {"status": "pass"},
+    "c_residuals": {"status": "pass"}
+  }
+}
