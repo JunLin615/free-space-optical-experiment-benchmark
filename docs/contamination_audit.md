@@ -26,3 +26,21 @@ future truly hidden evaluations need a family-disjoint holdout policy and
 additional scored families. Until then, hidden-seed infrastructure is a
 portability and accidental-leakage demonstration, not an uncontaminated
 generalization benchmark.
+
+## Family-disjoint policy screen
+
+The v1 hidden-evaluation checker now compares a private selection against the
+committed public variant plan at three lineage levels: canonical parent,
+concept family, and generator template. It also screens generated private
+records against public records for identical scientific payload hashes,
+normalized task structure after numeric substitution, and full typed-given
+tuples in SI units. Duplicate private instances and stale release/generator
+pins fail. Synthetic tests exercise all these policy boundaries without a
+private seed in the repository. See [hidden evaluation](hidden_evaluation.md)
+for the external bundle and commitment workflow.
+
+The screen is deliberately conservative. It does not prove that two differently
+worded tasks are semantically unrelated, nor can it exclude training exposure
+to the public canonical parents or general optics. Once new generator families
+are scientifically qualified, their proposed concept labels and structural
+sibling relationships need review before enabling hidden eligibility.

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "External hidden evaluation selection policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "release_id", "generator_version", "seed", "family_count", "selections"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "release_id": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+-rc[0-9]+$"},
+    "generator_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "seed": {"type": "string", "pattern": "^[0-9a-fA-F]{32,}$"},
+    "family_count": {"type": "integer", "minimum": 1},
+    "selections": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["parent_case_id", "variant_type"],
+        "properties": {
+          "parent_case_id": {"type": "string", "pattern": "^SEED-[1-8]-[1-8]$"},
+          "variant_type": {"type": "string", "minLength": 1},
+          "instance_index": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  }
+}
