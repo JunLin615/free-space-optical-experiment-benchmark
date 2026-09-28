@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Free-Space Optical Experimental Reasoning — Pilot Questions</title>
+  <title>Free-Space Optical Experimental Reasoning — Question Bank</title>
   <style>
     body { max-width: 52rem; margin: 2rem auto; padding: 0 1.25rem; font: 1rem/1.6 system-ui, sans-serif; color: #1c2630; }
     h1, h2, h3 { line-height: 1.25; }
@@ -13,7 +13,7 @@
 </head>
 <body>
   <main>
-    <h1>Free-Space Optical Experimental Reasoning — Pilot Questions</h1>
+    <h1>Free-Space Optical Experimental Reasoning — Question Bank</h1>
     <p>Question bank generated from canonical case files.</p>
     <section class="case" id="SEED-1-1">
       <h2>SEED-1-1 — Mirror rotation and far-field displacement</h2>
@@ -28,6 +28,45 @@
         <li>Find the change in direction of the reflected beam.</li>
         <li>Estimate the transverse displacement of the spot on the screen.</li>
         <li>Identify the most direct geometric quantity to change if the displacement must fall to one quarter of its original value.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-1-2">
+      <h2>SEED-1-2 — Establishing an axis with two steering mirrors and two apertures</h2>
+      <p>A collimated laser must propagate at a specified height and direction. Two adjustable steering mirrors and two well-separated apertures are available. The aperture centers define the target output line and are reachable with the available mirror travel.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Describe a stable procedure for aligning the beam through both aperture centers.</li>
+        <li>Explain why centering only at the distant aperture does not establish the desired line.</li>
+        <li>Give a measurable convergence check for the alignment.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-1-3">
+      <h2>SEED-1-3 — Parallel translation of a collimated beam</h2>
+      <p>A horizontal collimated beam must be displaced laterally by 30 mm at the same height. The output must propagate forward parallel to the input.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>lateral offset = 30 mm</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Describe a feasible arrangement using the minimum of two plane mirrors.</li>
+        <li>State the relative mirror orientation and path-geometry condition that restores the propagation direction.</li>
+        <li>Explain why one ordinary plane-mirror reflection cannot generally provide this pure translation.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-1-4">
+      <h2>SEED-1-4 — Raising beam height with a two-mirror periscope</h2>
+      <p>A horizontal collimated input beam at 50 mm height must leave at 100 mm height, propagating parallel to the input. Assume a suitable clear vertical path is available for the two-mirror layout.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>input height = 50 mm</li>
+        <li>output height = 100 mm</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Describe a two-mirror implementation of the height change.</li>
+        <li>Name a geometric or polarization-related property that the layout may change in addition to height.</li>
+        <li>Give an experimental test that distinguishes true input-output parallelism from merely hitting one downstream point.</li>
       </ol>
     </section>
     <section class="case" id="SEED-1-5">
@@ -75,6 +114,16 @@
         <li>State whether the same linear-polarization rule can be applied directly to circularly polarized input.</li>
       </ol>
     </section>
+    <section class="case" id="SEED-1-8">
+      <h2>SEED-1-8 — Continuously adjustable free-space attenuation</h2>
+      <p>A linearly polarized continuous-wave laser needs a wide continuously adjustable transmitted power range. The useful output direction should remain essentially fixed, and an absorbing element should not carry the main attenuation load.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Give a standard free-space optical arrangement.</li>
+        <li>Explain how the chosen control changes the power delivered to the useful output.</li>
+        <li>State how the unused output should be handled.</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-2-1">
       <h2>SEED-2-1 — Diffraction-limited focus scale</h2>
       <p>An approximately collimated Gaussian beam at 532 nm enters a thin lens of focal length 100 mm. Its 1/e² intensity radius at the lens is about 1.0 mm, and the lens aperture is sufficiently large.</p>
@@ -91,6 +140,93 @@
         <li>If the incident beam radius doubles and other conditions stay fixed, how does the ideal waist radius change?</li>
       </ol>
     </section>
+    <section class="case" id="SEED-2-2">
+      <h2>SEED-2-2 — Designing a fivefold afocal beam expander</h2>
+      <p>An approximately collimated beam has a 1/e² intensity diameter near 1.5 mm. A two-lens afocal system should expand it to about 7.5 mm. Consider a first-order paraxial design with adequate clear apertures.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>input diameter = 1.5 mm</li>
+        <li>output diameter = 7.5 mm</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>State the required magnitude of the focal-length ratio and identify the expansion direction.</li>
+        <li>Give one valid focal-length pair each for a Keplerian and a Galilean expander, including lens signs and order.</li>
+        <li>Compare whether each layout forms a real internal focus for the stated propagation direction.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-2-3">
+      <h2>SEED-2-3 — Expanding and spatially filtering high-peak-power pulses</h2>
+      <p>An 800 nm, 100 fs, 1 mJ pulsed laser must be expanded by approximately fourfold. High-spatial-frequency beam artifacts should also be reduced. The input beam diameter, pulse shape, optic ratings, and environment have not yet been specified.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>wavelength = 800 nm</li>
+        <li>pulse duration = 100 fs</li>
+        <li>pulse energy = 1 mJ</li>
+        <li>expansion factor = 4</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a feasible expansion and beam-cleaning architecture, identifying conditions under which it can be used.</li>
+        <li>Identify the principal damage or breakdown locations and the physical reason for the risk.</li>
+        <li>If a pinhole filter is selected, name the design quantities and checks needed before it can be considered safe and useful.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-2-4">
+      <h2>SEED-2-4 — Rayleigh range after doubling a Gaussian waist</h2>
+      <p>A Gaussian beam waist has 1/e² intensity radius 50 μm. A redesigned free-space optical path increases the waist radius to 100 μm at the same wavelength and beam quality. For any peak-intensity comparison, hold the total beam power fixed.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>initial waist radius = 50 um</li>
+        <li>final waist radius = 100 um</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>By what factor does the Rayleigh range change?</li>
+        <li>By what factor does the far-field half-angle divergence change?</li>
+        <li>Explain why a larger waist is not preferable for every application.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-2-5">
+      <h2>SEED-2-5 — Diagnosing higher-order modes in cavity coupling</h2>
+      <p>A laser is coupled into a stable free-space optical cavity. Scanning laser frequency reveals prominent higher-order transverse-mode resonances in addition to the fundamental mode. The resonance peaks themselves are sufficiently narrow.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Which should be investigated first, frequency linewidth or spatial mode matching, and why?</li>
+        <li>Name at least three distinct spatial parameters that need matching to the cavity mode.</li>
+        <li>Propose an adjustment and measurement sequence to improve fundamental-mode coupling.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-2-6">
+      <h2>SEED-2-6 — Circularizing an elliptical free-space beam</h2>
+      <p>A semiconductor laser output is approximately collimated but strongly elliptical. Its horizontal-to-vertical 1/e² beam-diameter ratio is about 3:1. A downstream free-space system would benefit from a nearly circular beam.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>horizontal to vertical diameter ratio = 3</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Give at least two distinct classes of free-space optics that could adjust the two axes differently.</li>
+        <li>Explain why an ordinary rotationally symmetric two-spherical-lens telescope cannot independently set horizontal and vertical magnification.</li>
+        <li>Describe measurements that verify circularization and its propagation behavior.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-2-7">
+      <h2>SEED-2-7 — Gaussian aperture clipping and diffraction</h2>
+      <p>At a lens, a centered circular Gaussian beam has 1/e² intensity radius 4 mm. The lens has a circular clear-aperture radius of 5 mm. First consider ideal geometric clipping of this beam; then consider diffraction and alignment margins.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>beam radius = 4 mm</li>
+        <li>clear aperture radius = 5 mm</li>
+        <li>target geometric loss = 1 percent</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Is this aperture much larger than the beam? Estimate the ideal centered fraction of power geometrically clipped.</li>
+        <li>Describe at least two physically distinct consequences of finite-aperture truncation.</li>
+        <li>For no more than 1% ideal geometric clipping, estimate the minimum aperture radius and explain why a real design may need a larger one.</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-2-8">
       <h2>SEED-2-8 — Can beam size and divergence both shrink tenfold?</h2>
       <p>A stable collimated free-space beam enters an ideal, entirely passive, lossless free-space optical system. A proposal claims that the system can reduce its transverse size tenfold and its far-field divergence tenfold while preserving the same power and wavelength.</p>
@@ -105,6 +241,24 @@
         <li>Explain what usually happens to one quantity if only the other is reduced.</li>
       </ol>
     </section>
+    <section class="case" id="SEED-3-1">
+      <h2>SEED-3-1 — Single-lens conjugates at twice the focal length</h2>
+      <p>An object is placed at a distance 2f in front of an ideal positive thin lens of focal length f.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>object distance in focal lengths = 2</li>
+      </ul>
+      <h3>Assumptions</h3>
+      <ul>
+        <li>Paraxial imaging in air; f is positive, and the object lies on the incident side.</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Where is the image formed? Express its distance behind the lens in units of f.</li>
+        <li>What is the signed transverse magnification?</li>
+        <li>Is the image real or virtual, upright or inverted?</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-3-2">
       <h2>SEED-3-2 — Unity-magnification relay with an accessible Fourier plane</h2>
       <p>An intensity pattern in one plane must be relayed without magnification to another, distant plane, with room between them for a stop.</p>
@@ -113,6 +267,81 @@
         <li>Give the basic layout of a two-lens relay.</li>
         <li>Identify the plane suitable for a spatial-frequency stop.</li>
         <li>Explain how that intermediate plane differs from an ordinary image plane.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-3">
+      <h2>SEED-3-3 — Central opaque stop in a Fourier plane</h2>
+      <p>A small opaque circular stop is centered on the Fourier plane of an ideal coherent 4f imaging system, blocking low spatial frequencies.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Predict the main change in the output image.</li>
+        <li>Is this closer to low-pass or high-pass spatial filtering?</li>
+        <li>Explain why edges and fine detail may become relatively prominent.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-4">
+      <h2>SEED-3-4 — Why an image-plane pinhole is not a Fourier filter</h2>
+      <p>A proposed design claims that placing a small pinhole at any sharp image plane implements standard Fourier spatial filtering.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Assess the claim.</li>
+        <li>Where should a pinhole be placed to select spatial frequencies in the standard arrangement?</li>
+        <li>What does a pinhole at an image plane select, compared with one at a Fourier plane?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-5">
+      <h2>SEED-3-5 — Entrance-slit width and spectral resolution</h2>
+      <p>A free-space grating spectrometer has an entrance slit. With all other settings fixed, its slit width is increased fourfold.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>How does transmitted optical flux usually change?</li>
+        <li>How does instrument-limited spectral resolution usually change?</li>
+        <li>Why is the narrowest possible slit not always the best choice?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-6">
+      <h2>SEED-3-6 — Independent access to field and pupil conjugates</h2>
+      <p>An imaging system needs a spatial-selection stop at an object-conjugate plane and an adjustable aperture at a pupil-conjugate plane.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Why should the two stops not simply be placed at one arbitrary common plane?</li>
+        <li>Describe an optical-relay approach that gives access to both required conjugates.</li>
+        <li>What does each stop control?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-7">
+      <h2>SEED-3-7 — Diffraction-limited lateral resolution</h2>
+      <p>A microscope objective images at wavelength 550 nm with numerical aperture 0.50. Neglect aberrations and use the Rayleigh lateral-resolution estimate.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>wavelength = 550 nm</li>
+        <li>numerical aperture = 0.5</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Estimate the lateral diffraction-limited separation in micrometers.</li>
+        <li>Is the scale closer to 0.1, 1 or 10 micrometers?</li>
+        <li>What is the typical effect of increasing numerical aperture on depth of focus?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-3-8">
+      <h2>SEED-3-8 — Measuring far-field angular distribution with a lens</h2>
+      <p>A laser beam far-field angular distribution must be measured, but the laboratory cannot place a detector at the physical far-field distance.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose an equivalent lens-based angular measurement.</li>
+        <li>At which plane should the detector be located?</li>
+        <li>How does a detector transverse coordinate map approximately to propagation angle?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-1">
+      <h2>SEED-4-1 — Circular polarization from a quarter-wave plate</h2>
+      <p>Linearly polarized light enters an ideal quarter-wave plate. Its incident polarization direction is 45 degrees from the fast axis.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>What is the output polarization state?</li>
+        <li>What if the angle is changed to 0 degrees?</li>
+        <li>What determines the handedness assigned to the circular output?</li>
       </ol>
     </section>
     <section class="case" id="SEED-4-2">
@@ -129,6 +358,86 @@
         <li>What changes if the mirror moves only λ/4?</li>
       </ol>
     </section>
+    <section class="case" id="SEED-4-3">
+      <h2>SEED-4-3 — Diagnosing Mach-Zehnder fringe drift</h2>
+      <p>A Mach-Zehnder interferometer gives high-contrast fringes, but the fringe pattern drifts slowly over tens of seconds.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Give at least four distinct plausible classes of cause.</li>
+        <li>Propose a useful sequence of discriminating checks.</li>
+        <li>Why would increasing laser power alone usually not solve this?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-4">
+      <h2>SEED-4-4 — Single-pass phase measurement through a sample</h2>
+      <p>A transparent sample induces a phase shift. The probe may traverse the sample only once; it cannot be reflected back through it.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a suitable interferometer topology.</li>
+        <li>Where should the sample be placed?</li>
+        <li>Give at least one method to improve phase stability.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-5">
+      <h2>SEED-4-5 — Visibility of white-light interference</h2>
+      <p>A broadband white-light source is split into two arms and recombined. Their optical path difference is 5 mm; geometrical overlap is otherwise good.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Would stable visible white-light fringes normally be expected?</li>
+        <li>Which physical conditions govern fringe visibility?</li>
+        <li>How should the setup be adjusted to make fringes more likely?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-6">
+      <h2>SEED-4-6 — Limits of Sagnac common-mode rejection</h2>
+      <p>Someone claims that a Sagnac interferometer needs no vibration protection because every disturbance cancels automatically.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Assess the claim.</li>
+        <li>Which disturbances can be strongly rejected as common mode?</li>
+        <li>Give at least one disturbance that will not cancel completely.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-7">
+      <h2>SEED-4-7 — Spatial mode matching into a Fabry-Perot cavity</h2>
+      <p>A single-frequency laser must couple efficiently into a stable two-mirror cavity. Frequency scanning is available, but little incident power enters the fundamental transverse mode.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>What condition besides frequency resonance must be met?</li>
+        <li>List at least three useful alignment or mode-shaping degrees of freedom.</li>
+        <li>Which measurements show that mode matching has improved?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-4-8">
+      <h2>SEED-4-8 — Polarization-based balanced detection of small rotation</h2>
+      <p>A small polarization rotation must be converted into a differential electrical signal while suppressing fluctuations in total laser power.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a polarization analyzer and two-detector optical path, including the input operating point.</li>
+        <li>Explain how the differential response suppresses common-mode intensity noise and detects a small rotation.</li>
+        <li>What errors result from imbalance between optical paths or detectors, and how would you check the balance?</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-1">
+      <h2>SEED-5-1 — Right-angle fluorescence collection</h2>
+      <p>Monochromatic light excites a transparent sample. The fluorescence to be measured is much weaker than the excitation light.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design the basic geometry of excitation and collection directions.</li>
+        <li>Explain why collection near 90 degrees to the excitation direction is common.</li>
+        <li>Identify at least two distinct backgrounds that still require additional suppression.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-2">
+      <h2>SEED-5-2 — Confocal Raman microscopy</h2>
+      <p>A solid sample requires spatially localized Raman spectroscopy with axial sectioning.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Lay out the essential optical chain from laser to sample and then to spectrometer.</li>
+        <li>Distinguish the functions of Rayleigh-rejection optics and the confocal pinhole.</li>
+        <li>Explain the main cost of making the pinhole too small.</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-5-3">
       <h2>SEED-5-3 — Weak absorption with a reference channel</h2>
       <p>A sample produces a relative transmission change of about 10^-5. The laser also has noticeable slow power drift and intensity noise.</p>
@@ -143,6 +452,169 @@
         <li>Identify errors that an intensity ratio alone does not automatically remove.</li>
       </ol>
     </section>
+    <section class="case" id="SEED-5-4">
+      <h2>SEED-5-4 — Chopping and lock-in detection</h2>
+      <p>A signal near DC is buried under 1/f noise. A mechanical chopper and lock-in amplifier are available.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Explain the complete modulation and synchronous-detection logic.</li>
+        <li>Give at least four distinct constraints on the chopper-frequency choice.</li>
+        <li>Explain why the highest available chopping frequency is not automatically best.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-5">
+      <h2>SEED-5-5 — Optical heterodyne beat</h2>
+      <p>Signal light has optical frequency f0. A local-oscillator beam has frequency f0 + 80 MHz. The beams have matching polarization and good spatial overlap on a photodetector fast enough to resolve their beat.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>lo frequency offset = 80 MHz</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>What is the key new electrical frequency component?</li>
+        <li>Explain the physical origin of this component.</li>
+        <li>Predict what happens if the beams instead have orthogonal polarizations and there is no polarization projector before the detector.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-6">
+      <h2>SEED-5-6 — Detector saturation hiding a Raman signal</h2>
+      <p>In a Raman spectrometer, the detector repeatedly reaches full scale while the desired weak Raman peak cannot be distinguished.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Assess whether increasing laser power is a sensible first action.</li>
+        <li>Give at least four distinct higher-priority checks or corrections.</li>
+        <li>Explain why dynamic range is a system-level issue.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-7">
+      <h2>SEED-5-7 — Noise limits of balanced detection</h2>
+      <p>Balanced photodetection has strongly suppressed common laser relative-intensity noise. At fixed electrical measurement bandwidth, the rms differential noise normalized to the mean photocurrent initially improves as power rises, but its improvement later stalls.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>List noise mechanisms or nonidealities that could now dominate and describe how to distinguish them.</li>
+        <li>State how ideal shot-noise rms current and fractional shot noise scale with mean optical power at fixed bandwidth and responsivity.</li>
+        <li>Identify limits imposed by further power increases.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-5-8">
+      <h2>SEED-5-8 — Background rejection for a narrow emission line</h2>
+      <p>A desired emission line lies near 650.0 nm on a broadband continuum, while scattered 532 nm excitation is very strong. Free-space optical filters and a spectrometer are available.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>target line = 650.0 nm</li>
+        <li>excitation wavelength = 532.0 nm</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose at least three stages of background suppression between sample and detector.</li>
+        <li>Explain why relying only on the spectrometer is usually suboptimal.</li>
+        <li>Explain the risk of an excessively narrow optical passband.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-1">
+      <h2>SEED-6-1 — Small refractive-index change in a transparent sample</h2>
+      <p>A transparent sample of fixed thickness develops a small refractive-index change over time. A stable single-frequency laser is available, and high phase sensitivity is needed.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose at least two feasible free-space measurement architectures.</li>
+        <li>Compare their stability, sensitivity, and flexibility for placing the sample.</li>
+        <li>Describe a calibration from measured phase change to refractive-index change.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-2">
+      <h2>SEED-6-2 — Femtosecond pump-probe transient transmission</h2>
+      <p>A fixed-repetition-rate 800 nm source produces 100 fs pulses. Measure pump-induced transient transmission from −2 ps to +500 ps, targeting approximately 150 fs temporal resolution. A folded retroreflector delay stage changes the optical path by twice its mechanical travel.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>central wavelength = 800 nm</li>
+        <li>pulse duration = 100 fs</li>
+        <li>delay start = -2 ps</li>
+        <li>delay end = 500 ps</li>
+        <li>target resolution = 150 fs</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design the complete free-space pump-probe architecture.</li>
+        <li>Estimate the minimum mechanical scan span of the folded delay line across the stated interval, before setup margin.</li>
+        <li>Describe an independent way to locate time zero.</li>
+        <li>Identify at least three distinct limits on effective temporal resolution.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-3">
+      <h2>SEED-6-3 — Multipass gas absorption cell</h2>
+      <p>A gas cell is about 20 cm long, but the desired effective absorption path is tens of metres without a comparable increase in straight bench length.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a free-space multipass layout.</li>
+        <li>Explain the role of a multi-spot pattern on the mirrors.</li>
+        <li>Identify at least four important design constraints.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-4">
+      <h2>SEED-6-4 — Second-harmonic generation from 1064 nm</h2>
+      <p>A continuous or quasi-continuous 1064 nm beam must generate 532 nm light in a nonlinear crystal in a free-space setup, with the remaining fundamental separated from the output.</p>
+      <h3>Given quantities</h3>
+      <ul>
+        <li>fundamental wavelength = 1064 nm</li>
+        <li>second harmonic wavelength = 532 nm</li>
+      </ul>
+      <h3>Questions</h3>
+      <ol>
+        <li>Identify the key components and controls in the optical path.</li>
+        <li>Explain why arbitrarily tighter focusing cannot increase conversion efficiency indefinitely.</li>
+        <li>Explain how to separate 532 nm light from residual 1064 nm light.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-5">
+      <h2>SEED-6-5 — Confocal fluorescence depth scanning</h2>
+      <p>Fluorescence inside a transparent sample must be scanned at different depths while suppressing out-of-focus background.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design the confocal excitation and collection path.</li>
+        <li>State which conjugate relationship must be maintained during depth scanning.</li>
+        <li>Describe the tradeoff between pinhole size, signal, and axial selectivity.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-6">
+      <h2>SEED-6-6 — Sensitive interferometric mirror displacement</h2>
+      <p>Measure nanometre-scale axial displacement of a reflective mirror using a stable single-frequency laser despite air currents and mechanical vibration.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose at least two interferometric architectures.</li>
+        <li>Explain how to improve immunity to environmental perturbations.</li>
+        <li>Give the conversion from measured fringe phase change to axial mirror displacement.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-7">
+      <h2>SEED-6-7 — Mode cleaning before interferometry</h2>
+      <p>A visible continuous-wave beam contains obvious speckle and high-spatial-frequency wavefront artifacts before a high-contrast interferometer.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design a conditioning chain from source to interferometer entrance.</li>
+        <li>Explain the reason for the order of the modules.</li>
+        <li>Give at least three measurable output acceptance criteria.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-6-8">
+      <h2>SEED-6-8 — Joint phase and intensity measurement</h2>
+      <p>A sample induces both weak absorption and a small phase shift. Obtain both observables in as nearly the same experimental run as practical.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a free-space interferometric measurement.</li>
+        <li>Explain how the observables separately determine amplitude or transmission and phase.</li>
+        <li>Identify at least two nonidealities that couple the inferred amplitude and phase.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-1">
+      <h2>SEED-7-1 — Why two alignment apertures cannot both be centered</h2>
+      <p>In a two-mirror, two-aperture alignment setup, adjustment can center the beam in either aperture, but it cannot be made to pass through both aperture centers at once. Diagnose the setup before assuming that more mirror adjustment will solve it.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>List at least four plausible causes.</li>
+        <li>Separate alignment-procedure faults from geometric or hardware limits.</li>
+        <li>Give a minimal diagnostic sequence.</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-7-2">
       <h2>SEED-7-2 — Strong diffraction rings after beam expansion</h2>
       <p>A two-lens beam expander has reached approximately the target output beam size, but the far field shows strong ring-like structure.</p>
@@ -153,6 +625,78 @@
         <li>Give a stepwise troubleshooting method.</li>
       </ol>
     </section>
+    <section class="case" id="SEED-7-3">
+      <h2>SEED-7-3 — Low interferometric fringe visibility</h2>
+      <p>Each arm of a two-arm interferometer makes a clear spot on the camera separately, but recombining them produces only shallow fringes.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>List at least six distinct causes of low visibility.</li>
+        <li>Prioritize diagnostic checks.</li>
+        <li>Explain why overlapping camera spots are insufficient.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-4">
+      <h2>SEED-7-4 — Independently verify a fivefold beam expander</h2>
+      <p>A beam-expander module is labeled 5×. Verify its optical performance independently rather than reading the focal-length labels.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose at least two independent experimental measurements.</li>
+        <li>Explain how to handle imperfect input or output collimation.</li>
+        <li>Define acceptance quantities.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-5">
+      <h2>SEED-7-5 — Can a half-wave plate attenuate circular polarization?</h2>
+      <p>A proposal claims that circularly polarized light passing through a rotatable ideal half-wave plate and then a fixed polarizing beam splitter can provide continuous 0%–100% transmitted-power control.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Assess the claim under ideal conditions.</li>
+        <li>Explain the polarization transformation and analyzer response.</li>
+        <li>Give a workable modification.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-6">
+      <h2>SEED-7-6 — Lossless purification of unpolarized light</h2>
+      <p>The input is completely unpolarized light. The goal is one pure linear-polarization output in the same spatial mode and direction, with no active gain and no loss of optical power.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Decide whether ordinary passive polarization optics can meet all conditions.</li>
+        <li>Explain the physical constraint.</li>
+        <li>Give a standard method if optical loss is allowed.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-7">
+      <h2>SEED-7-7 — No transient signal in a pump–probe experiment</h2>
+      <p>Pump and probe spots appear to overlap on the sample surface, but scanning the delay line never yields a distinguishable transient signal.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Give at least eight distinct plausible causes.</li>
+        <li>Order the diagnostic sequence from basic checks to advanced checks.</li>
+        <li>Show how to verify independently that the delay scan includes time zero.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-7-8">
+      <h2>SEED-7-8 — Can focus shrink while depth of focus grows?</h2>
+      <p>At fixed wavelength and fixed input beam quality, a passive free-space design is asked to make the focused beam radius progressively smaller while simultaneously making the Rayleigh range progressively longer.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Decide whether the simultaneous trend is physically self-consistent for a paraxial Gaussian beam.</li>
+        <li>State the governing relation and its assumptions.</li>
+        <li>State the usual cost of a smaller focus.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-1">
+      <h2>SEED-8-1 — Low-cost free-space measurement of weak absorption</h2>
+      <p>Design a free-space system to measure a sample-transmission change of about 10^-4 despite appreciable slow laser-power drift. Fiber must not be the principal transport path.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Give a complete optical and detection architecture.</li>
+        <li>Explain how source drift is suppressed or measured.</li>
+        <li>Protect the detectors from saturation while preserving sensitivity.</li>
+        <li>Describe blank and calibration measurements.</li>
+        <li>Give at least three genuinely distinct workable implementations.</li>
+      </ol>
+    </section>
     <section class="case" id="SEED-8-2">
       <h2>SEED-8-2 — Imaging a weak phase object</h2>
       <p>A sample absorbs almost no light but has small spatial refractive-index variations. In free space, phase information must be converted into measurable intensity or the phase must be recovered directly.</p>
@@ -161,6 +705,70 @@
         <li>Propose at least two approaches based on different physical principles.</li>
         <li>State the key reference or spatial-filtering conditions for each approach.</li>
         <li>Compare their quantitative capability, stability and system complexity.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-3">
+      <h2>SEED-8-3 — Polarimetric imaging of a thin birefringent sample</h2>
+      <p>Map the local linear-birefringence axis and phase retardance of a thin sample over a two-dimensional field. State a sample model under which these quantities are identifiable.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design illumination, polarization preparation, sample, analyzer, and imaging paths.</li>
+        <li>Identify enough independent polarization settings or measurements to support inversion.</li>
+        <li>Explain the inversion, calibration, and remaining ambiguities.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-4">
+      <h2>SEED-8-4 — Subpicosecond nonlinear-response measurement</h2>
+      <p>Measure a sample&#x27;s weak response after ultrafast excitation with subpicosecond time resolution in the presence of a strong scattering background.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design pump and probe paths.</li>
+        <li>Explain the combined time-resolution limits.</li>
+        <li>Suppress scattered background without deleting the signal.</li>
+        <li>Demonstrate that the observed response is pump induced.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-5">
+      <h2>SEED-8-5 — Stable common-path phase interferometry</h2>
+      <p>A mechanically imperfect laboratory needs to measure a small phase change. Use a common-path or nearly common-path optical architecture where possible to reduce environmental sensitivity.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Propose a common-path or nearly common-path interferometer.</li>
+        <li>Explain how signal and reference channels are distinguishable.</li>
+        <li>Distinguish disturbances that cancel from those that remain.</li>
+        <li>Give a phase-response calibration.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-6">
+      <h2>SEED-8-6 — Collinear transport and separation of two wavelengths</h2>
+      <p>Transport 532 nm and 1064 nm beams collinearly over most of a free-space platform, then route them to separate detector channels. Specify a measurable cross-channel leakage or isolation requirement; finite optical extinction prevents literal complete separation.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design combination, common transport, and terminal wavelength separation.</li>
+        <li>Explain how collinearity is checked at more than one plane.</li>
+        <li>Name at least four wavelength-dependent component properties and explain how to test channel leakage.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-7">
+      <h2>SEED-8-7 — High-dynamic-range angular scattering measurement</h2>
+      <p>Measure weak angular scattering from a sample when the primary transmitted beam is at least 10^6 times stronger than the scattering signal of interest.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design direct-beam rejection and angular-scatter collection geometry.</li>
+        <li>Protect detector dynamic range.</li>
+        <li>Specify at least three distinct layers of stray-light control.</li>
+        <li>Describe blank-background and response measurements.</li>
+      </ol>
+    </section>
+    <section class="case" id="SEED-8-8">
+      <h2>SEED-8-8 — From beam target to acceptance plan</h2>
+      <p>On a free-space platform, prepare an approximately collimated, clean-spatial-mode, high-linear-polarization-purity 633 nm beam for high-contrast interferometry. The target beam diameter is about 8 mm and the input diameter about 1 mm; input mode quality is unknown. State the beam-width convention used for both values.</p>
+      <h3>Questions</h3>
+      <ol>
+        <li>Design a complete conditioning chain.</li>
+        <li>Identify input properties that must be measured before choosing components.</li>
+        <li>List final acceptance measurements and methods.</li>
+        <li>Give one quantitative pass/fail rule with stated measurement conditions.</li>
       </ol>
     </section>
   </main>

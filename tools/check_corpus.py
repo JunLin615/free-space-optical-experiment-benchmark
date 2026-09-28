@@ -47,6 +47,7 @@ def record_issues(case: dict, path: Path) -> list[str]:
 
 def check(seed_path: Path = SEED, case_dir: Path = CASES) -> list[str]:
     issues: list[str] = []
+    seed_task_counts: dict[str, int] = {}
     try:
         source = seed_path.read_bytes()
         actual = hashlib.sha256(source).hexdigest().upper()
@@ -55,6 +56,13 @@ def check(seed_path: Path = SEED, case_dir: Path = CASES) -> list[str]:
         source_ids = SEED_ID.findall(source.decode("utf-8"))
         if len(source_ids) != 64 or set(source_ids) != EXPECTED:
             issues.append("original seed does not contain exactly the expected 64 legacy IDs")
+        for article in re.findall(r"<article>(.*?)</article>", source.decode("utf-8"), re.DOTALL):
+            identity = SEED_ID.search(article)
+            tasks = re.search(r"<ol>(.*?)</ol>", article, re.DOTALL)
+            if identity and tasks:
+                seed_task_counts[identity.group(1)] = len(re.findall(r"<li>", tasks.group(1)))
+        if len(seed_task_counts) != 64 or sum(seed_task_counts.values()) != 199:
+            issues.append("original seed task inventory differs from the audited 199 tasks in 64 cases")
     except (OSError, UnicodeError) as exc:
         issues.append(f"cannot read original seed: {exc}")
     seen_ids: list[str] = []
@@ -67,6 +75,9 @@ def check(seed_path: Path = SEED, case_dir: Path = CASES) -> list[str]:
         if case.get("case_id", "").startswith("SEED-"):
             seen_ids.append(case.get("legacy_id"))
             issues.extend(record_issues(case, path))
+            legacy = case.get("legacy_id")
+            if legacy in seed_task_counts and len(case.get("task", {}).get("questions", [])) != seed_task_counts[legacy]:
+                issues.append(f"{path}: question count differs from original seed case {legacy}")
     if len(seen_ids) != 64 or set(seen_ids) != EXPECTED or len(set(seen_ids)) != len(seen_ids):
         missing = sorted(EXPECTED - set(seen_ids), key=lambda x: tuple(map(int, x.split("."))))
         issues.append(f"expected exactly 64 unique seed-derived cases; found {len(seen_ids)}, missing {missing}")

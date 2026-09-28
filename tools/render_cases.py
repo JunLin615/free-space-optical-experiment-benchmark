@@ -18,7 +18,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CASES = ROOT / "benchmark" / "cases"
 DEFAULT_OUTPUT = ROOT / "benchmark" / "generated"
-TITLE = "Free-Space Optical Experimental Reasoning — Pilot Questions"
+TITLE = "Free-Space Optical Experimental Reasoning — Question Bank"
 
 
 def _sort_key(path: Path) -> list[tuple[int, object]]:
@@ -42,7 +42,7 @@ def load_cases(case_dir: Path) -> list[dict]:
         if not isinstance(case, dict):
             raise ValueError(f"{path}: expected a case object")
         if case.get("language") != "en":
-            raise ValueError(f"{path}: this English-only pilot renderer requires language: en")
+            raise ValueError(f"{path}: the English question renderer requires language: en")
         for key in ("case_id", "title", "task"):
             if key not in case:
                 raise ValueError(f"{path}: missing {key}")

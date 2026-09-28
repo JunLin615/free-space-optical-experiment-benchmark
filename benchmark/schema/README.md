@@ -10,6 +10,8 @@ checks cross-record ID uniqueness, scoring weights and references, answer paths,
 numerical tolerance consistency, registered validator IDs, and authored numerical
 gold against implemented independent equations. These checks cover only the
 implemented models; adversarial fixtures remain necessary before release.
+`python tools/check_corpus.py` additionally checks the preserved HTML hash,
+all 64 legacy IDs, per-case lineage, and the original question counts.
 
 `result.schema.json` describes a separate per-case run record. Run records are
 outputs of the evaluator and are not embedded in canonical case YAML.
@@ -21,7 +23,7 @@ The development scorer also records a canonical case-content SHA-256,
 evaluator version, and evaluator source fingerprint; these supplement the
 case revision when reproducing a verdict. `oracle_unresolved` is separate from
 candidate failures and from an unavailable semantic judge.
-`pilot_answer_v0.1.schema.json` is the shared JSON block shape named by the pilot
+`pilot_answer_v0.1.schema.json` is the shared JSON block shape named by the canonical
 cases' `answer_contract.schema_id`: it permits case-specific prose and structured
 design claims while requiring physical numerical leaves to have `value` and
 `unit`. Each case's `required_result_paths` and physics checks narrow that broad
@@ -49,4 +51,5 @@ private content hashes, case revisions, evaluator versions, and split assignment
 
 Unknown top-level and controlled nested fields fail validation; experiments may
 use the top-level `extensions` mapping until the contract is revised. Schema
-version `0.1.0` is a pilot authoring contract, not a release claim.
+version `0.1.0` is an authoring contract, not a release claim. The full seed
+fits this version; corpus completion did not require a schema change.
