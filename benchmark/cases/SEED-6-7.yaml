@@ -1,0 +1,104 @@
+schema_version: 0.1.0
+case_id: SEED-6-7
+legacy_id: '6.7'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Mode cleaning before interferometry
+language: en
+taxonomy:
+  optical_domain: optical_alignment
+  task_types:
+  - experimental_design
+  - verification
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.7 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The seed gives a pinhole-chain example. This version accepts a mode-cleaner cavity or other validated
+    mode selection and makes acceptance criteria measurable rather than names alone.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A visible continuous-wave beam contains obvious speckle and high-spatial-frequency wavefront artifacts
+    before a high-contrast interferometer.
+  questions:
+  - id: q1
+    request: Design a conditioning chain from source to interferometer entrance.
+  - id: q2
+    request: Explain the reason for the order of the modules.
+  - id: q3
+    request: Give at least three measurable output acceptance criteria.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+  permit_additional_explanation: true
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Include pointing and power or polarization control, spatial-mode cleaning, re-collimation and
+      beam-size matching, and a stable entrance-axis reference.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Justify the order so filtering occurs with suitable power and focus, output is re-collimated
+      and matched, and downstream controls do not reintroduce mode defects.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: State at least three measurable criteria among beam diameter, divergence, near/far-field profile
+      or M², pointing stability, polarization, and interference visibility, with a measurement method or limit
+      for each.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: pinhole_filter
+    example: Focus through a protected free-space pinhole and re-collimate the selected mode.
+  - id: mode_cleaner_cavity
+    example: Use a mode-cleaner cavity and mode-match its output to the interferometer.
+  other_valid_families_policy: Other spatial-mode cleaning methods pass if they suppress high-spatial-frequency
+    artifacts without unacceptable power or pointing instability and provide measured acceptance evidence.
+  forbidden_claims:
+  - id: f_1
+    predicate: A pinhole at an arbitrary plane cleans wavefront artifacts without correct focusing or output
+      re-collimation.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

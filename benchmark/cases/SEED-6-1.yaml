@@ -1,0 +1,107 @@
+schema_version: 0.1.0
+case_id: SEED-6-1
+legacy_id: '6.1'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Small refractive-index change in a transparent sample
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - experimental_design
+  - calibration
+  - error_analysis
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.1 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The seed lists several architectures. This translation makes the phase-to-index relation conditional
+    on actual pass count and calibration, and does not require a particular interferometer.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A transparent sample of fixed thickness develops a small refractive-index change over time. A
+    stable single-frequency laser is available, and high phase sensitivity is needed.
+  questions:
+  - id: q1
+    request: Propose at least two feasible free-space measurement architectures.
+  - id: q2
+    request: Compare their stability, sensitivity, and flexibility for placing the sample.
+  - id: q3
+    request: Describe a calibration from measured phase change to refractive-index change.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+  permit_additional_explanation: true
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Give at least two physically distinct interference architectures, such as separated-arm, quasi-common-path,
+      double-pass, or resonant cavity, with a reference field and measurable phase.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Compare environmental path sensitivity, sample pass count or enhancement, alignment complexity,
+      and the constraints on sample placement.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: For a single pass through thickness L, use Δφ = (2π/λ)LΔn after accounting for baseline phase;
+      adjust by actual pass count or cavity response and validate with a known phase or index change.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: mach_zehnder
+    example: Use a sample arm and a matched reference arm with active or passive path stabilization.
+  - id: quasi_common_path
+    example: Create closely spaced sample and reference fields sharing much of the path.
+  - id: double_pass
+    example: Use a calibrated return path if the sample permits reflection and two passes.
+  - id: cavity_enhanced
+    example: Use a stable resonator and its calibrated dispersive response when loss and access allow.
+  other_valid_families_policy: Other interferometric topologies pass if phase sensitivity, sample interaction
+    count, and calibration are derived from the actual optical paths.
+  forbidden_claims:
+  - id: f_1
+    predicate: Use a single-pass phase-to-index formula unchanged for a double-pass or cavity-enhanced layout.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

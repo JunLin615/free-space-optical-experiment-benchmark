@@ -1,0 +1,103 @@
+schema_version: 0.1.0
+case_id: SEED-6-5
+legacy_id: '6.5'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Confocal fluorescence depth scanning
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - experimental_design
+  - conceptual_reasoning
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.5 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The seed emphasizes confocal conjugacy. The translation also allows either sample motion or focal-plane
+    scanning while requiring the same optical relationship.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Fluorescence inside a transparent sample must be scanned at different depths while suppressing
+    out-of-focus background.
+  questions:
+  - id: q1
+    request: Design the confocal excitation and collection path.
+  - id: q2
+    request: State which conjugate relationship must be maintained during depth scanning.
+  - id: q3
+    request: Describe the tradeoff between pinhole size, signal, and axial selectivity.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q2: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+    q3: Object giving the requested physical reasoning, design, calibration, or diagnostic evidence.
+  permit_additional_explanation: true
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Focus excitation and collect fluorescence with appropriate objectives; spectrally separate excitation
+      from fluorescence and image the selected sample volume onto a detection pinhole and detector.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Keep the selected object-space focal volume conjugate to the detection pinhole during sample
+      or focus scanning, including any required refocusing for refractive-index mismatch.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Explain that a smaller pinhole often improves optical sectioning but reduces photon throughput
+      and raises alignment or aberration sensitivity.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: sample_scan
+    example: Keep optics and pinhole fixed while moving the transparent sample through focus.
+  - id: focus_scan
+    example: Shift the focal plane with an appropriately relayed objective or scan optic and preserve pinhole
+      conjugacy.
+  other_valid_families_policy: Other scan schemes pass if they maintain or recalibrate sample-volume to pinhole
+    imaging across depth and quantify their collection tradeoff.
+  forbidden_claims:
+  - id: f_1
+    predicate: The pinhole can remain arbitrarily mis-conjugated during scanning without affecting sectioning.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

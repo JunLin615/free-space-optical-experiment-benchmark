@@ -1,0 +1,114 @@
+schema_version: 0.1.0
+case_id: SEED-5-5
+legacy_id: '5.5'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Optical heterodyne beat
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - quantitative_inference
+  - conceptual_reasoning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 5.5 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The 80 MHz value is retained. The ideal orthogonal-polarization limit is stated separately from
+    practical leakage.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Signal light has optical frequency f0. A local-oscillator beam has frequency f0 + 80 MHz. The
+    beams have matching polarization and good spatial overlap on a photodetector fast enough to resolve their
+    beat.
+  questions:
+  - id: q1
+    request: What is the key new electrical frequency component?
+  - id: q2
+    request: Explain the physical origin of this component.
+  - id: q3
+    request: Predict what happens if the beams instead have orthogonal polarizations and there is no polarization
+      projector before the detector.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.beat_frequency
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q2: Object giving the requested physical reasoning, design, or diagnostic evidence.
+    q3: Object giving the requested physical reasoning, design, or diagnostic evidence.
+  permit_additional_explanation: true
+  quantity_shape:
+    answers.q1.beat_frequency: Quantity {value, unit}; convertible frequency units accepted.
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q2
+    severity: scored
+    predicate: Derive the beat from the cross term in the square-law response to overlapping electric fields.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: For ideal orthogonal states without projection, identify a vanishing interference cross term;
+      practical residuals may remain with imperfect orthogonality.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: direct_overlap
+    example: Overlap the two matching-polarization beams directly on a sufficiently fast photodiode.
+  - id: polarization_projection
+    example: For initially orthogonal inputs, use an explicit common polarization projection before photodetection
+      to restore a beat at a throughput cost.
+  other_valid_families_policy: Other heterodyne readouts are valid if they preserve coherent mode overlap and
+    correctly identify the difference-frequency term.
+  forbidden_claims:
+  - id: f_1
+    predicate: Ideal orthogonal polarizations produce the same beat without any polarization projection or
+      mixing.
+  numerical_checks:
+  - id: n_result
+    answer_path: answers.q1.beat_frequency
+    reference:
+      value: 80.0
+      unit: MHz
+    absolute_tolerance:
+      value: 1.0
+      unit: MHz
+    comparator: absolute_inclusive
+    tolerance_rationale: Allows normal rounding; this is a scoring tolerance, not an instrument uncertainty.
+scoring:
+  criteria:
+  - id: n_result
+    weight: 0.33333333
+    check: n_result
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - unit_aware_numerical_check
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.
