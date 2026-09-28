@@ -1,0 +1,111 @@
+schema_version: 0.1.0
+case_id: SEED-4-8
+legacy_id: '4.8'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Polarization-based balanced detection of small rotation
+language: en
+taxonomy:
+  optical_domain: polarization
+  task_types:
+  - experimental_design
+  - error_analysis
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.8 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The seed omitted the operating
+    point. A 45-degree bias relative to the analyzer axes and balanced gains are specified because without
+    them the difference need not respond linearly to a small rotation or cancel common-mode power noise.
+    The signed slope depends on axis convention.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A small polarization rotation must be converted into a differential electrical signal while
+    suppressing fluctuations in total laser power.
+  questions:
+  - id: q1
+    request: Propose a polarization analyzer and two-detector optical path, including the input operating
+      point.
+  - id: q2
+    request: Explain how the differential response suppresses common-mode intensity noise and detects
+      a small rotation.
+  - id: q3
+    request: What errors result from imbalance between optical paths or detectors, and how would you check
+      the balance?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_layout
+    severity: scored
+    predicate: Bias linear input near 45 degrees to the orthogonal axes of a polarizing analyzer or equivalent
+      so the two outputs have nearly equal power; detect both and form a gain-adjusted difference.
+    evidence_path: answers.q1
+  - id: c_response
+    severity: scored
+    predicate: Near the equal-power point a small rotation raises one output and lowers the other to first
+      order; matched common-mode power changes cancel to first order at zero rotation, while normalized
+      difference can further reduce multiplicative power noise.
+    evidence_path: answers.q2
+  - id: c_balance
+    severity: scored
+    predicate: Unequal optical loss, detector responsivity or electronic gain leaks common-mode intensity
+      noise into the difference; trim or calibrate gains by measuring the zero-rotation offset and response
+      to common power modulation.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: pbs_balanced
+    example: A polarizing beam splitter sends orthogonal components to two matched photodetectors after
+      a 45-degree bias.
+    family_checks:
+    - equal_power_bias
+    - gain_balance
+    - differential_readout
+  - id: equivalent_analyzer
+    example: An equivalent dual-channel polarization analyzer produces complementary intensities and a
+      calibrated differential or normalized readout.
+    family_checks:
+    - complementary_channels
+    - balanced_gain
+  other_valid_families_policy: Accept any two-channel polarization analysis that has a first-order rotation
+    signal at its chosen bias and explicitly controls common-mode leakage.
+  known_failure_modes:
+  - Raw difference suppresses common-mode noise exactly only at the balanced operating point and matched
+    gain; the rotation signal still scales with total optical power.
+  - Detector shot noise, electronic noise and finite extinction remain after common-mode subtraction.
+scoring:
+  criteria:
+  - id: c_layout
+    weight: 0.4
+    check: c_layout
+  - id: c_response
+    weight: 0.3
+    check: c_response
+  - id: c_balance
+    weight: 0.3
+    check: c_balance
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

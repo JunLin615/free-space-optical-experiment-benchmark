@@ -1,0 +1,98 @@
+schema_version: 0.1.0
+case_id: SEED-4-5
+legacy_id: '4.5'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Visibility of white-light interference
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - conceptual_reasoning
+  - experimental_design
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.5 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The seed says white light but
+    gives no spectrum; the usual short-coherence conclusion is qualified by source bandwidth and dispersion.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A broadband white-light source is split into two arms and recombined. Their optical path
+    difference is 5 mm; geometrical overlap is otherwise good.
+  questions:
+  - id: q1
+    request: Would stable visible white-light fringes normally be expected?
+  - id: q2
+    request: Which physical conditions govern fringe visibility?
+  - id: q3
+    request: How should the setup be adjusted to make fringes more likely?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_prediction
+    severity: scored
+    predicate: Ordinary broadband white light usually has a coherence length far shorter than 5 mm, so
+      high-visibility fringes are not normally expected.
+    evidence_path: answers.q1
+  - id: c_conditions
+    severity: scored
+    predicate: Optical path difference must lie within the source coherence envelope, with adequate spatial
+      and polarization overlap; dispersion mismatch can reduce broadband visibility.
+    evidence_path: answers.q2
+  - id: c_adjust
+    severity: scored
+    predicate: Balance optical paths near zero delay and compensate unequal glass thickness or group-delay
+      dispersion while maintaining beam overlap.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: zero_delay_balancing
+    example: Scan path difference through near-zero delay while matching dispersion and overlap.
+    family_checks:
+    - coherence_envelope
+    - dispersion_balance
+  - id: spectral_narrowing
+    example: A narrower selected spectrum may extend coherence length but changes the white-light measurement;
+      explain the throughput or bandwidth cost.
+    family_checks:
+    - spectrum_defined
+    - coherence_length
+  other_valid_families_policy: Accept a source-specific coherence calculation if its bandwidth is stated;
+    the ordinary-broadband prediction should not be treated as absolute for every filtered source.
+scoring:
+  criteria:
+  - id: c_prediction
+    weight: 0.3
+    check: c_prediction
+  - id: c_conditions
+    weight: 0.35
+    check: c_conditions
+  - id: c_adjust
+    weight: 0.35
+    check: c_adjust
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

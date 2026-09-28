@@ -1,0 +1,156 @@
+schema_version: 0.1.0
+case_id: SEED-2-2
+legacy_id: '2.2'
+case_revision: 0.2.1
+benchmark_release: null
+validation_status: executable
+split: public_dev
+title: Designing a fivefold afocal beam expander
+language: en
+taxonomy:
+  optical_domain: gaussian_beams
+  task_types:
+  - quantitative_inference
+  - experimental_design
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 2.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the seed's fivefold two-lens afocal expander; example focal lengths are
+    illustrative rather than uniquely required. Revision 0.2.0 defines typed fields for closed-physics autonomous
+    scoring. Revision 0.2.1 restores q1 to the seed's focal-length-ratio request; propagation direction is
+    already specified and assessed in q2.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: An approximately collimated beam has a 1/e² intensity diameter near 1.5 mm. A two-lens afocal
+    system should expand it to about 7.5 mm. Consider a first-order paraxial design with adequate clear apertures.
+  questions:
+  - id: q1
+    request: State the required magnitude of the output-to-input focal-length ratio.
+  - id: q2
+    request: Give one valid focal-length pair each for a Keplerian and a Galilean expander, including lens
+      signs and order.
+  - id: q3
+    request: Compare whether each layout forms a real internal focus for the stated propagation direction.
+  givens:
+  - symbol: input_diameter
+    value: 1.5
+    unit: mm
+    definition: 1/e^2 intensity diameter
+  - symbol: output_diameter
+    value: 7.5
+    unit: mm
+    definition: 1/e^2 intensity diameter
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.expansion_factor
+  - answers.q2.keplerian
+  - answers.q2.galilean
+  - answers.q3
+  permit_additional_explanation: true
+  quantity_shape:
+    answers.q1.expansion_factor: Quantity {value, unit}; dimensionless output-to-input diameter ratio.
+    answers.q2.keplerian.input_focal_length: Signed focal-length quantity.
+    answers.q2.keplerian.output_focal_length: Signed focal-length quantity.
+    answers.q2.galilean.input_focal_length: Signed focal-length quantity.
+    answers.q2.galilean.output_focal_length: Signed focal-length quantity.
+  method_shape:
+    q2: Object with keplerian and galilean, each containing signed input_focal_length and output_focal_length
+      quantities.
+    q3: Object with keplerian_real_internal_focus and galilean_real_internal_focus booleans.
+gold:
+  reference_model:
+    equation: For an afocal telescope, |f_output/f_input| = D_output/D_input ≈ 5.
+    valid_if: Paraxial collimated input, negligible clipping, and adequate lens separation for afocal output.
+  universal_constraints:
+  - id: c_ratio
+    severity: scored
+    predicate: The output-to-input beam diameter ratio and magnitude of output-to-input focal lengths are about
+      five.
+    evidence_path: answers.q1
+  - id: c_examples
+    severity: scored
+    predicate: Give a positive-short then positive-long Keplerian pair and a negative-short then positive-long
+      Galilean pair, each with focal-length magnitude ratio five; +20 mm then +100 mm and -20 mm then +100
+      mm are examples.
+    evidence_path: answers.q2
+  - id: c_focus
+    severity: scored
+    predicate: The Keplerian pair has an internal real focus, while the correctly oriented Galilean pair does
+      not.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: keplerian
+    example: A +20 mm input lens and +100 mm output lens separated by about 120 mm.
+  - id: galilean
+    example: A -20 mm input lens and +100 mm output lens separated by about 80 mm.
+  other_valid_families_policy: Accept any afocal lens pairs with the correct signs, propagation order, approximately
+    fivefold expansion, and appropriate separation.
+  forbidden_claims:
+  - id: f_real_focus_galilean
+    predicate: The specified negative-first Galilean expander must form a real internal focus.
+  numerical_checks:
+  - id: n_expansion
+    answer_path: answers.q1.expansion_factor
+    reference:
+      value: 5
+      unit: '1'
+    absolute_tolerance:
+      value: 0.1
+      unit: '1'
+    comparator: absolute_inclusive
+    validator_id: afocal_expansion
+    inputs:
+    - input_diameter
+    - output_diameter
+    tolerance_rationale: Permits ordinary rounding of approximately specified beam diameters.
+scoring:
+  criteria:
+  - id: n_expansion
+    weight: 0.35
+    check: n_expansion
+    question_id: q1
+  - id: c_examples
+    weight: 0.4
+    check: c_examples
+    question_id: q2
+  - id: c_focus
+    weight: 0.25
+    check: c_focus
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - focal_ratio_validator
+  - calibrated_semantic_judge
+  implemented_checks:
+  - independent_unit_aware_numeric_oracle
+  - bounded_structured_physics_oracle
+  notes: Executable typed closed-physics scorer with positive, alternative, negative, boundary, and adversarial
+    fixtures. Free prose is not semantically graded; unfamiliar plausible structured alternatives may remain
+    unresolved. Further challenge breadth is required before challenged or release_verified status.
+  positive_fixtures:
+  - benchmark/fixtures/SEED-2-2/positive_reference.json
+  - benchmark/fixtures/SEED-2-2/alternative_valid_units_or_form.json
+  negative_fixtures:
+  - benchmark/fixtures/SEED-2-2/negative_wrong_numeric.json
+  - benchmark/fixtures/SEED-2-2/adversarial_polished_false.json
+  independent_derivation: Independent ray-matrix, Gaussian-scaling, thin-lens, Rayleigh, and field-interference
+    constructions in tests/test_closed_physics.py, as applicable.
+  adversarial_evidence: benchmark/fixtures/SEED-2-2/adversarial_polished_false.json checks that incorrect structured
+    physics does not pass even with polished prose.
+  evidence_files:
+  - tests/test_closed_physics.py

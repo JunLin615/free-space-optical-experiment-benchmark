@@ -1,0 +1,106 @@
+schema_version: 0.1.0
+case_id: SEED-8-4
+legacy_id: '8.4'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Subpicosecond nonlinear-response measurement
+language: en
+taxonomy:
+  optical_domain: ultrafast_optics
+  task_types:
+  - experimental_design
+  - verification
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.4.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Clarification: subpicosecond resolution
+    is an instrument-response claim requiring cross-correlation and dispersion checks, not merely a mechanical
+    delay increment.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Measure a sample's weak response after ultrafast excitation with subpicosecond time resolution
+    in the presence of a strong scattering background.
+  questions:
+  - id: q1
+    request: Design pump and probe paths.
+  - id: q2
+    request: Explain the combined time-resolution limits.
+  - id: q3
+    request: Suppress scattered background without deleting the signal.
+  - id: q4
+    request: Demonstrate that the observed response is pump induced.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  - answers.q4
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Include pump/probe generation, delay, spatial and temporal overlap, pump-state control,
+      and selective detection.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Account for pulse widths or cross-correlation, dispersion, crossing-angle or interaction
+      geometry, timing jitter, and detector strategy rather than attributing resolution to stage step
+      alone.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Use a defensible combination of spatial, spectral, polarization, modulation, differential,
+      or phase-sensitive rejection with a signal-retention check.
+    evidence_path: answers.q3
+  - id: c_q4
+    severity: scored
+    predicate: Use pump-on/off controls, negative-delay baseline, power dependence, timing confirmation,
+      or another discriminating consistency test with background subtraction.
+    evidence_path: answers.q4
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+  accepted_solution_families:
+  - id: transient_transmission
+    example: Modulated pump and delayed probe measure differential transmission with reference normalization.
+  - id: nonlinear_cross_correlation
+    example: A nonlinear gating or correlation observable selects pump-induced response in time.
+  - id: heterodyne_probe
+    example: A reference field enables coherent detection of a weak pump-induced change.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.25
+    check: c_q1
+  - id: c_q2
+    weight: 0.25
+    check: c_q2
+  - id: c_q3
+    weight: 0.25
+    check: c_q3
+  - id: c_q4
+    weight: 0.25
+    check: c_q4
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks: []
+  notes: English canonical specification only. No autonomous scorer or release verification is claimed.

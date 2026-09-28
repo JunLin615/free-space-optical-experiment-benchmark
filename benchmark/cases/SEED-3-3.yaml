@@ -1,0 +1,97 @@
+schema_version: 0.1.0
+case_id: SEED-3-3
+legacy_id: '3.3'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Central opaque stop in a Fourier plane
+language: en
+taxonomy:
+  optical_domain: fourier_optics
+  task_types:
+  - conceptual_reasoning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.3 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The audit notes that a real coherent
+    image depends on stop diameter and phase and can ring or change sign. The gold therefore requires
+    low-frequency suppression and only conditional apparent edge enhancement.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A small opaque circular stop is centered on the Fourier plane of an ideal coherent 4f imaging
+    system, blocking low spatial frequencies.
+  questions:
+  - id: q1
+    request: Predict the main change in the output image.
+  - id: q2
+    request: Is this closer to low-pass or high-pass spatial filtering?
+  - id: q3
+    request: Explain why edges and fine detail may become relatively prominent.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_effect
+    severity: scored
+    predicate: Suppression of the zero and nearby low spatial-frequency components reduces broad background
+      or slowly varying structure; edges and fine features may be more prominent, without promising a
+      universal image appearance.
+    evidence_path: answers.q1
+  - id: c_class
+    severity: scored
+    predicate: A centered opaque stop is high-pass-like, not low-pass.
+    evidence_path: answers.q2
+  - id: c_mechanism
+    severity: scored
+    predicate: The stop suppresses low spatial frequencies at the Fourier plane, changing their relative
+      weight against transmitted higher frequencies.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: central_high_pass_stop
+    example: A small opaque central stop in a true Fourier plane suppresses the undiffracted or low-angle
+      components.
+    family_checks:
+    - true_fourier_plane
+    - central_frequency_rejection
+  other_valid_families_policy: Accept equivalent coherent spatial-frequency filtering explanations; do
+    not require a particular output brightness or edge sign.
+  known_failure_modes:
+  - A too-large stop also removes useful object frequencies and can severely attenuate the image.
+  - Coherent filtering can yield ringing and phase-dependent contrast; apparent edge enhancement is not
+    a universal pixel-by-pixel prediction.
+scoring:
+  criteria:
+  - id: c_effect
+    weight: 0.35
+    check: c_effect
+  - id: c_class
+    weight: 0.25
+    check: c_class
+  - id: c_mechanism
+    weight: 0.4
+    check: c_mechanism
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

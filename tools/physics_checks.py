@@ -26,6 +26,10 @@ UNITS: dict[str, tuple[str, float]] = {
     "rad": ("angle", 1.0),
     "deg": ("angle", math.pi / 180.0),
     "1": ("dimensionless", 1.0),
+    "Hz": ("frequency", 1.0),
+    "kHz": ("frequency", 1e3),
+    "MHz": ("frequency", 1e6),
+    "GHz": ("frequency", 1e9),
 }
 
 
@@ -123,6 +127,58 @@ def _half_wave_plate_rotation_effect(case: dict[str, Any]) -> tuple[float, str]:
     return 2 * abs(rotation), "angle"
 
 
+def _afocal_expansion(case: dict[str, Any]) -> tuple[float, str]:
+    incident = _given(case, "input_diameter", "length")
+    output = _given(case, "output_diameter", "length")
+    if incident <= 0 or output <= 0:
+        raise PhysicsCheckError("beam diameters must be positive")
+    return output / incident, "dimensionless"
+
+
+def _rayleigh_range_ratio(case: dict[str, Any]) -> tuple[float, str]:
+    initial = _given(case, "initial_waist_radius", "length")
+    final = _given(case, "final_waist_radius", "length")
+    if initial <= 0 or final <= 0:
+        raise PhysicsCheckError("waist radii must be positive")
+    return (final / initial) ** 2, "dimensionless"
+
+
+def _divergence_ratio(case: dict[str, Any]) -> tuple[float, str]:
+    initial = _given(case, "initial_waist_radius", "length")
+    final = _given(case, "final_waist_radius", "length")
+    if initial <= 0 or final <= 0:
+        raise PhysicsCheckError("waist radii must be positive")
+    return initial / final, "dimensionless"
+
+
+def _thin_lens_image_distance_ratio(case: dict[str, Any]) -> tuple[float, str]:
+    object_ratio = _given(case, "object_distance_in_focal_lengths", "dimensionless")
+    if object_ratio <= 1:
+        raise PhysicsCheckError("real conjugate needs object distance greater than f")
+    return object_ratio / (object_ratio - 1), "dimensionless"
+
+
+def _thin_lens_magnification(case: dict[str, Any]) -> tuple[float, str]:
+    image_ratio, _ = _thin_lens_image_distance_ratio(case)
+    object_ratio = _given(case, "object_distance_in_focal_lengths", "dimensionless")
+    return -image_ratio / object_ratio, "dimensionless"
+
+
+def _rayleigh_lateral_resolution(case: dict[str, Any]) -> tuple[float, str]:
+    wavelength = _given(case, "wavelength", "length")
+    na = _given(case, "numerical_aperture", "dimensionless")
+    if wavelength <= 0 or not 0 < na <= 1:
+        raise PhysicsCheckError("wavelength or numerical aperture out of range")
+    return 0.61 * wavelength / na, "length"
+
+
+def _heterodyne_beat(case: dict[str, Any]) -> tuple[float, str]:
+    offset = _given(case, "lo_frequency_offset", "frequency")
+    if offset == 0:
+        raise PhysicsCheckError("heterodyne frequency offset must be nonzero")
+    return abs(offset), "frequency"
+
+
 REGISTRY: dict[str, Callable[[dict[str, Any]], tuple[float, str]]] = {
     "mirror_angle": _mirror_angle,
     "mirror_spot_shift": _mirror_spot_shift,
@@ -134,6 +190,13 @@ REGISTRY: dict[str, Callable[[dict[str, Any]], tuple[float, str]]] = {
     "half_wave_axis": _half_wave_axis,
     "half_wave_relative_rotation_magnitude": _half_wave_relative_rotation_magnitude,
     "half_wave_plate_rotation_effect": _half_wave_plate_rotation_effect,
+    "afocal_expansion": _afocal_expansion,
+    "rayleigh_range_ratio": _rayleigh_range_ratio,
+    "divergence_ratio": _divergence_ratio,
+    "thin_lens_image_distance_ratio": _thin_lens_image_distance_ratio,
+    "thin_lens_magnification": _thin_lens_magnification,
+    "rayleigh_lateral_resolution": _rayleigh_lateral_resolution,
+    "heterodyne_beat": _heterodyne_beat,
 }
 
 

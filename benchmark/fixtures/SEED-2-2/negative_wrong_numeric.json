@@ -1,0 +1,52 @@
+{
+  "case_id": "SEED-2-2",
+  "name": "negative_wrong_numeric",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "expansion_factor": {
+          "value": 4,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "keplerian": {
+          "input_focal_length": {
+            "value": 20,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 100,
+            "unit": "mm"
+          }
+        },
+        "galilean": {
+          "input_focal_length": {
+            "value": -20,
+            "unit": "mm"
+          },
+          "output_focal_length": {
+            "value": 100,
+            "unit": "mm"
+          }
+        }
+      },
+      "q3": {
+        "keplerian_real_internal_focus": true,
+        "galilean_real_internal_focus": false
+      }
+    }
+  },
+  "expected": {
+    "n_expansion": {
+      "status": "fail"
+    },
+    "c_examples": {
+      "status": "pass"
+    },
+    "c_focus": {
+      "status": "pass"
+    }
+  }
+}

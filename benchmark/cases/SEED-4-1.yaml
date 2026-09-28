@@ -1,0 +1,92 @@
+schema_version: 0.1.0
+case_id: SEED-4-1
+legacy_id: '4.1'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Circular polarization from a quarter-wave plate
+language: en
+taxonomy:
+  optical_domain: polarization
+  task_types:
+  - conceptual_reasoning
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.1 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. No fixed right- or left-handed
+    label is imposed because the seed does not define an observer convention.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Linearly polarized light enters an ideal quarter-wave plate. Its incident polarization direction
+    is 45 degrees from the fast axis.
+  questions:
+  - id: q1
+    request: What is the output polarization state?
+  - id: q2
+    request: What if the angle is changed to 0 degrees?
+  - id: q3
+    request: What determines the handedness assigned to the circular output?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_circular
+    severity: scored
+    predicate: At 45 degrees the two plate-axis components have equal amplitudes and a quarter-cycle relative
+      phase, giving circular polarization for ideal input and plate.
+    evidence_path: answers.q1
+  - id: c_zero
+    severity: scored
+    predicate: At 0 degrees only one plate-axis component is excited; the output remains linearly polarized
+      and any phase is global.
+    evidence_path: answers.q2
+  - id: c_handed
+    severity: scored
+    predicate: Handedness depends on the incident orientation relative to fast and slow axes, sign of
+      retardance and the stated propagation or observation convention.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: jones_analysis
+    example: Resolve the input into fast and slow components and apply the quarter-wave relative phase.
+    family_checks:
+    - component_amplitudes
+    - relative_phase
+    - handedness_convention
+  other_valid_families_policy: Accept equivalent Stokes-vector or geometric polarization reasoning that
+    states a consistent handedness convention.
+scoring:
+  criteria:
+  - id: c_circular
+    weight: 0.4
+    check: c_circular
+  - id: c_zero
+    weight: 0.3
+    check: c_zero
+  - id: c_handed
+    weight: 0.3
+    check: c_handed
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

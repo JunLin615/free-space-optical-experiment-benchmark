@@ -1,0 +1,104 @@
+schema_version: 0.1.0
+case_id: SEED-6-6
+legacy_id: '6.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Sensitive interferometric mirror displacement
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - experimental_design
+  - calibration
+  - quantitative_inference
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.6 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The seed phase relation is retained for normal-incidence reflection. Alternative geometries are
+    accepted with a corresponding projected path and pass-count derivation.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Measure nanometre-scale axial displacement of a reflective mirror using a stable single-frequency
+    laser despite air currents and mechanical vibration.
+  questions:
+  - id: q1
+    request: Propose at least two interferometric architectures.
+  - id: q2
+    request: Explain how to improve immunity to environmental perturbations.
+  - id: q3
+    request: Give the conversion from measured fringe phase change to axial mirror displacement.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: 'Object with architectures: array of at least two distinct phase readouts.'
+    q2: Object with environmental_noise_controls and the disturbances each suppresses.
+    q3: Object with phase_displacement_relation, wavelength, pass_count, and geometry assumptions.
+  permit_additional_explanation: true
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Give at least two viable layouts, such as Michelson, differential, common-path, or quasi-common-path
+      interferometry, with a moving-mirror phase observable.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Control environmental error through shorter or shared paths, enclosure, differential referencing,
+      vibration isolation, and/or phase stabilization; explain which noise each control targets.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: For a single normal-incidence reflection and double optical pass, derive Δφ = 4πx/λ and x =
+      λΔφ/(4π); use the actual projection and pass count for modified geometries.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: michelson
+    example: Use a Michelson moving-mirror arm with phase tracking and a stable reference arm.
+  - id: differential_common_path
+    example: Use a shared or differential reference that rejects common air and mechanical fluctuations.
+  other_valid_families_policy: Equivalent interferometers pass if their phase-displacement conversion is derived
+    from their actual pass count and incidence geometry.
+  forbidden_claims:
+  - id: f_1
+    predicate: Use x = λΔφ/(2π) for an ordinary single reflection moving-mirror arm without accounting for
+      its return path.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

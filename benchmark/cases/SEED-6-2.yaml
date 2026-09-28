@@ -1,0 +1,158 @@
+schema_version: 0.1.0
+case_id: SEED-6-2
+legacy_id: '6.2'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Femtosecond pump-probe transient transmission
+language: en
+taxonomy:
+  optical_domain: ultrafast_optics
+  task_types:
+  - experimental_design
+  - quantitative_inference
+  - calibration
+  - error_analysis
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Material clarification: the seed rounds 500 ps to 75 mm and mentions extra negative-delay travel.
+    The complete −2 to +500 ps interval spans 502 ps, requiring c×502 ps/2 = 75.25 mm of double-pass mechanical
+    travel before margin. The seed lists detector bandwidth among possible limits; here it is distinguished
+    from optical cross-correlation resolution.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A fixed-repetition-rate 800 nm source produces 100 fs pulses. Measure pump-induced transient transmission
+    from −2 ps to +500 ps, targeting approximately 150 fs temporal resolution. A folded retroreflector delay
+    stage changes the optical path by twice its mechanical travel.
+  questions:
+  - id: q1
+    request: Design the complete free-space pump-probe architecture.
+  - id: q2
+    request: Estimate the minimum mechanical scan span of the folded delay line across the stated interval,
+      before setup margin.
+  - id: q3
+    request: Describe an independent way to locate time zero.
+  - id: q4
+    request: Identify at least three distinct limits on effective temporal resolution.
+  givens:
+  - value: 800
+    unit: nm
+    symbol: central_wavelength
+  - value: 100
+    unit: fs
+    symbol: pulse_duration
+  - value: -2
+    unit: ps
+    symbol: delay_start
+  - value: 500
+    unit: ps
+    symbol: delay_end
+  - value: 150
+    unit: fs
+    symbol: target_resolution
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2.minimum_travel
+  - answers.q3
+  - answers.q4
+  method_shape:
+    q1: Object with pump_path, probe_path, delay, overlap, pump_rejection, and probe_readout.
+    q2: 'Object containing minimum_travel: quantity {value, unit}, for the whole delay interval.'
+    q3: Object with independent_time_zero_method and observable.
+    q4: 'Object with resolution_limits: array of at least three distinct physical factors.'
+  permit_additional_explanation: true
+  quantity_shape:
+    answers.q2.minimum_travel: Quantity {value, unit}; convertible length units accepted; minimum span before
+      extra travel margin.
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Split pump and probe with independently controlled power and polarization, variable delay in
+      one arm, spatial and temporal overlap at the sample, pump rejection after interaction, and probe-transmission
+      detection with a baseline.
+    evidence_path: answers.q1
+  - id: c_q3
+    severity: scored
+    predicate: Locate zero delay using an independent cross-correlation or nonlinear overlap observable; a
+      sharp sample transient can supplement this with a stated model.
+    evidence_path: answers.q3
+  - id: c_q4
+    severity: scored
+    predicate: Identify at least three distinct limits, such as pump-probe cross-correlation, dispersion and
+      chirp, crossing-angle or spatial-temporal coupling, and delay-stage jitter. Electronic detection bandwidth
+      affects demodulation and noise rather than the femtosecond resolution of a scanned delay measurement
+      by itself.
+    evidence_path: answers.q4
+  accepted_solution_families:
+  - id: probe_delay
+    example: Scan a retroreflector in the probe arm and detect pump-induced probe transmission.
+  - id: pump_delay
+    example: Scan the pump arm while maintaining the same relative delay and probe-detection logic.
+  other_valid_families_policy: Other free-space pump-probe arrangements pass if they cover both delay endpoints,
+    keep fluence and overlap controlled, and independently establish time zero.
+  forbidden_claims:
+  - id: f_1
+    predicate: Treat a folded double-pass stage as requiring 150 mm of mechanical travel for a 500 ps optical
+      delay.
+  - id: f_2
+    predicate: Infer 150 fs resolution solely from the electronic detector bandwidth in a scanned-delay experiment.
+  numerical_checks:
+  - id: n_result
+    answer_path: answers.q2.minimum_travel
+    reference:
+      value: 75.25
+      unit: mm
+    absolute_tolerance:
+      value: 0.75
+      unit: mm
+    comparator: absolute_inclusive
+    formula: c × (delay_end − delay_start) / 2 for a folded double-pass stage
+    inputs:
+    - delay_start
+    - delay_end
+    tolerance_rationale: Allows normal rounding; this is a scoring tolerance, not stage uncertainty. The reported
+      value is the minimum span before setup margin.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.25
+    check: c_q1
+    question_id: q1
+  - id: n_result
+    weight: 0.25
+    check: n_result
+    question_id: q2
+  - id: c_q3
+    weight: 0.25
+    check: c_q3
+    question_id: q3
+  - id: c_q4
+    weight: 0.25
+    check: c_q4
+    question_id: q4
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - unit_aware_numerical_check
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

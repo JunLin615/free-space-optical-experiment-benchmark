@@ -1,0 +1,88 @@
+schema_version: 0.1.0
+case_id: SEED-7-6
+legacy_id: '7.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Lossless purification of unpolarized light
+language: en
+taxonomy:
+  optical_domain: polarization
+  task_types:
+  - conceptual_reasoning
+  - verification
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 7.6.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: Translated the original seed prompt and answer outline. Translation makes the single-output-mode
+    and no-gain assumptions explicit so that lossless multi-port polarization sorting is not mistaken
+    for purification into one mode.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: The input is completely unpolarized light. The goal is one pure linear-polarization output
+    in the same spatial mode and direction, with no active gain and no loss of optical power.
+  questions:
+  - id: q1
+    request: Decide whether ordinary passive polarization optics can meet all conditions.
+  - id: q2
+    request: Explain the physical constraint.
+  - id: q3
+    request: Give a standard method if optical loss is allowed.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: State that passive linear polarization optics cannot simultaneously purify a fully unpolarized
+      input, keep the same single output mode and direction, and retain all power.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Explain that incoherent orthogonal polarization components cannot both be compressed into
+      one pure state in one mode by a lossless passive transformation; rejected energy or information
+      must leave through another mode or channel.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Use a linear polarizer or select one output of a polarizing beam splitter, acknowledging
+      discarded power rather than claiming lossless purification.
+    evidence_path: answers.q3
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.3333333333333333
+    check: c_q1
+  - id: c_q2
+    weight: 0.3333333333333333
+    check: c_q2
+  - id: c_q3
+    weight: 0.3333333333333333
+    check: c_q3
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks: []
+  notes: English canonical specification only. No autonomous scorer or release verification is claimed.

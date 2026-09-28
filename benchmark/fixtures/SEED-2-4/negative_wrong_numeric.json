@@ -1,0 +1,36 @@
+{
+  "case_id": "SEED-2-4",
+  "name": "negative_wrong_numeric",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "rayleigh_range_factor": {
+          "value": 2,
+          "unit": "1"
+        }
+      },
+      "q2": {
+        "divergence_factor": {
+          "value": 0.5,
+          "unit": "1"
+        }
+      },
+      "q3": {
+        "benefit": "longer_rayleigh_range",
+        "cost": "larger_clear_aperture"
+      }
+    }
+  },
+  "expected": {
+    "n_rayleigh_ratio": {
+      "status": "fail"
+    },
+    "n_divergence_ratio": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "pass"
+    }
+  }
+}

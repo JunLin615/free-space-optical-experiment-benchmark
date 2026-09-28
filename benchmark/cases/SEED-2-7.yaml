@@ -1,0 +1,85 @@
+schema_version: 0.1.0
+case_id: SEED-2-7
+legacy_id: '2.7'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Gaussian aperture clipping and diffraction
+language: en
+taxonomy:
+  optical_domain: gaussian_beams
+  task_types: [quantitative_inference, error_analysis, experimental_design]
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation and measurable clarification of case 2.7 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: >-
+    The seed asks whether 5 mm is much larger than a 4 mm Gaussian radius and
+    suggests several radii of clearance without a quantitative threshold.
+    For an ideal centered circular Gaussian, the geometric fraction outside
+    radius a is exp[-2(a/w)^2], giving about 4.4% at a=5 mm and w=4 mm.
+    A 1% geometric-loss target is added solely to make the sizing task testable;
+    diffraction or alignment margins can require still more clearance.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: >-
+    At a lens, a centered circular Gaussian beam has 1/e² intensity radius
+    4 mm. The lens has a circular clear-aperture radius of 5 mm. First consider
+    ideal geometric clipping of this beam; then consider diffraction and
+    alignment margins.
+  questions:
+  - id: q1
+    request: Is this aperture much larger than the beam? Estimate the ideal centered fraction of power geometrically clipped.
+  - id: q2
+    request: Describe at least two physically distinct consequences of finite-aperture truncation.
+  - id: q3
+    request: For no more than 1% ideal geometric clipping, estimate the minimum aperture radius and explain why a real design may need a larger one.
+  givens:
+  - {symbol: beam_radius, value: 4, unit: mm, definition: 1/e^2 intensity radius}
+  - {symbol: clear_aperture_radius, value: 5, unit: mm}
+  - {symbol: target_geometric_loss, value: 1, unit: percent}
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: P_outside/P_total = exp[-2(a/w)^2]; a_min = w sqrt[ln(1/L_max)/2].
+    valid_if: Centered circular ideal Gaussian intensity and circular clear aperture; this is geometric transmitted-power loss only.
+  universal_constraints:
+  - id: c_clipping
+    severity: scored
+    predicate: The aperture is only 1.25 beam radii, not much larger; ideal centered geometric power loss is about 4.4%.
+    evidence_path: answers.q1
+  - id: c_consequences
+    severity: scored
+    predicate: Identify power loss and a distinct diffraction or far-field mode/side-lobe consequence of truncation.
+    evidence_path: answers.q2
+  - id: c_sizing
+    severity: scored
+    predicate: A 1% ideal-loss limit needs a/w at least about 1.52, or radius at least 6.1 mm here; diffraction or pointing tolerance may demand more.
+    evidence_path: answers.q3
+  forbidden_claims:
+  - id: f_no_effect
+    predicate: A centered 5 mm aperture around a 4 mm Gaussian radius transmits essentially all power without diffraction effects.
+  known_failure_modes:
+  - Geometric clipping fraction alone does not predict detailed diffraction rings or system wavefront quality.
+  - Beam decenter and aperture tolerances can increase loss beyond the centered ideal result.
+scoring:
+  criteria:
+  - {id: c_clipping, weight: 0.35, check: c_clipping, question_id: q1}
+  - {id: c_consequences, weight: 0.3, check: c_consequences, question_id: q2}
+  - {id: c_sizing, weight: 0.35, check: c_sizing, question_id: q3}
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, Gaussian_clipping_validator, calibrated_semantic_judge]
+  implemented_checks: []
+  notes: The ideal loss estimate is specified, but no executable clipping validator or diffraction oracle is implemented.

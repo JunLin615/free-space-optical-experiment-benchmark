@@ -1,0 +1,585 @@
+{
+  "schema_version": "0.1.0",
+  "source_seed_sha256": "077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8",
+  "total_seed_cases": 64,
+  "canonical_english_records": 64,
+  "note": "Corpus migration is complete; scorer availability and release verification are separate gates. scientific_correction_made is a conservative reviewed seed-audit repair flag; ordinary translation clarifications may not be flagged. Consult each case's provenance.derivation for its exact change history.",
+  "cases": [
+    {
+      "legacy_id": "1.1",
+      "canonical_id": "SEED-1-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "challenged",
+      "scientific_correction_made": true,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "1.2",
+      "canonical_id": "SEED-1-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "1.3",
+      "canonical_id": "SEED-1-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "1.4",
+      "canonical_id": "SEED-1-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "1.5",
+      "canonical_id": "SEED-1-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "challenged",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "1.6",
+      "canonical_id": "SEED-1-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "1.7",
+      "canonical_id": "SEED-1-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "1.8",
+      "canonical_id": "SEED-1-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.1",
+      "canonical_id": "SEED-2-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.2",
+      "canonical_id": "SEED-2-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "executable",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "2.3",
+      "canonical_id": "SEED-2-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.4",
+      "canonical_id": "SEED-2-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "executable",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "2.5",
+      "canonical_id": "SEED-2-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.6",
+      "canonical_id": "SEED-2-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.7",
+      "canonical_id": "SEED-2-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "2.8",
+      "canonical_id": "SEED-2-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "3.1",
+      "canonical_id": "SEED-3-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "executable",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "3.2",
+      "canonical_id": "SEED-3-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "3.3",
+      "canonical_id": "SEED-3-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "3.4",
+      "canonical_id": "SEED-3-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "3.5",
+      "canonical_id": "SEED-3-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "3.6",
+      "canonical_id": "SEED-3-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "3.7",
+      "canonical_id": "SEED-3-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "executable",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "3.8",
+      "canonical_id": "SEED-3-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.1",
+      "canonical_id": "SEED-4-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.2",
+      "canonical_id": "SEED-4-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.3",
+      "canonical_id": "SEED-4-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.4",
+      "canonical_id": "SEED-4-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.5",
+      "canonical_id": "SEED-4-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.6",
+      "canonical_id": "SEED-4-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.7",
+      "canonical_id": "SEED-4-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "4.8",
+      "canonical_id": "SEED-4-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.1",
+      "canonical_id": "SEED-5-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.2",
+      "canonical_id": "SEED-5-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.3",
+      "canonical_id": "SEED-5-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "5.4",
+      "canonical_id": "SEED-5-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.5",
+      "canonical_id": "SEED-5-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "executable",
+      "scientific_correction_made": false,
+      "scoring_readiness": "deterministic-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "5.6",
+      "canonical_id": "SEED-5-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.7",
+      "canonical_id": "SEED-5-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "5.8",
+      "canonical_id": "SEED-5-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.1",
+      "canonical_id": "SEED-6-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.2",
+      "canonical_id": "SEED-6-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.3",
+      "canonical_id": "SEED-6-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.4",
+      "canonical_id": "SEED-6-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.5",
+      "canonical_id": "SEED-6-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.6",
+      "canonical_id": "SEED-6-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.7",
+      "canonical_id": "SEED-6-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "6.8",
+      "canonical_id": "SEED-6-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.1",
+      "canonical_id": "SEED-7-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.2",
+      "canonical_id": "SEED-7-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": true
+    },
+    {
+      "legacy_id": "7.3",
+      "canonical_id": "SEED-7-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.4",
+      "canonical_id": "SEED-7-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.5",
+      "canonical_id": "SEED-7-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.6",
+      "canonical_id": "SEED-7-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.7",
+      "canonical_id": "SEED-7-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "7.8",
+      "canonical_id": "SEED-7-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "structured-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.1",
+      "canonical_id": "SEED-8-1",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.2",
+      "canonical_id": "SEED-8-2",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.3",
+      "canonical_id": "SEED-8-3",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.4",
+      "canonical_id": "SEED-8-4",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.5",
+      "canonical_id": "SEED-8-5",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.6",
+      "canonical_id": "SEED-8-6",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": true,
+      "scoring_readiness": "constraint-ready",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.7",
+      "canonical_id": "SEED-8-7",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    },
+    {
+      "legacy_id": "8.8",
+      "canonical_id": "SEED-8-8",
+      "migration_status": "canonical_english_record_present",
+      "validation_status": "specified",
+      "scientific_correction_made": false,
+      "scoring_readiness": "judge-required",
+      "scorer_available": false
+    }
+  ]
+}

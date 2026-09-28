@@ -1,0 +1,2059 @@
+{
+  "schema_version": "0.1.0",
+  "source_seed_sha256": "077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8",
+  "case_count": 64,
+  "method": "Canonical YAML supplies identity, taxonomy and validation status; tools/scoring_runtime.py supplies registered scorer availability; explicitly reviewed planning annotations in tools/generate_coverage.py supply openness, readiness, evaluation families, concept family, and dominant emphasis.",
+  "openness_definitions": {
+    "S0": "Fully specified or physically closed",
+    "S1": "Limited design choices",
+    "S2": "Multiple valid architectures or causal paths",
+    "S3": "Explicit engineering trade-offs",
+    "S4": "Open scientific system design"
+  },
+  "evaluation_family_definitions": {
+    "A": "Deterministic quantitative",
+    "B": "Deterministic structured physics",
+    "C": "Constraint-based experimental design",
+    "D": "Diagnostic or causal reasoning",
+    "E": "Semantic-heavy open design"
+  },
+  "counts": {
+    "optical_domain": {
+      "beam_diagnostics": 2,
+      "fourier_optics": 7,
+      "free_space_beam_geometry": 3,
+      "gaussian_beams": 8,
+      "interferometry": 11,
+      "metrology": 2,
+      "optical_alignment": 3,
+      "phase_imaging": 1,
+      "polarization": 7,
+      "ultrafast_optics": 5,
+      "wavelength_routing": 3,
+      "weak_signal_detection": 12
+    },
+    "task_type": {
+      "calibration": 9,
+      "conceptual_reasoning": 29,
+      "diagnosis": 8,
+      "error_analysis": 12,
+      "experimental_design": 37,
+      "planning": 6,
+      "quantitative_inference": 17,
+      "verification": 13
+    },
+    "reasoning_mode": {
+      "calibration": 9,
+      "critique_physical_boundary": 6,
+      "diagnosis": 8,
+      "error_analysis": 12,
+      "experimental_planning": 6,
+      "forward_prediction": 15,
+      "inverse_design": 37,
+      "quantitative_inference": 17,
+      "verification": 13
+    },
+    "provisional_difficulty": {
+      "advanced": 26,
+      "expert": 8,
+      "intermediate": 17,
+      "introductory": 13
+    },
+    "openness": {
+      "S0": 18,
+      "S1": 10,
+      "S2": 20,
+      "S3": 8,
+      "S4": 8
+    },
+    "scoring_readiness": {
+      "deterministic-ready": 10,
+      "structured-ready": 16,
+      "constraint-ready": 21,
+      "judge-required": 17,
+      "unresolved-needs-redesign": 0
+    },
+    "evaluation_family": {
+      "A": 13,
+      "B": 21,
+      "C": 38,
+      "D": 8,
+      "E": 10
+    },
+    "quantitative_emphasis": {
+      "dominant": 11,
+      "secondary_or_absent": 53
+    },
+    "scoring_dominance": {
+      "deterministic": 10,
+      "semantic_or_constraint": 54
+    },
+    "validation_status": {
+      "challenged": 2,
+      "executable": 5,
+      "specified": 57
+    },
+    "scorer_available": {
+      "yes": 10,
+      "no": 54
+    }
+  },
+  "cases": [
+    {
+      "legacy_id": "1.1",
+      "case_id": "SEED-1-1",
+      "title": "Mirror rotation and far-field displacement",
+      "case_revision": "0.1.4",
+      "validation_status": "challenged",
+      "optical_domain": "free_space_beam_geometry",
+      "task_types": [
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "mirror_steering",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "1.2",
+      "case_id": "SEED-1-2",
+      "title": "Establishing an axis with two steering mirrors and two apertures",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "optical_alignment",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "alignment",
+      "sibling_clusters": [
+        "alignment_and_conditioning"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "1.3",
+      "case_id": "SEED-1-3",
+      "title": "Parallel translation of a collimated beam",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "free_space_beam_geometry",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "mirror_steering",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "1.4",
+      "case_id": "SEED-1-4",
+      "title": "Raising beam height with a two-mirror periscope",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "free_space_beam_geometry",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "alignment",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "1.5",
+      "case_id": "SEED-1-5",
+      "title": "Folded optical delay line",
+      "case_revision": "0.1.3",
+      "validation_status": "challenged",
+      "optical_domain": "ultrafast_optics",
+      "task_types": [
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "optical_delay",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "1.6",
+      "case_id": "SEED-1-6",
+      "title": "Dichroic wavelength routing",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "wavelength_routing",
+      "task_types": [
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "wavelength_routing",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "1.7",
+      "case_id": "SEED-1-7",
+      "title": "Half-wave plate and linear polarization",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A",
+        "B"
+      ],
+      "primary_concept_family": "polarization_transformation",
+      "sibling_clusters": [
+        "polarization_attenuation"
+      ],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "1.8",
+      "case_id": "SEED-1-8",
+      "title": "Continuously adjustable free-space attenuation",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "polarization_attenuation",
+      "sibling_clusters": [
+        "polarization_attenuation"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.1",
+      "case_id": "SEED-2-1",
+      "title": "Diffraction-limited focus scale",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "gaussian_focus",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.2",
+      "case_id": "SEED-2-2",
+      "title": "Designing a fivefold afocal beam expander",
+      "case_revision": "0.2.1",
+      "validation_status": "executable",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "quantitative_inference",
+        "experimental_design"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S1",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A",
+        "C"
+      ],
+      "primary_concept_family": "beam_expansion",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "2.3",
+      "case_id": "SEED-2-3",
+      "title": "Expanding and spatially filtering high-peak-power pulses",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "ultrafast_optics",
+      "task_types": [
+        "experimental_design",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "beam_expansion",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.4",
+      "case_id": "SEED-2-4",
+      "title": "Rayleigh range after doubling a Gaussian waist",
+      "case_revision": "0.2.0",
+      "validation_status": "executable",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "gaussian_invariants",
+      "sibling_clusters": [
+        "gaussian_invariants"
+      ],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "2.5",
+      "case_id": "SEED-2-5",
+      "title": "Diagnosing higher-order modes in cavity coupling",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "diagnosis",
+        "experimental_design"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C",
+        "D"
+      ],
+      "primary_concept_family": "cavity_coupling",
+      "sibling_clusters": [
+        "cavity_coupling"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.6",
+      "case_id": "SEED-2-6",
+      "title": "Circularizing an elliptical free-space beam",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "beam_shaping",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.7",
+      "case_id": "SEED-2-7",
+      "title": "Gaussian aperture clipping and diffraction",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "quantitative_inference",
+        "error_analysis",
+        "experimental_design"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S1",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "A",
+        "C"
+      ],
+      "primary_concept_family": "aperture_clipping",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "2.8",
+      "case_id": "SEED-2-8",
+      "title": "Can beam size and divergence both shrink tenfold?",
+      "case_revision": "0.2.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "gaussian_invariants",
+      "sibling_clusters": [
+        "gaussian_invariants"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": true,
+      "scorer_module": "structured"
+    },
+    {
+      "legacy_id": "3.1",
+      "case_id": "SEED-3-1",
+      "title": "Single-lens conjugates at twice the focal length",
+      "case_revision": "0.2.0",
+      "validation_status": "executable",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "lens_imaging",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "3.2",
+      "case_id": "SEED-3-2",
+      "title": "Unity-magnification relay with an accessible Fourier plane",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "relay_imaging",
+      "sibling_clusters": [
+        "fourier_plane_filtering"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "3.3",
+      "case_id": "SEED-3-3",
+      "title": "Central opaque stop in a Fourier plane",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "fourier_plane_filtering",
+      "sibling_clusters": [
+        "fourier_plane_filtering"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "3.4",
+      "case_id": "SEED-3-4",
+      "title": "Why an image-plane pinhole is not a Fourier filter",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "fourier_plane_filtering",
+      "sibling_clusters": [
+        "fourier_plane_filtering"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "3.5",
+      "case_id": "SEED-3-5",
+      "title": "Entrance-slit width and spectral resolution",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "conceptual_reasoning",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "forward_prediction"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "spectral_resolution",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "3.6",
+      "case_id": "SEED-3-6",
+      "title": "Independent access to field and pupil conjugates",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "pupil_field_conjugacy",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "3.7",
+      "case_id": "SEED-3-7",
+      "title": "Diffraction-limited lateral resolution",
+      "case_revision": "0.2.0",
+      "validation_status": "executable",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "diffraction_resolution",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "3.8",
+      "case_id": "SEED-3-8",
+      "title": "Measuring far-field angular distribution with a lens",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "fourier_optics",
+      "task_types": [
+        "experimental_design",
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "angular_metrology",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.1",
+      "case_id": "SEED-4-1",
+      "title": "Circular polarization from a quarter-wave plate",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "polarization_transformation",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.2",
+      "case_id": "SEED-4-2",
+      "title": "Michelson mirror motion and fringe cycles",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "introductory",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A"
+      ],
+      "primary_concept_family": "interferometer_phase",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.3",
+      "case_id": "SEED-4-3",
+      "title": "Diagnosing Mach-Zehnder fringe drift",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "diagnosis",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "experimental_planning"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "interferometer_stability",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.4",
+      "case_id": "SEED-4-4",
+      "title": "Single-pass phase measurement through a sample",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "experimental_planning",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "interferometer_phase",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.5",
+      "case_id": "SEED-4-5",
+      "title": "Visibility of white-light interference",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "conceptual_reasoning",
+        "experimental_design"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S1",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "interferometer_coherence",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.6",
+      "case_id": "SEED-4-6",
+      "title": "Limits of Sagnac common-mode rejection",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "conceptual_reasoning",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary",
+        "error_analysis"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "interferometer_stability",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.7",
+      "case_id": "SEED-4-7",
+      "title": "Spatial mode matching into a Fabry-Perot cavity",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "diagnosis"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C",
+        "D"
+      ],
+      "primary_concept_family": "cavity_coupling",
+      "sibling_clusters": [
+        "cavity_coupling"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "4.8",
+      "case_id": "SEED-4-8",
+      "title": "Polarization-based balanced detection of small rotation",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "experimental_design",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "polarization_detection",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.1",
+      "case_id": "SEED-5-1",
+      "title": "Right-angle fluorescence collection",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "fluorescence_background",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.2",
+      "case_id": "SEED-5-2",
+      "title": "Confocal Raman microscopy",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "raman_background",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.3",
+      "case_id": "SEED-5-3",
+      "title": "Weak absorption with a reference channel",
+      "case_revision": "0.2.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "weak_absorption",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": true,
+      "scorer_module": "structured"
+    },
+    {
+      "legacy_id": "5.4",
+      "case_id": "SEED-5-4",
+      "title": "Chopping and lock-in detection",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "modulated_detection",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.5",
+      "case_id": "SEED-5-5",
+      "title": "Optical heterodyne beat",
+      "case_revision": "0.2.1",
+      "validation_status": "executable",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "quantitative_inference",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "forward_prediction",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S0",
+      "scoring_readiness": "deterministic-ready",
+      "evaluation_families": [
+        "A",
+        "B"
+      ],
+      "primary_concept_family": "heterodyne_detection",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "deterministic",
+      "scorer_available": true,
+      "scorer_module": "numerical"
+    },
+    {
+      "legacy_id": "5.6",
+      "case_id": "SEED-5-6",
+      "title": "Detector saturation hiding a Raman signal",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "diagnosis",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "error_analysis"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "detector_diagnostics",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.7",
+      "case_id": "SEED-5-7",
+      "title": "Noise limits of balanced detection",
+      "case_revision": "0.1.1",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "conceptual_reasoning",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "forward_prediction"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "detection_noise",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "5.8",
+      "case_id": "SEED-5-8",
+      "title": "Background rejection for a narrow emission line",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "spectral_background",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.1",
+      "case_id": "SEED-6-1",
+      "title": "Small refractive-index change in a transparent sample",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "interferometer_phase",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.2",
+      "case_id": "SEED-6-2",
+      "title": "Femtosecond pump-probe transient transmission",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "ultrafast_optics",
+      "task_types": [
+        "experimental_design",
+        "quantitative_inference",
+        "calibration",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "error_analysis",
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "A",
+        "C"
+      ],
+      "primary_concept_family": "pump_probe",
+      "sibling_clusters": [
+        "pump_probe"
+      ],
+      "quantitative_emphasis": "dominant",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.3",
+      "case_id": "SEED-6-3",
+      "title": "Multipass gas absorption cell",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "metrology",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "multipass_absorption",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.4",
+      "case_id": "SEED-6-4",
+      "title": "Second-harmonic generation from 1064 nm",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "wavelength_routing",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "nonlinear_conversion",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.5",
+      "case_id": "SEED-6-5",
+      "title": "Confocal fluorescence depth scanning",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "confocal_sectioning",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.6",
+      "case_id": "SEED-6-6",
+      "title": "Sensitive interferometric mirror displacement",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "A",
+        "C"
+      ],
+      "primary_concept_family": "interferometer_phase",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.7",
+      "case_id": "SEED-6-7",
+      "title": "Mode cleaning before interferometry",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "optical_alignment",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S3",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "beam_conditioning",
+      "sibling_clusters": [
+        "alignment_and_conditioning"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "6.8",
+      "case_id": "SEED-6-8",
+      "title": "Joint phase and intensity measurement",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "error_analysis"
+      ],
+      "reasoning_modes": [
+        "error_analysis",
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "complex_field_measurement",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.1",
+      "case_id": "SEED-7-1",
+      "title": "Why two alignment apertures cannot both be centered",
+      "case_revision": "0.1.1",
+      "validation_status": "specified",
+      "optical_domain": "optical_alignment",
+      "task_types": [
+        "diagnosis",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "experimental_planning"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "alignment",
+      "sibling_clusters": [
+        "alignment_and_conditioning"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.2",
+      "case_id": "SEED-7-2",
+      "title": "Strong diffraction rings after beam expansion",
+      "case_revision": "0.2.0",
+      "validation_status": "specified",
+      "optical_domain": "beam_diagnostics",
+      "task_types": [
+        "diagnosis"
+      ],
+      "reasoning_modes": [
+        "diagnosis"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "intermediate",
+      "openness": "S2",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "beam_expansion",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": true,
+      "scorer_module": "diagnostic"
+    },
+    {
+      "legacy_id": "7.3",
+      "case_id": "SEED-7-3",
+      "title": "Low interferometric fringe visibility",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "diagnosis",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "experimental_planning"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "interferometer_stability",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.4",
+      "case_id": "SEED-7-4",
+      "title": "Independently verify a fivefold beam expander",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "metrology",
+      "task_types": [
+        "calibration",
+        "verification",
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "quantitative_inference",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S1",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "B",
+        "C"
+      ],
+      "primary_concept_family": "beam_expansion",
+      "sibling_clusters": [
+        "expansion_and_mode_quality"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.5",
+      "case_id": "SEED-7-5",
+      "title": "Can a half-wave plate attenuate circular polarization?",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "conceptual_reasoning",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "polarization_attenuation",
+      "sibling_clusters": [
+        "polarization_attenuation"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.6",
+      "case_id": "SEED-7-6",
+      "title": "Lossless purification of unpolarized light",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "conceptual_reasoning",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "polarization_purity",
+      "sibling_clusters": [
+        "polarization_attenuation"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.7",
+      "case_id": "SEED-7-7",
+      "title": "No transient signal in a pump–probe experiment",
+      "case_revision": "0.1.1",
+      "validation_status": "specified",
+      "optical_domain": "ultrafast_optics",
+      "task_types": [
+        "diagnosis",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "diagnosis",
+        "experimental_planning"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S2",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "D"
+      ],
+      "primary_concept_family": "pump_probe",
+      "sibling_clusters": [
+        "pump_probe"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "7.8",
+      "case_id": "SEED-7-8",
+      "title": "Can focus shrink while depth of focus grows?",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "gaussian_beams",
+      "task_types": [
+        "conceptual_reasoning",
+        "quantitative_inference"
+      ],
+      "reasoning_modes": [
+        "critique_physical_boundary",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "advanced",
+      "openness": "S0",
+      "scoring_readiness": "structured-ready",
+      "evaluation_families": [
+        "B"
+      ],
+      "primary_concept_family": "gaussian_invariants",
+      "sibling_clusters": [
+        "gaussian_invariants"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.1",
+      "case_id": "SEED-8-1",
+      "title": "Low-cost free-space measurement of weak absorption",
+      "case_revision": "0.1.1",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "weak_absorption",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.2",
+      "case_id": "SEED-8-2",
+      "title": "Imaging a weak phase object",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "phase_imaging",
+      "task_types": [
+        "experimental_design",
+        "conceptual_reasoning"
+      ],
+      "reasoning_modes": [
+        "inverse_design"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "phase_imaging",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.3",
+      "case_id": "SEED-8-3",
+      "title": "Polarimetric imaging of a thin birefringent sample",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "polarization",
+      "task_types": [
+        "experimental_design",
+        "quantitative_inference",
+        "calibration"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "inverse_design",
+        "quantitative_inference"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "polarization_imaging",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.4",
+      "case_id": "SEED-8-4",
+      "title": "Subpicosecond nonlinear-response measurement",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "ultrafast_optics",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "pump_probe",
+      "sibling_clusters": [
+        "pump_probe"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.5",
+      "case_id": "SEED-8-5",
+      "title": "Stable common-path phase interferometry",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "interferometry",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "interferometer_phase",
+      "sibling_clusters": [
+        "interferometer_phase_and_stability"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.6",
+      "case_id": "SEED-8-6",
+      "title": "Collinear transport and separation of two wavelengths",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "wavelength_routing",
+      "task_types": [
+        "experimental_design",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S3",
+      "scoring_readiness": "constraint-ready",
+      "evaluation_families": [
+        "C"
+      ],
+      "primary_concept_family": "wavelength_routing",
+      "sibling_clusters": [],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.7",
+      "case_id": "SEED-8-7",
+      "title": "High-dynamic-range angular scattering measurement",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "weak_signal_detection",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "verification"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "scattering_dynamic_range",
+      "sibling_clusters": [
+        "weak_signal_detection"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    },
+    {
+      "legacy_id": "8.8",
+      "case_id": "SEED-8-8",
+      "title": "From beam target to acceptance plan",
+      "case_revision": "0.1.0",
+      "validation_status": "specified",
+      "optical_domain": "beam_diagnostics",
+      "task_types": [
+        "experimental_design",
+        "calibration",
+        "verification",
+        "planning"
+      ],
+      "reasoning_modes": [
+        "calibration",
+        "experimental_planning",
+        "inverse_design",
+        "verification"
+      ],
+      "modality": "text",
+      "provisional_difficulty": "expert",
+      "openness": "S4",
+      "scoring_readiness": "judge-required",
+      "evaluation_families": [
+        "C",
+        "E"
+      ],
+      "primary_concept_family": "beam_conditioning",
+      "sibling_clusters": [
+        "alignment_and_conditioning"
+      ],
+      "quantitative_emphasis": "secondary_or_absent",
+      "scoring_dominance": "semantic_or_constraint",
+      "scorer_available": false,
+      "scorer_module": null
+    }
+  ]
+}

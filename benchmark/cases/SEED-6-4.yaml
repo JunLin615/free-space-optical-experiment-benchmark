@@ -1,0 +1,110 @@
+schema_version: 0.1.0
+case_id: SEED-6-4
+legacy_id: '6.4'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Second-harmonic generation from 1064 nm
+language: en
+taxonomy:
+  optical_domain: wavelength_routing
+  task_types:
+  - experimental_design
+  - conceptual_reasoning
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 6.4 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: The seed permits continuous or quasi-continuous operation; the translation includes single-pass
+    and resonantly enhanced families while retaining the seed conversion and separation tasks.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A continuous or quasi-continuous 1064 nm beam must generate 532 nm light in a nonlinear crystal
+    in a free-space setup, with the remaining fundamental separated from the output.
+  questions:
+  - id: q1
+    request: Identify the key components and controls in the optical path.
+  - id: q2
+    request: Explain why arbitrarily tighter focusing cannot increase conversion efficiency indefinitely.
+  - id: q3
+    request: Explain how to separate 532 nm light from residual 1064 nm light.
+  givens:
+  - value: 1064
+    unit: nm
+    symbol: fundamental_wavelength
+  - value: 532
+    unit: nm
+    symbol: second_harmonic_wavelength
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  method_shape:
+    q1: Object with input_controls, focusing, nonlinear_crystal, phase_matching, and output optics.
+    q2: Object with focusing_tradeoff and finite-interaction or damage limits.
+    q3: Object with separation_method, finite_isolation, and output verification.
+  permit_additional_explanation: true
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Include input spatial and polarization preparation, focusing, phase-matched nonlinear crystal
+      with thermal or angular control as needed, output handling, and wavelength-selective separation.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Explain the tradeoff between intensity and interaction length, including diffraction, walk-off
+      or phase matching, thermal effects, and damage risk.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Use a suitable dichroic, dispersive optic, or filter stack with finite extinction and verified
+      532 nm throughput.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: single_pass_crystal
+    example: Focus into a phase-matched crystal in a single free-space pass.
+  - id: resonant_enhancement
+    example: Use a calibrated enhancement cavity around the crystal for continuous-wave efficiency, with locking
+      and damage limits.
+  other_valid_families_policy: Other phase-matched free-space conversion layouts pass if the focusing, loss,
+    and fundamental rejection are physically justified.
+  forbidden_claims:
+  - id: f_1
+    predicate: Conversion efficiency improves without bound as the focal spot shrinks.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks: []
+  notes: Draft specification only. The answer criteria are proposed, not an implemented autonomous scorer;
+    positive and adversarial fixtures and semantic calibration are still required before promotion.

@@ -1,0 +1,100 @@
+schema_version: 0.1.0
+case_id: SEED-4-4
+legacy_id: '4.4'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Single-pass phase measurement through a sample
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - experimental_design
+  - planning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.4 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The seed example is Mach-Zehnder,
+    but its own gold allows common-path variants; the oracle therefore checks the single-pass and reference
+    conditions rather than one named topology.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A transparent sample induces a phase shift. The probe may traverse the sample only once;
+    it cannot be reflected back through it.
+  questions:
+  - id: q1
+    request: Propose a suitable interferometer topology.
+  - id: q2
+    request: Where should the sample be placed?
+  - id: q3
+    request: Give at least one method to improve phase stability.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_topology
+    severity: scored
+    predicate: Use a topology with one sample traversal by the probe and a coherent reference, such as
+      a Mach-Zehnder single-pass arm arrangement.
+    evidence_path: answers.q1
+  - id: c_placement
+    severity: scored
+    predicate: Place the sample in the probe path once, with a reference path that avoids it or a defined
+      common-path reference; preserve a measurable differential phase.
+    evidence_path: answers.q2
+  - id: c_stability
+    severity: scored
+    predicate: Give a causal phase-stability measure such as short balanced paths, enclosure, low mechanical
+      height, common or near-common paths, active locking or reference subtraction.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: mach_zehnder
+    example: Put the sample in one transmission arm of a Mach-Zehnder interferometer and recombine with
+      an unsampled reference.
+    family_checks:
+    - single_pass
+    - reference_visibility
+  - id: single_pass_common_path
+    example: Use a common or near-common-path reference that experiences a distinguishable sample phase
+      without making a second sample pass.
+    family_checks:
+    - single_pass
+    - reference_definition
+  other_valid_families_policy: Accept any interferometric topology that makes only one sample pass, has
+    a coherent distinguishable reference and supports phase readout.
+scoring:
+  criteria:
+  - id: c_topology
+    weight: 0.35
+    check: c_topology
+  - id: c_placement
+    weight: 0.3
+    check: c_placement
+  - id: c_stability
+    weight: 0.35
+    check: c_stability
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

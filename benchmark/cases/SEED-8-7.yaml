@@ -1,0 +1,107 @@
+schema_version: 0.1.0
+case_id: SEED-8-7
+legacy_id: '8.7'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: High-dynamic-range angular scattering measurement
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - experimental_design
+  - calibration
+  - verification
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.7.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Clarification: a 10^6 power ratio
+    requires pre-detector rejection, linearity, and background verification; post-acquisition subtraction
+    alone cannot recover a saturated weak signal.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Measure weak angular scattering from a sample when the primary transmitted beam is at least
+    10^6 times stronger than the scattering signal of interest.
+  questions:
+  - id: q1
+    request: Design direct-beam rejection and angular-scatter collection geometry.
+  - id: q2
+    request: Protect detector dynamic range.
+  - id: q3
+    request: Specify at least three distinct layers of stray-light control.
+  - id: q4
+    request: Describe blank-background and response measurements.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  - answers.q4
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Keep the transmitted primary beam out of the scatter detector by dark-field, angular, spatial,
+      or imaging-stop geometry while defining the measured angular range.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Reject or attenuate the main beam before detection and verify linearity and saturation
+      margin; numerical subtraction after saturation is insufficient.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Use at least three distinct physical controls such as baffling, blackened stops, beam dumps,
+      aperture placement, enclosure, spectral filtering, or justified polarization selection.
+    evidence_path: answers.q3
+  - id: c_q4
+    severity: scored
+    predicate: Measure no-sample or blank backgrounds and use a known scattering reference or calibrated
+      response to separate sample scatter from system stray light.
+    evidence_path: answers.q4
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
+    equivalent approaches satisfying the stated observable and constraints.
+  accepted_solution_families:
+  - id: dark_field
+    example: A dark-field stop blocks the main transmitted beam before a spatially resolved scatter detector.
+  - id: angle_scan
+    example: An angularly selective detector scans away from the direct beam with baffling and blank subtraction.
+  - id: imaging_pupil
+    example: Conjugate-plane masks and apertures reject the main beam while preserving calibrated scatter
+      angles.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.25
+    check: c_q1
+  - id: c_q2
+    weight: 0.25
+    check: c_q2
+  - id: c_q3
+    weight: 0.25
+    check: c_q3
+  - id: c_q4
+    weight: 0.25
+    check: c_q4
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks: []
+  notes: English canonical specification only. No autonomous scorer or release verification is claimed.

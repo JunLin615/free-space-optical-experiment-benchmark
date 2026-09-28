@@ -1,0 +1,93 @@
+schema_version: 0.1.0
+case_id: SEED-4-6
+legacy_id: '4.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Limits of Sagnac common-mode rejection
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - conceptual_reasoning
+  - error_analysis
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.6 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The seed distinguishes slow reciprocal
+    common-mode disturbances from nonreciprocal and time-dependent exceptions; their cancellation is conditional.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Someone claims that a Sagnac interferometer needs no vibration protection because every disturbance
+    cancels automatically.
+  questions:
+  - id: q1
+    request: Assess the claim.
+  - id: q2
+    request: Which disturbances can be strongly rejected as common mode?
+  - id: q3
+    request: Give at least one disturbance that will not cancel completely.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_assess
+    severity: scored
+    predicate: Reject universal cancellation; a counterpropagating common path reduces some perturbations
+      but does not make the phase invariant to all disturbances.
+    evidence_path: answers.q1
+  - id: c_common
+    severity: scored
+    predicate: Slow reciprocal changes in shared geometry or refractive index can largely cancel when
+      both beams experience sufficiently similar conditions.
+    evidence_path: answers.q2
+  - id: c_exceptions
+    severity: scored
+    predicate: Identify a plausible differential or nonreciprocal effect such as rotation, Faraday effect,
+      time-varying perturbation sampled at different times, direction-specific loss or polarization asymmetry.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: reciprocity_analysis
+    example: Compare the phase accumulated by counterpropagating beams along the shared route and identify
+      what breaks equal accumulation.
+    family_checks:
+    - reciprocal_common_mode
+    - nonreciprocal_or_time_asymmetric
+  other_valid_families_policy: Accept any specific physical counterexample with a clear mechanism, including
+    fast vibration whose phase is sampled at different times.
+scoring:
+  criteria:
+  - id: c_assess
+    weight: 0.3
+    check: c_assess
+  - id: c_common
+    weight: 0.3
+    check: c_common
+  - id: c_exceptions
+    weight: 0.4
+    check: c_exceptions
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

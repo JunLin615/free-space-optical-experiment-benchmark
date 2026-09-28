@@ -1,0 +1,87 @@
+schema_version: 0.1.0
+case_id: SEED-1-2
+legacy_id: '1.2'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Establishing an axis with two steering mirrors and two apertures
+language: en
+taxonomy:
+  optical_domain: optical_alignment
+  task_types: [experimental_design, verification]
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.2 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: >-
+    Translates the three seed tasks. The seed implies that one mirror independently
+    controls the near aperture and the other the far aperture. In a real layout either
+    mirror may move both spots. The specification therefore asks for iterative
+    two-plane alignment, with mirror roles chosen from actual response geometry.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: >-
+    A collimated laser must propagate at a specified height and direction. Two
+    adjustable steering mirrors and two well-separated apertures are available.
+    The aperture centers define the target output line and are reachable with the
+    available mirror travel.
+  questions:
+  - id: q1
+    request: Describe a stable procedure for aligning the beam through both aperture centers.
+  - id: q2
+    request: Explain why centering only at the distant aperture does not establish the desired line.
+  - id: q3
+    request: Give a measurable convergence check for the alignment.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_iteration
+    severity: scored
+    predicate: >-
+      Use both reference planes, observe each mirror's effect, and iterate the two
+      steering adjustments until position and direction meet the target line.
+    evidence_path: answers.q1
+  - id: c_two_planes
+    severity: scored
+    predicate: >-
+      A single distant-plane hit constrains position at that plane but leaves
+      angular error or a different near-plane position possible.
+    evidence_path: answers.q2
+  - id: c_convergence
+    severity: scored
+    predicate: >-
+      After the final adjustments, the beam stays centered within stated aperture
+      tolerances at both separated planes without continual compensating changes.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: iterative_near_far
+    example: Adjust the most useful near-plane steering control, then the far-plane control, and repeat while rechecking both apertures.
+  - id: measured_response_matrix
+    example: Measure both aperture-spot responses to small mirror changes and solve iteratively for the two required corrections.
+  other_valid_families_policy: Accept any physically feasible two-plane method that measures and corrects cross-coupling between steering controls.
+  forbidden_claims:
+  - id: f_one_plane
+    predicate: A single centered distant spot alone proves that the full output axis is aligned.
+  - id: f_independent_mirrors
+    predicate: Each mirror always affects exactly one aperture, regardless of geometry.
+scoring:
+  criteria:
+  - {id: c_iteration, weight: 0.4, check: c_iteration, question_id: q1}
+  - {id: c_two_planes, weight: 0.3, check: c_two_planes, question_id: q2}
+  - {id: c_convergence, weight: 0.3, check: c_convergence, question_id: q3}
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, calibrated_semantic_judge]
+  implemented_checks: []
+  notes: The two-plane method is specified, but an executable oracle and challenge fixtures remain to be built.

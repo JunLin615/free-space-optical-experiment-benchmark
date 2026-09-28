@@ -1,0 +1,34 @@
+{
+  "case_id": "SEED-5-5",
+  "name": "alternative_valid_units_or_form",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "value": 80000000,
+          "unit": "Hz"
+        }
+      },
+      "q2": {
+        "detection_law": "intensity_detection",
+        "field_cross_term": "heterodyne_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false,
+        "projection_restores_beat": true
+      }
+    }
+  },
+  "expected": {
+    "n_result": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "pass"
+    }
+  }
+}

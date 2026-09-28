@@ -1,0 +1,83 @@
+schema_version: 0.1.0
+case_id: SEED-1-4
+legacy_id: '1.4'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Raising beam height with a two-mirror periscope
+language: en
+taxonomy:
+  optical_domain: free_space_beam_geometry
+  task_types: [experimental_design, verification]
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.4 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: >-
+    Translates the seed's periscope tasks. The seed suggests that two arbitrary
+    downstream apertures prove parallelism; the target aperture centers must first
+    define a line calibrated parallel to the measured input direction, or an
+    independent two-plane angular comparison must be used.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: >-
+    A horizontal collimated input beam at 50 mm height must leave at 100 mm
+    height, propagating parallel to the input. Assume a suitable clear vertical
+    path is available for the two-mirror layout.
+  questions:
+  - id: q1
+    request: Describe a two-mirror implementation of the height change.
+  - id: q2
+    request: Name a geometric or polarization-related property that the layout may change in addition to height.
+  - id: q3
+    request: Give an experimental test that distinguishes true input-output parallelism from merely hitting one downstream point.
+  givens:
+  - {symbol: input_height, value: 50, unit: mm}
+  - {symbol: output_height, value: 100, unit: mm}
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_periscope
+    severity: scored
+    predicate: Two reflections first turn the beam upward by 50 mm of height change and then restore horizontal forward propagation.
+    evidence_path: answers.q1
+  - id: c_other_property
+    severity: scored
+    predicate: Recognize a layout-dependent lateral offset, image orientation, or polarization-basis/phase change from the reflections.
+    evidence_path: answers.q2
+  - id: c_parallel_test
+    severity: scored
+    predicate: >-
+      Compare output positions at two separated planes with a target line known to
+      be parallel to the input, or measure input and output angles independently.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: periscope
+    example: A pair of tilted mirrors sends the beam vertically upward and then forward at the raised height.
+  - id: equivalent_folded_lift
+    example: Another two-reflection vertical fold with the same 50 mm lift and measured forward-parallel output.
+  other_valid_families_policy: Accept equivalent two-mirror geometries when the input-output axis and height requirements are demonstrated.
+  forbidden_claims:
+  - id: f_unreferenced_apertures
+    predicate: Centering through two apertures whose line has no relationship to the input proves input-output parallelism.
+scoring:
+  criteria:
+  - {id: c_periscope, weight: 0.4, check: c_periscope, question_id: q1}
+  - {id: c_other_property, weight: 0.25, check: c_other_property, question_id: q2}
+  - {id: c_parallel_test, weight: 0.35, check: c_parallel_test, question_id: q3}
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, calibrated_semantic_judge]
+  implemented_checks: []
+  notes: The target-axis reference is explicit; no executable geometry checker is implemented.

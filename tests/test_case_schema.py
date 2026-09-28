@@ -10,7 +10,7 @@ from pathlib import Path
 import yaml
 from jsonschema import Draft202012Validator
 
-from tools.validate_cases import SCHEMA_PATH, load_case, validate
+from tools.validate_cases import ROOT, SCHEMA_PATH, load_case, validate
 
 
 def case_record(case_id: str = "TEST-1") -> dict:
@@ -79,6 +79,47 @@ class CaseSchemaTests(unittest.TestCase):
         self.write("a.yaml", case_record())
         self.write("b.yaml", case_record())
         self.assertTrue(any("duplicate case_id" in issue for issue in validate([self.directory])))
+
+    def test_malformed_question_id(self) -> None:
+        record = case_record()
+        record["task"]["questions"][0]["id"] = "question_one"
+        self.assertTrue(any("malformed task question ID" in issue for issue in validate([self.write("bad_question.yaml", record)])))
+
+    def test_executable_task_to_score_coverage(self) -> None:
+        record = case_record()
+        record["validation_status"] = "executable"
+        record["validation"]["implemented_checks"] = ["typed_numeric_check"]
+        self.assertEqual(validate([self.write("covered.yaml", record)]), [])
+
+        record["answer_contract"]["required_result_paths"].append("answers.q1.unscored_claim")
+        issues = validate([self.write("unscored_claim.yaml", record)])
+        self.assertTrue(any("required_result_path answers.q1.unscored_claim has no scored evidence path"
+                            in issue for issue in issues))
+        record["answer_contract"]["required_result_paths"].pop()
+
+        record["task"]["questions"].append({"id": "q2", "request": "Report y."})
+        record["answer_contract"]["required_result_paths"].append("answers.q2.y")
+        issues = validate([self.write("unscored_question.yaml", record)])
+        self.assertTrue(any("public question q2 has no scoring criterion" in issue for issue in issues))
+        self.assertTrue(any("required_result_path answers.q2.y has no scored evidence path" in issue for issue in issues))
+
+        record["scoring"]["criteria"][0]["question_id"] = "q2"
+        issues = validate([self.write("wrong_question.yaml", record)])
+        self.assertTrue(any("question_id differs from scored evidence path" in issue for issue in issues))
+
+    def test_expander_q1_public_request_matches_scored_ratio(self) -> None:
+        case = load_case(ROOT / "benchmark" / "cases" / "SEED-2-2.yaml")
+        q1 = case["task"]["questions"][0]["request"]
+        self.assertEqual(q1, "State the required magnitude of the output-to-input focal-length ratio.")
+        self.assertNotIn("direction", q1.lower())
+        check = next(item for item in case["gold"]["numerical_checks"] if item["id"] == "n_expansion")
+        self.assertEqual(check["answer_path"], "answers.q1.expansion_factor")
+        self.assertIn("answers.q1.expansion_factor", case["answer_contract"]["required_result_paths"])
+        self.assertTrue(any(item["check"] == "n_expansion" and item["question_id"] == "q1"
+                            for item in case["scoring"]["criteria"]))
+        rendered = (ROOT / "benchmark" / "generated" / "questions.md").read_text(encoding="utf-8")
+        self.assertIn(q1, rendered)
+        self.assertNotIn("identify the expansion direction", rendered)
 
     def test_unresolved_score_reference_and_weights(self) -> None:
         record = case_record()

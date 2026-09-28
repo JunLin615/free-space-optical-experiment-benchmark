@@ -1,0 +1,75 @@
+schema_version: 0.1.0
+case_id: SEED-1-3
+legacy_id: '1.3'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Parallel translation of a collimated beam
+language: en
+taxonomy:
+  optical_domain: free_space_beam_geometry
+  task_types: [experimental_design, conceptual_reasoning]
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 1.3 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the seed's same-height 30 mm dogleg problem; parallel means the same forward propagation direction.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: >-
+    A horizontal collimated beam must be displaced laterally by 30 mm at the
+    same height. The output must propagate forward parallel to the input.
+  questions:
+  - id: q1
+    request: Describe a feasible arrangement using the minimum of two plane mirrors.
+  - id: q2
+    request: State the relative mirror orientation and path-geometry condition that restores the propagation direction.
+  - id: q3
+    request: Explain why one ordinary plane-mirror reflection cannot generally provide this pure translation.
+  givens:
+  - {symbol: lateral_offset, value: 30, unit: mm}
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths: [answers.q1, answers.q2, answers.q3]
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_dogleg
+    severity: scored
+    predicate: Two reflections create a displaced path and restore the original forward direction with 30 mm same-height lateral separation.
+    evidence_path: answers.q1
+  - id: c_orientation
+    severity: scored
+    predicate: The second angular deflection cancels the first; a pair of parallel mirror planes in a suitable dogleg geometry is one implementation.
+    evidence_path: answers.q2
+  - id: c_single_reflection
+    severity: scored
+    predicate: A single ordinary plane reflection changes beam direction rather than producing a forward parallel pure displacement.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: parallel_mirror_dogleg
+    example: Use two appropriately positioned parallel mirror planes so the first reflection turns sideways and the second restores the forward direction.
+  - id: equivalent_two_reflection_geometry
+    example: Use any two-reflection geometry with equal and opposite angular deflections and the required same-height lateral offset.
+  other_valid_families_policy: Accept geometrically equivalent two-mirror layouts with a verified forward-parallel output and 30 mm offset.
+  forbidden_claims:
+  - id: f_single_mirror_translation
+    predicate: One ordinary plane-mirror reflection alone generates an arbitrary forward-parallel lateral beam offset.
+scoring:
+  criteria:
+  - {id: c_dogleg, weight: 0.4, check: c_dogleg, question_id: q1}
+  - {id: c_orientation, weight: 0.35, check: c_orientation, question_id: q2}
+  - {id: c_single_reflection, weight: 0.25, check: c_single_reflection, question_id: q3}
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks: [yaml_and_json_schema_valid, all_scoring_ids_resolve_and_weights_sum_to_one, independent_physics_review, positive_and_adversarial_answer_fixtures_pass, calibrated_semantic_judge]
+  implemented_checks: []
+  notes: Geometric equivalence is specified; no executable geometry checker is implemented.
