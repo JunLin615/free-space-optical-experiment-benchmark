@@ -1,8 +1,8 @@
 # Free-Space Optical Experiment Benchmark
 
-An open benchmark under development for evaluating autonomous agents on **free-space optical experimental reasoning**: quantitative prediction, beam-path design, diagnosis, calibration, and defensible engineering trade-offs. The scientific questions are independent of OpenSci, any agent framework, vendor, and optical-design software. Planned protocols compare closed-book, case-assisted, tool-assisted, and combined access to the *same* cases.
+An open benchmark under development for evaluating autonomous agents on **free-space optical experimental reasoning**: quantitative prediction, beam-path design, diagnosis, calibration, and defensible engineering trade-offs. The scientific questions are independent of OpenSci, any agent framework, vendor, and optical-design software. Four [versioned protocols](docs/protocols.md) compare closed-book, case-assisted, tool-assisted, and combined access to the *same* scientific tasks.
 
-**Status:** all 64 seed cases are canonical English YAML. Eighteen cases have registered autonomous scorers, including all ten deterministic-ready cases. Five typed-answer cases form the first evidence-pinned `0.1.0-rc1` release candidate; the [manifest](benchmark/releases/0.1.0-rc1.json) and [qualification report](docs/qualification_report.md) state its exact scope and exclusions. The original Chinese HTML remains byte for byte unchanged. The [generated Markdown](benchmark/generated/questions.md) and [HTML](benchmark/generated/questions.html) show questions only; gold specifications remain in canonical case files.
+**Status:** all 64 seed cases are canonical English YAML. Eighteen cases have registered autonomous scorers, including all ten deterministic-ready cases. Five typed-answer cases form the first evidence-pinned `0.1.0-rc1` release candidate; the [manifest](benchmark/releases/0.1.0-rc1.json) and [qualification report](docs/qualification_report.md) state its exact scope and exclusions. The original Chinese HTML remains byte for byte unchanged. The [generated Markdown](benchmark/generated/questions.md) and [HTML](benchmark/generated/questions.html) show questions only; gold specifications remain in canonical case files. A separate [five-item example library](docs/case_library.md), [ten public development variants](docs/variants.md), and a [provider-neutral baseline runner](docs/baseline_runner.md) support reproducible evaluation without changing rc1. The [first measured baseline](docs/baseline_results.md) and [contamination audit](docs/contamination_audit.md) document their observed scope and limits.
 
 ## Run the local checks
 
@@ -18,6 +18,9 @@ python tools/check_verification_status.py
 python tools/render_cases.py --check
 python tools/generate_coverage.py --check
 python tools/qualify_release.py --check
+python -m tools.protocols
+python -m tools.case_library
+python tools/variants.py check-public
 ```
 
 `tools/validate_cases.py` checks schema structure, IDs, taxonomy, cross-field references, tolerances, and registered physics references. `tools/check_corpus.py` verifies all 64 legacy IDs and the original seed hash. `tools/render_cases.py` regenerates public question views from canonical YAML. CI also runs unit tests, scoring fixtures, and verification-status gates without a paid model API. Most cases have a specification and proposed oracle only; a YAML record alone does not mean a case can be scored autonomously.
@@ -32,10 +35,14 @@ Run `python tools/qualify_release.py` to inspect each selected case's evidence a
 - `benchmark/coverage/`: complete-corpus classifications, concept families, and migration status.
 - `benchmark/schema/`: versioned case and future run-result JSON Schemas.
 - `benchmark/generated/`: generated question-only Markdown and HTML.
+- `benchmark/protocols/` and `benchmark/case_library/`: matched access rules and optional examples.
+- `benchmark/variants/`: public development lineage and gold-free generated questions.
+- `benchmark/run_schema/` and `tools/baseline/`: frozen run records, adapters, and bounded tools.
+- `runs/`: executed baseline manifests, result records, logs, and analysis.
 - `tools/` and `tests/`: schema validation, rendering, physics checks, and tests.
 - `docs/`: [Round 2 decisions](docs/round2_decisions.md), [benchmark design](docs/benchmark_design.md), [case schema proposal](docs/case_schema_proposal.md), [evaluation design](docs/evaluation_design.md), [automated validation design](docs/automated_validation_design.md), [seed audit](docs/research/seed_audit.md), [benchmark landscape](docs/research/benchmark_landscape.md), and [roadmap](docs/project_roadmap.md).
 
-The long-term scoring design combines unit-aware calculations, independent optical physics, constraints that admit multiple valid designs, and calibrated semantic judges for bounded residual claims. Normal evaluation must run **without human expert grading**. Open-ended pilot cases are not promoted to a scored release until their autonomous oracles have been challenged with valid alternatives and plausible wrong answers. The optional optical case/example library will be versioned separately from benchmark prompts and gold specifications.
+The long-term scoring design combines unit-aware calculations, independent optical physics, constraints that admit multiple valid designs, and calibrated semantic judges for bounded residual claims. Normal evaluation must run **without human expert grading**. Open-ended pilot cases are not promoted to a scored release until their autonomous oracles have been challenged with valid alternatives and plausible wrong answers. The optical example library is versioned separately from benchmark prompts and gold specifications.
 
 Use [Issues](https://github.com/JunLin615/free-space-optical-experiment-benchmark/issues) to propose or correct a case or discuss infrastructure. Contributions use focused pull requests to `main`; see [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md).
 

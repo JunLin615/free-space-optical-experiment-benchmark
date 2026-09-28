@@ -1,0 +1,94 @@
+{
+  "answer_contract": {
+    "format": "human_explanation_plus_json_object",
+    "permit_additional_explanation": true,
+    "quantity_shape": {
+      "answers.q1.path_change": "Quantity {value, unit}; length units m, mm, um, or nm, magnitude scored.",
+      "answers.q2.delay_change": "Quantity {value, unit}; time units s, ps, or fs, magnitude scored.",
+      "answers.q3.stage_travel": "Quantity {value, unit}; length units m, mm, um, or nm; nonnegative required travel."
+    },
+    "required_result_paths": [
+      "answers.q1.path_change",
+      "answers.q2.delay_change",
+      "answers.q3.stage_travel"
+    ],
+    "schema_id": "pilot_answer_v0.1"
+  },
+  "compatible_protocols": [
+    {
+      "id": "closed_book",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tool_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_and_tool_assisted",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "instance_content_sha256": "04b0f1c3089fc34c6dc1b4e4791eb0366ed3fd683efcde4fdce5cae79a4aaff5",
+  "parameter_constraints": {
+    "passes": 2,
+    "stage_displacement_m": [
+      0.0005,
+      0.002
+    ],
+    "target_delay_s": [
+      5e-11,
+      1.6e-10
+    ]
+  },
+  "parent_case_content_sha256": "1877546a59b9ca61ee9278cc9fa28d8eb38b13deeaacbff86c033af3f864c717",
+  "parent_case_id": "SEED-1-5",
+  "parent_case_revision": "0.1.5",
+  "parent_release": "0.1.0-rc1",
+  "public_seed": "public-delay-parameters-01",
+  "scientific_payload_sha256": "a8f803dc1e646b3bc93e17fa5662327df0daf152a323619aa434713c12391e9b",
+  "scorer": {
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "module": "numerical"
+  },
+  "seed_classification": "public_dev",
+  "seed_commitment_sha256": "65369133d900600819d927fc476653919ec39a6b67a1a3f7495bcd028be64119",
+  "task": {
+    "coordinate_convention": "Path and time changes are magnitudes because the stage-motion sense was not given; required mechanical travel is nonnegative.",
+    "givens": [
+      {
+        "symbol": "stage_displacement",
+        "unit": "mm",
+        "value": 1.4
+      },
+      {
+        "symbol": "target_delay",
+        "unit": "ps",
+        "value": 150
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "request": "Find the change in optical path length."
+      },
+      {
+        "id": "q2",
+        "request": "Find the change in time delay."
+      },
+      {
+        "id": "q3",
+        "request": "Estimate the required one-way mechanical travel for a 150 ps delay scan."
+      }
+    ],
+    "statement": "An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.4 mm along the optical axis. The beam traverses the moving-stage gap once on the outbound leg and once on the return leg; no other moving path segment changes. Report changes in optical path and time delay as magnitudes."
+  },
+  "variant_id": "VAR-SEED-1-5-P-65369133d900",
+  "variant_schema_version": "0.1.0",
+  "variant_type": "parameter"
+}

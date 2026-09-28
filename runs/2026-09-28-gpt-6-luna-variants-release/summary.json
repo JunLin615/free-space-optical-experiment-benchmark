@@ -1,0 +1,294 @@
+{
+  "run_id": "2026-09-28-gpt-6-luna-variants-release",
+  "execution_class": "real",
+  "record_count": 3,
+  "declared_run_count": 3,
+  "verified": {
+    "overall": {
+      "runs": 1,
+      "completed": 1,
+      "candidate_outcomes": 1,
+      "infrastructure_failures": 0,
+      "scored": 1,
+      "mean_score": 1.0,
+      "median_score": 1.0,
+      "score_distribution": [
+        1.0
+      ],
+      "successes": 1,
+      "task_success_rate": 1.0,
+      "first_attempt_success_rate": 1.0,
+      "unresolved_rate": 0.0,
+      "invalid_contract_rate": 0.0,
+      "physics_failure_rate": 0.0,
+      "failure_classes": {
+        "none": 1
+      },
+      "score_failure_modes": {
+        "none": 1
+      },
+      "usage": {
+        "input": {
+          "known_records": 1,
+          "total": 12561
+        },
+        "output": {
+          "known_records": 1,
+          "total": 195
+        },
+        "total": {
+          "known_records": 1,
+          "total": 12756
+        },
+        "cached_input": {
+          "known_records": 1,
+          "total": 11008
+        },
+        "reasoning": {
+          "known_records": 1,
+          "total": 120
+        }
+      },
+      "tokens_per_success": 12756,
+      "tool_calls": 0,
+      "tool_failures": 0,
+      "tool_calls_per_success": 0,
+      "wall_time_seconds": 16.57799999997951,
+      "wall_seconds_per_success": 16.57799999997951,
+      "cost": {
+        "amount": null,
+        "currency": null,
+        "known_records": 0,
+        "per_success": null
+      }
+    },
+    "by_protocol": {
+      "closed_book": {
+        "runs": 1,
+        "completed": 1,
+        "candidate_outcomes": 1,
+        "infrastructure_failures": 0,
+        "scored": 1,
+        "mean_score": 1.0,
+        "median_score": 1.0,
+        "score_distribution": [
+          1.0
+        ],
+        "successes": 1,
+        "task_success_rate": 1.0,
+        "first_attempt_success_rate": 1.0,
+        "unresolved_rate": 0.0,
+        "invalid_contract_rate": 0.0,
+        "physics_failure_rate": 0.0,
+        "failure_classes": {
+          "none": 1
+        },
+        "score_failure_modes": {
+          "none": 1
+        },
+        "usage": {
+          "input": {
+            "known_records": 1,
+            "total": 12561
+          },
+          "output": {
+            "known_records": 1,
+            "total": 195
+          },
+          "total": {
+            "known_records": 1,
+            "total": 12756
+          },
+          "cached_input": {
+            "known_records": 1,
+            "total": 11008
+          },
+          "reasoning": {
+            "known_records": 1,
+            "total": 120
+          }
+        },
+        "tokens_per_success": 12756,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": 0,
+        "wall_time_seconds": 16.57799999997951,
+        "wall_seconds_per_success": 16.57799999997951,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      }
+    }
+  },
+  "development": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variants": {
+    "runs": 2,
+    "completed": 2,
+    "candidate_outcomes": 2,
+    "infrastructure_failures": 0,
+    "scored": 2,
+    "mean_score": 1.0,
+    "median_score": 1.0,
+    "score_distribution": [
+      1.0,
+      1.0
+    ],
+    "successes": 2,
+    "task_success_rate": 1.0,
+    "first_attempt_success_rate": 1.0,
+    "unresolved_rate": 0.0,
+    "invalid_contract_rate": 0.0,
+    "physics_failure_rate": 0.0,
+    "failure_classes": {
+      "none": 2
+    },
+    "score_failure_modes": {
+      "none": 2
+    },
+    "usage": {
+      "input": {
+        "known_records": 2,
+        "total": 25226
+      },
+      "output": {
+        "known_records": 2,
+        "total": 348
+      },
+      "total": {
+        "known_records": 2,
+        "total": 25574
+      },
+      "cached_input": {
+        "known_records": 2,
+        "total": 19968
+      },
+      "reasoning": {
+        "known_records": 2,
+        "total": 129
+      }
+    },
+    "tokens_per_success": 12787,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": 0,
+    "wall_time_seconds": 62.07799999997951,
+    "wall_seconds_per_success": 31.038999999989755,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variant_robustness": [
+    {
+      "case_id": "SEED-1-1",
+      "variant_id": "VAR-SEED-1-1-P-c8828a9799d3",
+      "protocol": "closed_book",
+      "canonical_score": 1.0,
+      "variant_score": 1.0,
+      "score_delta": 0.0
+    },
+    {
+      "case_id": "SEED-1-1",
+      "variant_id": "VAR-SEED-1-1-U-613088edc5d1",
+      "protocol": "closed_book",
+      "canonical_score": 1.0,
+      "variant_score": 1.0,
+      "score_delta": 0.0
+    }
+  ],
+  "paired": {
+    "per_case": [],
+    "aggregate": {
+      "case_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "tool_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_tool_assisted": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_case_assisted": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      }
+    }
+  },
+  "retrieval": {
+    "closed_book": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    }
+  },
+  "interpretation": "Observed results for this model and run only. Public variants are development probes, not hidden generalization evidence. Unknown cost or usage remains null."
+}

@@ -1,0 +1,93 @@
+{
+  "answer_contract": {
+    "format": "human_explanation_plus_json_object",
+    "permit_additional_explanation": true,
+    "quantity_shape": {
+      "answers.q1.opd_change_in_wavelengths": "Dimensionless quantity {value, unit: 1}; optical-path difference in wavelengths, magnitude scored.",
+      "answers.q2.fringe_cycles": "Dimensionless quantity {value, unit: 1}; complete detector fringe periods.",
+      "answers.q3.fringe_cycles": "Dimensionless quantity {value, unit: 1}; detector fringe periods for quarter-wavelength mirror travel.",
+      "answers.q3.opd_change_in_wavelengths": "Dimensionless quantity {value, unit: 1}; optical-path difference in wavelengths for quarter-wavelength mirror travel, magnitude scored."
+    },
+    "required_result_paths": [
+      "answers.q1.opd_change_in_wavelengths",
+      "answers.q2.fringe_cycles",
+      "answers.q3.opd_change_in_wavelengths",
+      "answers.q3.fringe_cycles"
+    ],
+    "schema_id": "pilot_answer_v0.1"
+  },
+  "compatible_protocols": [
+    {
+      "id": "closed_book",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tool_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_and_tool_assisted",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "instance_content_sha256": "0ee6ececedef283255fa6524e1d64f9162d2986a0c9b6991b43445d9d0f35f64",
+  "parameter_constraints": {
+    "complete_primary_fringe_periods": true,
+    "primary_motion_wavelengths": [
+      0,
+      1.5
+    ],
+    "secondary_motion_wavelengths": 0.25
+  },
+  "parent_case_content_sha256": "77035afacb301a8c6bcb5819de1d1588648ab75bc9c6aae1a8c859dd9f64a274",
+  "parent_case_id": "SEED-4-2",
+  "parent_case_revision": "0.2.2",
+  "parent_release": "0.1.0-rc1",
+  "public_seed": "public-michelson-fractions-01",
+  "scientific_payload_sha256": "b230d7c8123e475cce1ab0a4975b0217b858504f667b306e51f82bbb9ea1b671",
+  "scorer": {
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "module": "numerical"
+  },
+  "seed_classification": "public_dev",
+  "seed_commitment_sha256": "1da10be7317b223e4fbf6d4a03bfe1f5c0b338a980b12a35490c6419ae3c8d72",
+  "task": {
+    "coordinate_convention": "Mirror-motion direction is unspecified. Optical-path changes and fringe periods are requested as magnitudes; equivalent signed optical-path reports are compared by absolute value.",
+    "givens": [
+      {
+        "symbol": "mirror_displacement_wavelengths",
+        "unit": "1",
+        "value": 1.5
+      },
+      {
+        "symbol": "quarter_mirror_displacement_wavelengths",
+        "unit": "1",
+        "value": 0.25
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "request": "How much does the optical path difference change?"
+      },
+      {
+        "id": "q2",
+        "request": "How many complete fringe periods does the detector experience?"
+      },
+      {
+        "id": "q3",
+        "request": "What changes if the mirror moves only λ/4?"
+      }
+    ],
+    "statement": "In a monochromatic-light Michelson interferometer, the mirror in one arm moves by 3λ/2 along the optical axis. Report optical-path changes as magnitudes because no direction is specified."
+  },
+  "variant_id": "VAR-SEED-4-2-U-1da10be7317b",
+  "variant_schema_version": "0.1.0",
+  "variant_type": "structural_unit"
+}

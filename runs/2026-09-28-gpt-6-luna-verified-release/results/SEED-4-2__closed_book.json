@@ -1,0 +1,257 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "opd_change_in_wavelengths": {
+          "unit": "1",
+          "value": 1
+        }
+      },
+      "q2": {
+        "fringe_cycles": {
+          "unit": "1",
+          "value": 1
+        }
+      },
+      "q3": {
+        "fringe_cycles": {
+          "unit": "1",
+          "value": 0.5
+        },
+        "opd_change_in_wavelengths": {
+          "unit": "1",
+          "value": 0.5
+        }
+      }
+    },
+    "explanation": "In a Michelson interferometer, mirror travel changes the optical path difference by twice the travel distance. Thus λ/2 of mirror travel changes the path difference by λ and produces one fringe period; λ/4 changes it by λ/2 and produces half a fringe period."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "ca355dfe375ff67633cd8dab34273f2bf57578478c2b985fab3ad355874ef123",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"opd_change_in_wavelengths\":{\"value\":1,\"unit\":\"1\"}},\"q2\":{\"fringe_cycles\":{\"value\":1,\"unit\":\"1\"}},\"q3\":{\"opd_change_in_wavelengths\":{\"value\":0.5,\"unit\":\"1\"},\"fringe_cycles\":{\"value\":0.5,\"unit\":\"1\"}}},\"explanation\":\"In a Michelson interferometer, mirror travel changes the optical path difference by twice the travel distance. Thus λ/2 of mirror travel changes the path difference by λ and produces one fringe period; λ/4 changes it by λ/2 and produces half a fringe period.\"}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-gpt-6-luna-verified-release",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "5f6d97fe6aa57c72f690ad0fcfec8201c24d46fc+source-sha256:efbee45bc437678e9458989c7eb6402353fb03e603bcaa6bad4e37430dff7e1e",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "77035afacb301a8c6bcb5819de1d1588648ab75bc9c6aae1a8c859dd9f64a274",
+    "case_id": "SEED-4-2",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.2.2",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_opd_half",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_fringe_half",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      },
+      {
+        "criterion_id": "n_opd_quarter",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.2
+      },
+      {
+        "criterion_id": "n_fringe_quarter",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 12564,
+            "output": 229,
+            "reasoning": 88
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"opd_change_in_wavelengths\":{\"value\":1,\"unit\":\"1\"}},\"q2\":{\"fringe_cycles\":{\"value\":1,\"unit\":\"1\"}},\"q3\":{\"opd_change_in_wavelengths\":{\"value\":0.5,\"unit\":\"1\"},\"fringe_cycles\":{\"value\":0.5,\"unit\":\"1\"}}},\"explanation\":\"In a Michelson interferometer, mirror travel changes the optical path difference by twice the travel distance. Thus λ/2 of mirror travel changes the path difference by λ and produces one fringe period; λ/4 changes it by λ/2 and produces half a fringe period.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-gpt-6-luna-verified-release",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "opd_change_in_wavelengths": {
+            "unit": "1",
+            "value": 1
+          }
+        },
+        "q2": {
+          "fringe_cycles": {
+            "unit": "1",
+            "value": 1
+          }
+        },
+        "q3": {
+          "fringe_cycles": {
+            "unit": "1",
+            "value": 0.5
+          },
+          "opd_change_in_wavelengths": {
+            "unit": "1",
+            "value": 0.5
+          }
+        }
+      },
+      "explanation": "In a Michelson interferometer, mirror travel changes the optical path difference by twice the travel distance. Thus λ/2 of mirror travel changes the path difference by λ and produces one fringe period; λ/4 changes it by λ/2 and produces half a fringe period."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 12564,
+      "output": 229,
+      "total": 12793
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_opd_half",
+        "details": {
+          "answer_path": "answers.q1.opd_change_in_wavelengths",
+          "candidate_si": 1.0,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": true,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_opd_change_half"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_fringe_half",
+        "details": {
+          "answer_path": "answers.q2.fringe_cycles",
+          "candidate_si": 1.0,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": false,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_fringe_count"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_opd_quarter",
+        "details": {
+          "answer_path": "answers.q3.opd_change_in_wavelengths",
+          "candidate_si": 0.5,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": true,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_opd_change_quarter"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_fringe_quarter",
+        "details": {
+          "answer_path": "answers.q3.fringe_cycles",
+          "candidate_si": 0.5,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "dimensionless",
+          "magnitude_convention": false,
+          "tolerance_si": 0.01,
+          "validator_id": "michelson_fringe_count_quarter"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.01.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 17.70299999997951
+  },
+  "selection": {
+    "case_content_sha256": "77035afacb301a8c6bcb5819de1d1588648ab75bc9c6aae1a8c859dd9f64a274",
+    "case_id": "SEED-4-2",
+    "case_revision": "0.2.2",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 12564,
+    "output": 229,
+    "reasoning": 88,
+    "total": 12793
+  },
+  "wall_time_seconds": 17.780999999959022
+}

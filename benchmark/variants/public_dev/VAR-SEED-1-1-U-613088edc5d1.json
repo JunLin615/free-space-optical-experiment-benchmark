@@ -1,0 +1,96 @@
+{
+  "answer_contract": {
+    "format": "human_explanation_plus_json_object",
+    "method_shape": {
+      "q3": "Object geometry_change with variable, held_fixed, and dimensionless new/old scale fields."
+    },
+    "permit_additional_explanation": true,
+    "quantity_shape": {
+      "answers.q1.angle_change": "Quantity {value, unit}; angle units deg or rad, magnitude scored.",
+      "answers.q2.spot_displacement": "Quantity {value, unit}; length units m, mm, um, or nm, magnitude scored."
+    },
+    "required_result_paths": [
+      "answers.q1.angle_change",
+      "answers.q2.spot_displacement",
+      "answers.q3.geometry_change"
+    ],
+    "schema_id": "pilot_answer_v0.1"
+  },
+  "compatible_protocols": [
+    {
+      "id": "closed_book",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tool_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_and_tool_assisted",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "instance_content_sha256": "dc05b1c04d0528bc59284c4e4ed9b2551004e85524d1eb4620426da11f7e8339",
+  "parameter_constraints": {
+    "mirror_rotation_rad": [
+      0,
+      0.017453292519943295
+    ],
+    "regime": "near_normal_small_angle",
+    "screen_distance_m": [
+      1,
+      3
+    ]
+  },
+  "parent_case_content_sha256": "dd9acbee1590f341e4262b1a75be2d40a37d139f7917dff5c9b5d6dcde1fa835",
+  "parent_case_id": "SEED-1-1",
+  "parent_case_revision": "0.1.5",
+  "parent_release": "0.1.0-rc1",
+  "public_seed": "public-mirror-units-01",
+  "scientific_payload_sha256": "dc201d702a44cdbafffc6659813754beaa61638953680999718cc8ddefe9be1f",
+  "scorer": {
+    "evaluator_fingerprint": "697bf4a8169f36bc3b2cf6298cd17209f131b96e2de6fdd5847d5d82d9668d4e",
+    "evaluator_version": "0.1.1",
+    "module": "numerical"
+  },
+  "seed_classification": "public_dev",
+  "seed_commitment_sha256": "613088edc5d1226561374a9ca1bb09ff6971444ce34190c5fbbfad4f614b6e44",
+  "task": {
+    "coordinate_convention": "The direction and displacement questions request magnitudes; no clockwise or transverse sign was specified, so equivalent signed reports are compared by absolute value.",
+    "givens": [
+      {
+        "symbol": "mirror_rotation",
+        "unit": "rad",
+        "value": 0.01
+      },
+      {
+        "symbol": "screen_distance",
+        "unit": "mm",
+        "value": 1600
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "request": "Find the change in direction of the reflected beam."
+      },
+      {
+        "id": "q2",
+        "request": "Estimate the transverse displacement of the spot on the screen."
+      },
+      {
+        "id": "q3",
+        "request": "Identify the most direct geometric quantity to change if the displacement must fall to one quarter of its original value."
+      }
+    ],
+    "statement": "A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror rotates 0.010 rad about a vertical axis. A viewing screen is normal to the nominal reflected ray, 1600 mm from the mirror along that ray. Neglect higher-order corrections associated with the initial angle of incidence. Report the angle change and spot displacement as magnitudes."
+  },
+  "variant_id": "VAR-SEED-1-1-U-613088edc5d1",
+  "variant_schema_version": "0.1.0",
+  "variant_type": "structural_unit"
+}

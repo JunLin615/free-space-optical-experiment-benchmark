@@ -1,0 +1,102 @@
+{
+  "answer_contract": {
+    "format": "human_explanation_plus_json_object",
+    "method_shape": {
+      "q2": "Object with keplerian and galilean, each containing signed input_focal_length and output_focal_length quantities.",
+      "q3": "Object with keplerian_real_internal_focus and galilean_real_internal_focus booleans."
+    },
+    "permit_additional_explanation": true,
+    "quantity_shape": {
+      "answers.q1.expansion_factor": "Quantity {value, unit}; dimensionless output-to-input diameter ratio.",
+      "answers.q2.galilean.input_focal_length": "Signed focal-length quantity.",
+      "answers.q2.galilean.output_focal_length": "Signed focal-length quantity.",
+      "answers.q2.keplerian.input_focal_length": "Signed focal-length quantity.",
+      "answers.q2.keplerian.output_focal_length": "Signed focal-length quantity."
+    },
+    "required_result_paths": [
+      "answers.q1.expansion_factor",
+      "answers.q2.keplerian",
+      "answers.q2.galilean",
+      "answers.q3"
+    ],
+    "schema_id": "pilot_answer_v0.1"
+  },
+  "compatible_protocols": [
+    {
+      "id": "closed_book",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tool_assisted",
+      "version": "1.0.0"
+    },
+    {
+      "id": "case_and_tool_assisted",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "instance_content_sha256": "9ff97b88a37010e5b31fafda556dc8a57795b6d6f41aa8febd8e122cf48239af",
+  "parameter_constraints": {
+    "expansion_ratio": [
+      2,
+      8
+    ],
+    "input_diameter_m": [
+      0.001,
+      0.003
+    ],
+    "regime": "afocal_paraxial"
+  },
+  "parent_case_content_sha256": "dfe041664ee0fc501e683ad4ecadfedb5ab7294d9f4b0bb137fd76b40494cbc6",
+  "parent_case_id": "SEED-2-2",
+  "parent_case_revision": "0.2.2",
+  "parent_release": "0.1.0-rc1",
+  "public_seed": "public-expander-units-02",
+  "scientific_payload_sha256": "2ef3a64011325aa137cf6404bad5c87a74196b66a6f01f67aa65c81b5f85301c",
+  "scorer": {
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "module": "numerical"
+  },
+  "seed_classification": "public_dev",
+  "seed_commitment_sha256": "e2686bf1bc46605473cd138c16c37e283801a7961d928ce63f1f40836aa506ca",
+  "task": {
+    "givens": [
+      {
+        "definition": "1/e^2 intensity diameter",
+        "symbol": "input_diameter",
+        "unit": "m",
+        "value": 0.0024
+      },
+      {
+        "definition": "1/e^2 intensity diameter",
+        "symbol": "output_diameter",
+        "unit": "m",
+        "value": 0.0144
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "request": "State the required magnitude of the output-to-input focal-length ratio."
+      },
+      {
+        "id": "q2",
+        "request": "Give one valid focal-length pair each for a Keplerian and a Galilean expander, including lens signs and order."
+      },
+      {
+        "id": "q3",
+        "request": "Compare whether each layout forms a real internal focus for the stated propagation direction."
+      }
+    ],
+    "statement": "An approximately collimated beam has a 1/e² intensity diameter near 0.0024 m. A two-lens afocal system should expand it to about 0.0144 m. Consider a first-order paraxial design with adequate clear apertures."
+  },
+  "variant_id": "VAR-SEED-2-2-U-e2686bf1bc46",
+  "variant_schema_version": "0.1.0",
+  "variant_type": "structural_unit"
+}

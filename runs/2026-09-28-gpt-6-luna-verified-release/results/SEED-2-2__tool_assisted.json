@@ -1,0 +1,236 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": "invalid_contract",
+  "first_attempt_success": false,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "expansion_factor": {
+          "unit": "dimensionless",
+          "value": 5
+        }
+      },
+      "q2": {
+        "galilean": {
+          "input_focal_length": {
+            "unit": "mm",
+            "value": -50
+          },
+          "lens_order": "negative input lens, then positive output lens",
+          "output_focal_length": {
+            "unit": "mm",
+            "value": 250
+          }
+        },
+        "keplerian": {
+          "input_focal_length": {
+            "unit": "mm",
+            "value": 50
+          },
+          "lens_order": "positive input lens, then positive output lens",
+          "output_focal_length": {
+            "unit": "mm",
+            "value": 250
+          }
+        }
+      },
+      "q3": {
+        "galilean_real_internal_focus": false,
+        "keplerian_real_internal_focus": true
+      }
+    },
+    "explanation": "Both pairs give a 5× diameter expansion in the stated propagation direction. The Keplerian lenses are separated by 300 mm and form a real internal focus; the Galilean lenses are separated by 200 mm and have no real internal focus."
+  },
+  "protocol": {
+    "id": "tool_assisted",
+    "scientific_payload_sha256": "4155419e219660e702abf6470fa7b7ccb25c2265fd2f32b21d53e29a2444785b",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\n  \"answers\": {\n    \"q1\": {\n      \"expansion_factor\": {\n        \"value\": 5,\n        \"unit\": \"dimensionless\"\n      }\n    },\n    \"q2\": {\n      \"keplerian\": {\n        \"input_focal_length\": {\n          \"value\": 50,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 250,\n          \"unit\": \"mm\"\n        },\n        \"lens_order\": \"positive input lens, then positive output lens\"\n      },\n      \"galilean\": {\n        \"input_focal_length\": {\n          \"value\": -50,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 250,\n          \"unit\": \"mm\"\n        },\n        \"lens_order\": \"negative input lens, then positive output lens\"\n      }\n    },\n    \"q3\": {\n      \"keplerian_real_internal_focus\": true,\n      \"galilean_real_internal_focus\": false\n    }\n  },\n  \"explanation\": \"Both pairs give a 5× diameter expansion in the stated propagation direction. The Keplerian lenses are separated by 300 mm and form a real internal focus; the Galilean lenses are separated by 200 mm and have no real internal focus.\"\n}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-gpt-6-luna-verified-release",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "5f6d97fe6aa57c72f690ad0fcfec8201c24d46fc+source-sha256:efbee45bc437678e9458989c7eb6402353fb03e603bcaa6bad4e37430dff7e1e",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "dfe041664ee0fc501e683ad4ecadfedb5ab7294d9f4b0bb137fd76b40494cbc6",
+    "case_id": "SEED-2-2",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.2.2",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_expansion",
+        "evidence": "unsupported unit: 'dimensionless'",
+        "score": 0,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "c_examples",
+        "evidence": "Keplerian: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion. Galilean: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.4
+      },
+      {
+        "criterion_id": "c_focus",
+        "evidence": "Internal real-focus distinction for the stated lens order.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.25
+      }
+    ],
+    "evaluator_fingerprint": "57b6abbebb1d1a6c763d111be53a57f6a859e7ba3fab6fb9c41f671dacf3ef83",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "invalid_contract",
+    "judge_results": [],
+    "protocol": "tool_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 12639,
+            "output": 1297,
+            "reasoning": 1014
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\n  \"answers\": {\n    \"q1\": {\n      \"expansion_factor\": {\n        \"value\": 5,\n        \"unit\": \"dimensionless\"\n      }\n    },\n    \"q2\": {\n      \"keplerian\": {\n        \"input_focal_length\": {\n          \"value\": 50,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 250,\n          \"unit\": \"mm\"\n        },\n        \"lens_order\": \"positive input lens, then positive output lens\"\n      },\n      \"galilean\": {\n        \"input_focal_length\": {\n          \"value\": -50,\n          \"unit\": \"mm\"\n        },\n        \"output_focal_length\": {\n          \"value\": 250,\n          \"unit\": \"mm\"\n        },\n        \"lens_order\": \"negative input lens, then positive output lens\"\n      }\n    },\n    \"q3\": {\n      \"keplerian_real_internal_focus\": true,\n      \"galilean_real_internal_focus\": false\n    }\n  },\n  \"explanation\": \"Both pairs give a 5× diameter expansion in the stated propagation direction. The Keplerian lenses are separated by 300 mm and form a real internal focus; the Galilean lenses are separated by 200 mm and have no real internal focus.\"\n}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-gpt-6-luna-verified-release",
+    "scores": {
+      "capped_total": 0.65,
+      "raw_total": 0.65
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "expansion_factor": {
+            "unit": "dimensionless",
+            "value": 5
+          }
+        },
+        "q2": {
+          "galilean": {
+            "input_focal_length": {
+              "unit": "mm",
+              "value": -50
+            },
+            "lens_order": "negative input lens, then positive output lens",
+            "output_focal_length": {
+              "unit": "mm",
+              "value": 250
+            }
+          },
+          "keplerian": {
+            "input_focal_length": {
+              "unit": "mm",
+              "value": 50
+            },
+            "lens_order": "positive input lens, then positive output lens",
+            "output_focal_length": {
+              "unit": "mm",
+              "value": 250
+            }
+          }
+        },
+        "q3": {
+          "galilean_real_internal_focus": false,
+          "keplerian_real_internal_focus": true
+        }
+      },
+      "explanation": "Both pairs give a 5× diameter expansion in the stated propagation direction. The Keplerian lenses are separated by 300 mm and form a real internal focus; the Galilean lenses are separated by 200 mm and have no real internal focus."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 12639,
+      "output": 1297,
+      "total": 13936
+    },
+    "tool_call_count": 0,
+    "tools_available": [
+      "calculator",
+      "unit_convert"
+    ],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_expansion",
+        "details": {
+          "answer_path": "answers.q1.expansion_factor",
+          "failure_class": "wrong_unit"
+        },
+        "evidence": "unsupported unit: 'dimensionless'",
+        "score": 0,
+        "status": "fail",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_examples",
+        "details": {},
+        "evidence": "Keplerian: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion. Galilean: Lens signs, order, and focal-length magnitude ratio yield the requested afocal expansion.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_focus",
+        "details": {},
+        "evidence": "Internal real-focus distinction for the stated lens order.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      }
+    ],
+    "wall_time_seconds": 60.15599999995902
+  },
+  "selection": {
+    "case_content_sha256": "dfe041664ee0fc501e683ad4ecadfedb5ab7294d9f4b0bb137fd76b40494cbc6",
+    "case_id": "SEED-2-2",
+    "case_revision": "0.2.2",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 12639,
+    "output": 1297,
+    "reasoning": 1014,
+    "total": 13936
+  },
+  "wall_time_seconds": 60.26600000000326
+}

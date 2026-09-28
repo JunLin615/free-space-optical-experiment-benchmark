@@ -1,0 +1,15 @@
+{
+  "generator_version": "0.1.0",
+  "variants": [
+    {"parent_case_id": "SEED-1-1", "variant_type": "parameter", "seed": "public-mirror-parameters-01"},
+    {"parent_case_id": "SEED-1-1", "variant_type": "structural_unit", "seed": "public-mirror-units-01"},
+    {"parent_case_id": "SEED-1-5", "variant_type": "parameter", "seed": "public-delay-parameters-01"},
+    {"parent_case_id": "SEED-1-5", "variant_type": "structural_unit", "seed": "public-delay-units-01"},
+    {"parent_case_id": "SEED-1-7", "variant_type": "parameter", "seed": "public-waveplate-parameters-01"},
+    {"parent_case_id": "SEED-1-7", "variant_type": "structural_unit", "seed": "public-waveplate-units-01"},
+    {"parent_case_id": "SEED-2-2", "variant_type": "parameter", "seed": "public-expander-parameters-01"},
+    {"parent_case_id": "SEED-2-2", "variant_type": "structural_unit", "seed": "public-expander-units-02"},
+    {"parent_case_id": "SEED-4-2", "variant_type": "parameter", "seed": "public-michelson-parameters-01"},
+    {"parent_case_id": "SEED-4-2", "variant_type": "structural_unit", "seed": "public-michelson-fractions-01"}
+  ]
+}

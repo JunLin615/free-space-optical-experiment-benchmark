@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_id": "optics-examples-v1",
+  "language": "en",
+  "items": [
+    {
+      "item_id": "EX-ALIGN-01",
+      "version": "1.0.0",
+      "path": "EX-ALIGN-01.md",
+      "content_sha256": "5d92ff16059730f7c20a226cad6fe481b2fd1b7995daf942befb631ce0d74738",
+      "concept_family": "alignment",
+      "optical_domain": "free_space_beam_geometry",
+      "reasoning_mode": "procedural_diagnosis",
+      "difficulty": "introductory",
+      "source_provenance": "Project-authored auxiliary example, 2026-09-28",
+      "source_type": "synthetic",
+      "benchmark_family_relationship": "SEED-1 family",
+      "leakage_risk_notes": "Position-angle decoupling only; no released mirror-rotation numeric tuple.",
+      "allowed_protocols": [
+        "case_assisted",
+        "case_and_tool_assisted"
+      ]
+    },
+    {
+      "item_id": "EX-DETECT-01",
+      "version": "1.0.0",
+      "path": "EX-DETECT-01.md",
+      "content_sha256": "35719a025fc1ec9a9da538d1bbf0f81aaa57d2e22f66bf18a2bc02f513d1a3e3",
+      "concept_family": "detector_calibration",
+      "optical_domain": "free_space_detection",
+      "reasoning_mode": "measurement_control",
+      "difficulty": "intermediate",
+      "source_provenance": "Project-authored auxiliary example, 2026-09-28",
+      "source_type": "synthetic",
+      "benchmark_family_relationship": "SEED-5 family",
+      "leakage_risk_notes": "Distinct detector calibration; no evaluated power ratio or gold copied.",
+      "allowed_protocols": [
+        "case_assisted",
+        "case_and_tool_assisted"
+      ]
+    },
+    {
+      "item_id": "EX-DRIFT-01",
+      "version": "1.0.0",
+      "path": "EX-DRIFT-01.md",
+      "content_sha256": "000412cc4958804729a8d1e5924e673e6aaf5c008a47ddf9bbc9068b4d45be0a",
+      "concept_family": "drift_control",
+      "optical_domain": "free_space_measurement",
+      "reasoning_mode": "experimental_design",
+      "difficulty": "intermediate",
+      "source_provenance": "Project-authored auxiliary example, 2026-09-28",
+      "source_type": "synthetic",
+      "benchmark_family_relationship": "SEED-5 family",
+      "leakage_risk_notes": "Source-normalization demonstration; no benchmark solution layout copied.",
+      "allowed_protocols": [
+        "case_assisted",
+        "case_and_tool_assisted"
+      ]
+    },
+    {
+      "item_id": "EX-GRATING-01",
+      "version": "1.0.0",
+      "path": "EX-GRATING-01.md",
+      "content_sha256": "a048a1e59600c3017a30cb35f95f110fca6074a86cddb29662c5327ed9305c91",
+      "concept_family": "diffraction_order",
+      "optical_domain": "free_space_diffraction",
+      "reasoning_mode": "quantitative_sanity_check",
+      "difficulty": "introductory",
+      "source_provenance": "Project-authored auxiliary example, 2026-09-28",
+      "source_type": "synthetic",
+      "benchmark_family_relationship": "SEED-3 family",
+      "leakage_risk_notes": "Different grating order and parameter tuple; impossible order as auxiliary example.",
+      "allowed_protocols": [
+        "case_assisted",
+        "case_and_tool_assisted"
+      ]
+    },
+    {
+      "item_id": "EX-PINHOLE-01",
+      "version": "1.0.0",
+      "path": "EX-PINHOLE-01.md",
+      "content_sha256": "7163af8d9aacdca5116e780a8b2cf9d272826ec5a7777ce450293ee904abbe6a",
+      "concept_family": "spatial_filtering",
+      "optical_domain": "free_space_beam_delivery",
+      "reasoning_mode": "fault_diagnosis",
+      "difficulty": "introductory",
+      "source_provenance": "Project-authored auxiliary example, 2026-09-28",
+      "source_type": "synthetic",
+      "benchmark_family_relationship": "SEED-2 family",
+      "leakage_risk_notes": "Qualitative alignment failure; no benchmark answer key or numeric tuple.",
+      "allowed_protocols": [
+        "case_assisted",
+        "case_and_tool_assisted"
+      ]
+    }
+  ]
+}

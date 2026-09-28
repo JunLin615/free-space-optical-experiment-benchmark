@@ -1,0 +1,230 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "unit": "deg",
+          "value": 1.0
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "unit": "mm",
+          "value": 34.9
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "unit": "1",
+            "value": 0.25
+          },
+          "variable": "screen_distance"
+        }
+      }
+    },
+    "explanation": "A plane mirror rotation changes the reflected beam direction by twice the mirror rotation: 1.0°. At 2.0 m, the spot shift is 2.0 m × tan(1.0°) ≈ 34.9 mm. With mirror rotation held fixed, reducing screen distance to one quarter reduces the displacement to one quarter."
+  },
+  "protocol": {
+    "id": "tool_assisted",
+    "scientific_payload_sha256": "6ee1637585d38ceb6b2688479645b70fc20f4c9251186aae7e6cd0a9e1c02371",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"angle_change\":{\"value\":1.0,\"unit\":\"deg\"}},\"q2\":{\"spot_displacement\":{\"value\":34.9,\"unit\":\"mm\"}},\"q3\":{\"geometry_change\":{\"variable\":\"screen_distance\",\"held_fixed\":\"mirror_rotation\",\"scale\":{\"value\":0.25,\"unit\":\"1\"}}}},\"explanation\":\"A plane mirror rotation changes the reflected beam direction by twice the mirror rotation: 1.0°. At 2.0 m, the spot shift is 2.0 m × tan(1.0°) ≈ 34.9 mm. With mirror rotation held fixed, reducing screen distance to one quarter reduces the displacement to one quarter.\"}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-gpt-6-luna-verified-release",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "5f6d97fe6aa57c72f690ad0fcfec8201c24d46fc+source-sha256:efbee45bc437678e9458989c7eb6402353fb03e603bcaa6bad4e37430dff7e1e",
+  "score_result": {
+    "benchmark_version": "0.1.0-rc1",
+    "case_content_sha256": "dd9acbee1590f341e4262b1a75be2d40a37d139f7917dff5c9b5d6dcde1fa835",
+    "case_id": "SEED-1-1",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.1.5",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_angle",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.000349065850399.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_shift",
+        "evidence": "Absolute SI error 1.01298564352e-05 <= inclusive tolerance 0.001.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.4
+      },
+      {
+        "criterion_id": "c_quarter",
+        "evidence": "predicted screen-shift ratio 0.25 vs 0.25",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      }
+    ],
+    "evaluator_fingerprint": "697bf4a8169f36bc3b2cf6298cd17209f131b96e2de6fdd5847d5d82d9668d4e",
+    "evaluator_version": "0.1.1",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "tool_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 12608,
+            "output": 335,
+            "reasoning": 185
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"angle_change\":{\"value\":1.0,\"unit\":\"deg\"}},\"q2\":{\"spot_displacement\":{\"value\":34.9,\"unit\":\"mm\"}},\"q3\":{\"geometry_change\":{\"variable\":\"screen_distance\",\"held_fixed\":\"mirror_rotation\",\"scale\":{\"value\":0.25,\"unit\":\"1\"}}}},\"explanation\":\"A plane mirror rotation changes the reflected beam direction by twice the mirror rotation: 1.0°. At 2.0 m, the spot shift is 2.0 m × tan(1.0°) ≈ 34.9 mm. With mirror rotation held fixed, reducing screen distance to one quarter reduces the displacement to one quarter.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-gpt-6-luna-verified-release",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "angle_change": {
+            "unit": "deg",
+            "value": 1.0
+          }
+        },
+        "q2": {
+          "spot_displacement": {
+            "unit": "mm",
+            "value": 34.9
+          }
+        },
+        "q3": {
+          "geometry_change": {
+            "held_fixed": "mirror_rotation",
+            "scale": {
+              "unit": "1",
+              "value": 0.25
+            },
+            "variable": "screen_distance"
+          }
+        }
+      },
+      "explanation": "A plane mirror rotation changes the reflected beam direction by twice the mirror rotation: 1.0°. At 2.0 m, the spot shift is 2.0 m × tan(1.0°) ≈ 34.9 mm. With mirror rotation held fixed, reducing screen distance to one quarter reduces the displacement to one quarter."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 12608,
+      "output": 335,
+      "total": 12943
+    },
+    "tool_call_count": 0,
+    "tools_available": [
+      "calculator",
+      "unit_convert"
+    ],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_angle",
+        "details": {
+          "answer_path": "answers.q1.angle_change",
+          "candidate_si": 0.017453292519943295,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "angle",
+          "magnitude_convention": true,
+          "tolerance_si": 0.00034906585039886593,
+          "validator_id": "mirror_angle"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.000349065850399.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "n_shift",
+        "details": {
+          "answer_path": "answers.q2.spot_displacement",
+          "candidate_si": 0.0349,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": -1.0129856435170392e-05,
+          "dimension": "length",
+          "magnitude_convention": true,
+          "tolerance_si": 0.001,
+          "validator_id": "mirror_spot_shift"
+        },
+        "evidence": "Absolute SI error 1.01298564352e-05 <= inclusive tolerance 0.001.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.1.1"
+      },
+      {
+        "check_id": "c_quarter",
+        "details": {
+          "predicted_ratio": 0.25,
+          "tolerance": 0.005
+        },
+        "evidence": "predicted screen-shift ratio 0.25 vs 0.25",
+        "score": 1,
+        "status": "pass",
+        "version": "mirror_geometry_v0.1"
+      }
+    ],
+    "wall_time_seconds": 32.07799999997951
+  },
+  "selection": {
+    "case_content_sha256": "dd9acbee1590f341e4262b1a75be2d40a37d139f7917dff5c9b5d6dcde1fa835",
+    "case_id": "SEED-1-1",
+    "case_revision": "0.1.5",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 12608,
+    "output": 335,
+    "reasoning": 185,
+    "total": 12943
+  },
+  "wall_time_seconds": 32.15700000000652
+}

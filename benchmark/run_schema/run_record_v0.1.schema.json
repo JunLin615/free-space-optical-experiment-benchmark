@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Baseline run record v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_record_version",
+    "run_id",
+    "execution_class",
+    "selection",
+    "protocol",
+    "agent_identity",
+    "status",
+    "failure_class",
+    "attempt_count",
+    "retry_count",
+    "model_turn_count",
+    "protocol_compliance_verified",
+    "tool_observation_scope",
+    "first_attempt_success",
+    "retrieval",
+    "tool_calls",
+    "usage",
+    "cost",
+    "wall_time_seconds",
+    "raw_response",
+    "parsed_answer",
+    "score_result",
+    "runner_source_revision"
+  ],
+  "properties": {
+    "run_record_version": {
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_class": {
+      "enum": [
+        "real",
+        "dry_run"
+      ]
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "case_id",
+        "case_revision",
+        "variant_id",
+        "track",
+        "case_content_sha256"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "case_revision": {
+          "type": "string"
+        },
+        "variant_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "track": {
+          "enum": [
+            "verified",
+            "development",
+            "public_variant",
+            "private_variant"
+          ]
+        },
+        "case_content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "scientific_payload_sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "scientific_payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "agent_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "model_version",
+        "framework",
+        "scaffold_id",
+        "system_prompt_version",
+        "adapter_type"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "model_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "framework": {
+          "type": "string"
+        },
+        "scaffold_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "system_prompt_version": {
+          "type": "string"
+        },
+        "adapter_type": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "failure_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attempt_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "retry_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "model_turn_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "protocol_compliance_verified": {
+      "type": "boolean"
+    },
+    "tool_observation_scope": {
+      "enum": ["runner_mediated_only", "complete_with_builtin_tools_disabled"]
+    },
+    "first_attempt_success": {
+      "type": "boolean"
+    },
+    "retrieval": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "tool_calls": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input",
+        "output",
+        "total",
+        "cached_input",
+        "reasoning"
+      ],
+      "properties": {
+        "input": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "output": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cached_input": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reasoning": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "cost": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "wall_time_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "raw_response": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parsed_answer": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "score_result": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "runner_source_revision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
