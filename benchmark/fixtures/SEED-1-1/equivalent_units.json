@@ -1,0 +1,32 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "equivalent_units",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 0.017453292519943295,
+          "unit": "rad"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 0.034910129856,
+          "unit": "m"
+        }
+      },
+      "q3": {
+        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "pass"
+    },
+    "n_shift": {
+      "status": "pass"
+    }
+  }
+}

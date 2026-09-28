@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-1-1
 legacy_id: '1.1'
-case_revision: 0.1.0
+case_revision: 0.1.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -19,13 +19,13 @@ provenance:
   seed_relationship: Translation of case 1.1 in the original 64-case HTML seed.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: English translation of the original seed prompt and tasks. The screen orientation is implicit
-    in the seed; the numerical oracle uses a transverse plane normal to the nominal reflected ray.
+  derivation: English translation of the original seed prompt and tasks. Revision 0.1.1 states the
+    screen orientation and distance convention that were implicit in the seed and required by the numerical oracle.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror
-    rotates 0.50° about a vertical axis. The reflected beam then travels 2.0 m to a viewing screen. Neglect
-    higher-order corrections associated with the initial angle of incidence.
+    rotates 0.50° about a vertical axis. A viewing screen is normal to the nominal reflected ray, 2.0 m
+    from the mirror along that ray. Neglect higher-order corrections associated with the initial angle of incidence.
   questions:
   - id: q1
     request: Find the change in direction of the reflected beam.

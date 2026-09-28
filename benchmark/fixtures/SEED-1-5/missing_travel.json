@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "missing_travel",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 2,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 6.6712819,
+          "unit": "ps"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_path": {
+      "status": "pass"
+    },
+    "n_delay": {
+      "status": "pass"
+    },
+    "n_travel": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    }
+  }
+}

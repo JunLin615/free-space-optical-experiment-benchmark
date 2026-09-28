@@ -1,0 +1,42 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "single_pass_factor",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 1,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 3.33564,
+          "unit": "ps"
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "value": 29.979,
+          "unit": "mm"
+        }
+      }
+    },
+    "explanation": "The stage travel creates a single-pass delay."
+  },
+  "expected": {
+    "n_path": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "n_delay": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "n_travel": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    }
+  }
+}

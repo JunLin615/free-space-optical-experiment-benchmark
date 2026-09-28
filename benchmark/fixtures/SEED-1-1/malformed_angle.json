@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "malformed_angle",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": "1",
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 34.910129856,
+          "unit": "mm"
+        }
+      },
+      "q3": {
+        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "fail",
+      "failure_class": "malformed_claim"
+    },
+    "n_shift": {
+      "status": "pass"
+    }
+  }
+}

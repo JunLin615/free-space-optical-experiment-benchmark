@@ -1,0 +1,39 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "outside_travel_boundary",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 2,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 6.6712819,
+          "unit": "ps"
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "value": 15.3897229,
+          "unit": "mm"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_path": {
+      "status": "pass"
+    },
+    "n_delay": {
+      "status": "pass"
+    },
+    "n_travel": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    }
+  }
+}

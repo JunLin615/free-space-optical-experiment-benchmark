@@ -1,0 +1,27 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "missing_spot",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 1,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "pass"
+    },
+    "n_shift": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    }
+  }
+}

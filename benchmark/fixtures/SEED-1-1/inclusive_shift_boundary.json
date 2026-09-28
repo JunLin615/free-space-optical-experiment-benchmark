@@ -1,0 +1,32 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "inclusive_shift_boundary",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 1,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 35.91012985643517,
+          "unit": "mm"
+        }
+      },
+      "q3": {
+        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "pass"
+    },
+    "n_shift": {
+      "status": "pass"
+    }
+  }
+}

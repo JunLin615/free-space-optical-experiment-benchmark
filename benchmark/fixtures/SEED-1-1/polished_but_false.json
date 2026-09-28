@@ -1,0 +1,35 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "polished_but_false",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 2,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "q3": {
+        "geometry_change": "Reduce screen distance to one quarter at fixed mirror angle."
+      }
+    },
+    "explanation": "By reflection geometry and trigonometry, these are the correct values."
+  },
+  "expected": {
+    "n_angle": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "n_shift": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    }
+  }
+}
