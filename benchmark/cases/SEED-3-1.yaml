@@ -1,0 +1,113 @@
+schema_version: 0.1.0
+case_id: SEED-3-1
+legacy_id: '3.1'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Single-lens conjugates at twice the focal length
+language: en
+taxonomy:
+  optical_domain: fourier_optics
+  task_types:
+  - quantitative_inference
+  - conceptual_reasoning
+  difficulty_hypothesis: introductory
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.1 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The sign of magnification is
+    made explicit to distinguish inversion from absolute image size.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: An object is placed at a distance 2f in front of an ideal positive thin lens of focal length
+    f.
+  questions:
+  - id: q1
+    request: Where is the image formed? Express its distance behind the lens in units of f.
+  - id: q2
+    request: What is the signed transverse magnification?
+  - id: q3
+    request: Is the image real or virtual, upright or inverted?
+  givens:
+  - symbol: object_distance_in_focal_lengths
+    value: 2
+    unit: '1'
+  assumptions:
+  - Paraxial imaging in air; f is positive, and the object lies on the incident side.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1.image_distance_in_focal_lengths
+  - answers.q2.lateral_magnification
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  reference_model:
+    equation: 1/f = 1/s + 1/s_prime; m = -s_prime/s
+    valid_if: Ideal positive thin lens, s = 2f, paraxial sign convention.
+  numerical_checks:
+  - id: n_image_distance
+    answer_path: answers.q1.image_distance_in_focal_lengths
+    reference:
+      value: 2
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0
+    comparator: max_abs_or_relative_inclusive
+  - id: n_magnification
+    answer_path: answers.q2.lateral_magnification
+    reference:
+      value: -1
+      unit: '1'
+    absolute_tolerance:
+      value: 0.01
+      unit: '1'
+    relative_tolerance: 0
+    comparator: max_abs_or_relative_inclusive
+  universal_constraints:
+  - id: c_image_character
+    severity: scored
+    predicate: An object beyond the focal plane gives a real, inverted image on the opposite side of the
+      lens.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: paraxial_thin_lens
+    example: Use 1/f = 1/s + 1/s_prime and m = -s_prime/s.
+    family_checks:
+    - positive_focal_length
+    - real_conjugate
+    - signed_magnification
+  other_valid_families_policy: Accept any algebraically equivalent thin-lens derivation under the stated
+    sign convention.
+scoring:
+  criteria:
+  - id: n_image_distance
+    weight: 0.4
+    check: n_image_distance
+  - id: n_magnification
+    weight: 0.35
+    check: n_magnification
+  - id: c_image_character
+    weight: 0.25
+    check: c_image_character
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

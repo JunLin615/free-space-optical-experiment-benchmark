@@ -1,0 +1,100 @@
+schema_version: 0.1.0
+case_id: SEED-3-5
+legacy_id: '3.5'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Entrance-slit width and spectral resolution
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - conceptual_reasoning
+  - error_analysis
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.5 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The seed states a fourfold width
+    change but only asks qualitative effects; exact factors depend on illumination and the limiting line-spread
+    terms.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A free-space grating spectrometer has an entrance slit. With all other settings fixed, its
+    slit width is increased fourfold.
+  questions:
+  - id: q1
+    request: How does transmitted optical flux usually change?
+  - id: q2
+    request: How does instrument-limited spectral resolution usually change?
+  - id: q3
+    request: Why is the narrowest possible slit not always the best choice?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_flux
+    severity: scored
+    predicate: A wider slit usually admits more light, but the flux need not rise exactly fourfold if
+      illumination or another aperture limits throughput.
+    evidence_path: answers.q1
+  - id: c_resolution
+    severity: scored
+    predicate: When slit width materially contributes to the line-spread function, widening it usually
+      broadens lines and worsens spectral resolving power; another resolution limit can weaken this effect.
+    evidence_path: answers.q2
+  - id: c_tradeoff
+    severity: scored
+    predicate: Excessive narrowing loses signal photons and may reduce signal-to-noise ratio, so choose
+      width against the required resolution and throughput.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: slit_limited
+    example: For an approximately uniformly illuminated entrance slit in the slit-limited regime, wider
+      width increases throughput and broadens spectral features.
+    family_checks:
+    - throughput
+    - line_spread
+  - id: other_resolution_limit
+    example: If grating diffraction, aberration, pixel sampling or another element dominates, acknowledge
+      a resolution floor while preserving the throughput tradeoff.
+    family_checks:
+    - dominant_resolution_budget
+    - throughput
+  other_valid_families_policy: Accept any physically grounded resolution budget; do not require an exact
+    fourfold throughput or resolution change.
+scoring:
+  criteria:
+  - id: c_flux
+    weight: 0.3
+    check: c_flux
+  - id: c_resolution
+    weight: 0.35
+    check: c_resolution
+  - id: c_tradeoff
+    weight: 0.35
+    check: c_tradeoff
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

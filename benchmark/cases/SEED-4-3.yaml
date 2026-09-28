@@ -1,0 +1,101 @@
+schema_version: 0.1.0
+case_id: SEED-4-3
+legacy_id: '4.3'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Diagnosing Mach-Zehnder fringe drift
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - diagnosis
+  - planning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.3 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. Frequency noise matters through
+    unequal path lengths; this conditional mechanism is made explicit rather than assumed for every Mach-Zehnder
+    layout.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A Mach-Zehnder interferometer gives high-contrast fringes, but the fringe pattern drifts
+    slowly over tens of seconds.
+  questions:
+  - id: q1
+    request: Give at least four distinct plausible classes of cause.
+  - id: q2
+    request: Propose a useful sequence of discriminating checks.
+  - id: q3
+    request: Why would increasing laser power alone usually not solve this?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_causes
+    severity: scored
+    predicate: Name at least four causally distinct phase-drift sources among air-index fluctuations,
+      thermal expansion, mechanical motion or vibration, mount instability and source-frequency drift
+      when arm mismatch makes it relevant.
+    evidence_path: answers.q1
+  - id: c_tests
+    severity: scored
+    predicate: Prioritize environmental shielding and mechanical stability checks, then test arm-path
+      balance and source-frequency sensitivity; use observed fringe phase versus controlled changes to
+      separate causes.
+    evidence_path: answers.q2
+  - id: c_power
+    severity: scored
+    predicate: High contrast already shows interference; added optical power does not remove changing
+      optical phase, although it may improve readout noise.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: environment_first
+    example: Shield air paths and inspect mounts or table before assigning residual drift to source frequency.
+    family_checks:
+    - discriminating_tests
+    - phase_stability
+  - id: frequency_sensitivity_first
+    example: If arm mismatch is known large, first correlate phase with independent laser-frequency monitoring,
+      while still checking environmental terms.
+    family_checks:
+    - path_mismatch
+    - frequency_phase_coupling
+  other_valid_families_policy: Accept any efficient diagnostic order justified by measured clues; do not
+    score a mere unordered list as a complete investigation.
+scoring:
+  criteria:
+  - id: c_causes
+    weight: 0.4
+    check: c_causes
+  - id: c_tests
+    weight: 0.4
+    check: c_tests
+  - id: c_power
+    weight: 0.2
+    check: c_power
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

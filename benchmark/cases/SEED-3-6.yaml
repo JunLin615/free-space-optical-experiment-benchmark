@@ -1,0 +1,93 @@
+schema_version: 0.1.0
+case_id: SEED-3-6
+legacy_id: '3.6'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Independent access to field and pupil conjugates
+language: en
+taxonomy:
+  optical_domain: fourier_optics
+  task_types:
+  - experimental_design
+  - conceptual_reasoning
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.6 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The common plane is called arbitrary
+    because specially designed degenerate or combined planes do not remove the requirement to demonstrate
+    the intended conjugacies.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: An imaging system needs a spatial-selection stop at an object-conjugate plane and an adjustable
+    aperture at a pupil-conjugate plane.
+  questions:
+  - id: q1
+    request: Why should the two stops not simply be placed at one arbitrary common plane?
+  - id: q2
+    request: Describe an optical-relay approach that gives access to both required conjugates.
+  - id: q3
+    request: What does each stop control?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_distinct
+    severity: scored
+    predicate: A field or object conjugate maps object position, whereas a pupil conjugate maps ray angle
+      or aperture coordinate; arbitrary common placement does not independently control both.
+    evidence_path: answers.q1
+  - id: c_relay
+    severity: scored
+    predicate: Provide a relay with accessible object-conjugate and pupil-conjugate planes, and place
+      or image each stop into its proper conjugate.
+    evidence_path: answers.q2
+  - id: c_roles
+    severity: scored
+    predicate: The field stop selects spatial region or field of view; the pupil stop limits angular acceptance,
+      numerical aperture and illumination or imaging cone.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: multi_plane_relay
+    example: A relay forms separate accessible field and pupil images, with a stop at each.
+    family_checks:
+    - field_conjugate_verified
+    - pupil_conjugate_verified
+  other_valid_families_policy: Accept equivalent relays or externally imaged stops if their respective
+    conjugacies and independent controls are explained.
+scoring:
+  criteria:
+  - id: c_distinct
+    weight: 0.3
+    check: c_distinct
+  - id: c_relay
+    weight: 0.4
+    check: c_relay
+  - id: c_roles
+    weight: 0.3
+    check: c_roles
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

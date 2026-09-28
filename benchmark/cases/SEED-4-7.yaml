@@ -1,0 +1,100 @@
+schema_version: 0.1.0
+case_id: SEED-4-7
+legacy_id: '4.7'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Spatial mode matching into a Fabry-Perot cavity
+language: en
+taxonomy:
+  optical_domain: interferometry
+  task_types:
+  - experimental_design
+  - diagnosis
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 4.7 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The reflection-dip depth alone
+    also depends on impedance matching and loss, so it is treated as contextual evidence rather than a
+    unique mode-overlap measure.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A single-frequency laser must couple efficiently into a stable two-mirror cavity. Frequency
+    scanning is available, but little incident power enters the fundamental transverse mode.
+  questions:
+  - id: q1
+    request: What condition besides frequency resonance must be met?
+  - id: q2
+    request: List at least three useful alignment or mode-shaping degrees of freedom.
+  - id: q3
+    request: Which measurements show that mode matching has improved?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_overlap
+    severity: scored
+    predicate: Match the input spatial mode to the cavity fundamental eigenmode in waist size, waist location,
+      wavefront curvature and axis; resonance frequency alone is insufficient.
+    evidence_path: answers.q1
+  - id: c_controls
+    severity: scored
+    predicate: Name at least three effective degrees of freedom among lens focal length or position, telescope
+      spacing, waist size or location, beam pointing and cavity-mirror alignment.
+    evidence_path: answers.q2
+  - id: c_metrics
+    severity: scored
+    predicate: Use frequency-scan evidence such as fundamental-mode transmitted power or fraction, higher-order-mode
+      suppression, reflected-resonance behavior interpreted with coupling conditions and beam profiles.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: lens_pair_match
+    example: Adjust relay or telescope optics for waist size and location, then steer into the cavity
+      axis.
+    family_checks:
+    - gaussian_q_match
+    - pointing_overlap
+  - id: single_lens_match
+    example: For a reachable target q-parameter, use a translated lens and steering optics with measured
+      overlap.
+    family_checks:
+    - q_parameter_reachability
+    - axis_overlap
+  other_valid_families_policy: Accept any realizable free-space mode-matching arrangement that improves
+    fundamental-mode overlap and validates it against higher-order modes.
+scoring:
+  criteria:
+  - id: c_overlap
+    weight: 0.35
+    check: c_overlap
+  - id: c_controls
+    weight: 0.3
+    check: c_controls
+  - id: c_metrics
+    weight: 0.35
+    check: c_metrics
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.

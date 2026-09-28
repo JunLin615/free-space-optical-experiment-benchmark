@@ -1,0 +1,91 @@
+schema_version: 0.1.0
+case_id: SEED-3-4
+legacy_id: '3.4'
+case_revision: 0.1.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Why an image-plane pinhole is not a Fourier filter
+language: en
+taxonomy:
+  optical_domain: fourier_optics
+  task_types:
+  - conceptual_reasoning
+  difficulty_hypothesis: intermediate
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 3.4 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: English translation of the original seed prompt and tasks. The image-plane aperture is described
+    as chiefly selecting a field region, since all finite apertures can also affect downstream spectra.
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: A proposed design claims that placing a small pinhole at any sharp image plane implements
+    standard Fourier spatial filtering.
+  questions:
+  - id: q1
+    request: Assess the claim.
+  - id: q2
+    request: Where should a pinhole be placed to select spatial frequencies in the standard arrangement?
+  - id: q3
+    request: What does a pinhole at an image plane select, compared with one at a Fourier plane?
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+gold:
+  universal_constraints:
+  - id: c_assess
+    severity: scored
+    predicate: Reject the claim that any sharp image plane is interchangeable with a Fourier plane for
+      direct spatial-frequency selection.
+    evidence_path: answers.q1
+  - id: c_plane
+    severity: scored
+    predicate: Place the frequency-selective pinhole at a lens Fourier plane, or a plane optically conjugate
+      to it, where angle or spatial frequency is mapped to position.
+    evidence_path: answers.q2
+  - id: c_compare
+    severity: scored
+    predicate: An image-plane pinhole chiefly selects a local image or object region; a Fourier-plane
+      pinhole selects angular-spectrum or spatial-frequency components.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: fourier_plane_filter
+    example: Use a properly located focal or pupil-conjugate plane for frequency selection.
+    family_checks:
+    - plane_conjugacy
+    - frequency_to_position_mapping
+  other_valid_families_policy: Accept an equivalent Fourier-conjugate filtering layout; acknowledge secondary
+    diffraction effects of an image-plane aperture without mistaking those for direct spectral selection.
+scoring:
+  criteria:
+  - id: c_assess
+    weight: 0.3
+    check: c_assess
+  - id: c_plane
+    weight: 0.35
+    check: c_plane
+  - id: c_compare
+    weight: 0.35
+    check: c_compare
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve
+    the parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - all_scoring_ids_resolve_and_weights_sum_to_one
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  implemented_checks: []
+  notes: Draft oracle only; automated positive, alternative-valid, boundary and adversarial evidence is
+    required before status promotion.
