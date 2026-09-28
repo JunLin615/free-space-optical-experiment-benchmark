@@ -1,0 +1,56 @@
+{
+  "campaign_id": "2026-09-28-multimodel-020rc1",
+  "campaign_plan_path": "benchmark/results/campaigns/2026-09-28-multimodel-020rc1/campaign_plan.json",
+  "campaign_plan_sha256": "4300e7ba8d3c698b1182be0d4d0b98913aeee1fffa66efe2dd7a0784ca3de8e7",
+  "created_utc": "2026-09-28T18:31:17.108747+00:00",
+  "formal_runs": [
+    {
+      "evidence_tree_sha256": "df74c5ee3498d092773797c3c4ddf101e6e57fd5cdb1c50b1f00151ed6bdb0c0",
+      "manifest_sha256": "b373c21931c86ec1a78057a0e360f4bd6618d1432c136dce29dfe69b1875ae98",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-luna-020rc1-formal"
+    },
+    {
+      "evidence_tree_sha256": "70b5b9c4a130c4c22d7c01625c0a3b839494c0ae73502351473def817226fa1e",
+      "manifest_sha256": "3bd0afdabab11773ae705bda4fd763e7eb285ac4f42474041cb67c14a2c8d261",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-sol-020rc1-formal"
+    },
+    {
+      "evidence_tree_sha256": "8475458659047fef5b923c3f7d23f1b5aa2441d191648d2eaebff0f4f44b3477",
+      "manifest_sha256": "293c421f5674f89c6125221e340e67e295d4a20b0582fadf95307034475ab1d4",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-astra-020rc1-formal"
+    }
+  ],
+  "hidden_attestations": [
+    {
+      "path": "benchmark/hidden_eval/attestations/2026-09-28-gpt-6-luna-020rc1-campaign.json",
+      "sha256": "1e7103b2285bc1f0548f4c79856674cf6f440214d0769347bf1a140ad1ee8ec8"
+    },
+    {
+      "path": "benchmark/hidden_eval/attestations/2026-09-28-gpt-6-sol-020rc1-campaign.json",
+      "sha256": "38315ee9eafd08ac9a7eb670a0e4f0c24fcfdb11e12650290ea6f7baa98baa5d"
+    },
+    {
+      "path": "benchmark/hidden_eval/attestations/2026-09-28-gpt-6-astra-020rc1-campaign.json",
+      "sha256": "0808630d8346af536abb62e0ce69510b41f97ce6f57a2801e1ef02e973eef6cb"
+    }
+  ],
+  "release_id": "0.2.0-rc1",
+  "schema_version": "1.0.0",
+  "variant_runs": [
+    {
+      "evidence_tree_sha256": "c6846b492b261b5d0615b92e6b2a741ba8e926df214d7d4109b6e396144d735c",
+      "manifest_sha256": "c08b4091ce0c9428cc0722a841e3fa012268535522106fe98212c76ecc6f2d50",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-luna-rc1-variant-probe"
+    },
+    {
+      "evidence_tree_sha256": "c764ca3d2b58e70ebf7ae0683c37526fe1d446c939d48a7f85bc74d9614afcce",
+      "manifest_sha256": "1aa424bca17f0d42475e533f25a746e525f79f29eb47c150526a55575c2e6178",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-sol-rc1-variant-probe"
+    },
+    {
+      "evidence_tree_sha256": "076ca75b2415f98bce7d8233f34d28e154ad7cc3b826a9963b6a28f2e19f3e68",
+      "manifest_sha256": "ef00d93e8eb4e985f76f137c2294e99ac1324970d2876f13514ce4d35640fe11",
+      "run_dir": "runs/2026-09-28-openai-gpt-6-astra-rc1-variant-probe"
+    }
+  ]
+}

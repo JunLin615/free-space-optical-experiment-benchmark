@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "protocol_id": "case_and_tool_assisted",
+  "version": "1.0.0",
+  "scientific_prompt_source": "tools.protocols.public_payload(case).task",
+  "case_library_access": {
+    "enabled": true,
+    "snapshot_id": "optics-examples-v1"
+  },
+  "tool_policy": {
+    "profile_id": "generic_computation_v0.1",
+    "allowed_tools": [
+      "calculator",
+      "unit_convert"
+    ]
+  },
+  "network_policy": {
+    "external_access": false
+  },
+  "file_access_policy": {
+    "mode": "runner_supplied_only",
+    "allowed_roots": []
+  },
+  "retrieval_policy": {
+    "method": "lexical_v1",
+    "version": "1.0.0",
+    "max_items": 3,
+    "max_context_tokens": 900
+  },
+  "context_injection_policy": {
+    "mode": "retrieved_items_only",
+    "max_items": 3,
+    "max_tokens": 900,
+    "order": "retrieval_rank"
+  },
+  "retry_policy": {
+    "transport_retries": 0,
+    "malformed_answer_retries": 0,
+    "self_correction_retries": 0
+  },
+  "timeout_policy": {
+    "agent_seconds": 300,
+    "tool_seconds": 10
+  },
+  "answer_format_contract": "public_payload.answer_contract; evaluator accepts the declared JSON answer without hand repair",
+  "system_scaffold": {
+    "id": "neutral_optics_v1",
+    "version": "1.0.0",
+    "allowed_content": "Role, protocol resource availability, and output format only; no case-specific hints."
+  },
+  "logging_requirements": [
+    "scientific_payload_sha256",
+    "case_revision",
+    "scorer_fingerprint",
+    "result_schema_version",
+    "agent_identity",
+    "library_content_sha256",
+    "retrieval_query_and_scores",
+    "tool_events",
+    "raw_response",
+    "usage_and_latency"
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-sol",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "waist_radius": {
+          "unit": "um",
+          "value": 17
+        }
+      },
+      "q2": {
+        "closest_scale": {
+          "unit": "um",
+          "value": 10
+        }
+      },
+      "q3": {
+        "waist_radius_factor": {
+          "unit": "1",
+          "value": 0.5
+        }
+      }
+    },
+    "explanation": "Using w₀ ≈ λf/(πw), the waist radius is about 17 μm. Doubling the incident radius halves the ideal waist radius."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "a3846b54929ea9f4b433b59c81d4254d6b546241289122571a6edf5315162100",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\n  \"answers\": {\n    \"q1\": {\n      \"waist_radius\": {\n        \"value\": 17,\n        \"unit\": \"um\"\n      }\n    },\n    \"q2\": {\n      \"closest_scale\": {\n        \"value\": 10,\n        \"unit\": \"um\"\n      }\n    },\n    \"q3\": {\n      \"waist_radius_factor\": {\n        \"value\": 0.5,\n        \"unit\": \"1\"\n      }\n    }\n  },\n  \"explanation\": \"Using w₀ ≈ λf/(πw), the waist radius is about 17 μm. Doubling the incident radius halves the ideal waist radius.\"\n}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "891fd9854eceb4c2512afe542011e5baac7ed50964b12705efa2f87f946d1a6f",
+    "case_id": "SEED-2-1",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.3.0",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_waist",
+        "evidence": "Absolute SI error 6.59140550223e-08 <= inclusive tolerance 3.386817189e-06.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.5
+      },
+      {
+        "criterion_id": "c_scale",
+        "evidence": "The selected scale must be the nearest of the three offered choices.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.2
+      },
+      {
+        "criterion_id": "c_double",
+        "evidence": "At fixed wavelength and focal length, doubled incident radius halves ideal waist.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      }
+    ],
+    "evaluator_fingerprint": "22781ef61e11c35d873eadef406e3eb2c01262b3fe3756451959544178224c7b",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11776,
+            "input": 12758,
+            "output": 230,
+            "reasoning": 81
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\n  \"answers\": {\n    \"q1\": {\n      \"waist_radius\": {\n        \"value\": 17,\n        \"unit\": \"um\"\n      }\n    },\n    \"q2\": {\n      \"closest_scale\": {\n        \"value\": 10,\n        \"unit\": \"um\"\n      }\n    },\n    \"q3\": {\n      \"waist_radius_factor\": {\n        \"value\": 0.5,\n        \"unit\": \"1\"\n      }\n    }\n  },\n  \"explanation\": \"Using w₀ ≈ λf/(πw), the waist radius is about 17 μm. Doubling the incident radius halves the ideal waist radius.\"\n}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "waist_radius": {
+            "unit": "um",
+            "value": 17
+          }
+        },
+        "q2": {
+          "closest_scale": {
+            "unit": "um",
+            "value": 10
+          }
+        },
+        "q3": {
+          "waist_radius_factor": {
+            "unit": "1",
+            "value": 0.5
+          }
+        }
+      },
+      "explanation": "Using w₀ ≈ λf/(πw), the waist radius is about 17 μm. Doubling the incident radius halves the ideal waist radius."
+    },
+    "system": {
+      "model_id": "gpt-6-sol",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11776,
+      "input": 12758,
+      "output": 230,
+      "total": 12988
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_waist",
+        "details": {
+          "answer_path": "answers.q1.waist_radius",
+          "candidate_si": 1.7e-05,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 6.591405502233576e-08,
+          "dimension": "length",
+          "magnitude_convention": false,
+          "tolerance_si": 3.386817188995533e-06,
+          "validator_id": "gaussian_focus_radius"
+        },
+        "evidence": "Absolute SI error 6.59140550223e-08 <= inclusive tolerance 3.386817189e-06.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_scale",
+        "details": {},
+        "evidence": "The selected scale must be the nearest of the three offered choices.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_double",
+        "details": {},
+        "evidence": "At fixed wavelength and focal length, doubled incident radius halves ideal waist.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      }
+    ],
+    "wall_time_seconds": 15.172000000020489
+  },
+  "selection": {
+    "case_content_sha256": "891fd9854eceb4c2512afe542011e5baac7ed50964b12705efa2f87f946d1a6f",
+    "case_id": "SEED-2-1",
+    "case_revision": "0.3.0",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11776,
+    "input": 12758,
+    "output": 230,
+    "reasoning": 81,
+    "total": 12988
+  },
+  "wall_time_seconds": 15.25
+}

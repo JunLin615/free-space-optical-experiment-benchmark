@@ -1,0 +1,268 @@
+{
+  "run_id": "2026-09-28-openai-gpt-6-sol-rc1-variant-probe",
+  "execution_class": "real",
+  "record_count": 5,
+  "declared_run_count": 5,
+  "verified": {
+    "overall": {
+      "runs": 0,
+      "completed": 0,
+      "candidate_outcomes": 0,
+      "infrastructure_failures": 0,
+      "scored": 0,
+      "mean_score": null,
+      "median_score": null,
+      "score_distribution": [],
+      "successes": 0,
+      "task_success_rate": null,
+      "first_attempt_success_rate": null,
+      "unresolved_rate": null,
+      "invalid_contract_rate": null,
+      "physics_failure_rate": null,
+      "failure_classes": {},
+      "score_failure_modes": {},
+      "usage": {
+        "input": {
+          "known_records": 0,
+          "total": 0
+        },
+        "output": {
+          "known_records": 0,
+          "total": 0
+        },
+        "total": {
+          "known_records": 0,
+          "total": 0
+        },
+        "cached_input": {
+          "known_records": 0,
+          "total": 0
+        },
+        "reasoning": {
+          "known_records": 0,
+          "total": 0
+        }
+      },
+      "tokens_per_success": null,
+      "tool_calls": 0,
+      "tool_failures": 0,
+      "tool_calls_per_success": null,
+      "wall_time_seconds": 0,
+      "wall_seconds_per_success": null,
+      "cost": {
+        "amount": null,
+        "currency": null,
+        "known_records": 0,
+        "per_success": null
+      }
+    },
+    "by_protocol": {
+      "closed_book": {
+        "runs": 0,
+        "completed": 0,
+        "candidate_outcomes": 0,
+        "infrastructure_failures": 0,
+        "scored": 0,
+        "mean_score": null,
+        "median_score": null,
+        "score_distribution": [],
+        "successes": 0,
+        "task_success_rate": null,
+        "first_attempt_success_rate": null,
+        "unresolved_rate": null,
+        "invalid_contract_rate": null,
+        "physics_failure_rate": null,
+        "failure_classes": {},
+        "score_failure_modes": {},
+        "usage": {
+          "input": {
+            "known_records": 0,
+            "total": 0
+          },
+          "output": {
+            "known_records": 0,
+            "total": 0
+          },
+          "total": {
+            "known_records": 0,
+            "total": 0
+          },
+          "cached_input": {
+            "known_records": 0,
+            "total": 0
+          },
+          "reasoning": {
+            "known_records": 0,
+            "total": 0
+          }
+        },
+        "tokens_per_success": null,
+        "tool_calls": 0,
+        "tool_failures": 0,
+        "tool_calls_per_success": null,
+        "wall_time_seconds": 0,
+        "wall_seconds_per_success": null,
+        "cost": {
+          "amount": null,
+          "currency": null,
+          "known_records": 0,
+          "per_success": null
+        }
+      }
+    }
+  },
+  "development": {
+    "runs": 0,
+    "completed": 0,
+    "candidate_outcomes": 0,
+    "infrastructure_failures": 0,
+    "scored": 0,
+    "mean_score": null,
+    "median_score": null,
+    "score_distribution": [],
+    "successes": 0,
+    "task_success_rate": null,
+    "first_attempt_success_rate": null,
+    "unresolved_rate": null,
+    "invalid_contract_rate": null,
+    "physics_failure_rate": null,
+    "failure_classes": {},
+    "score_failure_modes": {},
+    "usage": {
+      "input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "output": {
+        "known_records": 0,
+        "total": 0
+      },
+      "total": {
+        "known_records": 0,
+        "total": 0
+      },
+      "cached_input": {
+        "known_records": 0,
+        "total": 0
+      },
+      "reasoning": {
+        "known_records": 0,
+        "total": 0
+      }
+    },
+    "tokens_per_success": null,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": null,
+    "wall_time_seconds": 0,
+    "wall_seconds_per_success": null,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variants": {
+    "runs": 5,
+    "completed": 5,
+    "candidate_outcomes": 5,
+    "infrastructure_failures": 0,
+    "scored": 5,
+    "mean_score": 1.0,
+    "median_score": 1.0,
+    "score_distribution": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "successes": 5,
+    "task_success_rate": 1.0,
+    "first_attempt_success_rate": 1.0,
+    "unresolved_rate": 0.0,
+    "invalid_contract_rate": 0.0,
+    "physics_failure_rate": 0.0,
+    "failure_classes": {
+      "none": 5
+    },
+    "score_failure_modes": {
+      "none": 5
+    },
+    "usage": {
+      "input": {
+        "known_records": 5,
+        "total": 63713
+      },
+      "output": {
+        "known_records": 5,
+        "total": 1196
+      },
+      "total": {
+        "known_records": 5,
+        "total": 64909
+      },
+      "cached_input": {
+        "known_records": 5,
+        "total": 21248
+      },
+      "reasoning": {
+        "known_records": 5,
+        "total": 335
+      }
+    },
+    "tokens_per_success": 12981.8,
+    "tool_calls": 0,
+    "tool_failures": 0,
+    "tool_calls_per_success": 0,
+    "wall_time_seconds": 83.28200000000652,
+    "wall_seconds_per_success": 16.656400000001305,
+    "cost": {
+      "amount": null,
+      "currency": null,
+      "known_records": 0,
+      "per_success": null
+    }
+  },
+  "variant_robustness": [],
+  "paired": {
+    "per_case": [],
+    "aggregate": {
+      "case_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "tool_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_closed_book": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_tool_assisted": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      },
+      "case_and_tool_assisted_minus_case_assisted": {
+        "paired_cases": 0,
+        "scored_pairs": 0,
+        "mean_score_delta": null
+      }
+    }
+  },
+  "retrieval": {
+    "closed_book": {
+      "records_with_retrieval": 0,
+      "items": 0,
+      "tokens": null,
+      "latency_seconds": null
+    }
+  },
+  "interpretation": "Observed results for this model and run only. Public variants are development probes, not hidden generalization evidence. Unknown cost or usage remains null."
+}

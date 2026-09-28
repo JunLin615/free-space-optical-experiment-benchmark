@@ -1,0 +1,54 @@
+{
+  "adapter_type": "codex_cli",
+  "aggregate_score": 1.0,
+  "attestation_type": "private_hidden_real_smoke",
+  "commitment": {
+    "benchmark_release_id": "0.2.0-rc1",
+    "bundle_id": "HIDDEN-4f80cf4a166ba127",
+    "concept_family_count": 4,
+    "created_utc": "2026-09-28T16:24:55.352052+00:00",
+    "generator_version": "0.2.0",
+    "hidden_policy_schema_version": "1.0.0",
+    "hidden_seed_sha256": "5f9638454de5212e5934affb42811595f4e6f046ecad16ff5437c6502b0bcbbf",
+    "instance_commitments_sha256": [
+      "55a5932a81ec4fb182bdbb3a7c1f7661f612a2ff27d6c72f85fce9ea7654bc30",
+      "42fbcb8e8de34400f25bcdd5450e53825b78a13c8af304afd82363a5c97ab221",
+      "2f02e392236c7ab2fdfbf5259d6a5ac4e901d78693d05d04da894dc0ed5d6d1e",
+      "cc61cada3dd14d23fa5a2b8228483e80ad1d556067fb40da47d065cfb3c9579c",
+      "da30c7c6b49796480dd201c74d5580ec884ad2af28669d96e9f505a155ceab4d",
+      "b902529137580eaa4d01da52bfdb63082ba82dbf411ecee483a4a90bef1cf605",
+      "f7fd12acf8bb5a93f7cde9e87c334c830823e9d6131c4fa24a530ee1a3d10480",
+      "cc1fc2864d487834055b414bae8bd308c8cf6fb509170e2a1565dccf260f7715"
+    ],
+    "instance_count": 8,
+    "private_policy_sha256": "ce233e02fab0e78658c498d2b33d9e6041ac0bbb6fac05a3a0e532c751fc6201",
+    "schema_version": "1.0.0"
+  },
+  "completed_instances": 8,
+  "cost": null,
+  "execution_class": "real",
+  "failure_categories": {
+    "none": 8
+  },
+  "linked_result_records": 8,
+  "model_id": "gpt-6-astra",
+  "model_version": null,
+  "protocol": "closed_book",
+  "raw_hidden_instances_published": false,
+  "raw_model_responses_published": false,
+  "run_evidence": {
+    "evidence_tree_sha256": "18e14243c1f7f2785ee78394351de25c2a5d078b152591e42165d35417f72823",
+    "file_count": 20,
+    "manifest_sha256": "a9647d5ff5ed095dbc36f10ebd017aa769466c161c7bf260c32616f8ed878fde",
+    "schema_version": "1.0.0"
+  },
+  "run_id": "2026-09-28-openai-gpt-6-astra-hidden-020rc1",
+  "selected_instances": 8,
+  "tokens": {
+    "cached_input": 24576,
+    "input": 104940,
+    "output": 1538,
+    "reasoning": 190,
+    "total": 106478
+  }
+}

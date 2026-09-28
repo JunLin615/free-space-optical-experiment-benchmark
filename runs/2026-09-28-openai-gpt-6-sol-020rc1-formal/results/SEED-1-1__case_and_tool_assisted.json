@@ -1,0 +1,276 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-sol",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "unit": "deg",
+          "value": 1.0
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "unit": "mm",
+          "value": 34.9
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "unit": "1",
+            "value": 0.25
+          },
+          "variable": "screen_distance"
+        }
+      }
+    },
+    "explanation": "The reflected beam turns through twice the mirror rotation. At 2.0 m, its spot moves approximately 2.0 tan(1.0°) = 34.9 mm. With the mirror rotation fixed, displacement scales with screen distance."
+  },
+  "protocol": {
+    "id": "case_and_tool_assisted",
+    "scientific_payload_sha256": "6ee1637585d38ceb6b2688479645b70fc20f4c9251186aae7e6cd0a9e1c02371",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"angle_change\":{\"value\":1.0,\"unit\":\"deg\"}},\"q2\":{\"spot_displacement\":{\"value\":34.9,\"unit\":\"mm\"}},\"q3\":{\"geometry_change\":{\"variable\":\"screen_distance\",\"held_fixed\":\"mirror_rotation\",\"scale\":{\"value\":0.25,\"unit\":\"1\"}}}},\"explanation\":\"The reflected beam turns through twice the mirror rotation. At 2.0 m, its spot moves approximately 2.0 tan(1.0°) = 34.9 mm. With the mirror rotation fixed, displacement scales with screen distance.\"}",
+  "retrieval": {
+    "item_count": 3,
+    "items": [
+      {
+        "content_sha256": "7163af8d9aacdca5116e780a8b2cf9d272826ec5a7777ce450293ee904abbe6a",
+        "estimated_tokens": 69,
+        "item_id": "EX-PINHOLE-01",
+        "score": 10.52726029,
+        "text": "# Spatial-filter alignment failure\n\nWhen a focused free-space beam misses a spatial-filter pinhole, first reduce\npower, place a viewing card at the focus, and adjust transverse pinhole position\nwith small steps. Distinguish clipping from a focus displaced along the optical\naxis: transverse motion changes the bright spot overlap, whereas axial motion\nchanges the spot size at the aperture. Do not infer that every low-throughput\ncondition calls for a smaller aperture.\n"
+      },
+      {
+        "content_sha256": "5d92ff16059730f7c20a226cad6fe481b2fd1b7995daf942befb631ce0d74738",
+        "estimated_tokens": 83,
+        "item_id": "EX-ALIGN-01",
+        "score": 8.54737934,
+        "text": "# Two-iris alignment diagnosis\n\nAn alignment laser passes through two irises on an optical table. The first iris is\nclose to the steering mirror; the second is farther downstream. If the beam is\ncentered on the first iris but displaced at the second, change the steering angle\nand then recenter the first iris with a translation adjustment. Repeat because a\nsingle downstream observation cannot separate beam position from beam angle.\n\nThis procedure separates position error from angle error by using observations\nat two distances.\n"
+      },
+      {
+        "content_sha256": "35719a025fc1ec9a9da538d1bbf0f81aaa57d2e22f66bf18a2bc02f513d1a3e3",
+        "estimated_tokens": 76,
+        "item_id": "EX-DETECT-01",
+        "score": 7.66923428,
+        "text": "# Detector linearity calibration\n\nTo test whether a photodiode response is linear, attenuate a stable free-space\nbeam with calibrated neutral-density filters and record dark-subtracted output.\nFor an illustrative filter transmitting 12% of incident power, a linear response\nshould fall to about 12% of its previous dark-subtracted reading. If the ratio\nchanges with incident power, inspect amplifier saturation, offset, and detector\nbandwidth before interpreting the optical signal.\n\nRecord the filter transmission and dark offsets in the measurement log.\n"
+      }
+    ],
+    "latency_seconds": 0.007035799964796752,
+    "library_index_sha256": "99d374539ac143d3dd1fc44a532a34f5f0d6e0b20af2291c7692179cdb497003",
+    "library_snapshot_id": "optics-examples-v1",
+    "query": "A collimated laser beam is incident nearly normally on an adjustable plane mirror. The mirror rotates 0.50° about a vertical axis. A viewing screen is normal to the nominal reflected ray, 2.0 m from the mirror along that ray. Neglect higher-order corrections associated with the initial angle of incidence. Report the angle change and spot displacement as magnitudes. Find the change in direction of the reflected beam. Estimate the transverse displacement of the spot on the screen. Identify the most direct geometric quantity to change if the displacement must fall to one quarter of its original value.",
+    "query_sha256": "f24ea1f1212c3180a4b6ca38654df7b30c0e95f09c2251620cf2460afdce506a",
+    "retrieval_version": "lexical_v1.0.0",
+    "retrieved_ids": [
+      "EX-PINHOLE-01",
+      "EX-ALIGN-01",
+      "EX-DETECT-01"
+    ],
+    "scores": [
+      10.52726029,
+      8.54737934,
+      7.66923428
+    ],
+    "total_retrieved_tokens": 228
+  },
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "dd9acbee1590f341e4262b1a75be2d40a37d139f7917dff5c9b5d6dcde1fa835",
+    "case_id": "SEED-1-1",
+    "case_library_access": {
+      "available": true,
+      "retrieved_document_ids": [
+        "EX-PINHOLE-01",
+        "EX-ALIGN-01",
+        "EX-DETECT-01"
+      ],
+      "snapshot_id": "optics-examples-v1"
+    },
+    "case_revision": "0.1.5",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_angle",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.000349065850399.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_shift",
+        "evidence": "Absolute SI error 1.01298564352e-05 <= inclusive tolerance 0.001.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.4
+      },
+      {
+        "criterion_id": "c_quarter",
+        "evidence": "predicted screen-shift ratio 0.25 vs 0.25",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      }
+    ],
+    "evaluator_fingerprint": "f98d459b6742e0bc992f2db2ac9d94cf81507e0d8380cd7bed4ea830e1454382",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "case_and_tool_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 0,
+            "input": 13325,
+            "output": 172,
+            "reasoning": 42
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"angle_change\":{\"value\":1.0,\"unit\":\"deg\"}},\"q2\":{\"spot_displacement\":{\"value\":34.9,\"unit\":\"mm\"}},\"q3\":{\"geometry_change\":{\"variable\":\"screen_distance\",\"held_fixed\":\"mirror_rotation\",\"scale\":{\"value\":0.25,\"unit\":\"1\"}}}},\"explanation\":\"The reflected beam turns through twice the mirror rotation. At 2.0 m, its spot moves approximately 2.0 tan(1.0°) = 34.9 mm. With the mirror rotation fixed, displacement scales with screen distance.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "angle_change": {
+            "unit": "deg",
+            "value": 1.0
+          }
+        },
+        "q2": {
+          "spot_displacement": {
+            "unit": "mm",
+            "value": 34.9
+          }
+        },
+        "q3": {
+          "geometry_change": {
+            "held_fixed": "mirror_rotation",
+            "scale": {
+              "unit": "1",
+              "value": 0.25
+            },
+            "variable": "screen_distance"
+          }
+        }
+      },
+      "explanation": "The reflected beam turns through twice the mirror rotation. At 2.0 m, its spot moves approximately 2.0 tan(1.0°) = 34.9 mm. With the mirror rotation fixed, displacement scales with screen distance."
+    },
+    "system": {
+      "model_id": "gpt-6-sol",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 0,
+      "input": 13325,
+      "output": 172,
+      "total": 13497
+    },
+    "tool_call_count": 0,
+    "tools_available": [
+      "calculator",
+      "unit_convert"
+    ],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_angle",
+        "details": {
+          "answer_path": "answers.q1.angle_change",
+          "candidate_si": 0.017453292519943295,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "angle",
+          "magnitude_convention": true,
+          "tolerance_si": 0.00034906585039886593,
+          "validator_id": "mirror_angle"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 0.000349065850399.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "n_shift",
+        "details": {
+          "answer_path": "answers.q2.spot_displacement",
+          "candidate_si": 0.0349,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": -1.0129856435170392e-05,
+          "dimension": "length",
+          "magnitude_convention": true,
+          "tolerance_si": 0.001,
+          "validator_id": "mirror_spot_shift"
+        },
+        "evidence": "Absolute SI error 1.01298564352e-05 <= inclusive tolerance 0.001.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_quarter",
+        "details": {
+          "predicted_ratio": 0.25,
+          "tolerance": 0.005
+        },
+        "evidence": "predicted screen-shift ratio 0.25 vs 0.25",
+        "score": 1,
+        "status": "pass",
+        "version": "mirror_geometry_v0.1"
+      }
+    ],
+    "wall_time_seconds": 18.93699999997625
+  },
+  "selection": {
+    "case_content_sha256": "dd9acbee1590f341e4262b1a75be2d40a37d139f7917dff5c9b5d6dcde1fa835",
+    "case_id": "SEED-1-1",
+    "case_revision": "0.1.5",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 0,
+    "input": 13325,
+    "output": 172,
+    "reasoning": 42,
+    "total": 13497
+  },
+  "wall_time_seconds": 19.01500000001397
+}

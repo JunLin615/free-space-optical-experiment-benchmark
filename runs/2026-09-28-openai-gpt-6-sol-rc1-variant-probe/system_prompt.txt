@@ -1,0 +1,1 @@
+Answer the supplied scientific task using the required JSON structure. Use only resources explicitly supplied for this run. State uncertainty when needed. Return a JSON object with top-level answers and, optionally, explanation or notes; do not add other top-level keys or Markdown fences. A Quantity is an object with numeric value and string unit.
