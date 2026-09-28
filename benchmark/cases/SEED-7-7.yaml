@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-7-7
 legacy_id: '7.7'
-case_revision: 0.1.0
+case_revision: 0.1.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -20,7 +20,9 @@ provenance:
   seed_relationship: English migration of original HTML seed case 7.7.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'Translated the original seed prompt and answer outline. Clarification: overlap on the visible
+  derivation: 'Translated the original seed prompt and answer outline. Revision 0.1.1 makes any eight
+    distinct plausible causes sufficient; named categories are examples rather than mandatory coverage.
+    Clarification: overlap on the visible
     sample surface does not prove overlap through the interaction volume or in time; the delay-line geometry
     must be converted to a time interval.'
   license_status: CC-BY-4.0 (project benchmark content)
@@ -46,8 +48,9 @@ gold:
   universal_constraints:
   - id: c_q1
     severity: scored
-    predicate: Include distinct spatial, temporal, sample-response, optical-power, detector, modulation/reference,
-      spectral-filter, dispersion, and acquisition failure mechanisms rather than synonyms.
+    predicate: Give at least eight distinct plausible mechanisms rather than synonyms. Spatial, temporal,
+      sample-response, optical-power, detector, modulation/reference, spectral-filter, dispersion, and
+      acquisition problems are examples; an answer need not include every named category.
     evidence_path: answers.q1
   - id: c_q2
     severity: scored

@@ -1,11 +1,11 @@
 schema_version: 0.1.0
 case_id: SEED-8-1
 legacy_id: '8.1'
-case_revision: 0.1.0
+case_revision: 0.1.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
-title: Free-space measurement of weak absorption
+title: Low-cost free-space measurement of weak absorption
 language: en
 taxonomy:
   optical_domain: weak_signal_detection
@@ -21,7 +21,9 @@ provenance:
   seed_relationship: English migration of original HTML seed case 8.1.
   created_utc: '2026-09-28'
   source_references: []
-  derivation: 'Translated the original seed prompt and answer outline. Clarification: 10^-4 is a relative
+  derivation: 'Translated the original seed prompt and answer outline. Revision 0.1.1 distinguishes three
+    complete drift-control architectures instead of counting ratio and balanced readout of one split-beam
+    setup as separate alternatives. Clarification: 10^-4 is a relative
     transmission-change target, not a guarantee of attainable precision; require a noise, bandwidth, drift,
     and linearity argument. Three alternatives must differ in measurement principle.'
   license_status: CC-BY-4.0 (project benchmark content)
@@ -73,21 +75,25 @@ gold:
     evidence_path: answers.q4
   - id: c_q5
     severity: scored
-    predicate: Offer at least three distinct physical measurement architectures, not three parameter changes
-      of one setup; compare their noise and drift assumptions.
+    predicate: Offer at least three distinct physical measurement architectures with a credible drift
+      control, linear-range, and calibration path for each; changing arithmetic from ratio to balanced
+      difference on the same split-beam hardware does not count as a separate architecture.
     evidence_path: answers.q5
-  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist; accept physically
-    equivalent approaches satisfying the stated observable and constraints.
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist. Three variants
+    must differ in physical measurement or drift-rejection method; ratio and balanced arithmetic on the
+    same simultaneous split-beam layout count as one family.
   accepted_solution_families:
   - id: reference_ratio
-    example: Sample and reference channels are measured together and their ratio removes source drift.
-  - id: modulated_difference
-    example: Sample state or beam is modulated and a phase-sensitive difference is measured against a
-      reference.
-  - id: interleaved_blank
-    example: Sample and blank are alternated faster than the relevant drift with linearized detector readout.
-  - id: balanced_detection
-    example: Matched detection channels measure a calibrated small differential transmission.
+    example: A simultaneous split-beam sample/reference ratio or balanced difference uses matched linear
+      detectors, blank and dark baselines, and a known-attenuation check to track source drift.
+  - id: modulated_sample
+    example: A controlled sample-state modulation and synchronous transmitted-light readout reject slow
+      source drift; a source monitor, off-state blank, linearity test, and modulation-leakage control verify
+      that the signal is absorption rather than modulator pickup.
+  - id: stabilized_source
+    example: An independent power monitor actively stabilizes the illumination before sequential sample
+      and blank transmission readings; an out-of-loop monitor verifies residual drift, and dark, linearity,
+      and known-attenuation measurements calibrate the detector response.
 scoring:
   criteria:
   - id: c_q1

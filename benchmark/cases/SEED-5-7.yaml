@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-5-7
 legacy_id: '5.7'
-case_revision: 0.1.0
+case_revision: 0.1.1
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -22,7 +22,8 @@ provenance:
   source_references: []
   derivation: 'Material clarification: the seed says differential noise stops falling without defining its
     normalization. This version specifies rms differential current referred to mean photocurrent in fixed bandwidth;
-    ideal absolute and fractional shot-noise trends are both requested.'
+    ideal absolute and fractional shot-noise trends are both requested. Revision 0.1.1 separates noise-budget
+    terms from actual causes of a high-power fractional-noise plateau.'
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Balanced photodetection has strongly suppressed common laser relative-intensity noise. At fixed
@@ -54,9 +55,11 @@ gold:
   universal_constraints:
   - id: c_q1
     severity: scored
-    predicate: Consider shot noise, detector dark or electronic noise, residual imbalance or technical noise,
-      and saturation; use power scaling or dark and blocked-light controls to discriminate causes. Ideal shot
-      noise alone cannot explain a true plateau of fractional noise at fixed bandwidth.
+    predicate: Distinguish noise-budget terms from plateau mechanisms. Fixed-bandwidth electronic or dark
+      noise falls fractionally as 1/P, and ideal shot noise falls as 1/sqrt(P); neither alone produces a
+      high-power fractional plateau. Residual technical relative-intensity noise, imbalance, nonlinear
+      gain or saturation, or a changing effective bandwidth can flatten the trend. Use power scaling and
+      dark, blocked-light, and balance controls to discriminate them.
     evidence_path: answers.q1
   - id: c_q2
     severity: scored
