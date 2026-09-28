@@ -1,0 +1,96 @@
+{
+  "case_id": "SEED-8-1",
+  "name": "alternative_equivalent_units",
+  "kind": "alternative_valid",
+  "challenge_reason": "Equivalent time, current, and fractional units preserve the physical inequalities.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "family": "simultaneous_reference",
+        "observable": "sample_reference_ratio",
+        "free_space_sample_path": true,
+        "linear_detector": true
+      },
+      "q2": {
+        "method": "simultaneous_reference",
+        "drift_control_tracks_source_variation": true,
+        "drift_timescale_s": {
+          "value": 10000.0,
+          "unit": "ms"
+        },
+        "cycle_timescale_s": {
+          "value": 10.0,
+          "unit": "ms"
+        },
+        "out_of_loop_monitor": false
+      },
+      "q3": {
+        "unattenuated_current_ma": {
+          "value": 0.005,
+          "unit": "A"
+        },
+        "attenuation_fraction": {
+          "value": 10.0,
+          "unit": "percent"
+        },
+        "linear_limit_ma": {
+          "value": 1000.0,
+          "unit": "uA"
+        },
+        "measured_fractional_noise_floor": {
+          "value": 0.002,
+          "unit": "percent"
+        }
+      },
+      "q4": {
+        "blank": true,
+        "dark": true,
+        "linearity": true,
+        "known_attenuation": true
+      },
+      "q5": [
+        {
+          "family": "simultaneous_reference",
+          "observable": "sample_reference_ratio",
+          "drift_method": "simultaneous_reference",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        },
+        {
+          "family": "sample_state_modulation",
+          "observable": "modulated_transmission",
+          "drift_method": "sample_state_modulation",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        },
+        {
+          "family": "active_source_stabilization",
+          "observable": "sequential_transmission",
+          "drift_method": "active_source_stabilization",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        }
+      ]
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "pass"
+    },
+    "c_q4": {
+      "status": "pass"
+    },
+    "c_q5": {
+      "status": "pass"
+    }
+  }
+}

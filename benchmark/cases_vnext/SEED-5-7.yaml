@@ -1,0 +1,120 @@
+schema_version: 0.1.0
+case_id: SEED-5-7
+legacy_id: '5.7'
+case_revision: 0.2.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Noise limits of balanced detection
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - conceptual_reasoning
+  - error_analysis
+  difficulty_hypothesis: advanced
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: Translation of case 5.7 in the original 64-case HTML seed.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Material clarification: the seed says differential noise stops falling without defining its
+    normalization. This version specifies rms differential current referred to mean photocurrent in fixed bandwidth;
+    ideal absolute and fractional shot-noise trends are both requested. Revision 0.1.1 separates noise-budget
+    terms from actual causes of a high-power fractional-noise plateau. Revision 0.2.0 adds a development-only
+    typed causal and scaling challenge contract without changing the question.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Balanced photodetection has strongly suppressed common laser relative-intensity noise. At fixed
+    electrical measurement bandwidth, the rms differential noise normalized to the mean photocurrent initially
+    improves as power rises, but its improvement later stalls.
+  questions:
+  - id: q1
+    request: List noise mechanisms or nonidealities that could now dominate and describe how to distinguish
+      them.
+  - id: q2
+    request: State how ideal shot-noise rms current and fractional shot noise scale with mean optical power
+      at fixed bandwidth and responsivity.
+  - id: q3
+    request: Identify limits imposed by further power increases.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  permit_additional_explanation: true
+  method_shape:
+    q1: '{hypotheses:[{family,fractional_scaling,discriminating_test},...]}; distinct plateau causes require distinct physical families and matched controls.'
+    q2: '{absolute_power_exponent,fractional_power_exponent,fixed_bandwidth,fixed_responsivity}; exponents are quantities in unit 1, with ideal values +0.5 and -0.5.'
+    q3: '{limits:[...],check_linearity_before_increase}; distinguish saturation, heating or drift, and damage.'
+  notes: Unknown credible plateau mechanisms or controls abstain; noise terms that cannot create a fractional plateau fail when presented as its sole cause.
+gold:
+  visibility: private
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Distinguish noise-budget terms from plateau mechanisms. Fixed-bandwidth electronic or dark
+      noise falls fractionally as 1/P, and ideal shot noise falls as 1/sqrt(P); neither alone produces a
+      high-power fractional plateau. Residual technical relative-intensity noise, imbalance, nonlinear
+      gain or saturation, or a changing effective bandwidth can flatten the trend. Use power scaling and
+      dark, blocked-light, and balance controls to discriminate them.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: At fixed bandwidth and responsivity, state absolute shot-noise rms current proportional to square
+      root of photocurrent or power, while the fractional value falls as inverse square root of power.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Identify saturation, nonlinearity, heating or drift, and optical or detector damage as possible
+      high-power limits.
+    evidence_path: answers.q3
+  accepted_solution_families:
+  - id: scaling_scan
+    example: Measure differential noise versus power in a fixed bandwidth, with both-beams, one-beam, and dark
+      controls.
+  - id: calibrated_noise_budget
+    example: Calibrate electronic, shot, and residual technical-noise terms from independently measured current
+      and detector transfer functions.
+  other_valid_families_policy: Equivalent diagnostics pass if they define the reported noise quantity and bandwidth
+    and separate absolute from fractional scaling.
+  forbidden_claims:
+  - id: f_1
+    predicate: Absolute shot-noise current decreases as optical power increases at fixed bandwidth.
+  - id: f_2
+    predicate: The normalized difference must keep improving indefinitely with optical power.
+  - id: f_3
+    predicate: Ideal shot noise by itself creates a power-independent plateau in fractional rms noise at fixed
+      electrical bandwidth.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.33333333
+    check: c_q1
+    question_id: q1
+  - id: c_q2
+    weight: 0.33333333
+    check: c_q2
+    question_id: q2
+  - id: c_q3
+    weight: 0.33333334
+    check: c_q3
+    question_id: q3
+  hard_rule: No score cap is proposed for this draft case; retain all criterion outcomes.
+  malformed_answer_rule: Missing or invalid structured paths score zero for dependent criteria; preserve the
+    parse error.
+  aggregation: weighted_sum_then_hard_cap
+validation:
+  planned_checks:
+  - yaml_and_json_schema_valid
+  - independent_physics_review
+  - positive_and_adversarial_answer_fixtures_pass
+  - calibrated_bounded_semantic_review_for_explanations
+  implemented_checks:
+  - development_typed_noise_wave_v0.2
+  - positive_alternative_invalid_and_abstention_fixtures
+  notes: Development scorer only. Fixture coverage does not establish broad causal calibration or release readiness.

@@ -1,0 +1,54 @@
+{
+  "case_id": "SEED-5-7",
+  "name": "adversarial_unlimited_power",
+  "kind": "adversarial",
+  "challenge_reason": "Rhetorical safety assurances do not remove saturation and damage limits.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "hypotheses": [
+          {
+            "family": "residual_source_rin",
+            "fractional_scaling": "constant",
+            "discriminating_test": "block_sample_compare_reference"
+          },
+          {
+            "family": "detector_nonlinearity",
+            "fractional_scaling": "flattening_or_growth",
+            "discriminating_test": "attenuation_linearity_scan"
+          }
+        ]
+      },
+      "q2": {
+        "absolute_power_exponent": {
+          "value": 0.5,
+          "unit": "1"
+        },
+        "fractional_power_exponent": {
+          "value": -0.5,
+          "unit": "1"
+        },
+        "fixed_bandwidth": true,
+        "fixed_responsivity": true
+      },
+      "q3": {
+        "limits": [
+          "unlimited_power_is_safe",
+          "detector_saturation"
+        ],
+        "check_linearity_before_increase": true
+      }
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "pass"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "fail"
+    }
+  }
+}

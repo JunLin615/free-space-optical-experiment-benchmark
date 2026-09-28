@@ -1,0 +1,33 @@
+{
+  "case_id": "SEED-2-8",
+  "name": "negative_missing_ratio_scenarios",
+  "kind": "negative",
+  "challenge_reason": "The vNext quantitative contract is not supplied.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "achievable": false
+      },
+      "q2": {
+        "invariant": "beam_parameter_product",
+        "behavior": "cannot_decrease",
+        "same_beam": true
+      },
+      "q3": {
+        "reduce_size": "divergence_increases",
+        "reduce_divergence": "size_increases"
+      }
+    }
+  },
+  "expected": {
+    "c_impossible": {
+      "status": "pass"
+    },
+    "c_invariant": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "fail"
+    }
+  }
+}

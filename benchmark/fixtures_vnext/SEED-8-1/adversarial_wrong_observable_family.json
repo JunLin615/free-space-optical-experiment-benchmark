@@ -1,0 +1,96 @@
+{
+  "case_id": "SEED-8-1",
+  "name": "adversarial_wrong_observable_family",
+  "kind": "adversarial",
+  "challenge_reason": "A simultaneous ratio layout cannot silently claim the stabilized sequential observable.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "family": "simultaneous_reference",
+        "observable": "sequential_transmission",
+        "free_space_sample_path": true,
+        "linear_detector": true
+      },
+      "q2": {
+        "method": "simultaneous_reference",
+        "drift_control_tracks_source_variation": true,
+        "drift_timescale_s": {
+          "value": 10.0,
+          "unit": "s"
+        },
+        "cycle_timescale_s": {
+          "value": 0.01,
+          "unit": "s"
+        },
+        "out_of_loop_monitor": false
+      },
+      "q3": {
+        "unattenuated_current_ma": {
+          "value": 5.0,
+          "unit": "mA"
+        },
+        "attenuation_fraction": {
+          "value": 0.1,
+          "unit": "1"
+        },
+        "linear_limit_ma": {
+          "value": 1.0,
+          "unit": "mA"
+        },
+        "measured_fractional_noise_floor": {
+          "value": 2e-05,
+          "unit": "1"
+        }
+      },
+      "q4": {
+        "blank": true,
+        "dark": true,
+        "linearity": true,
+        "known_attenuation": true
+      },
+      "q5": [
+        {
+          "family": "simultaneous_reference",
+          "observable": "sample_reference_ratio",
+          "drift_method": "simultaneous_reference",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        },
+        {
+          "family": "sample_state_modulation",
+          "observable": "modulated_transmission",
+          "drift_method": "sample_state_modulation",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        },
+        {
+          "family": "active_source_stabilization",
+          "observable": "sequential_transmission",
+          "drift_method": "active_source_stabilization",
+          "has_observable": true,
+          "has_drift_control": true,
+          "has_linearity_calibration": true
+        }
+      ]
+    }
+  },
+  "expected": {
+    "c_q1": {
+      "status": "fail"
+    },
+    "c_q2": {
+      "status": "pass"
+    },
+    "c_q3": {
+      "status": "pass"
+    },
+    "c_q4": {
+      "status": "pass"
+    },
+    "c_q5": {
+      "status": "pass"
+    }
+  }
+}

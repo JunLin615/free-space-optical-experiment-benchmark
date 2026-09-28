@@ -1,0 +1,57 @@
+{
+  "case_id": "SEED-2-8",
+  "name": "boundary_novel_scenario_mode",
+  "kind": "boundary",
+  "challenge_reason": "A new scenario representation is not silently false-failed.",
+  "answer": {
+    "answers": {
+      "q1": {
+        "achievable": false
+      },
+      "q2": {
+        "invariant": "beam_parameter_product",
+        "behavior": "cannot_decrease",
+        "same_beam": true
+      },
+      "q3": {
+        "reduce_size": "divergence_increases",
+        "reduce_divergence": "size_increases",
+        "same_beam_scenarios": [
+          {
+            "mode": "magnification_transform",
+            "size_ratio": {
+              "value": 0.1,
+              "unit": "1"
+            },
+            "divergence_ratio": {
+              "value": 10.0,
+              "unit": "1"
+            }
+          },
+          {
+            "mode": "reduce_divergence",
+            "size_ratio": {
+              "value": 10.0,
+              "unit": "1"
+            },
+            "divergence_ratio": {
+              "value": 0.1,
+              "unit": "1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_impossible": {
+      "status": "pass"
+    },
+    "c_invariant": {
+      "status": "pass"
+    },
+    "c_tradeoff": {
+      "status": "unresolved"
+    }
+  }
+}

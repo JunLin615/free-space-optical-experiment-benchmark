@@ -1,0 +1,136 @@
+schema_version: 0.1.0
+case_id: SEED-8-1
+legacy_id: '8.1'
+case_revision: 0.2.0
+benchmark_release: null
+validation_status: specified
+split: public_dev
+title: Low-cost free-space measurement of weak absorption
+language: en
+taxonomy:
+  optical_domain: weak_signal_detection
+  task_types:
+  - experimental_design
+  - calibration
+  - verification
+  difficulty_hypothesis: expert
+  modality: text
+provenance:
+  origin: user_supplied_chinese_html_seed
+  source_hash: 077DB14D2A5C67A3123C82AF1D571F8FFA73D3C79501C7C9D8C99E021C2318A8
+  seed_relationship: English migration of original HTML seed case 8.1.
+  created_utc: '2026-09-28'
+  source_references: []
+  derivation: 'Translated the original seed prompt and answer outline. Revision 0.1.1 distinguishes three
+    complete drift-control architectures instead of counting ratio and balanced readout of one split-beam
+    setup as separate alternatives. Clarification: 10^-4 is a relative
+    transmission-change target, not a guarantee of attainable precision; require a noise, bandwidth, drift,
+    and linearity argument. Three alternatives must differ in measurement principle. Revision 0.2.0 adds
+    a development-only typed functional challenge contract without changing the question.'
+  license_status: CC-BY-4.0 (project benchmark content)
+task:
+  statement: Design a free-space system to measure a sample-transmission change of about 10^-4 despite
+    appreciable slow laser-power drift. Fiber must not be the principal transport path.
+  questions:
+  - id: q1
+    request: Give a complete optical and detection architecture.
+  - id: q2
+    request: Explain how source drift is suppressed or measured.
+  - id: q3
+    request: Protect the detectors from saturation while preserving sensitivity.
+  - id: q4
+    request: Describe blank and calibration measurements.
+  - id: q5
+    request: Give at least three genuinely distinct workable implementations.
+answer_contract:
+  format: human_explanation_plus_json_object
+  schema_id: pilot_answer_v0.1
+  required_result_paths:
+  - answers.q1
+  - answers.q2
+  - answers.q3
+  - answers.q4
+  - answers.q5
+  permit_additional_explanation: true
+  method_shape:
+    q1: '{family,observable,free_space_sample_path,linear_detector}; supported function families are simultaneous_reference, sample_state_modulation, and active_source_stabilization.'
+    q2: '{method,drift_control_tracks_source_variation,drift_timescale_s,cycle_timescale_s,out_of_loop_monitor}; times are quantity objects convertible to s. Comparison cycle must be shorter than drift time, and active stabilization needs an out-of-loop monitor.'
+    q3: '{unattenuated_current_ma,attenuation_fraction,linear_limit_ma,measured_fractional_noise_floor}; currents are quantity objects convertible to mA and fractions to unit 1. Attenuation must keep current strictly below the linear limit and measured floor below 1e-4.'
+    q4: '{blank,dark,linearity,known_attenuation}: boolean calibration claims.'
+    q5: 'Array of {family,observable,drift_method,has_observable,has_drift_control,has_linearity_calibration}; ratio and balanced difference on one split-beam layout count as one family. Observable and drift functions must match the physical family.'
+  notes: Typed development contract only; unfamiliar physically plausible functions abstain.
+gold:
+  universal_constraints:
+  - id: c_q1
+    severity: scored
+    predicate: Provide illumination, sample and detector paths, a measurable transmission observable,
+      and an acquisition sequence.
+    evidence_path: answers.q1
+  - id: c_q2
+    severity: scored
+    predicate: Use a simultaneous or interleaved reference, modulation, normalization, or another defensible
+      drift-control mechanism with appropriate time scale.
+    evidence_path: answers.q2
+  - id: c_q3
+    severity: scored
+    predicate: Address optical attenuation and detector linear range before acquisition, and show that
+      attenuation does not erase the 10^-4 sensitivity target.
+    evidence_path: answers.q3
+  - id: c_q4
+    severity: scored
+    predicate: Include blank or no-sample baseline, dark/background correction, detector linearity, and
+      known attenuation or reference validation.
+    evidence_path: answers.q4
+  - id: c_q5
+    severity: scored
+    predicate: Offer at least three distinct physical measurement architectures with a credible drift
+      control, linear-range, and calibration path for each; changing arithmetic from ratio to balanced
+      difference on the same split-beam hardware does not count as a separate architecture.
+    evidence_path: answers.q5
+  other_valid_families_policy: Listed examples are illustrative, not a closed whitelist. Three variants
+    must differ in physical measurement or drift-rejection method; ratio and balanced arithmetic on the
+    same simultaneous split-beam layout count as one family.
+  accepted_solution_families:
+  - id: reference_ratio
+    example: A simultaneous split-beam sample/reference ratio or balanced difference uses matched linear
+      detectors, blank and dark baselines, and a known-attenuation check to track source drift.
+  - id: modulated_sample
+    example: A controlled sample-state modulation and synchronous transmitted-light readout reject slow
+      source drift; a source monitor, off-state blank, linearity test, and modulation-leakage control verify
+      that the signal is absorption rather than modulator pickup.
+  - id: stabilized_source
+    example: An independent power monitor actively stabilizes the illumination before sequential sample
+      and blank transmission readings; an out-of-loop monitor verifies residual drift, and dark, linearity,
+      and known-attenuation measurements calibrate the detector response.
+scoring:
+  criteria:
+  - id: c_q1
+    weight: 0.2
+    check: c_q1
+  - id: c_q2
+    weight: 0.2
+    check: c_q2
+  - id: c_q3
+    weight: 0.2
+    check: c_q3
+  - id: c_q4
+    weight: 0.2
+    check: c_q4
+  - id: c_q5
+    weight: 0.2
+    check: c_q5
+  aggregation: weighted_sum_then_hard_cap
+  hard_rule: No automated hard cap is asserted at the specified stage; scientific contradictions require
+    a validated oracle before executable promotion.
+  malformed_answer_rule: Missing required answer paths fail only their dependent criteria when an autonomous
+    oracle is implemented.
+validation:
+  planned_checks:
+  - schema_and_lineage_valid
+  - scientific_assumptions_reviewed
+  - valid_alternatives_and_adversarial_fixtures
+  - autonomous_oracle_calibration
+  implemented_checks:
+  - development_typed_design_wave_v0.2
+  - positive_alternative_invalid_and_abstention_fixtures
+  notes: The development scorer checks declared function and numeric consistency, not realization of a complete instrument or measured precision. No release verification is claimed.
