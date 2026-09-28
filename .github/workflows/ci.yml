@@ -30,3 +30,5 @@ jobs:
         run: python tools/render_cases.py --check
       - name: Verify complete-corpus coverage outputs
         run: python tools/generate_coverage.py --check
+      - name: Verify release qualification and pinned evidence
+        run: python tools/qualify_release.py --check

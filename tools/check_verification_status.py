@@ -11,7 +11,10 @@ from pathlib import Path, PurePosixPath
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from tools.scoring_runtime import CASES, ROOT, SCORERS, evaluate_case, load_scored_case
+from tools.scoring_runtime import (
+    CASES, ROOT, RUNTIME_VERSION, SCORERS, _content_hash,
+    _evaluator_fingerprint, evaluate_case, load_scored_case,
+)
 from tools.validate_cases import load_case
 from tools.fixture_evidence import fixture_kind_issues
 from tools.calibrate_judge import SET as CALIBRATION_SET, measure
@@ -89,6 +92,33 @@ def _judge_evidence_issues(case: dict, manifest: dict) -> tuple[set[str], list[s
     return required_files, []
 
 
+def required_release_files(case: dict, fixture_names: list[str]) -> set[str]:
+    """Files whose bytes can change a released case or its qualification."""
+    case_id = case["case_id"]
+    required = {
+        f"benchmark/cases/{case_id}.yaml", "benchmark/schema/case_v0.1.schema.json",
+        "benchmark/schema/pilot_answer_v0.1.schema.json", "benchmark/schema/result.schema.json",
+        "benchmark/generated/questions.md", "benchmark/generated/questions.html",
+        "benchmark/coverage/coverage.json", "benchmark/coverage/migration_status.json",
+        "tools/scoring_runtime.py", "tools/validate_cases.py",
+        "tools/render_cases.py", "tools/run_case_fixtures.py", "tools/fixture_evidence.py",
+        "tools/check_verification_status.py", "tools/qualify_release.py",
+        "tools/check_corpus.py", "tools/generate_coverage.py", ".github/workflows/ci.yml",
+        ".gitattributes", "requirements.txt",
+    }
+    required.update(f"benchmark/fixtures/{case_id}/{name}" for name in fixture_names)
+    required.update(case["validation"].get("evidence_files", []))
+    module = SCORERS[case_id]
+    required.add(f"tools/scorers/{module}.py")
+    if module == "numerical":
+        required.add("tools/physics_checks.py")
+    if case_id == "SEED-1-1":
+        required.add("tools/scorers/geometry.py")
+    if case["validation"].get("semantic_criteria"):
+        required.update({"tools/calibrate_judge.py", "tools/semantic_judge.py"})
+    return required
+
+
 def _manifest_issues(case_id: str, release: str, fixture_names: list[str]) -> list[str]:
     path = RELEASES / f"{release}.json"
     if not path.is_file():
@@ -104,23 +134,21 @@ def _manifest_issues(case_id: str, release: str, fixture_names: list[str]) -> li
             raise ValueError("manifest has no file hashes")
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return [f"{case_id}: invalid release manifest: {exc}"]
-    required = {
-        f"benchmark/cases/{case_id}.yaml", "benchmark/schema/case_v0.1.schema.json",
-        "benchmark/schema/pilot_answer_v0.1.schema.json", "benchmark/schema/result.schema.json",
-        "benchmark/generated/questions.md", "benchmark/generated/questions.html",
-        "tools/scoring_runtime.py", "tools/validate_cases.py",
-        "tools/render_cases.py", "tools/run_case_fixtures.py", "tools/fixture_evidence.py",
-        "tools/check_verification_status.py", "requirements.txt",
-    }
-    required.update(f"benchmark/fixtures/{case_id}/{name}" for name in fixture_names)
-    required.update(case["validation"].get("evidence_files", []))
-    module = SCORERS[case_id]
-    required.add(f"tools/scorers/{module}.py")
-    if module == "numerical":
-        required.add("tools/physics_checks.py")
-    if case_id == "SEED-1-1":
-        required.add("tools/scorers/geometry.py")
-    judge_files, issues = _judge_evidence_issues(case, manifest)
+    if pinned.get("status") != "release_verified":
+        issues = [f"{case_id}: release manifest status is not release_verified"]
+    else:
+        issues = []
+    if pinned.get("scorer") != SCORERS[case_id]:
+        issues.append(f"{case_id}: release manifest scorer differs from registry")
+    if pinned.get("evaluator_version") != RUNTIME_VERSION:
+        issues.append(f"{case_id}: release manifest evaluator version differs from runtime")
+    if pinned.get("evaluator_fingerprint") != _evaluator_fingerprint(case):
+        issues.append(f"{case_id}: release manifest evaluator fingerprint differs from source")
+    if pinned.get("case_content_sha256") != _content_hash(case):
+        issues.append(f"{case_id}: release manifest case content hash differs from case")
+    required = required_release_files(case, fixture_names)
+    judge_files, judge_issues = _judge_evidence_issues(case, manifest)
+    issues.extend(judge_issues)
     required.update(judge_files)
     if judge_files:
         required.update({"tools/calibrate_judge.py", "tools/semantic_judge.py"})

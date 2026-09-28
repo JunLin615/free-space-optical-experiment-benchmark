@@ -25,6 +25,7 @@ class VerificationStatusTests(unittest.TestCase):
                 case = copy.deepcopy(case)
                 case["validation_status"] = "release_verified"
                 case["benchmark_release"] = "nonexistent-release"
+                case["split"] = "public_dev"
             return case
         with patch.object(status_gate, "load_scored_case", side_effect=changed):
             issues = status_gate.check()

@@ -88,7 +88,7 @@ class NumericalScoringTests(unittest.TestCase):
 
     def test_unknown_case_is_invalid_instance(self) -> None:
         case = copy.deepcopy(case_for("SEED-1-5"))
-        case["case_id"] = "SEED-2-1"
+        case["case_id"] = "SEED-9-9"
         verdicts = evaluate(case, {})
         self.assertEqual(len(verdicts), 1)
         self.assertEqual(verdicts[0]["status"], "error")
