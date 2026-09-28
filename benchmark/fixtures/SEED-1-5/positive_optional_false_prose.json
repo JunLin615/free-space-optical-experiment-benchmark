@@ -1,7 +1,7 @@
 {
   "case_id": "SEED-1-5",
-  "name": "adversarial_false_prose",
-  "kind": "adversarial",
+  "name": "positive_optional_false_prose",
+  "kind": "positive",
   "answer": {
     "answers": {
       "q1": {
@@ -36,6 +36,6 @@
       "status": "pass"
     }
   },
-  "failure_mode": "judge_unresolved",
-  "capped_total": null
+  "failure_mode": "none",
+  "capped_total": 1.0
 }

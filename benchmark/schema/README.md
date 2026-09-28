@@ -26,6 +26,10 @@ cases' `answer_contract.schema_id`: it permits case-specific prose and structure
 design claims while requiring physical numerical leaves to have `value` and
 `unit`. Each case's `required_result_paths` and physics checks narrow that broad
 shape; passing this shared answer schema alone never earns a score.
+Optional `answer.explanation` is kept for audit and has no scoring effect. A
+required explanation must instead have a scored judge rubric whose
+`evidence_path` appears in `required_result_paths`, with its criterion listed
+in `validation.semantic_criteria`.
 Cases at `challenged` or above inventory executable derivation files in
 `validation.evidence_files`. A release manifest hashes that inventory and,
 when semantic scoring is used, the actual judge configuration, challenge set,

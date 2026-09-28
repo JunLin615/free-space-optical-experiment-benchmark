@@ -38,8 +38,7 @@ def _judge_evidence_issues(case: dict, manifest: dict) -> tuple[set[str], list[s
     """Return judge files that must be hashed and any missing live evidence."""
     case_id = case["case_id"]
     criteria = case["validation"].get("semantic_criteria", [])
-    required = bool(criteria or case["answer_contract"].get("permit_additional_explanation")
-                    or case["gold"].get("judge_rubrics"))
+    required = bool(criteria)
     judge = manifest.get("judge")
     if not isinstance(judge, dict) or judge.get("mode") not in {"required", "disabled"}:
         return set(), [f"{case_id}: release manifest must declare judge mode"]
@@ -49,8 +48,6 @@ def _judge_evidence_issues(case: dict, manifest: dict) -> tuple[set[str], list[s
         return set(), []
     if judge["mode"] != "required":
         return set(), [f"{case_id}: semantic scoring path requires judge mode"]
-    if case["answer_contract"].get("permit_additional_explanation") and "explanation_consistency" not in criteria:
-        return set(), [f"{case_id}: explanation_consistency must be inventoried as a semantic criterion"]
     declared = judge.get("criteria")
     if not criteria or not isinstance(declared, list) or not all(isinstance(x, str) for x in declared) or set(declared) != set(criteria):
         return set(), [f"{case_id}: manifest judge criteria differ from case evidence inventory"]
@@ -111,7 +108,7 @@ def _manifest_issues(case_id: str, release: str, fixture_names: list[str]) -> li
         f"benchmark/cases/{case_id}.yaml", "benchmark/schema/case_v0.1.schema.json",
         "benchmark/schema/pilot_answer_v0.1.schema.json", "benchmark/schema/result.schema.json",
         "benchmark/generated/questions.md", "benchmark/generated/questions.html",
-        "tools/scoring_runtime.py", "tools/semantic_judge.py", "tools/validate_cases.py",
+        "tools/scoring_runtime.py", "tools/validate_cases.py",
         "tools/render_cases.py", "tools/run_case_fixtures.py", "tools/fixture_evidence.py",
         "tools/check_verification_status.py", "requirements.txt",
     }
@@ -126,7 +123,7 @@ def _manifest_issues(case_id: str, release: str, fixture_names: list[str]) -> li
     judge_files, issues = _judge_evidence_issues(case, manifest)
     required.update(judge_files)
     if judge_files:
-        required.add("tools/calibrate_judge.py")
+        required.update({"tools/calibrate_judge.py", "tools/semantic_judge.py"})
     for relative in sorted(required):
         if relative not in files:
             issues.append(f"{case_id}: release manifest does not pin {relative}")

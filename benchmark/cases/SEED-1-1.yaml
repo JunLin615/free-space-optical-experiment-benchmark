@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-1-1
 legacy_id: '1.1'
-case_revision: 0.1.3
+case_revision: 0.1.4
 benchmark_release: null
 validation_status: challenged
 split: public_dev
@@ -23,6 +23,7 @@ provenance:
     screen orientation and distance convention that were implicit in the seed and required by the numerical oracle.
     Revision 0.1.2 discloses a typed geometry-change answer for executable scoring without changing the scientific task.
     Revision 0.1.3 states that requested changes are magnitudes because the seed gives no rotation sense.
+    Revision 0.1.4 clarifies that optional explanation is retained for audit without adding a scoring criterion.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   coordinate_convention: The direction and displacement questions request magnitudes; no clockwise or transverse sign was specified, so equivalent signed reports are compared by absolute value.
@@ -127,6 +128,4 @@ validation:
   evidence_files:
   - tests/test_independent_physics.py
   - tests/test_numerical_scoring.py
-  semantic_criteria:
-  - explanation_consistency
   notes: Challenged development case. Release requires a pinned manifest, wider challenge evidence, and CI preflight; it is not release_verified.

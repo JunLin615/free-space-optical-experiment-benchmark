@@ -72,45 +72,65 @@ class ScoringRuntimeTests(unittest.TestCase):
         self.assertEqual(result["scores"]["capped_total"], 0.65)
         self.assertEqual(list(self.validator.iter_errors(result)), [])
 
-    def test_correct_numbers_do_not_silently_validate_optional_prose(self) -> None:
+    def test_optional_prose_does_not_change_deterministic_score(self) -> None:
+        baseline = evaluate_case(self.case, ANSWER)
         answer = copy.deepcopy(ANSWER)
         answer["explanation"] = "The delay line is single pass despite these tabulated numbers."
-        result = evaluate_case(self.case, answer)
-        self.assertEqual(result["failure_mode"], "judge_unresolved")
-        self.assertIsNone(result["scores"]["capped_total"])
-        self.assertEqual(result["judge_results"][0]["check_id"], "explanation_consistency")
+        def backend(prompt, config):
+            self.fail("optional explanation must not invoke the judge")
+        result = evaluate_case(self.case, answer, raw_answer=json.dumps(answer), judge_backend=backend)
+        self.assertEqual(result["scores"], baseline["scores"])
+        self.assertEqual(result["failure_mode"], baseline["failure_mode"])
+        self.assertEqual(result["judge_results"], [])
+        self.assertEqual(result["structured_answer"]["explanation"], answer["explanation"])
+        self.assertEqual(result["raw_answer"], json.dumps(answer))
         self.assertEqual(list(self.validator.iter_errors(result)), [])
 
-    def test_bounded_judge_only_resolves_configured_residual(self) -> None:
+    def test_explicit_scored_explanation_can_fail_and_cap(self) -> None:
+        case = copy.deepcopy(self.case)
+        case["answer_contract"]["required_result_paths"].append("answers.q1.explanation")
+        case["gold"]["judge_rubrics"] = [{
+            "id": "j_explanation", "criterion": "Does the stated path reasoning agree with a double pass?",
+            "judge_version": "0.1.0", "threshold": 0.9,
+            "evidence_path": "answers.q1.explanation", "severity": "hard",
+            "pass_examples": ["The path changes by twice the stage motion."],
+            "fail_examples": ["The path changes by only one stage displacement."],
+        }]
+        case["scoring"]["criteria"][0]["weight"] = 0.2
+        case["scoring"]["criteria"].append({"id": "c_explanation", "check": "j_explanation", "weight": 0.1})
+        case["validation"]["semantic_criteria"] = ["c_explanation"]
+        answer = copy.deepcopy(ANSWER)
+        answer["answers"]["q1"]["explanation"] = "The path is single pass."
+        unresolved = evaluate_case(case, answer)
+        self.assertEqual(unresolved["failure_mode"], "judge_unresolved")
+        def backend(prompt, config):
+            return json.dumps({"verdict": "fail", "evidence_quote": "single pass",
+                               "reason": "A folded delay line changes both path segments."})
+        failed = evaluate_case(case, answer, judge_backend=backend)
+        self.assertEqual(failed["judge_results"][0]["status"], "fail")
+        self.assertEqual(failed["failure_mode"], "constraint_fail")
+        self.assertEqual(failed["scores"]["raw_total"], 0.9)
+        self.assertEqual(failed["scores"]["capped_total"], 0.49)
+        self.assertEqual(list(self.validator.iter_errors(failed)), [])
+        correct_answer = copy.deepcopy(answer)
+        correct_answer["answers"]["q1"]["explanation"] = "The path changes by twice the stage motion."
+        def passing_backend(prompt, config):
+            return json.dumps({"verdict": "pass", "evidence_quote": "twice the stage motion",
+                               "reason": "The explanation states the double-pass path change."})
+        passed = evaluate_case(case, correct_answer, judge_backend=passing_backend)
+        self.assertEqual(passed["scores"]["capped_total"], 1.0)
+        self.assertEqual(passed["failure_mode"], "none")
+
+    def test_undeclared_judge_criterion_cannot_change_score(self) -> None:
         case = load_scored_case("SEED-2-8")
         answer = {"answers": {"q1": {"achievable": False},
                               "q2": {"invariant": "phase_space_volume", "behavior": "conserved"},
                               "q3": {"reduce_size": "divergence_increases", "reduce_divergence": "size_increases"}}}
-        unresolved = evaluate_case(case, answer, judge_criteria={"c_invariant": "Explain the invariant"})
-        self.assertEqual(unresolved["failure_mode"], "judge_unresolved")
-        self.assertIsNone(unresolved["scores"]["capped_total"])
-        def backend(prompt, config):
-            return json.dumps({"verdict": "pass", "evidence_quote": "phase_space_volume",
-                               "reason": "This names a conserved optical phase-space quantity."})
-        resolved = evaluate_case(case, answer, judge_criteria={"c_invariant": "Explain the invariant"},
-                                 judge_backend=backend)
-        self.assertEqual(resolved["scores"]["capped_total"], 1.0)
-        self.assertEqual(resolved["judge_results"][0]["status"], "pass")
-        self.assertEqual(next(v for v in resolved["validator_results"] if v["check_id"] == "c_invariant")["status"], "unresolved")
-        self.assertEqual(list(self.validator.iter_errors(resolved)), [])
-
-    def test_judge_cannot_override_hard_physics_failure(self) -> None:
-        case = load_scored_case("SEED-2-8")
-        answer = {"answers": {"q1": {"achievable": True},
-                              "q2": {"invariant": "etendue", "behavior": "conserved"},
-                              "q3": {"reduce_size": "divergence_increases", "reduce_divergence": "size_increases"}}}
-        def backend(prompt, config):
-            self.fail("backend should not be called for deterministic failure")
-        result = evaluate_case(case, answer, judge_criteria={"c_impossible": "Is it feasible?"},
-                               judge_backend=backend)
-        self.assertEqual(result["failure_mode"], "constraint_fail")
-        self.assertLessEqual(result["scores"]["capped_total"], 0.49)
-        self.assertEqual(result["judge_results"], [])
+        with self.assertRaisesRegex(ValueError, "explicitly scored case rubrics"):
+            evaluate_case(case, answer, judge_criteria={"c_invariant": "Explain the invariant"})
+        baseline = evaluate_case(case, answer)
+        self.assertEqual(baseline["judge_results"], [])
+        self.assertEqual(list(self.validator.iter_errors(baseline)), [])
 
 
 if __name__ == "__main__":

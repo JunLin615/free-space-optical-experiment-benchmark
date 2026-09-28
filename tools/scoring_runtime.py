@@ -16,7 +16,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 from tools.validate_cases import ROOT, load_case, semantic_issues
 
 
-RUNTIME_VERSION = "0.1.0"
+RUNTIME_VERSION = "0.1.1"
 CASES = ROOT / "benchmark" / "cases"
 SCHEMAS = ROOT / "benchmark" / "schema"
 SCORERS = {
@@ -33,9 +33,11 @@ def _content_hash(value: Any) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def _evaluator_fingerprint(case_id: str) -> str:
-    paths = ["tools/scoring_runtime.py", f"tools/scorers/{SCORERS[case_id]}.py",
-             "tools/semantic_judge.py", "benchmark/judge/bounded_v0.1.json"]
+def _evaluator_fingerprint(case: dict[str, Any]) -> str:
+    case_id = case["case_id"]
+    paths = ["tools/scoring_runtime.py", f"tools/scorers/{SCORERS[case_id]}.py"]
+    if case.get("validation", {}).get("semantic_criteria"):
+        paths.extend(["tools/semantic_judge.py", "benchmark/judge/bounded_v0.1.json"])
     if SCORERS[case_id] == "numerical":
         paths.append("tools/physics_checks.py")
     if case_id == "SEED-1-1":
@@ -123,7 +125,7 @@ def evaluate_case(
         "case_revision": case.get("case_revision"),
         "case_content_sha256": _content_hash(case),
         "evaluator_version": RUNTIME_VERSION,
-        "evaluator_fingerprint": _evaluator_fingerprint(case_id),
+        "evaluator_fingerprint": _evaluator_fingerprint(case),
         "benchmark_version": run["benchmark_version"],
         "system": run["system"],
         "protocol": run["protocol"],
@@ -191,8 +193,25 @@ def evaluate_case(
     except Exception as exc:
         return all_unresolved("validator_error", "scorer_exception", f"{type(exc).__name__}: {exc}")
     by_id = {v.get("criterion_id"): v for v in verdicts}
+    rubric_by_id = {item["id"]: item for item in case["gold"].get("judge_rubrics", [])}
+    for criterion in criteria:
+        rubric = rubric_by_id.get(criterion["check"])
+        if rubric is None:
+            continue
+        current = answer
+        for part in rubric.get("evidence_path", "").split("."):
+            current = current.get(part) if isinstance(current, dict) else None
+        present = isinstance(current, str) and bool(current.strip())
+        by_id[criterion["id"]] = {
+            "criterion_id": criterion["id"], "check_id": rubric["id"],
+            "status": "unresolved" if present else "fail",
+            "score": None if present else 0,
+            "evidence": "Declared explanation awaits semantic judging." if present else
+                        f"Required explanation is missing at {rubric.get('evidence_path')}.",
+            "details": {"failure_class": "missing_claim"} if not present else {},
+        }
     expected = {c["id"] for c in criteria}
-    if len(by_id) != len(verdicts) or set(by_id) != expected:
+    if len(by_id) != len(verdicts) + sum(c["check"] in rubric_by_id for c in criteria) or set(by_id) != expected:
         return all_unresolved("validator_error", "scorer_coverage", "scorer verdicts do not cover each criterion exactly once")
     invalid_statuses = [v for v in verdicts if v.get("status") not in {"pass", "fail", "unresolved", "error"}]
     if invalid_statuses:
@@ -200,10 +219,17 @@ def evaluate_case(
 
     original_by_id = dict(by_id)
     numeric_ids = {item["id"] for item in case["gold"].get("numerical_checks", [])}
-    if judge_criteria:
+    declared_judges = {
+        c["id"]: rubric_by_id[c["check"]]["criterion"] for c in criteria
+        if c["check"] in rubric_by_id
+    }
+    if judge_criteria and judge_criteria != declared_judges:
+        raise ValueError("judge criteria must match explicitly scored case rubrics")
+    requested_judges = declared_judges
+    if requested_judges:
         from tools.semantic_judge import judge_criterion
         candidate_text = raw_answer if raw_answer is not None else json.dumps(answer, ensure_ascii=False)
-        for criterion_id, criterion_text in judge_criteria.items():
+        for criterion_id, criterion_text in requested_judges.items():
             if criterion_id not in by_id or criterion_id in numeric_ids:
                 raise ValueError(f"semantic judge cannot target {criterion_id}")
             if by_id[criterion_id]["status"] != "unresolved":
@@ -219,25 +245,12 @@ def evaluate_case(
                     "details": {"source": "semantic_judge"},
                 }
 
-    residual_judge = None
-    explanation = answer.get("explanation")
-    if isinstance(explanation, str) and explanation.strip() and all(v["status"] == "pass" for v in by_id.values()):
-        # Correct structured leaves cannot certify contradictory optional prose.
-        # Without a calibrated backend the complete answer is unresolved.
-        from tools.semantic_judge import judge_criterion
-        residual_judge = judge_criterion(
-            criterion_id="explanation_consistency",
-            criterion="Does the optional explanation avoid physically contradicting the scored structured claims?",
-            candidate_text=raw_answer if raw_answer is not None else json.dumps(answer, ensure_ascii=False),
-            backend=judge_backend,
-        )
-        result["judge_results"].append(residual_judge)
-
     has_unresolved = False
     has_error = False
     total = 0.0
     hard_failed = False
     hard_ids = {item["id"] for item in case["gold"].get("universal_constraints", []) if item["severity"] == "hard"}
+    hard_ids.update(c["id"] for c in criteria if c["check"] in rubric_by_id and rubric_by_id[c["check"]].get("severity") == "hard")
     if answer_errors:
         result["validator_results"].append({
             "check_id": "answer_schema", "version": RUNTIME_VERSION, "status": "fail", "score": 0,
@@ -280,8 +293,8 @@ def evaluate_case(
     else:
         result["scores"] = {"raw_total": round(total, 12),
                             "capped_total": round(min(total, 0.49) if hard_failed else total, 12)}
-        if any(v["status"] == "fail" for v in verdicts):
-            failure_classes = {v.get("details", {}).get("failure_class") for v in verdicts if v["status"] == "fail"}
+        if any(v["status"] == "fail" for v in by_id.values()):
+            failure_classes = {v.get("details", {}).get("failure_class") for v in by_id.values() if v["status"] == "fail"}
             result["failure_mode"] = (
                 "invalid_contract" if answer_errors or failure_classes & {"missing_claim", "malformed_claim", "malformed_answer", "wrong_unit"}
                 else "constraint_fail" if hard_failed else "physics_fail"
@@ -290,11 +303,4 @@ def evaluate_case(
             result["failure_mode"] = "invalid_contract"
         if answer_errors:
             result["scores"]["capped_total"] = min(result["scores"]["capped_total"], 0.49)
-        if residual_judge is not None:
-            if residual_judge["status"] == "unresolved":
-                result["scores"] = {"raw_total": None, "capped_total": None}
-                result["failure_mode"] = "judge_unresolved"
-            elif residual_judge["status"] == "fail":
-                result["scores"]["capped_total"] = min(result["scores"]["capped_total"], 0.49)
-                result["failure_mode"] = "constraint_fail"
     return finish()

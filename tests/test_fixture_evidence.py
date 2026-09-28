@@ -60,8 +60,13 @@ class FixtureEvidenceTests(unittest.TestCase):
 
     def test_release_adversarial_must_fail_not_abstain(self) -> None:
         case = load_scored_case("SEED-1-5")
-        fixture = json.loads((FIXTURES / "SEED-1-5" / "adversarial_false_prose.json").read_text(encoding="utf-8"))
+        fixture = json.loads((FIXTURES / "SEED-1-5" / "reference.json").read_text(encoding="utf-8"))
+        fixture["kind"] = "adversarial"
         result = evaluate_case(case, fixture["answer"])
+        result["criterion_scores"][0]["status"] = "unresolved"
+        result["criterion_scores"][0]["score"] = None
+        result["scores"] = {"raw_total": None, "capped_total": None}
+        result["failure_mode"] = "oracle_unresolved"
         self.assertEqual(fixture_kind_issues(fixture, result), [])
         self.assertIn("release adversarial fixture must resolve to an actual failure",
                       fixture_kind_issues(fixture, result, release_verified=True))
