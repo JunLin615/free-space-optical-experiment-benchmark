@@ -1,0 +1,271 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-luna",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "unit": "mm",
+          "value": 2.0
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "unit": "ps",
+          "value": 6.67
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "unit": "mm",
+          "value": 14.99
+        }
+      }
+    },
+    "explanation": "The stage displacement changes the optical path by twice its motion, so 1.00 mm gives 2.00 mm of path change. Dividing by the speed of light gives a 6.67 ps delay change. A 100 ps scan requires a 29.98 mm optical path change, or 14.99 mm of one-way stage travel."
+  },
+  "protocol": {
+    "id": "case_assisted",
+    "scientific_payload_sha256": "7f2bef184e0dbe04441745ff0297d6ac0cb604849f1795ea91b620f10a605d4e",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"path_change\":{\"value\":2.00,\"unit\":\"mm\"}},\"q2\":{\"delay_change\":{\"value\":6.67,\"unit\":\"ps\"}},\"q3\":{\"stage_travel\":{\"value\":14.99,\"unit\":\"mm\"}}},\"explanation\":\"The stage displacement changes the optical path by twice its motion, so 1.00 mm gives 2.00 mm of path change. Dividing by the speed of light gives a 6.67 ps delay change. A 100 ps scan requires a 29.98 mm optical path change, or 14.99 mm of one-way stage travel.\"}",
+  "retrieval": {
+    "item_count": 3,
+    "items": [
+      {
+        "content_sha256": "5d92ff16059730f7c20a226cad6fe481b2fd1b7995daf942befb631ce0d74738",
+        "estimated_tokens": 83,
+        "item_id": "EX-ALIGN-01",
+        "score": 7.64881311,
+        "text": "# Two-iris alignment diagnosis\n\nAn alignment laser passes through two irises on an optical table. The first iris is\nclose to the steering mirror; the second is farther downstream. If the beam is\ncentered on the first iris but displaced at the second, change the steering angle\nand then recenter the first iris with a translation adjustment. Repeat because a\nsingle downstream observation cannot separate beam position from beam angle.\n\nThis procedure separates position error from angle error by using observations\nat two distances.\n"
+      },
+      {
+        "content_sha256": "7163af8d9aacdca5116e780a8b2cf9d272826ec5a7777ce450293ee904abbe6a",
+        "estimated_tokens": 69,
+        "item_id": "EX-PINHOLE-01",
+        "score": 5.08156472,
+        "text": "# Spatial-filter alignment failure\n\nWhen a focused free-space beam misses a spatial-filter pinhole, first reduce\npower, place a viewing card at the focus, and adjust transverse pinhole position\nwith small steps. Distinguish clipping from a focus displaced along the optical\naxis: transverse motion changes the bright spot overlap, whereas axial motion\nchanges the spot size at the aperture. Do not infer that every low-throughput\ncondition calls for a smaller aperture.\n"
+      },
+      {
+        "content_sha256": "35719a025fc1ec9a9da538d1bbf0f81aaa57d2e22f66bf18a2bc02f513d1a3e3",
+        "estimated_tokens": 76,
+        "item_id": "EX-DETECT-01",
+        "score": 1.70214731,
+        "text": "# Detector linearity calibration\n\nTo test whether a photodiode response is linear, attenuate a stable free-space\nbeam with calibrated neutral-density filters and record dark-subtracted output.\nFor an illustrative filter transmitting 12% of incident power, a linear response\nshould fall to about 12% of its previous dark-subtracted reading. If the ratio\nchanges with incident power, inspect amplifier saturation, offset, and detector\nbandwidth before interpreting the optical signal.\n\nRecord the filter transmission and dark offsets in the measurement log.\n"
+      }
+    ],
+    "latency_seconds": 0.00471460004337132,
+    "library_index_sha256": "99d374539ac143d3dd1fc44a532a34f5f0d6e0b20af2291c7692179cdb497003",
+    "library_snapshot_id": "optics-examples-v1",
+    "query": "An ultrashort pulse enters a straight folded delay line with two reflections. The translation stage carrying the retroreflecting mirror group moves 1.00 mm along the optical axis. The beam traverses the moving-stage gap once on the outbound leg and once on the return leg; no other moving path segment changes. Report changes in optical path and time delay as magnitudes. Find the change in optical path length. Find the change in time delay. Estimate the required one-way mechanical travel for a 100 ps delay scan.",
+    "query_sha256": "b872f89ab677a19e23a45ddf5758cdf96f03d2002119b4c700f147966a7adb06",
+    "retrieval_version": "lexical_v1.0.0",
+    "retrieved_ids": [
+      "EX-ALIGN-01",
+      "EX-PINHOLE-01",
+      "EX-DETECT-01"
+    ],
+    "scores": [
+      7.64881311,
+      5.08156472,
+      1.70214731
+    ],
+    "total_retrieved_tokens": 228
+  },
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-luna-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "1877546a59b9ca61ee9278cc9fa28d8eb38b13deeaacbff86c033af3f864c717",
+    "case_id": "SEED-1-5",
+    "case_library_access": {
+      "available": true,
+      "retrieved_document_ids": [
+        "EX-ALIGN-01",
+        "EX-PINHOLE-01",
+        "EX-DETECT-01"
+      ],
+      "snapshot_id": "optics-examples-v1"
+    },
+    "case_revision": "0.1.5",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_path",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-05.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.3
+      },
+      {
+        "criterion_id": "n_delay",
+        "evidence": "Absolute SI error 1.28190396304e-15 <= inclusive tolerance 1.2e-13.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      },
+      {
+        "criterion_id": "n_travel",
+        "evidence": "Absolute SI error 3.77099999999e-07 <= inclusive tolerance 0.0004.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.35
+      }
+    ],
+    "evaluator_fingerprint": "22781ef61e11c35d873eadef406e3eb2c01262b3fe3756451959544178224c7b",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "case_assisted",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11008,
+            "input": 13066,
+            "output": 279,
+            "reasoning": 141
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"path_change\":{\"value\":2.00,\"unit\":\"mm\"}},\"q2\":{\"delay_change\":{\"value\":6.67,\"unit\":\"ps\"}},\"q3\":{\"stage_travel\":{\"value\":14.99,\"unit\":\"mm\"}}},\"explanation\":\"The stage displacement changes the optical path by twice its motion, so 1.00 mm gives 2.00 mm of path change. Dividing by the speed of light gives a 6.67 ps delay change. A 100 ps scan requires a 29.98 mm optical path change, or 14.99 mm of one-way stage travel.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-luna-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "path_change": {
+            "unit": "mm",
+            "value": 2.0
+          }
+        },
+        "q2": {
+          "delay_change": {
+            "unit": "ps",
+            "value": 6.67
+          }
+        },
+        "q3": {
+          "stage_travel": {
+            "unit": "mm",
+            "value": 14.99
+          }
+        }
+      },
+      "explanation": "The stage displacement changes the optical path by twice its motion, so 1.00 mm gives 2.00 mm of path change. Dividing by the speed of light gives a 6.67 ps delay change. A 100 ps scan requires a 29.98 mm optical path change, or 14.99 mm of one-way stage travel."
+    },
+    "system": {
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11008,
+      "input": 13066,
+      "output": 279,
+      "total": 13345
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_path",
+        "details": {
+          "answer_path": "answers.q1.path_change",
+          "candidate_si": 0.002,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 0.0,
+          "dimension": "length",
+          "magnitude_convention": true,
+          "tolerance_si": 3e-05,
+          "validator_id": "folded_delay_path"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 3e-05.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "n_delay",
+        "details": {
+          "answer_path": "answers.q2.delay_change",
+          "candidate_si": 6.67e-12,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": -1.2819039630417592e-15,
+          "dimension": "time",
+          "magnitude_convention": true,
+          "tolerance_si": 1.2e-13,
+          "validator_id": "folded_delay_time"
+        },
+        "evidence": "Absolute SI error 1.28190396304e-15 <= inclusive tolerance 1.2e-13.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "n_travel",
+        "details": {
+          "answer_path": "answers.q3.stage_travel",
+          "candidate_si": 0.01499,
+          "comparator": "max_abs_or_relative_inclusive",
+          "difference_si": 3.7709999999892274e-07,
+          "dimension": "length",
+          "magnitude_convention": false,
+          "tolerance_si": 0.0004,
+          "validator_id": "folded_delay_stage_for_target"
+        },
+        "evidence": "Absolute SI error 3.77099999999e-07 <= inclusive tolerance 0.0004.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      }
+    ],
+    "wall_time_seconds": 13.35999999998603
+  },
+  "selection": {
+    "case_content_sha256": "1877546a59b9ca61ee9278cc9fa28d8eb38b13deeaacbff86c033af3f864c717",
+    "case_id": "SEED-1-5",
+    "case_revision": "0.1.5",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11008,
+    "input": 13066,
+    "output": 279,
+    "reasoning": 141,
+    "total": 13345
+  },
+  "wall_time_seconds": 13.48499999998603
+}

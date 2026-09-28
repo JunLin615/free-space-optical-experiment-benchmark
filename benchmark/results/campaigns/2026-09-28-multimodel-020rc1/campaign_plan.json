@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "2026-09-28-multimodel-020rc1",
+  "created_utc": "2026-09-28T18:10:21.690571+00:00",
+  "formal_release_id": "0.2.0-rc1",
+  "formal_release_manifest_sha256": "0d2950e9ecac3e49094c6a5e02cee49ea937d0bad2f00cc82c140c687cc192f7",
+  "candidate_systems": [
+    {
+      "provider": "openai",
+      "model_id": "gpt-6-luna",
+      "model_version": null,
+      "adapter_type": "codex_cli",
+      "framework": "codex-cli-0.158.0",
+      "scaffold_id": "neutral_optics_v1",
+      "command_prefix": [
+        "npx",
+        "-y",
+        "@openai/codex@0.158.0"
+      ],
+      "formal_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-luna-020rc1-formal.json",
+      "variant_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-luna-rc1-variant-probe.json",
+      "pricing_snapshot": null
+    },
+    {
+      "provider": "openai",
+      "model_id": "gpt-6-sol",
+      "model_version": null,
+      "adapter_type": "codex_cli",
+      "framework": "codex-cli-0.158.0",
+      "scaffold_id": "neutral_optics_v1",
+      "command_prefix": [
+        "npx",
+        "-y",
+        "@openai/codex@0.158.0"
+      ],
+      "formal_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-sol-020rc1-formal.json",
+      "variant_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-sol-rc1-variant-probe.json",
+      "pricing_snapshot": null
+    },
+    {
+      "provider": "openai",
+      "model_id": "gpt-6-astra",
+      "model_version": null,
+      "adapter_type": "codex_cli",
+      "framework": "codex-cli-0.158.0",
+      "scaffold_id": "neutral_optics_v1",
+      "command_prefix": [
+        "npx",
+        "-y",
+        "@openai/codex@0.158.0"
+      ],
+      "formal_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-astra-020rc1-formal.json",
+      "variant_input_manifest": "runs/input_manifests/2026-09-28-openai-gpt-6-astra-rc1-variant-probe.json",
+      "pricing_snapshot": null
+    }
+  ],
+  "formal_case_ids": [
+    "SEED-1-1",
+    "SEED-1-5",
+    "SEED-1-7",
+    "SEED-2-2",
+    "SEED-4-2",
+    "SEED-2-1",
+    "SEED-3-1",
+    "SEED-3-7",
+    "SEED-5-5"
+  ],
+  "protocol_ids": [
+    "closed_book",
+    "case_assisted",
+    "tool_assisted",
+    "case_and_tool_assisted"
+  ],
+  "per_system_formal_records": 36,
+  "retry_policy": {
+    "transport_max_retries": 0,
+    "malformed_answer_max_retries": 0,
+    "self_correction_max_retries": 0
+  },
+  "retrieval_config": {
+    "max_items": 3
+  },
+  "tool_config": {
+    "profile_id": "generic_computation_v0.1",
+    "max_calls": 6
+  },
+  "system_prompt_version": "neutral_optics_v1",
+  "runner_version": "0.1.0",
+  "public_variant_probe": {
+    "compatible_parent_release": "0.1.0-rc1",
+    "protocol_ids": [
+      "closed_book"
+    ],
+    "per_system_variants": 5,
+    "separate_from_formal": true
+  },
+  "hidden_evaluation": {
+    "bundle_commitment": {
+      "benchmark_release_id": "0.2.0-rc1",
+      "bundle_id": "HIDDEN-4f80cf4a166ba127",
+      "concept_family_count": 4,
+      "created_utc": "2026-09-28T16:24:55.352052+00:00",
+      "generator_version": "0.2.0",
+      "hidden_policy_schema_version": "1.0.0",
+      "hidden_seed_sha256": "5f9638454de5212e5934affb42811595f4e6f046ecad16ff5437c6502b0bcbbf",
+      "instance_commitments_sha256": [
+        "55a5932a81ec4fb182bdbb3a7c1f7661f612a2ff27d6c72f85fce9ea7654bc30",
+        "42fbcb8e8de34400f25bcdd5450e53825b78a13c8af304afd82363a5c97ab221",
+        "2f02e392236c7ab2fdfbf5259d6a5ac4e901d78693d05d04da894dc0ed5d6d1e",
+        "cc61cada3dd14d23fa5a2b8228483e80ad1d556067fb40da47d065cfb3c9579c",
+        "da30c7c6b49796480dd201c74d5580ec884ad2af28669d96e9f505a155ceab4d",
+        "b902529137580eaa4d01da52bfdb63082ba82dbf411ecee483a4a90bef1cf605",
+        "f7fd12acf8bb5a93f7cde9e87c334c830823e9d6131c4fa24a530ee1a3d10480",
+        "cc1fc2864d487834055b414bae8bd308c8cf6fb509170e2a1565dccf260f7715"
+      ],
+      "instance_count": 8,
+      "private_policy_sha256": "ce233e02fab0e78658c498d2b33d9e6041ac0bbb6fac05a3a0e532c751fc6201",
+      "schema_version": "1.0.0"
+    },
+    "protocol_ids": [
+      "closed_book"
+    ],
+    "external_private_bundle": true,
+    "separate_from_formal": true
+  },
+  "reporting_policy": {
+    "unknown_cost": null,
+    "compare_paired_case_deltas": true,
+    "no_composite_winner_score": true
+  }
+}

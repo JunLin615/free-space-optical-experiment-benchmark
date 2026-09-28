@@ -1,0 +1,203 @@
+{
+  "agent_identity": {
+    "adapter_type": "codex_cli",
+    "framework": "codex-cli-0.158.0",
+    "model_id": "gpt-6-sol",
+    "model_version": null,
+    "provider": "openai",
+    "scaffold_id": "neutral_optics_v1",
+    "system_prompt_version": "neutral_optics_v1"
+  },
+  "attempt_count": 1,
+  "cost": null,
+  "execution_class": "real",
+  "failure_class": null,
+  "first_attempt_success": true,
+  "model_turn_count": 1,
+  "parsed_answer": {
+    "answers": {
+      "q1": {
+        "beat_frequency": {
+          "unit": "MHz",
+          "value": 80
+        }
+      },
+      "q2": {
+        "detector_field_response_order": {
+          "unit": "1",
+          "value": 2
+        },
+        "frequency_component_source": "interference_cross_term"
+      },
+      "q3": {
+        "ideal_cross_term": false
+      }
+    },
+    "explanation": "The detector responds to intensity, which is quadratic in the electric field. The interference cross term oscillates at the 80 MHz frequency difference. For orthogonal polarizations with no projector, that cross term vanishes in the ideal case."
+  },
+  "protocol": {
+    "id": "closed_book",
+    "scientific_payload_sha256": "8e022403e02a83460ec13ed4e548dfaeb743218dc281964326ae4cdb588aa01c",
+    "version": "1.0.0"
+  },
+  "protocol_compliance_verified": true,
+  "raw_response": "{\"answers\":{\"q1\":{\"beat_frequency\":{\"value\":80,\"unit\":\"MHz\"}},\"q2\":{\"detector_field_response_order\":{\"value\":2,\"unit\":\"1\"},\"frequency_component_source\":\"interference_cross_term\"},\"q3\":{\"ideal_cross_term\":false}},\"explanation\":\"The detector responds to intensity, which is quadratic in the electric field. The interference cross term oscillates at the 80 MHz frequency difference. For orthogonal polarizations with no projector, that cross term vanishes in the ideal case.\"}",
+  "retrieval": null,
+  "retry_count": 0,
+  "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+  "run_record_version": "0.1.0",
+  "runner_source_revision": "caebd4bbb908a6a2e9b375b0de5f3ccec759a57d+source-sha256:7ef29715ea6a705dc9ca41d4760b9953cf899b5d97a06ab92297d61926931cba",
+  "score_result": {
+    "benchmark_version": "0.2.0-rc1",
+    "case_content_sha256": "0c7926946fa74bf179c69606c72e0a20290cbc689173ef0c6e8b2b68a71359e7",
+    "case_id": "SEED-5-5",
+    "case_library_access": {
+      "available": false,
+      "retrieved_document_ids": [],
+      "snapshot_id": null
+    },
+    "case_revision": "0.3.0",
+    "cost": null,
+    "criterion_scores": [
+      {
+        "criterion_id": "n_result",
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 1000000.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333333
+      },
+      {
+        "criterion_id": "c_q2",
+        "evidence": "Second-order intensity detection of the interference cross term yields the difference-frequency photocurrent.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333333
+      },
+      {
+        "criterion_id": "c_q3",
+        "evidence": "Ideal orthogonality removes the beat in the stated no-projector condition.",
+        "score": 1,
+        "status": "scored",
+        "weight": 0.33333334
+      }
+    ],
+    "evaluator_fingerprint": "e9a66e11f05c50548fd9e335fa914224df631d01e427cae2f5dede057460b279",
+    "evaluator_version": "0.2.0",
+    "failure_mode": "none",
+    "judge_results": [],
+    "protocol": "closed_book",
+    "provider_usage": {
+      "turns": [
+        {
+          "source": "codex_jsonl",
+          "usage": {
+            "cached_input": 11776,
+            "input": 12666,
+            "output": 143,
+            "reasoning": 30
+          }
+        }
+      ]
+    },
+    "raw_answer": "{\"answers\":{\"q1\":{\"beat_frequency\":{\"value\":80,\"unit\":\"MHz\"}},\"q2\":{\"detector_field_response_order\":{\"value\":2,\"unit\":\"1\"},\"frequency_component_source\":\"interference_cross_term\"},\"q3\":{\"ideal_cross_term\":false}},\"explanation\":\"The detector responds to intensity, which is quadratic in the electric field. The interference cross term oscillates at the 80 MHz frequency difference. For orthogonal polarizations with no projector, that cross term vanishes in the ideal case.\"}",
+    "result_schema_version": "0.1.0",
+    "retry_count": 0,
+    "run_id": "2026-09-28-openai-gpt-6-sol-020rc1-formal",
+    "scores": {
+      "capped_total": 1.0,
+      "raw_total": 1.0
+    },
+    "structured_answer": {
+      "answers": {
+        "q1": {
+          "beat_frequency": {
+            "unit": "MHz",
+            "value": 80
+          }
+        },
+        "q2": {
+          "detector_field_response_order": {
+            "unit": "1",
+            "value": 2
+          },
+          "frequency_component_source": "interference_cross_term"
+        },
+        "q3": {
+          "ideal_cross_term": false
+        }
+      },
+      "explanation": "The detector responds to intensity, which is quadratic in the electric field. The interference cross term oscillates at the 80 MHz frequency difference. For orthogonal polarizations with no projector, that cross term vanishes in the ideal case."
+    },
+    "system": {
+      "model_id": "gpt-6-sol",
+      "model_version": null,
+      "name": "codex-cli-0.158.0",
+      "provider": "openai",
+      "scaffold_id": "neutral_optics_v1"
+    },
+    "tokens": {
+      "cached_input": 11776,
+      "input": 12666,
+      "output": 143,
+      "total": 12809
+    },
+    "tool_call_count": 0,
+    "tools_available": [],
+    "tools_used": [],
+    "validator_results": [
+      {
+        "check_id": "n_result",
+        "details": {
+          "answer_path": "answers.q1.beat_frequency",
+          "candidate_si": 80000000.0,
+          "comparator": "absolute_inclusive",
+          "difference_si": 0.0,
+          "dimension": "frequency",
+          "magnitude_convention": false,
+          "tolerance_si": 1000000.0,
+          "validator_id": "heterodyne_beat"
+        },
+        "evidence": "Absolute SI error 0 <= inclusive tolerance 1000000.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_q2",
+        "details": {},
+        "evidence": "Second-order intensity detection of the interference cross term yields the difference-frequency photocurrent.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      },
+      {
+        "check_id": "c_q3",
+        "details": {},
+        "evidence": "Ideal orthogonality removes the beat in the stated no-projector condition.",
+        "score": 1,
+        "status": "pass",
+        "version": "0.2.0"
+      }
+    ],
+    "wall_time_seconds": 14.811999999976251
+  },
+  "selection": {
+    "case_content_sha256": "0c7926946fa74bf179c69606c72e0a20290cbc689173ef0c6e8b2b68a71359e7",
+    "case_id": "SEED-5-5",
+    "case_revision": "0.3.0",
+    "track": "verified",
+    "variant_id": null,
+    "variant_type": null
+  },
+  "status": "completed",
+  "tool_calls": [],
+  "tool_observation_scope": "complete_with_builtin_tools_disabled",
+  "usage": {
+    "cached_input": 11776,
+    "input": 12666,
+    "output": 143,
+    "reasoning": 30,
+    "total": 12809
+  },
+  "wall_time_seconds": 14.875
+}

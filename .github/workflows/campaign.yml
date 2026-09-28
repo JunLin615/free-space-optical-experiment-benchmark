@@ -1,0 +1,35 @@
+name: Frozen multi-model campaign
+
+on:
+  pull_request:
+  push:
+    branches: [main, "baseline/**"]
+
+jobs:
+  campaign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.16"
+          cache: pip
+      - name: Install pinned release environment
+        run: |
+          python tools/check_release_environment.py --requirements > "$RUNNER_TEMP/rc1-requirements.txt"
+          python -m pip install --no-deps -r "$RUNNER_TEMP/rc1-requirements.txt"
+      - name: Verify immutable releases and campaign analyzer
+        run: |
+          python tools/check_release_environment.py --check
+          python tools/qualify_release.py --check
+          python tools/qualify_vnext.py --check
+          python -m unittest tests.test_analyze_campaign
+      - name: Reproduce stored public run analyses
+        run: |
+          for model in luna sol astra; do
+            python tools/analyze_baseline.py "runs/2026-09-28-openai-gpt-6-${model}-020rc1-formal" --check
+            python tools/analyze_baseline.py "runs/2026-09-28-openai-gpt-6-${model}-rc1-variant-probe" --check
+          done
+      - name: Verify public evidence hashes and hidden attestation safety
+        run: |
+          python -m tools.analyze_campaign benchmark/results/campaigns/2026-09-28-multimodel-020rc1/campaign.json --check
