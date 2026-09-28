@@ -1,0 +1,26 @@
+{
+  "case_id": "SEED-5-3",
+  "kind": "negative",
+  "name": "A second detector after the sample is not an independent reference",
+  "answer": {
+    "answers": {
+      "q1": {
+        "sample": {"contains_sample": true, "observes": "transmitted_power"},
+        "reference": {"contains_sample": true, "observes": "transmitted_power"},
+        "shared_source": true,
+        "timing": "simultaneous",
+        "comparison": "calibrated_ratio",
+        "gain_calibrated": true,
+        "baseline_calibrated": true,
+        "sample_response_retained": true
+      },
+      "q2": {"tracks": "sample_transmission", "mechanism": "cancels_all_noise", "sample_response_retained": false},
+      "q3": {"residuals": []}
+    }
+  },
+  "expected": {
+    "c_channels": {"status": "fail", "failure_class": "invalid_channel_graph"},
+    "c_normalize": {"status": "fail", "failure_class": "wrong_reference"},
+    "c_residuals": {"status": "fail", "failure_class": "missing_claim"}
+  }
+}

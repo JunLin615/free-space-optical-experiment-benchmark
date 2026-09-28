@@ -1,0 +1,46 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "one_to_one_reflection",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 0.5,
+          "unit": "deg"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 17.45,
+          "unit": "mm"
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "variable": "screen_distance",
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "value": 0.25,
+            "unit": "1"
+          }
+        }
+      }
+    },
+    "explanation": "The reflected ray only rotates by the mirror angle."
+  },
+  "expected": {
+    "n_angle": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "n_shift": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "c_quarter": {
+      "status": "pass",
+      "score": 1
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "case_id": "SEED-5-3",
+  "kind": "adversarial",
+  "name": "Polished ratio design with saturated detector",
+  "answer": {
+    "answers": {
+      "q1": {
+        "sample": {
+          "contains_sample": true,
+          "observes": "transmitted_power"
+        },
+        "reference": {
+          "contains_sample": false,
+          "observes": "source_power"
+        },
+        "shared_source": true,
+        "timing": "simultaneous",
+        "comparison": "calibrated_ratio",
+        "gain_calibrated": true,
+        "baseline_calibrated": true,
+        "sample_response_retained": true,
+        "resolution": {
+          "noise_floor_fraction": {
+            "value": 2e-06,
+            "unit": "1"
+          },
+          "systematic_floor_fraction": {
+            "value": 3e-06,
+            "unit": "1"
+          },
+          "linear_unsaturated": false,
+          "verification": "blank_and_known_step"
+        }
+      },
+      "q2": {
+        "tracks": "common_source_power",
+        "mechanism": "multiplicative_ratio_cancellation",
+        "sample_response_retained": true
+      },
+      "q3": {
+        "residuals": [
+          "detector_nonlinearity",
+          "channel_specific_noise",
+          "sample_scattering_change"
+        ]
+      }
+    },
+    "explanation": "This elegant simultaneous reference design measures a tiny transmission change with excellent common-mode drift suppression, even though its sample detector is driven into saturation."
+  },
+  "expected": {
+    "c_channels": {
+      "status": "fail",
+      "failure_class": "dynamic_range"
+    },
+    "c_normalize": {
+      "status": "pass"
+    },
+    "c_residuals": {
+      "status": "pass"
+    }
+  }
+}

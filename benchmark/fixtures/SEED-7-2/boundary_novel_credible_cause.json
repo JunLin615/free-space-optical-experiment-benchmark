@@ -1,0 +1,141 @@
+{
+  "case_id": "SEED-7-2",
+  "name": "boundary_novel_credible_cause",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "causes": [
+          {
+            "id": "lens",
+            "category": "aperture_clipping",
+            "physical_process": "hard_edge_truncation",
+            "component": "lens_clear_aperture",
+            "explanation": "The expanded beam overfills the clear lens pupil, making a hard transverse edge.",
+            "prediction": {
+              "test": "inspect_near_field",
+              "outcome": "edge_truncation"
+            }
+          },
+          {
+            "id": "pinhole",
+            "category": "pinhole_clipping",
+            "physical_process": "spatial_filter_truncation",
+            "component": "filter_pinhole",
+            "explanation": "An undersized pinhole rejects part of the focused spatial spectrum.",
+            "prediction": {
+              "test": "remove_or_enlarge_pinhole",
+              "outcome": "rings_weaken"
+            }
+          },
+          {
+            "id": "surface",
+            "category": "surface_defect",
+            "physical_process": "scatter_from_defect",
+            "component": "lens_surface",
+            "explanation": "Dust or local damage on a lens scatters coherent light into a ringed pattern.",
+            "prediction": {
+              "test": "inspect_surface",
+              "outcome": "defect_visible"
+            }
+          },
+          {
+            "id": "alignment",
+            "category": "misalignment",
+            "physical_process": "beam_optic_axis_mismatch",
+            "component": "lens_mount",
+            "explanation": "A decentered or tilted expander lens makes the beam sample the pupil asymmetrically.",
+            "prediction": {
+              "test": "realign_lenses",
+              "outcome": "rings_weaken"
+            }
+          },
+          {
+            "id": "ghost",
+            "category": "parasitic_interference",
+            "physical_process": "coherent_ghost_reflection",
+            "component": "unwedged_surface",
+            "explanation": "A weak coherent ghost reflection may interfere with the principal transmitted beam.",
+            "prediction": {
+              "test": "tilt_ghost_surface",
+              "outcome": "rings_shift"
+            }
+          }
+        ]
+      },
+      "q2": {
+        "aperture_causes": [
+          {
+            "cause_id": "lens",
+            "aperture_type": "lens_clear_aperture",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          },
+          {
+            "cause_id": "pinhole",
+            "aperture_type": "filter_pinhole",
+            "effect": "edge_diffraction_or_spatial_filter_truncation"
+          }
+        ]
+      },
+      "q3": {
+        "steps": [
+          {
+            "operation": "inspect_near_field",
+            "target_cause_ids": [
+              "lens"
+            ],
+            "controls": [
+              "fixed_input",
+              "fixed_exposure"
+            ],
+            "if_present": "edge_truncation",
+            "if_absent": "full_profile",
+            "inference": "A clipped profile supports lens-pupil truncation; a full profile weakens it."
+          },
+          {
+            "operation": "remove_or_enlarge_pinhole",
+            "target_cause_ids": [
+              "pinhole"
+            ],
+            "controls": [
+              "fixed_input",
+              "before_after"
+            ],
+            "if_present": "rings_weaken",
+            "if_absent": "rings_unchanged",
+            "inference": "If rings weaken after enlarging the pinhole, spatial-filter truncation is implicated."
+          },
+          {
+            "operation": "substitute_optic",
+            "target_cause_ids": [
+              "surface"
+            ],
+            "controls": [
+              "fixed_input",
+              "one_change_at_a_time"
+            ],
+            "if_present": "rings_weaken",
+            "if_absent": "rings_unchanged",
+            "inference": "A cleaner substitute reducing rings implicates the removed optic."
+          }
+        ]
+      }
+    }
+  },
+  "expected": {
+    "c_causes": {
+      "status": "unresolved",
+      "failure_class": "unsupported_alternative"
+    },
+    "c_apertures": {
+      "status": "pass"
+    },
+    "c_diagnosis": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "novel_alternative",
+    "criterion_id": "c_causes"
+  }
+}

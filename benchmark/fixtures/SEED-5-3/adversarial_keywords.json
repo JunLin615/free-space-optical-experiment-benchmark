@@ -1,0 +1,17 @@
+{
+  "case_id": "SEED-5-3",
+  "kind": "adversarial",
+  "name": "Keywords and confident prose do not establish a valid channel graph",
+  "answer": {
+    "answers": {
+      "q1": "Use a sample, reference, low noise, balanced detector, lock-in, and calibration.",
+      "q2": "Normalize everything and eliminate all drift with a ratio.",
+      "q3": "Scattering and nonlinear detectors are words to mention."
+    }
+  },
+  "expected": {
+    "c_channels": {"status": "unresolved", "failure_class": "unsupported_answer_shape"},
+    "c_normalize": {"status": "unresolved", "failure_class": "unsupported_answer_shape"},
+    "c_residuals": {"status": "fail", "failure_class": "missing_claim"}
+  }
+}

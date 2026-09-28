@@ -1,0 +1,43 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "equivalent_units",
+  "kind": "alternative_valid",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 0.017453292519943295,
+          "unit": "rad"
+        }
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 0.034910129856,
+          "unit": "m"
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "variable": "screen_distance",
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "value": 0.25,
+            "unit": "1"
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "pass"
+    },
+    "n_shift": {
+      "status": "pass"
+    },
+    "c_quarter": {
+      "status": "pass",
+      "score": 1
+    }
+  }
+}

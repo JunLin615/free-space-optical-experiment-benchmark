@@ -1,0 +1,41 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "malformed_angle",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": "1 deg"
+      },
+      "q2": {
+        "spot_displacement": {
+          "value": 34.910129856,
+          "unit": "mm"
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "variable": "screen_distance",
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "value": 0.25,
+            "unit": "1"
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "fail",
+      "failure_class": "malformed_claim"
+    },
+    "n_shift": {
+      "status": "pass"
+    },
+    "c_quarter": {
+      "status": "pass",
+      "score": 1
+    }
+  }
+}

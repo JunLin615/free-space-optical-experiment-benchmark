@@ -1,0 +1,40 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "polished_but_false",
+  "kind": "adversarial",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 2,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 67,
+          "unit": "ps"
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "value": 14.9896229,
+          "unit": "mm"
+        }
+      }
+    },
+    "explanation": "Using c and the double-pass optical path, the delay is 67 ps."
+  },
+  "expected": {
+    "n_path": {
+      "status": "pass"
+    },
+    "n_delay": {
+      "status": "fail",
+      "failure_class": "physics_fail"
+    },
+    "n_travel": {
+      "status": "pass"
+    }
+  }
+}

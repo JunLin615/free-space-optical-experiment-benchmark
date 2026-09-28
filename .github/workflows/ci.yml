@@ -20,5 +20,9 @@ jobs:
         run: python tools/validate_cases.py
       - name: Run unit tests
         run: python -m unittest discover -s tests
+      - name: Challenge scoring fixtures
+        run: python tools/run_case_fixtures.py
+      - name: Check verification-status evidence
+        run: python tools/check_verification_status.py
       - name: Verify generated question bank
         run: python tools/render_cases.py --check

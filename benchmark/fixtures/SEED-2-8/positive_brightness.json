@@ -1,0 +1,17 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "alternative_valid",
+  "name": "Equivalent radiance conservation formulation",
+  "answer": {
+    "answers": {
+      "q1": false,
+      "q2": {"invariant": "radiance", "behavior": "cannot_increase"},
+      "q3": {"reduce_size": "larger_divergence", "reduce_divergence": "larger_size"}
+    }
+  },
+  "expected": {
+    "c_impossible": {"status": "pass"},
+    "c_invariant": {"status": "pass"},
+    "c_tradeoff": {"status": "pass"}
+  }
+}

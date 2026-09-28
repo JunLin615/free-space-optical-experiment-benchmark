@@ -1,0 +1,42 @@
+{
+  "case_id": "SEED-1-5",
+  "name": "inclusive_delay_boundary",
+  "kind": "boundary",
+  "answer": {
+    "answers": {
+      "q1": {
+        "path_change": {
+          "value": 2,
+          "unit": "mm"
+        }
+      },
+      "q2": {
+        "delay_change": {
+          "value": 6.791281903963042,
+          "unit": "ps"
+        }
+      },
+      "q3": {
+        "stage_travel": {
+          "value": 14.9896229,
+          "unit": "mm"
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_path": {
+      "status": "pass"
+    },
+    "n_delay": {
+      "status": "pass"
+    },
+    "n_travel": {
+      "status": "pass"
+    }
+  },
+  "boundary": {
+    "type": "inclusive_tolerance",
+    "criterion_id": "n_delay"
+  }
+}

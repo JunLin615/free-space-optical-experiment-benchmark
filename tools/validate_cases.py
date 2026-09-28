@@ -110,6 +110,15 @@ def semantic_issues(case: dict[str, Any]) -> list[str]:
             issues.append(f"criterion {criterion['id']}: unknown check {criterion['check']}")
         if criterion.get("question_id") and criterion["question_id"] not in question_ids:
             issues.append(f"criterion {criterion['id']}: unknown question_id {criterion['question_id']}")
+    rubrics = {item["id"]: item for item in gold.get("judge_rubrics", [])}
+    scored_semantic = {c["id"] for c in criteria if c["check"] in rubrics}
+    inventoried_semantic = set(case["validation"].get("semantic_criteria", []))
+    if scored_semantic != inventoried_semantic:
+        issues.append("validation.semantic_criteria must equal explicitly scored judge-rubric criteria")
+    for criterion in criteria:
+        rubric = rubrics.get(criterion["check"])
+        if rubric is not None and rubric.get("evidence_path") not in contract["required_result_paths"]:
+            issues.append(f"criterion {criterion['id']}: scored judge rubric needs a required evidence_path")
 
     # A single case score uses one normalized weight vector. Per-question scoring
     # can be added in a future schema version without silently changing this rule.

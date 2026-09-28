@@ -17,11 +17,23 @@ The record distinguishes distinct `tools_used` identifiers from the measured
 `tool_call_count`, retains extensible raw `provider_usage`, and stores measured
 `cost` with currency and a dated pricing reference. Unknown counts, usage, and
 cost are `null`, never inferred as zero.
+The development scorer also records a canonical case-content SHA-256,
+evaluator version, and evaluator source fingerprint; these supplement the
+case revision when reproducing a verdict. `oracle_unresolved` is separate from
+candidate failures and from an unavailable semantic judge.
 `pilot_answer_v0.1.schema.json` is the shared JSON block shape named by the pilot
 cases' `answer_contract.schema_id`: it permits case-specific prose and structured
 design claims while requiring physical numerical leaves to have `value` and
 `unit`. Each case's `required_result_paths` and physics checks narrow that broad
 shape; passing this shared answer schema alone never earns a score.
+Optional `answer.explanation` is kept for audit and has no scoring effect. A
+required explanation must instead have a scored judge rubric whose
+`evidence_path` appears in `required_result_paths`, with its criterion listed
+in `validation.semantic_criteria`.
+Cases at `challenged` or above inventory executable derivation files in
+`validation.evidence_files`. A release manifest hashes that inventory and,
+when semantic scoring is used, the actual judge configuration, challenge set,
+and live calibration results.
 
 The canonical authoring record contains both public `task` and private `gold`.
 Normal tool and case-library access is set by the evaluation protocol, not the

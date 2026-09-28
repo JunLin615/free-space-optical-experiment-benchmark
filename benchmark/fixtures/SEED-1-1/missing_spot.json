@@ -1,0 +1,38 @@
+{
+  "case_id": "SEED-1-1",
+  "name": "missing_spot",
+  "kind": "negative",
+  "answer": {
+    "answers": {
+      "q1": {
+        "angle_change": {
+          "value": 1,
+          "unit": "deg"
+        }
+      },
+      "q3": {
+        "geometry_change": {
+          "variable": "screen_distance",
+          "held_fixed": "mirror_rotation",
+          "scale": {
+            "value": 0.25,
+            "unit": "1"
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "n_angle": {
+      "status": "pass"
+    },
+    "n_shift": {
+      "status": "fail",
+      "failure_class": "missing_claim"
+    },
+    "c_quarter": {
+      "status": "pass",
+      "score": 1
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "positive",
+  "name": "Independent Gaussian beam parameter product reasoning",
+  "answer": {
+    "answers": {
+      "q1": {"achievable": false},
+      "q2": {"invariant": "beam_parameter_product", "behavior": "conserved", "same_beam": true},
+      "q3": {"reduce_size": "divergence_increases", "reduce_divergence": "size_increases"}
+    }
+  },
+  "expected": {
+    "c_impossible": {"status": "pass"},
+    "c_invariant": {"status": "pass"},
+    "c_tradeoff": {"status": "pass"}
+  }
+}

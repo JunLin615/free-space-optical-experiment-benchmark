@@ -32,6 +32,9 @@
     "run_id": { "type": "string", "minLength": 1 },
     "case_id": { "type": "string", "minLength": 1 },
     "case_revision": { "type": ["string", "null"] },
+    "case_content_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "evaluator_version": { "type": "string", "minLength": 1 },
+    "evaluator_fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "benchmark_version": { "type": "string", "minLength": 1 },
     "system": {
       "type": "object",
@@ -125,7 +128,7 @@
       }
     },
     "failure_mode": {
-      "enum": ["none", "agent_timeout", "agent_error", "no_answer", "invalid_contract", "physics_fail", "constraint_fail", "judge_unresolved", "validator_error", "invalid_instance"]
+      "enum": ["none", "agent_timeout", "agent_error", "no_answer", "invalid_contract", "physics_fail", "constraint_fail", "judge_unresolved", "oracle_unresolved", "validator_error", "invalid_instance"]
     }
   },
   "$defs": {

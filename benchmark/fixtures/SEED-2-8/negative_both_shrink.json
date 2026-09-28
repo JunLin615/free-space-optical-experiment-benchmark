@@ -1,0 +1,17 @@
+{
+  "case_id": "SEED-2-8",
+  "kind": "negative",
+  "name": "Passive optics falsely claimed to improve both factors",
+  "answer": {
+    "answers": {
+      "q1": {"achievable": true},
+      "q2": {"invariant": "beam_parameter_product", "behavior": "decreases"},
+      "q3": {"reduce_size": "divergence_decreases", "reduce_divergence": "size_decreases"}
+    }
+  },
+  "expected": {
+    "c_impossible": {"status": "fail", "failure_class": "physical_contradiction"},
+    "c_invariant": {"status": "fail", "failure_class": "physical_contradiction"},
+    "c_tradeoff": {"status": "fail", "failure_class": "physical_contradiction"}
+  }
+}

@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-2-8
 legacy_id: '2.8'
-case_revision: 0.1.0
+case_revision: 0.2.0
 benchmark_release: null
 validation_status: specified
 split: public_dev
@@ -43,6 +43,10 @@ answer_contract:
   - answers.q1
   - answers.q2
   - answers.q3
+  method_shape:
+    q1: 'Object with achievable: boolean. State whether the proposed same-beam goal is physically possible.'
+    q2: 'Object with invariant: string and behavior: string. Name the relevant conserved or bounded optical quantity and its allowed direction under passive lossless propagation.'
+    q3: 'Object with reduce_size: string and reduce_divergence: string. State the corresponding direction of the other quantity in each case.'
   permit_additional_explanation: true
 gold:
   universal_constraints:
@@ -100,3 +104,6 @@ validation:
   - positive_and_adversarial_answer_fixtures_pass
   implemented_checks: []
   notes: Semantic rubric is a draft; this case is not eligible for scored release.
+    Revision 0.2.0 makes the conceptual invariant and both reciprocal tradeoff directions
+    explicit in the answer contract without requiring the candidate to repeat the
+    supplied tenfold ratio. The scorer remains a bounded structural oracle.
