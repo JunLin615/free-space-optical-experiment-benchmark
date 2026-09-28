@@ -81,6 +81,8 @@ run ID:
 python -m tools.hidden_eval prepare-run --bundle-dir /external/hidden-bundle --output-root /external/runs --run-id hidden-run-001 --agent-json /external/agent.json
 python -m tools.baseline /external/runs/input_manifests/hidden-run-001.json --output-root /external/runs
 python -m tools.hidden_eval audit-results --bundle-dir /external/hidden-bundle --run-dir /external/runs/hidden-run-001
+python -m tools.hidden_eval attest-run --bundle-dir /external/hidden-bundle --run-dir /external/runs/hidden-run-001 --attestation /public/real-run-attestation.json
+python -m tools.hidden_eval audit-attestation --bundle-dir /external/hidden-bundle --run-dir /external/runs/hidden-run-001 --attestation /public/real-run-attestation.json
 ```
 
 `prepare-run` validates the bundle, creates a new private input manifest, and
@@ -88,6 +90,9 @@ rejects an existing run ID. A mock agent config makes a dry run; a configured
 command or Codex CLI adapter is recorded as a real run. The runner keeps raw
 responses, task instances, and per-attempt results outside the repository.
 Do not publish a real run without reviewing its response disclosure risk.
+`attest-run` derives model/protocol identity, score, usage, cost, and failure
+counts from the linked private result records. It refuses dry-run evidence;
+write its public output outside the frozen private run directory.
 
 The first private pilot used four families and two variants per family. The
 external bundle reproduced all eight instances. A prepared mock runner run
@@ -102,8 +107,9 @@ passed; its score was 1.0 with 12,784 reported input-plus-output tokens and
 no priced cost estimate. This is one infrastructure probe, not a model
 benchmark or a generalization estimate. The public
 [`first_real_smoke.v1.json`](../benchmark/hidden_eval/attestations/first_real_smoke.v1.json)
-contains only the bundle commitment, identity, aggregate score, usage, and
-failure summary. The private task and raw response remain outside the repo.
+contains only the bundle commitment, identity, aggregate score, usage, failure
+summary, and private-run evidence hashes. The private task and raw response
+remain outside the repo.
 
 ## Commitment and audit
 
@@ -129,6 +135,19 @@ For a completed private runner run, `python -m tools.hidden_eval audit-results
 that every selected and scored instance belongs to the bundle, and that its
 science, generator, instance, and scorer fingerprints match. It returns counts
 and IDs only; raw responses remain in the private run directory.
+
+`attest-run` first audits that linkage, then hashes every regular file in the
+frozen run directory, including the exact manifest, result, log, protocol,
+environment, and system-prompt bytes. The tree digest uses the
+`hidden-run-evidence-tree-v1` domain, sorted relative UTF-8 paths, and
+8-byte big-endian lengths before each path and its raw file bytes. The public
+attestation contains the tree digest, manifest digest, and file count, never
+private file paths or content. `audit-attestation` regenerates the bundle,
+recomputes the run summary and digests, and compares the entire public object.
+Changing a score, usage field, manifest field, log byte, or published claim
+invalidates the audit. An auditor needs the retained private bundle and run
+directory; the hashes alone cannot prove honest execution or prevent a
+privileged operator from replacing both private evidence and attestation.
 
 SHA-256 commitments make a later reveal auditable; they do not prove a seed was
 secret before creation, prevent a privileged evaluator from leaking content,

@@ -6,7 +6,7 @@
     "benchmark_release_id": "0.2.0-rc1",
     "bundle_id": "HIDDEN-4f80cf4a166ba127",
     "concept_family_count": 4,
-    "created_utc": "2026-09-28T19:24:55.352052+03:00",
+    "created_utc": "2026-09-28T16:24:55.352052+00:00",
     "generator_version": "0.2.0",
     "hidden_policy_schema_version": "1.0.0",
     "hidden_seed_sha256": "5f9638454de5212e5934affb42811595f4e6f046ecad16ff5437c6502b0bcbbf",
@@ -36,6 +36,12 @@
   "protocol": "closed_book",
   "raw_hidden_instances_published": false,
   "raw_model_responses_published": false,
+  "run_evidence": {
+    "evidence_tree_sha256": "9b2e52209477ef84a9a3f71229dd480a9a5bb81350f514716c042254f111223e",
+    "file_count": 6,
+    "manifest_sha256": "02001095e447b488a6e68f0c424912ea6b0e8af0d8928ec1908cd3cc158bd713",
+    "schema_version": "1.0.0"
+  },
   "run_id": "hidden-real-smoke-002",
   "selected_instances": 1,
   "tokens": {

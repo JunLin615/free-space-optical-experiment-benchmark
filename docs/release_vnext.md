@@ -46,7 +46,10 @@ Its prepared mock runner run completed and audited all eight, with no model
 API or private data committed. A separate one-instance `gpt-6-luna` real smoke
 run completed and linked to the same private bundle; the observed score was
 1.0, with no cost estimate. It is an infrastructure probe, not a broad model
-comparison. See [hidden evaluation](hidden_evaluation.md).
+comparison. Its public attestation is derived from the retained private run
+and commits to the exact manifest and complete result/log evidence tree; an
+auditor can recompute both claims and hashes. See
+[hidden evaluation](hidden_evaluation.md).
 
 All 64 canonical questions remain public. A private variant is therefore
 resistant to exact-instance memorization and obvious public-variant sibling

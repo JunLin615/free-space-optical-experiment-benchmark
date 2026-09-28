@@ -484,6 +484,11 @@ def main() -> None:
     results = sub.add_parser("audit-results")
     results.add_argument("--bundle-dir", type=Path, required=True)
     results.add_argument("--run-dir", type=Path, required=True)
+    for name in ("attest-run", "audit-attestation"):
+        command = sub.add_parser(name)
+        command.add_argument("--bundle-dir", type=Path, required=True)
+        command.add_argument("--run-dir", type=Path, required=True)
+        command.add_argument("--attestation", type=Path, required=True)
     prepare = sub.add_parser("prepare-run")
     prepare.add_argument("--bundle-dir", type=Path, required=True)
     prepare.add_argument("--output-root", type=Path, required=True)
@@ -498,6 +503,24 @@ def main() -> None:
         print(json.dumps(audit_bundle(args.bundle_dir), indent=2))
     elif args.action == "audit-results":
         print(json.dumps(audit_result_linkage(args.bundle_dir, args.run_dir), indent=2))
+    elif args.action == "attest-run":
+        from tools.hidden_attestation import derive_real_attestation
+
+        if args.attestation.resolve().is_relative_to(args.run_dir.resolve()):
+            raise ValueError("public attestation must be outside the frozen private run")
+        attestation = derive_real_attestation(args.bundle_dir, args.run_dir)
+        args.attestation.parent.mkdir(parents=True, exist_ok=True)
+        args.attestation.write_text(json.dumps(attestation, ensure_ascii=False,
+                                               sort_keys=True, indent=2) + "\n",
+                                    encoding="utf-8", newline="\n")
+        print(json.dumps({"bundle_id": attestation["commitment"]["bundle_id"],
+                          "run_id": attestation["run_id"], "attestation": str(args.attestation)},
+                         indent=2))
+    elif args.action == "audit-attestation":
+        from tools.hidden_attestation import audit_real_attestation
+
+        print(json.dumps(audit_real_attestation(args.bundle_dir, args.run_dir,
+                                                args.attestation), indent=2))
     elif args.action == "prepare-run":
         print(prepare_run_manifest(args.bundle_dir, args.output_root, args.run_id, args.agent_json))
     else:
