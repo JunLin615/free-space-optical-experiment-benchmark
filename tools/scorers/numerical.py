@@ -270,11 +270,11 @@ def _closed_physics(case: dict[str, Any], answer: dict[str, Any]) -> list[dict[s
             else:
                 origin_result = _closed_verdict("c_q2", "unresolved", "Unrecognized detection-mechanism phrasing.", "unsupported_alternative")
         orthogonal = _field(answer, "answers.q3")
-        if not isinstance(orthogonal, dict) or not all(isinstance(orthogonal.get(k), bool) for k in ("ideal_cross_term", "projection_restores_beat")):
-            orthogonal_result = _closed_verdict("c_q3", "fail", "Missing typed orthogonal-polarization and projection claims.", "missing_claim")
+        if not isinstance(orthogonal, dict) or not isinstance(orthogonal.get("ideal_cross_term"), bool):
+            orthogonal_result = _closed_verdict("c_q3", "fail", "Missing typed no-projector orthogonal-polarization result.", "missing_claim")
         else:
-            correct = orthogonal["ideal_cross_term"] is False and orthogonal["projection_restores_beat"] is True
-            orthogonal_result = _closed_verdict("c_q3", "pass" if correct else "fail", "Ideal orthogonality removes the beat unless a common polarization projection is introduced.", None if correct else "physics_fail")
+            correct = orthogonal["ideal_cross_term"] is False
+            orthogonal_result = _closed_verdict("c_q3", "pass" if correct else "fail", "Ideal orthogonality removes the beat in the stated no-projector condition.", None if correct else "physics_fail")
         return [origin_result, orthogonal_result]
     return []
 

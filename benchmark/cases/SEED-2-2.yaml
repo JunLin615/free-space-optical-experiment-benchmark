@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-2-2
 legacy_id: '2.2'
-case_revision: 0.2.0
+case_revision: 0.2.1
 benchmark_release: null
 validation_status: executable
 split: public_dev
@@ -22,14 +22,15 @@ provenance:
   source_references: []
   derivation: English translation of the seed's fivefold two-lens afocal expander; example focal lengths are
     illustrative rather than uniquely required. Revision 0.2.0 defines typed fields for closed-physics autonomous
-    scoring while preserving the public scientific questions.
+    scoring. Revision 0.2.1 restores q1 to the seed's focal-length-ratio request; propagation direction is
+    already specified and assessed in q2.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: An approximately collimated beam has a 1/e² intensity diameter near 1.5 mm. A two-lens afocal
     system should expand it to about 7.5 mm. Consider a first-order paraxial design with adequate clear apertures.
   questions:
   - id: q1
-    request: State the required magnitude of the focal-length ratio and identify the expansion direction.
+    request: State the required magnitude of the output-to-input focal-length ratio.
   - id: q2
     request: Give one valid focal-length pair each for a Keplerian and a Galilean expander, including lens
       signs and order.

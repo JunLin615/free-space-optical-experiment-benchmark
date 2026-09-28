@@ -138,7 +138,7 @@ An approximately collimated beam has a 1/e² intensity diameter near 1.5 mm. A t
 
 **Questions**
 
-1. State the required magnitude of the focal-length ratio and identify the expansion direction.
+1. State the required magnitude of the output-to-input focal-length ratio.
 2. Give one valid focal-length pair each for a Keplerian and a Galilean expander, including lens signs and order.
 3. Compare whether each layout forms a real internal focus for the stated propagation direction.
 

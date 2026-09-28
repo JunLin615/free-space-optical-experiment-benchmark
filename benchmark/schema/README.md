@@ -10,6 +10,10 @@ checks cross-record ID uniqueness, scoring weights and references, answer paths,
 numerical tolerance consistency, registered validator IDs, and authored numerical
 gold against implemented independent equations. These checks cover only the
 implemented models; adversarial fixtures remain necessary before release.
+For executable and later statuses, it also checks that each public question and
+required answer path has scored evidence under the same question ID. This is an
+authoring coverage guard, not a semantic proof that every phrase is scored.
+
 `python tools/check_corpus.py` additionally checks the preserved HTML hash,
 all 64 legacy IDs, per-case lineage, and the original question counts.
 

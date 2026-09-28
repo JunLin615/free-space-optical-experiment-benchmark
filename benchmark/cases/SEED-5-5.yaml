@@ -1,7 +1,7 @@
 schema_version: 0.1.0
 case_id: SEED-5-5
 legacy_id: '5.5'
-case_revision: 0.2.0
+case_revision: 0.2.1
 benchmark_release: null
 validation_status: executable
 split: public_dev
@@ -22,7 +22,8 @@ provenance:
   source_references: []
   derivation: The 80 MHz value is retained. The ideal orthogonal-polarization limit is stated separately from
     practical leakage. Revision 0.2.0 defines typed fields for closed-physics autonomous scoring while preserving
-    the public scientific questions.
+    the public scientific questions. Revision 0.2.1 removes an unasked projection claim from the required
+    q3 answer; only the no-projector result is scored.
   license_status: CC-BY-4.0 (project benchmark content)
 task:
   statement: Signal light has optical frequency f0. A local-oscillator beam has frequency f0 + 80 MHz. The
@@ -45,14 +46,15 @@ answer_contract:
   schema_id: pilot_answer_v0.1
   required_result_paths:
   - answers.q1.beat_frequency
-  - answers.q2
-  - answers.q3
+  - answers.q2.detection_law
+  - answers.q2.field_cross_term
+  - answers.q3.ideal_cross_term
   method_shape:
     q1: 'Object containing beat_frequency: quantity {value, unit}.'
     q2: 'Object with detection_law: square_law and field_cross_term: difference_frequency (equivalent typed
       synonyms accepted).'
-    q3: 'Object with ideal_cross_term: false and projection_restores_beat: true; optional practical-leakage
-      qualification.'
+    q3: 'Object with ideal_cross_term: false for the stated no-projector condition; optional practical-leakage
+      qualification. A possible beat-restoring projection is context, not required or scored.'
   permit_additional_explanation: true
   quantity_shape:
     answers.q1.beat_frequency: Quantity {value, unit}; convertible frequency units accepted.
@@ -128,6 +130,7 @@ validation:
   positive_fixtures:
   - benchmark/fixtures/SEED-5-5/positive_reference.json
   - benchmark/fixtures/SEED-5-5/alternative_valid_units_or_form.json
+  - benchmark/fixtures/SEED-5-5/positive_no_projection_claim.json
   negative_fixtures:
   - benchmark/fixtures/SEED-5-5/negative_wrong_numeric.json
   - benchmark/fixtures/SEED-5-5/adversarial_polished_false.json

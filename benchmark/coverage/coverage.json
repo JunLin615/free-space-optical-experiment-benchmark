@@ -368,7 +368,7 @@
       "legacy_id": "2.2",
       "case_id": "SEED-2-2",
       "title": "Designing a fivefold afocal beam expander",
-      "case_revision": "0.2.0",
+      "case_revision": "0.2.1",
       "validation_status": "executable",
       "optical_domain": "gaussian_beams",
       "task_types": [
@@ -1180,7 +1180,7 @@
       "legacy_id": "5.5",
       "case_id": "SEED-5-5",
       "title": "Optical heterodyne beat",
-      "case_revision": "0.2.0",
+      "case_revision": "0.2.1",
       "validation_status": "executable",
       "optical_domain": "weak_signal_detection",
       "task_types": [

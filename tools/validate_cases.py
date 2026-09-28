@@ -84,6 +84,11 @@ def _duplicates(values: list[str]) -> set[str]:
     return repeated
 
 
+def _paths_overlap(first: str, second: str) -> bool:
+    """A scored object may cover one or more required typed child fields."""
+    return first == second or first.startswith(second + ".") or second.startswith(first + ".")
+
+
 def semantic_issues(case: dict[str, Any]) -> list[str]:
     """Check cross-field invariants after successful structural validation."""
     issues: list[str] = []
@@ -136,6 +141,37 @@ def semantic_issues(case: dict[str, Any]) -> list[str]:
             parts = path.split(".")
             if len(parts) < 2 or parts[0] != "answers" or parts[1] not in question_ids:
                 issues.append(f"required_result_path {path}: expected answers.<task question ID>[.<field>]")
+    if case["validation_status"] in ("executable", "challenged", "release_verified"):
+        # This checks explicit authoring links, not whether prose and physics agree.
+        # It prevents scoring a typed claim under the wrong question or leaving a
+        # public question/required path without any scored evidence.
+        scored_checks = {
+            item["id"]: item
+            for field in ("numerical_checks", "universal_constraints", "forbidden_claims", "judge_rubrics")
+            for item in gold.get(field, [])
+        }
+        question_scores: set[str] = set()
+        scored_paths: list[str] = []
+        for criterion in criteria:
+            item = scored_checks.get(criterion["check"], {})
+            evidence = item.get("answer_path") or item.get("evidence_path")
+            parts = evidence.split(".") if isinstance(evidence, str) else []
+            if len(parts) < 2 or parts[0] != "answers" or parts[1] not in question_ids:
+                issues.append(f"criterion {criterion['id']}: scored check needs a question-scoped evidence path")
+                continue
+            question_id = parts[1]
+            question_scores.add(question_id)
+            scored_paths.append(evidence)
+            if criterion.get("question_id") and criterion["question_id"] != question_id:
+                issues.append(f"criterion {criterion['id']}: question_id differs from scored evidence path")
+            if not any(_paths_overlap(evidence, path) for path in result_paths):
+                issues.append(f"criterion {criterion['id']}: scored evidence path has no required_result_path")
+        for question_id in question_ids:
+            if question_id not in question_scores:
+                issues.append(f"public question {question_id} has no scoring criterion")
+        for path in result_paths:
+            if not any(_paths_overlap(path, evidence) for evidence in scored_paths):
+                issues.append(f"required_result_path {path} has no scored evidence path")
     given_symbols = [given["symbol"] for given in task.get("givens", []) if "symbol" in given]
     for duplicate in sorted(_duplicates(given_symbols)):
         issues.append(f"duplicate given symbol: {duplicate}")
